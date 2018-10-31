@@ -1,0 +1,1 @@
+<a rel="nofollow" href="mailto:zakaz@strlog.ru">zakaz@strlog.ru</a>

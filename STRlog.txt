@@ -1,0 +1,110 @@
+Host: stroylogistika.ru
+Date: 2018-08-08 12:28:18
+Module: 
+ === qqq
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:28:18
+Module: 
+a:0:{} === ddd
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:29:22
+Module: 
+qqq
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:29:22
+Module: 
+21379
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:30:00
+Module: 
+qqq
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:30:00
+Module: 
+21379
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:30:15
+Module: 
+qqq
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:30:15
+Module: 
+21379
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:30:25
+Module: 
+qqq
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------
+Host: stroylogistika.ru
+Date: 2018-08-08 12:30:25
+Module: 
+21379
+    MyGetOptimalPrice < ExecuteModuleEventEx < CAllCatalogProduct::GetOptimalPrice < CatalogElementComponent::initAdditionalCacheKeys < Bitrix\Iblock\Component\Element::getCacheKeys
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/catalog/general/product.php:944
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/components/bitrix/catalog.element/class.php:134
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/element.php:689
+	/var/www/u0505962/data/www/stroylogistika.ru/bitrix/modules/iblock/lib/component/base.php:3541
+----------

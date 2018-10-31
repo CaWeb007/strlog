@@ -1,0 +1,180 @@
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 09:24:34
+Module: 
+PRICE_FINAL 0 - 10 297 руб : a:14:{s:8:"ORDER_ID";i:2815;s:13:"ORDER_REAL_ID";i:2815;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2815";s:10:"ORDER_DATE";s:19:"29.10.2018 09:24:34";s:10:"ORDER_USER";s:33:"Калашников Андрей";s:5:"PRICE";s:13:"10 297 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:24:"andrey_27.95@hotmail.com";s:10:"ORDER_LIST";s:178:"Плита OSB-3 Kronospan (ОСБ), 9 мм - 1 лист x 737 руб<br/>Пенополистирол Пеноплэкс Комфорт, 50 мм - 7 упак x 1 280 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:13:"10 297 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 09:24:34
+Module: 
+PRICE_FINAL 1 - 10 297 руб : a:14:{s:8:"ORDER_ID";i:2815;s:13:"ORDER_REAL_ID";i:2815;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2815";s:10:"ORDER_DATE";s:19:"29.10.2018 09:24:34";s:10:"ORDER_USER";s:33:"Калашников Андрей";s:5:"PRICE";s:13:"10 297 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:24:"andrey_27.95@hotmail.com";s:10:"ORDER_LIST";s:178:"Плита OSB-3 Kronospan (ОСБ), 9 мм - 1 лист x 737 руб<br/>Пенополистирол Пеноплэкс Комфорт, 50 мм - 7 упак x 1 280 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:13:"10 297 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 10:53:57
+Module: 
+PRICE_FINAL 0 - 263 020.80 руб : a:14:{s:8:"ORDER_ID";i:2816;s:13:"ORDER_REAL_ID";i:2816;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2816";s:10:"ORDER_DATE";s:19:"29.10.2018 10:53:57";s:10:"ORDER_USER";s:31:"Б.Г. Батожаргалов";s:5:"PRICE";s:17:"263 020.80 руб";s:3:"BCC";s:12:"to@strlog.ru";s:5:"EMAIL";s:15:"oyona@yandex.ru";s:10:"ORDER_LIST";s:5671:"Плита цельная с частыми ребрами жесткости, 410x710 мм - 15 шт x 1 850 руб<br/>Колосник печной, 300x200 мм - 10 шт x 365 руб<br/>Алебастр Krasland, 5 кг - 30 упак x 90 руб<br/>Штукатурка Knauf Rotband, 30 кг - 40 упак x 408 руб<br/>Арматура АСП, 6 мм - 10 шт x 515 руб<br/>Арматура АСП, 8 мм - 10 шт x 707 руб<br/>Сетка кладочная 1х3 м, 20х20 /10/ открытый контур - 20 шт x 152 руб<br/>Сетка кладочная 1х3 м, 15х15 /10/ открытый контур - 20 шт x 184 руб<br/>Дверка печная, 250x140 мм - 14 шт x 430 руб<br/>Утеплитель напыляемый PENOPLEX FASTFIX - 55 шт x 392 руб<br/>Пакля льняная ленточная, 150 мм - 30 шт x 263 руб<br/>Пакля льняная ленточная, 150 мм - 30 шт x 414 руб<br/>Пакля льняная 2 сорт, 20 кг - 20 упак x 940 руб<br/>Отражающая изоляция Изодом ППИ ПЛ, 2 мм - 15 рул x 556 руб<br/>Отражающая изоляция Изодом ППИ ПЛ, 4 мм - 1 рул x 778 руб<br/>Самоклеющаяся изоляция Изодом ППИ ПФСК, 5 мм - 2 рул x 1 441 руб<br/>Пароизоляция Стройбонд B, 35 м2  - 20 рул x 384 руб<br/>Побелочная паста, 3 кг - 26 шт x 49 руб<br/>Аэрозольная краска EMPILS, темно-серый - 12 шт x 121 руб<br/>Аэрозольная краска EMPILS, бронзовая - 12 шт x 121 руб<br/>Аэрозольная краска EMPILS, синяя - 12 шт x 121 руб<br/>Аэрозольная краска EMPILS, чёрная - 48 шт x 121 руб<br/>Аэрозольная краска жаростойкая EMPILS, черная - 9 шт x 250 руб<br/>Аэрозольная краска EMPILS, белая - 48 шт x 121 руб<br/>Аэрозольная краска EMPILS, хром - 12 шт x 149 руб<br/>Аэрозольная краска EMPILS, серебристая - 12 шт x 121 руб<br/>Профиль углозащитный, 20х20 мм - 50 шт x 28 руб<br/>Профиль углозащитный, 25х25 мм - 43 шт x 31 руб<br/>Крючок дверной КД-75 цинк - 81 шт x 12 руб<br/>Крючок ветровой КР-200 цинк - 39 шт x 15 руб<br/>Ручка-скоба РС-120, медь - 5 шт x 26 руб<br/>Ручка-скоба РС-120 серебро - 6 шт x 27 руб<br/>Ручка-скоба РС-80-2 полимер - 37 шт x 18 руб<br/>Задвижка накладная ЗТ5, цинк - 24 шт x 13 руб<br/>Задвижка накладная ЗТ2, цинк - 100 шт x 15 руб<br/>Задвижка накладная ЗТ6, цинк - 86 шт x 14 руб<br/>Задвижка накладная ЗТ5, коричневый - 100 шт x 18 руб<br/>Петля стрела ПС-130 б/п - 100 шт x 25 руб<br/>Петля стрела ПС-210 б/п - 100 шт x 31 руб<br/>Петля стрела ПС-250 б/п - 2 шт x 36 руб<br/>Петля стрела ПС-370 б/п - 50 шт x 110 руб<br/>Петля стрела ПС-420 б/п - 50 шт x 120 руб<br/>Петля стрела ПС-670 б/п - 50 шт x 168 руб<br/>Скоба строительная, 10 мм - 95 шт x 17 руб<br/>Скоба строительная, 8 мм - 100 шт x 17 руб<br/>Уголок косынка, 200x150 мм - 30 шт x 66 руб<br/>Уголок косынка, 250x250 мм - 30 шт x 81 руб<br/>Уголок косынка, 300x300 мм - 30 шт x 92 руб<br/>Дюбель для изоляции IZO, 10х90 мм - 4 упак x 1 095 руб<br/>Гвозди мебельные декоративные, золото - 50 упак x 39 руб<br/>Гвозди финишные NFL-LU, 1,8х50 мм - 1 упак x 1 505 руб<br/>Гвозди финишные NFL-CU, 1,8х50 мм - 1 упак x 712 руб<br/>Лопата снеговая "Метель", 430х440 мм - 10 шт x 167 руб<br/>Лопата снеговая "Богатырь", 500х375 мм - 10 шт x 182 руб<br/>Лопата снеговая 445х330  PROTEX "Снежная королева" с алюм.пл.б/чер. - 15 шт x 221 руб<br/>Ледоруб Б-3 с металлической ручкой - 10 шт x 147 руб<br/>Скребок для льда с металлическим черенком, 190 мм  - 7 шт x 128 руб<br/>Скребок для льда с тулейкой, 200 мм - 10 шт x 37 руб<br/>Лопата совковая НЕРЖАВЕЙКА - 10 шт x 238 руб<br/>Лопата уборочная - 20 шт x 270 руб<br/>Черенок березовый, 40 мм - 40 шт x 65 руб<br/>Коврик придверный влагозащитный 50*80см (черный) - 8 шт x 175 руб<br/>Коврик щетинистый Стандарт 0,9*0,60м (Черный)* - 5 шт x 225 руб<br/>Коврик щетинистый Ромб 0,9*0,60м (Черный)* - 5 шт x 225 руб<br/>Перчатки х/б с ПВХ "Стандарт" точка, черные - 200 шт x 12 руб<br/>Перчатки полушерстяные с двойным латексным покрытием и вкладышем - 14 шт x 29.70 руб<br/>Перчатки полушерстяные с ПВХ "Стандарт" с точкой черные - 200 шт x 17.50 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:17:"263 020.80 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 10:53:57
+Module: 
+PRICE_FINAL 1 - 263 020.80 руб : a:14:{s:8:"ORDER_ID";i:2816;s:13:"ORDER_REAL_ID";i:2816;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2816";s:10:"ORDER_DATE";s:19:"29.10.2018 10:53:57";s:10:"ORDER_USER";s:31:"Б.Г. Батожаргалов";s:5:"PRICE";s:17:"263 020.80 руб";s:3:"BCC";s:12:"to@strlog.ru";s:5:"EMAIL";s:15:"oyona@yandex.ru";s:10:"ORDER_LIST";s:5671:"Плита цельная с частыми ребрами жесткости, 410x710 мм - 15 шт x 1 850 руб<br/>Колосник печной, 300x200 мм - 10 шт x 365 руб<br/>Алебастр Krasland, 5 кг - 30 упак x 90 руб<br/>Штукатурка Knauf Rotband, 30 кг - 40 упак x 408 руб<br/>Арматура АСП, 6 мм - 10 шт x 515 руб<br/>Арматура АСП, 8 мм - 10 шт x 707 руб<br/>Сетка кладочная 1х3 м, 20х20 /10/ открытый контур - 20 шт x 152 руб<br/>Сетка кладочная 1х3 м, 15х15 /10/ открытый контур - 20 шт x 184 руб<br/>Дверка печная, 250x140 мм - 14 шт x 430 руб<br/>Утеплитель напыляемый PENOPLEX FASTFIX - 55 шт x 392 руб<br/>Пакля льняная ленточная, 150 мм - 30 шт x 263 руб<br/>Пакля льняная ленточная, 150 мм - 30 шт x 414 руб<br/>Пакля льняная 2 сорт, 20 кг - 20 упак x 940 руб<br/>Отражающая изоляция Изодом ППИ ПЛ, 2 мм - 15 рул x 556 руб<br/>Отражающая изоляция Изодом ППИ ПЛ, 4 мм - 1 рул x 778 руб<br/>Самоклеющаяся изоляция Изодом ППИ ПФСК, 5 мм - 2 рул x 1 441 руб<br/>Пароизоляция Стройбонд B, 35 м2  - 20 рул x 384 руб<br/>Побелочная паста, 3 кг - 26 шт x 49 руб<br/>Аэрозольная краска EMPILS, темно-серый - 12 шт x 121 руб<br/>Аэрозольная краска EMPILS, бронзовая - 12 шт x 121 руб<br/>Аэрозольная краска EMPILS, синяя - 12 шт x 121 руб<br/>Аэрозольная краска EMPILS, чёрная - 48 шт x 121 руб<br/>Аэрозольная краска жаростойкая EMPILS, черная - 9 шт x 250 руб<br/>Аэрозольная краска EMPILS, белая - 48 шт x 121 руб<br/>Аэрозольная краска EMPILS, хром - 12 шт x 149 руб<br/>Аэрозольная краска EMPILS, серебристая - 12 шт x 121 руб<br/>Профиль углозащитный, 20х20 мм - 50 шт x 28 руб<br/>Профиль углозащитный, 25х25 мм - 43 шт x 31 руб<br/>Крючок дверной КД-75 цинк - 81 шт x 12 руб<br/>Крючок ветровой КР-200 цинк - 39 шт x 15 руб<br/>Ручка-скоба РС-120, медь - 5 шт x 26 руб<br/>Ручка-скоба РС-120 серебро - 6 шт x 27 руб<br/>Ручка-скоба РС-80-2 полимер - 37 шт x 18 руб<br/>Задвижка накладная ЗТ5, цинк - 24 шт x 13 руб<br/>Задвижка накладная ЗТ2, цинк - 100 шт x 15 руб<br/>Задвижка накладная ЗТ6, цинк - 86 шт x 14 руб<br/>Задвижка накладная ЗТ5, коричневый - 100 шт x 18 руб<br/>Петля стрела ПС-130 б/п - 100 шт x 25 руб<br/>Петля стрела ПС-210 б/п - 100 шт x 31 руб<br/>Петля стрела ПС-250 б/п - 2 шт x 36 руб<br/>Петля стрела ПС-370 б/п - 50 шт x 110 руб<br/>Петля стрела ПС-420 б/п - 50 шт x 120 руб<br/>Петля стрела ПС-670 б/п - 50 шт x 168 руб<br/>Скоба строительная, 10 мм - 95 шт x 17 руб<br/>Скоба строительная, 8 мм - 100 шт x 17 руб<br/>Уголок косынка, 200x150 мм - 30 шт x 66 руб<br/>Уголок косынка, 250x250 мм - 30 шт x 81 руб<br/>Уголок косынка, 300x300 мм - 30 шт x 92 руб<br/>Дюбель для изоляции IZO, 10х90 мм - 4 упак x 1 095 руб<br/>Гвозди мебельные декоративные, золото - 50 упак x 39 руб<br/>Гвозди финишные NFL-LU, 1,8х50 мм - 1 упак x 1 505 руб<br/>Гвозди финишные NFL-CU, 1,8х50 мм - 1 упак x 712 руб<br/>Лопата снеговая "Метель", 430х440 мм - 10 шт x 167 руб<br/>Лопата снеговая "Богатырь", 500х375 мм - 10 шт x 182 руб<br/>Лопата снеговая 445х330  PROTEX "Снежная королева" с алюм.пл.б/чер. - 15 шт x 221 руб<br/>Ледоруб Б-3 с металлической ручкой - 10 шт x 147 руб<br/>Скребок для льда с металлическим черенком, 190 мм  - 7 шт x 128 руб<br/>Скребок для льда с тулейкой, 200 мм - 10 шт x 37 руб<br/>Лопата совковая НЕРЖАВЕЙКА - 10 шт x 238 руб<br/>Лопата уборочная - 20 шт x 270 руб<br/>Черенок березовый, 40 мм - 40 шт x 65 руб<br/>Коврик придверный влагозащитный 50*80см (черный) - 8 шт x 175 руб<br/>Коврик щетинистый Стандарт 0,9*0,60м (Черный)* - 5 шт x 225 руб<br/>Коврик щетинистый Ромб 0,9*0,60м (Черный)* - 5 шт x 225 руб<br/>Перчатки х/б с ПВХ "Стандарт" точка, черные - 200 шт x 12 руб<br/>Перчатки полушерстяные с двойным латексным покрытием и вкладышем - 14 шт x 29.70 руб<br/>Перчатки полушерстяные с ПВХ "Стандарт" с точкой черные - 200 шт x 17.50 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:17:"263 020.80 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 12:47:02
+Module: 
+PRICE_FINAL 0 - 7 500 руб : a:14:{s:8:"ORDER_ID";i:2817;s:13:"ORDER_REAL_ID";i:2817;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2817";s:10:"ORDER_DATE";s:19:"29.10.2018 12:47:02";s:10:"ORDER_USER";s:29:"Алексей Риккерд";s:5:"PRICE";s:12:"7 500 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:18:"ale13264@yandex.ru";s:10:"ORDER_LIST";s:66:"Стекловата Feniks, 50 мм - 10 рул x 750 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"7 500 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 12:47:02
+Module: 
+PRICE_FINAL 1 - 7 500 руб : a:14:{s:8:"ORDER_ID";i:2817;s:13:"ORDER_REAL_ID";i:2817;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2817";s:10:"ORDER_DATE";s:19:"29.10.2018 12:47:02";s:10:"ORDER_USER";s:29:"Алексей Риккерд";s:5:"PRICE";s:12:"7 500 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:18:"ale13264@yandex.ru";s:10:"ORDER_LIST";s:66:"Стекловата Feniks, 50 мм - 10 рул x 750 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"7 500 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 13:56:44
+Module: 
+PRICE_FINAL 0 - 9 066 руб : a:14:{s:8:"ORDER_ID";i:2818;s:13:"ORDER_REAL_ID";i:2818;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2818";s:10:"ORDER_DATE";s:19:"29.10.2018 13:56:44";s:10:"ORDER_USER";s:34:"Тест Тест Тестович";s:5:"PRICE";s:12:"9 066 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:14:"srtlog@mail.ru";s:10:"ORDER_LIST";s:465:"Керамзит, фракция 10-20 мм - 1 упак x 3 671 руб<br/>Пенополистирол Пеноплэкс Комфорт, 20 мм - 1 упак x 1 364 руб<br/>Пенополистирол Пеноплэкс Комфорт, 20 мм - 1 упак x 1 545 руб<br/>Пенополистирол Пеноплэкс Комфорт, 30 мм - 1 упак x 1 477 руб<br/>Минплита Базалит Л-50, 50 мм - 1 упак x 409 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"9 066 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 13:56:44
+Module: 
+PRICE_FINAL 1 - 8 700 руб : a:14:{s:8:"ORDER_ID";i:2818;s:13:"ORDER_REAL_ID";i:2818;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2818";s:10:"ORDER_DATE";s:19:"29.10.2018 13:56:44";s:10:"ORDER_USER";s:34:"Тест Тест Тестович";s:5:"PRICE";s:12:"9 066 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:14:"srtlog@mail.ru";s:10:"ORDER_LIST";s:465:"Керамзит, фракция 10-20 мм - 1 упак x 3 671 руб<br/>Пенополистирол Пеноплэкс Комфорт, 20 мм - 1 упак x 1 364 руб<br/>Пенополистирол Пеноплэкс Комфорт, 20 мм - 1 упак x 1 545 руб<br/>Пенополистирол Пеноплэкс Комфорт, 30 мм - 1 упак x 1 477 руб<br/>Минплита Базалит Л-50, 50 мм - 1 упак x 409 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:10:"366 руб";s:11:"PRICE_FINAL";s:12:"8 700 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 14:13:10
+Module: 
+PRICE_FINAL 0 - 11 408 руб : a:14:{s:8:"ORDER_ID";i:2819;s:13:"ORDER_REAL_ID";i:2819;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2819";s:10:"ORDER_DATE";s:19:"29.10.2018 14:13:10";s:10:"ORDER_USER";s:29:"Светлана Селина";s:5:"PRICE";s:13:"11 408 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:20:"svetlanav06@inbox.ru";s:10:"ORDER_LIST";s:313:"Огнебиозащитный состав для древесины I/ II гр бесцветный, 20 л - 5 шт x 1 364 руб<br/>Гвозди 4,0х100 мм - 1 упак x 1 520 руб<br/>Гвозди 4,0х120 мм - 1 упак x 1 520 руб<br/>Гвозди 3,5х90 мм - 1 упак x 1 548 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:13:"11 408 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 14:13:10
+Module: 
+PRICE_FINAL 1 - 11 408 руб : a:14:{s:8:"ORDER_ID";i:2819;s:13:"ORDER_REAL_ID";i:2819;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2819";s:10:"ORDER_DATE";s:19:"29.10.2018 14:13:10";s:10:"ORDER_USER";s:29:"Светлана Селина";s:5:"PRICE";s:13:"11 408 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:20:"svetlanav06@inbox.ru";s:10:"ORDER_LIST";s:313:"Огнебиозащитный состав для древесины I/ II гр бесцветный, 20 л - 5 шт x 1 364 руб<br/>Гвозди 4,0х100 мм - 1 упак x 1 520 руб<br/>Гвозди 4,0х120 мм - 1 упак x 1 520 руб<br/>Гвозди 3,5х90 мм - 1 упак x 1 548 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:13:"11 408 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 19:02:48
+Module: 
+PRICE_FINAL 0 - 3 480 руб : a:14:{s:8:"ORDER_ID";i:2820;s:13:"ORDER_REAL_ID";i:2820;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2820";s:10:"ORDER_DATE";s:19:"29.10.2018 19:02:47";s:10:"ORDER_USER";s:58:"Чернецкий Алексей Владимирович";s:5:"PRICE";s:12:"3 480 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:20:"irk.alexey@yandex.ru";s:10:"ORDER_LIST";s:73:"Фанера березовая, 21 мм - 2 лист x 1 740 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"3 480 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 19:02:48
+Module: 
+PRICE_FINAL 1 - 3 480 руб : a:14:{s:8:"ORDER_ID";i:2820;s:13:"ORDER_REAL_ID";i:2820;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2820";s:10:"ORDER_DATE";s:19:"29.10.2018 19:02:47";s:10:"ORDER_USER";s:58:"Чернецкий Алексей Владимирович";s:5:"PRICE";s:12:"3 480 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:20:"irk.alexey@yandex.ru";s:10:"ORDER_LIST";s:73:"Фанера березовая, 21 мм - 2 лист x 1 740 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:0;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"3 480 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 21:46:05
+Module: 
+PRICE_FINAL 0 - 3 066 руб : a:14:{s:8:"ORDER_ID";i:2821;s:13:"ORDER_REAL_ID";i:2821;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2821";s:10:"ORDER_DATE";s:19:"29.10.2018 21:46:05";s:10:"ORDER_USER";s:56:"Никифоров Андрей Владимирович";s:5:"PRICE";s:12:"3 066 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:18:"andvladnik@mail.ru";s:10:"ORDER_LIST";s:318:"Ондулин SMART зеленый - 4 лист x 485 руб<br/>Набор для врезки замков 4пр.FALCO Standard * - 1 шт x 62 руб<br/>Розетка 1-мест ОУ с зазем. кон. 16-004 * - 6 шт x 14 руб<br/>Гвозди шиферные, 5x120 мм - 1 упак x 380 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"3 066 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 21:46:05
+Module: 
+PRICE_FINAL 1 - 3 066 руб : a:14:{s:8:"ORDER_ID";i:2821;s:13:"ORDER_REAL_ID";i:2821;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2821";s:10:"ORDER_DATE";s:19:"29.10.2018 21:46:05";s:10:"ORDER_USER";s:56:"Никифоров Андрей Владимирович";s:5:"PRICE";s:12:"3 066 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:18:"andvladnik@mail.ru";s:10:"ORDER_LIST";s:318:"Ондулин SMART зеленый - 4 лист x 485 руб<br/>Набор для врезки замков 4пр.FALCO Standard * - 1 шт x 62 руб<br/>Розетка 1-мест ОУ с зазем. кон. 16-004 * - 6 шт x 14 руб<br/>Гвозди шиферные, 5x120 мм - 1 упак x 380 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"3 066 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 21:48:11
+Module: 
+PRICE_FINAL 0 - 3 066 руб : a:14:{s:8:"ORDER_ID";i:2822;s:13:"ORDER_REAL_ID";i:2822;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2822";s:10:"ORDER_DATE";s:19:"29.10.2018 21:48:10";s:10:"ORDER_USER";s:56:"Никифоров Андрей Владимирович";s:5:"PRICE";s:12:"3 066 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:18:"andvladnik@mail.ru";s:10:"ORDER_LIST";s:318:"Ондулин SMART зеленый - 4 лист x 485 руб<br/>Набор для врезки замков 4пр.FALCO Standard * - 1 шт x 62 руб<br/>Розетка 1-мест ОУ с зазем. кон. 16-004 * - 6 шт x 14 руб<br/>Гвозди шиферные, 5x120 мм - 1 упак x 380 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"3 066 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-29 21:48:11
+Module: 
+PRICE_FINAL 1 - 3 066 руб : a:14:{s:8:"ORDER_ID";i:2822;s:13:"ORDER_REAL_ID";i:2822;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2822";s:10:"ORDER_DATE";s:19:"29.10.2018 21:48:10";s:10:"ORDER_USER";s:56:"Никифоров Андрей Владимирович";s:5:"PRICE";s:12:"3 066 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:18:"andvladnik@mail.ru";s:10:"ORDER_LIST";s:318:"Ондулин SMART зеленый - 4 лист x 485 руб<br/>Набор для врезки замков 4пр.FALCO Standard * - 1 шт x 62 руб<br/>Розетка 1-мест ОУ с зазем. кон. 16-004 * - 6 шт x 14 руб<br/>Гвозди шиферные, 5x120 мм - 1 упак x 380 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:12:"3 066 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-30 01:37:23
+Module: 
+PRICE_FINAL 0 - 984 руб : a:14:{s:8:"ORDER_ID";i:2823;s:13:"ORDER_REAL_ID";i:2823;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2823";s:10:"ORDER_DATE";s:19:"30.10.2018 01:37:23";s:10:"ORDER_USER";s:34:"Тест Тест Тестович";s:5:"PRICE";s:10:"984 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:14:"srtlog@mail.ru";s:10:"ORDER_LIST";s:62:"Рубероид РПП (О) 300  - 1 рул x 384 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:8:"0 руб";s:11:"PRICE_FINAL";s:10:"984 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------
+Host: xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-10-30 01:37:23
+Module: 
+PRICE_FINAL 1 - 943 руб : a:14:{s:8:"ORDER_ID";i:2823;s:13:"ORDER_REAL_ID";i:2823;s:27:"ORDER_ACCOUNT_NUMBER_ENCODE";s:4:"2823";s:10:"ORDER_DATE";s:19:"30.10.2018 01:37:23";s:10:"ORDER_USER";s:34:"Тест Тест Тестович";s:5:"PRICE";s:10:"984 руб";s:3:"BCC";s:15:"zakaz@strlog.ru";s:5:"EMAIL";s:14:"srtlog@mail.ru";s:10:"ORDER_LIST";s:62:"Рубероид РПП (О) 300  - 1 рул x 384 руб<br/>";s:10:"SALE_EMAIL";s:15:"zakaz@strlog.ru";s:14:"DELIVERY_PRICE";d:600;s:16:"ORDER_PUBLIC_URL";s:0:"";s:9:"PAY_BONUS";s:9:"41 руб";s:11:"PRICE_FINAL";s:10:"943 руб";}
+    OnOrderNewSendEmailHandler < ExecuteModuleEventEx < Bitrix\Sale\Notify::sendOrderNew < Bitrix\Sale\Compatible\EventCompatibility::onOrderNewSendEmail < call_user_func_array
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:475
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/notify.php:162
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/sale/lib/compatible/eventcompatibility.php:250
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/lib/eventmanager.php:442
+----------

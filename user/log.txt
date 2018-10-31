@@ -1,0 +1,70 @@
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:44
+Module: 
+Пользователь: natakostina74@mail.ru  добавлен
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:95
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:44
+Module: 
+Пользователь: ski@mail.ru  добавлен
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:95
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:44
+Module: 
+Пользователь: mail@belor.ru  добавлен
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:95
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:44
+Module: 
+Пользователь: igtnd@irk.ru  добавлен
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:95
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:44
+Module: 
+Пользователь: ibarahtenko86@bk.ru  добавлен
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:95
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:50
+Module: 
+Ошибка добавления пользователя natakostina74@mail.ru
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:98
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:51
+Module: 
+Ошибка добавления пользователя ski@mail.ru
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:98
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:51
+Module: 
+Ошибка добавления пользователя mail@belor.ru
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:98
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:51
+Module: 
+Ошибка добавления пользователя igtnd@irk.ru
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:98
+----------
+Host: new.xn--80afpacjdwcqkhfi.xn--p1ai
+Date: 2018-01-18 15:41:51
+Module: 
+Ошибка добавления пользователя ibarahtenko86@bk.ru
+    AddMessage2Log
+	/var/www/u0175547/data/www/new.xn--80afpacjdwcqkhfi.xn--p1ai/user/index.php:98
+----------

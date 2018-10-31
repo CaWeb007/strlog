@@ -1,0 +1,1 @@
+<?='</br></br></br><center style="font-size:16px;"><div><img src="/images/new_logo.png" alt="logo" data-tooltip="tooltip" class="tooltipstered"></div></br></br><strong>Уважаемые клиенты, мы обновляем версию сайта. <br>Зайдите пожалуйста позже.<strong></center>'?>

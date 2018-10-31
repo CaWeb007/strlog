@@ -1,0 +1,1 @@
+<a href="tel:+7(3952)280-900" rel="nofollow" onclick="sendSocEvent('clickphone','tel:+7(3952)280-900');return true;">+7(3952)280-900</a> (с 09:00 до 18:00)

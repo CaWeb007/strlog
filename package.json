@@ -1,0 +1,22 @@
+{
+  "name": "ak38",
+  "version": "1.0.0",
+  "description": "gulp for giim",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "caweb",
+  "license": "BSD",
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-sass": "~3.1.0",
+    "browser-sync": "~2.18.13",
+    "path": "~0.12.7",
+    "gulp-watch": "~4.3.11"
+  },
+  "dependencies": {}
+}

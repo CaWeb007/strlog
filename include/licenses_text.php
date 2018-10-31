@@ -1,0 +1,1 @@
+Я согласен на <a href="/info/politika/" target="_blank">обработку персональных данных</a>

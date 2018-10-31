@@ -1,0 +1,11 @@
+bitrix/
+!bitrix/templates/
+gulpfile.js
+.idea/
+upload/
+images/
+webstat/
+yandex_73357f1dae8d0228.html
+yandex_6da691193bd07855.html
+xml/
+wmail_3b025f984323808bc2d797b28993b496.html
