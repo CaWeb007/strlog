@@ -1,4 +1,5 @@
 <?php
+function Pr($z){echo "<pre>";var_dump($z);echo "</pre>";echo "<hr>";};
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }
