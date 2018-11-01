@@ -52,7 +52,7 @@ if ($request->get('via_ajax') === 'Y')
 global $APPLICATION;
 
 $APPLICATION->IncludeComponent(
-	'bitrix:sale.basket.basket',
+	'caweb:sale.basket.basket',
 	$template,
 	$params
 );

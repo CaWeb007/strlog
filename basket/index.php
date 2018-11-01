@@ -91,6 +91,7 @@ $APPLICATION->SetTitle("Корзина");
 		"USE_GIFTS" => "Y",	// Показывать блок "Подарки"
 		"USE_PREPAYMENT" => "N",	// Использовать предавторизацию для оформления заказа (PayPal Express Checkout)
 		"USE_PRICE_ANIMATION" => "Y",	// Использовать анимацию цен
+        'KP_PRICE_ID' => '11'
 	),
 	false
 );?>

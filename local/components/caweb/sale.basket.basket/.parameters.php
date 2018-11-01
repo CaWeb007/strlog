@@ -7,7 +7,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 use Bitrix\Main\Loader,
 	Bitrix\Catalog,
 	Bitrix\Iblock;
-
+use Bitrix\Catalog\GroupTable;
 if (!Loader::includeModule('sale'))
 	return;
 
@@ -145,7 +145,11 @@ $arComponentParameters = Array(
 		'ANALYTICS_SETTINGS' => array(
 			'NAME' => GetMessage('SBB_ANALYTICS_SETTINGS'),
 			'SORT' => 11000
-		)
+		),
+        'SPECIAL' => array(
+            'NAME' => GetMessage('SGB_GROUP_SPECIAL'),
+            'SORT'=> 15000
+        )
 	),
 	"PARAMETERS" => Array(
 		"PATH_TO_ORDER" => Array(
@@ -243,6 +247,24 @@ $arComponentParameters = Array(
 		),
 	),
 );
+
+$arColumns = array();
+$db = GroupTable::getList(array('select'=>array('ID', 'NAME')));
+while($ar = $db->fetch()){
+    $arColumns[$ar['ID']] = $ar['NAME'];
+}
+$arComponentParameters['PARAMETERS']['KP_PRICE_ID'] = array(
+    "PARENT" => "SPECIAL",
+    "NAME" => GetMessage("SGB_PARAMS_KP_PRICE_ID"),
+    "TYPE" => "LIST",
+    "MULTIPLE" => "N",
+    "VALUES" => $arColumns,
+    "DEFAULT" => 'N',
+    "COLS" => 25,
+    "SIZE" => 7,
+    "ADDITIONAL_VALUES" => "N",
+);
+
 
 foreach ($iblockIds as $iblockId)
 {

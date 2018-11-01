@@ -14,6 +14,8 @@ use Bitrix\Main,
 	Bitrix\Sale\PriceMaths,
 	Bitrix\Iblock,
 	Bitrix\Catalog;
+use Bitrix\Catalog\PriceTable;
+use Bitrix\Main\Diag\Debug;
 
 class CBitrixBasketComponent extends CBitrixComponent
 {
@@ -1103,7 +1105,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$basket = $this->getBasketStorage()->getBasket();
 
 		$actualQuantityList = $this->getActualQuantityList($basket);
-
 		if ($this->needBasketRefresh())
 		{
 			$refreshResult = $this->refreshBasket($basket);
@@ -2419,8 +2420,8 @@ class CBitrixBasketComponent extends CBitrixComponent
 				{
 					$basketPrice += $basketItem['SUM_VALUE'];
 					$basketWeight += $basketItem['WEIGHT'] * $basketItem['QUANTITY'];
-					$basketBasePrice += $basketItem['BASE_PRICE'] * $basketItem['QUANTITY'];
-					$basketVatSum += $basketItem['VAT_VALUE'] * $basketItem['QUANTITY'];
+					$basketBasePrice += $this->getBasePriceItem($basketItem);
+                    $basketVatSum += $basketItem['VAT_VALUE'] * $basketItem['QUANTITY'];
 				}
 			}
 		}
@@ -2428,14 +2429,13 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$basket = $this->getBasketStorage()->getOrderableBasket();
 			$this->initializeBasketOrderIfNotExists($basket);
-
 			$basketPrice = $basket->getPrice();
 			$basketWeight = $basket->getWeight();
-			$basketBasePrice = $basket->getBasePrice();
+			$basketBasePrice = $this->getBasePrice($basket);
 			$basketVatSum = $basket->getVatSum();
 			list($result['FULL_DISCOUNT_LIST'], $result['APPLIED_DISCOUNT_LIST']) = $this->getDiscountData($basket);
 		}
-
+		//Debug::dumpToFile(array($_REQUEST['via_ajax'], $basketBasePrice),'basePrice', 'basket.log');
 		$siteCurrency = Sale\Internals\SiteCurrencyTable::getSiteCurrency($this->getSiteId());
 		$result['CURRENCY'] = $siteCurrency;
 
@@ -2457,7 +2457,27 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		return $result;
 	}
-
+    protected function getBasePrice($basket){
+        $basketItems = $basket->getBasketItems();
+        $arParams = array(
+            'filter' => array('CATALOG_GROUP_ID' => $this->arParams['KP_PRICE_ID']),
+            'select' => array('PRICE')
+        );
+        $result = (float)0;
+	    foreach ($basketItems as $id => $basketItem){
+            $arParams['filter']['PRODUCT_ID'] = $basketItem->getField('PRODUCT_ID');
+            $result += (float)PriceTable::getRow($arParams)['PRICE'] * $basketItem->getQuantity();
+        }
+        return $result;
+    }
+    protected function getBasePriceItem($basketItem){
+        $arParams = array(
+            'filter' => array('CATALOG_GROUP_ID' => $this->arParams['KP_PRICE_ID']),
+            'select' => array('PRICE')
+        );
+        $arParams['filter']['PRODUCT_ID'] = $basketItem['PRODUCT_ID'];
+        return (float)PriceTable::getRow($arParams)['PRICE'] * $basketItem['QUANTITY'];
+    }
 	protected function getCouponInfo()
 	{
 		$result = array(
