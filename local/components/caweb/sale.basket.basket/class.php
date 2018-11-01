@@ -2435,7 +2435,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 			$basketVatSum = $basket->getVatSum();
 			list($result['FULL_DISCOUNT_LIST'], $result['APPLIED_DISCOUNT_LIST']) = $this->getDiscountData($basket);
 		}
-		//Debug::dumpToFile(array($_REQUEST['via_ajax'], $basketBasePrice),'basePrice', 'basket.log');
 		$siteCurrency = Sale\Internals\SiteCurrencyTable::getSiteCurrency($this->getSiteId());
 		$result['CURRENCY'] = $siteCurrency;
 
