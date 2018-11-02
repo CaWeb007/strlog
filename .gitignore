@@ -1,4 +1,6 @@
 bitrix/
+!bitrix/catalog/
+!bitrix/sale/
 !bitrix/templates/
 gulpfile.js
 .idea/
