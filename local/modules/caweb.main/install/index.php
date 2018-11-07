@@ -9,13 +9,13 @@ use Bitrix\Main\Entity\Base;
 use Caweb\Giim\CompanyTable;
 use Bitrix\Main\Config\Option;
 Loc::loadMessages(__FILE__);
-class caweb extends \CModule{
+class caweb_main extends \CModule{
  var $exclusionAdminFiles;
     function __construct(){
         $arModuleVersion = array();
         include (__DIR__."/version.php");
         $this->exclusionAdminFiles = array();
-        $this->MODULE_ID = "caweb";
+        $this->MODULE_ID = "caweb.main";
         $this->MODULE_VERSION = $arModuleVersion["VERSION"];
         $this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
         $this->MODULE_NAME = Loc::getMessage("CAWEB_MODULE_NAME");
@@ -32,9 +32,6 @@ class caweb extends \CModule{
         global $APPLICATION;
         if ($this->isVersionD7()){
             ModuleManager::registerModule($this->MODULE_ID);
-            $this->InstallDB();
-            $this->InstallEvents();
-            $this->InstallFiles();
         }else{
             $APPLICATION->ThrowException(Loc::getMessage("CAWEB_INSTALL_ERROR_VERSION"));
         }
@@ -42,16 +39,6 @@ class caweb extends \CModule{
     }
     function isVersionD7(){
         return CheckVersion(ModuleManager::getVersion('main'),'14.00.00');
-    }
-    function InstallDB(){
-        Loader::includeModule($this->MODULE_ID);
-    }
-    function UnInstallDB(){
-        Loader::includeModule($this->MODULE_ID);
-    }
-    function InstallFiles(){
-        $path = $this->GetPath()."/install/components";
-        return true;
     }
     function GetPath($notDocumentRoot = false){
         if ($notDocumentRoot){
@@ -67,10 +54,6 @@ class caweb extends \CModule{
         if ($request["step"] < 2){
             $APPLICATION->IncludeAdminFile(Loc::getMessage("CAWEB_UNINSTALL_TITLE"), $this->GetPath()."/install/unstep1.php");
         }elseif ($request["step"] == 2){
-            $this->UnInstallFiles();
-            $this->UnInstallEvents();
-            if ($request["save_data"] !="Y")
-                $this->UnInstallDB();
             ModuleManager::unRegisterModule($this->MODULE_ID);
             $APPLICATION->IncludeAdminFile(Loc::getMessage("CAWEB_UNINSTALL_TITLE"), $this->GetPath()."/install/unstep2.php");
         }
