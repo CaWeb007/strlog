@@ -54,8 +54,8 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 );?>
 
 <?$APPLICATION->IncludeComponent(
-	"bitrix:main.include", 
-	"front", 
+	"bitrix:main.include",
+	"front",
 	array(
 		"COMPONENT_TEMPLATE" => "front",
 		"PATH" => SITE_DIR."include/mainpage/comp_catalog_hit.php",
@@ -90,7 +90,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"EDIT_TEMPLATE" => "standard.php",	// Шаблон области по умолчанию
 	),
 	false
-);?>	
+);?>
 
 <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
