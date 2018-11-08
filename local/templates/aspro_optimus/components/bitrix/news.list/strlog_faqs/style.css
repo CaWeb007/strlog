@@ -1,0 +1,62 @@
+div.news-list
+{
+	word-wrap: break-word;
+}
+div.news-list img.preview_picture
+{
+	float:left;
+	margin:0 4px 6px 0;
+}
+.news-date-time {
+	color:#486DAA;
+}
+
+.news-item{
+	margin: 0;
+}
+
+.strlog-news-item-title{
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	padding: 10px 0;
+	font-family: "OS-Book";
+	font-size: 16px;
+	color: #00adee;
+	cursor: pointer;
+	position: relative;
+	user-select: none;
+}
+
+.strlog-news-item-title::after{
+	content: "";
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	background: url(images/faq-arrow.png) no-repeat center center;
+}
+
+.strlog-news-item-title.toggled::after{
+	transform: rotateZ(180deg);
+}
+
+.strlog-news-item-desc{
+	display: none;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	padding: 0;
+	font-size: 14px;
+	color: #453d3f;
+	cursor: default;
+}
+
+.strlog-news-items-wrapper{
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	padding: 0;
+	border-bottom: 1px solid #d8d8d8;
+}
