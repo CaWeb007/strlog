@@ -130,7 +130,7 @@ class BonusPayRestriction extends Price
 				{
 					$prices[] = (float)$ar_prices['PRICE'];
 				}
-				
+
 				if(2 == count($prices) && $prices[0] . $prices[1]){
 					$maxUserBudget += $prices[0] - $prices[1];
 				}

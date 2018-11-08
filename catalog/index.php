@@ -609,10 +609,10 @@ $APPLICATION->SetTitle("Каталог");
 		"OFFERS_CART_PROPERTIES" => array(
 			0 => "CML2_ATTRIBUTES",
 		),
-		"OFFERS_SORT_FIELD" => "shows",
-		"OFFERS_SORT_FIELD2" => "shows",
+		"OFFERS_SORT_FIELD" => "sort",
+		"OFFERS_SORT_FIELD2" => "CATALOG_QUANTITY",
 		"OFFERS_SORT_ORDER" => "asc",
-		"OFFERS_SORT_ORDER2" => "asc",
+		"OFFERS_SORT_ORDER2" => "desc",
 		"OFFER_ADD_PICT_PROP" => "MORE_PHOTO",
 		"OFFER_HIDE_NAME_PROPS" => "N",
 		"OFFER_TREE_PROPS" => array(

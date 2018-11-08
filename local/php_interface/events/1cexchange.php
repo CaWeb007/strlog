@@ -3,7 +3,7 @@ AddEventHandler('catalog', 'OnSuccessCatalogImport1C', 'customCatalogImportStep'
 
 function customCatalogImportStep()
 {
-	#define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/logs/log-change1c.txt");
+	define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/logs/log-change1c.txt");
     $stepInterval = (int) COption::GetOptionString("catalog", "1C_INTERVAL", "-");
     $startTime = time();
     // Флаг импорта файла остатков
@@ -32,15 +32,106 @@ function customCatalogImportStep()
 
 	$arItem = [];
 	
-	if($isOffers){
-		#$time = time();
-		#$DB->Query("DROP TABLE IF EXISTS b_xml_tree_o;");
-		#$DB->Query("CREATE TABLE IF NOT EXISTS b_xml_tree_o AS SELECT * FROM b_xml_tree;");
+	if($isCatalog){
+		
+		$el = new CIBlockElement;
+	#	$DB->Query("DROP TABLE IF EXISTS b_xml_tree_c;");
+	#	$DB->Query("CREATE TABLE IF NOT EXISTS b_xml_tree_c AS SELECT * FROM b_xml_tree;");
+
+		$PRODUCT_SET_Q = [];
+		$query = "SELECT ID, VALUE FROM b_xml_tree WHERE ID > '".$NS['custom']['lastId']."' && DEPTH_LEVEL = '4' && NAME = 'Ид' ORDER BY ID ASC";
+		$res = $DB->Query($query);
+		//$res = CIBlockElement::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('>ID' => $NS['custom']['lastId'])), false, false, ['ID','XML_ID','PROPERTY_OBEM_M3']);
+		$errorMessage = null;
+	 
+		while ($arXMLItem = $res->Fetch()) {
+			
+			$XML_ID = $arXMLItem["VALUE"];
+			
+			#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arXMLItem));
+			
+			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','PROPERTY_NOT_WORK']);
+			
+			if($arItem = $ires->Fetch()){
+			
+				$PRODUCT_ID = $arItem["ID"];
+				
+				$query = "  SELECT item.VALUE as item,  type1.VALUE as NameRekv, type2.VALUE as ValRekv
+								FROM b_xml_tree as item
+								INNER JOIN b_xml_tree as pr ON (item.PARENT_ID = pr.ID && pr.DEPTH_LEVEL = 3)
+								INNER JOIN b_xml_tree as rekv ON (rekv.LEFT_MARGIN BETWEEN pr.LEFT_MARGIN AND pr.RIGHT_MARGIN AND rekv.DEPTH_LEVEL = 5 AND rekv.NAME = 'ЗначениеРеквизита')
+								INNER JOIN b_xml_tree as type1 ON (type1.PARENT_ID = rekv.ID AND type1.DEPTH_LEVEL = 6 AND type1.NAME = 'Наименование')
+								INNER JOIN b_xml_tree as type2 ON (type2.PARENT_ID = rekv.ID AND type2.DEPTH_LEVEL = 6 AND type2.NAME = 'Значение')
+								WHERE item.VALUE = '$XML_ID' AND item.NAME = 'Ид'";
+								
+				$results = $DB->Query($query);
+				
+				while($row = $results->Fetch()) {
+					//	Товар комплект, установка остатков
+					if($row['NameRekv'] == "ВидНоменклатуры" && $row['ValRekv'] == "Товар-комплект"){
+						$PRODUCT_SET_Q[$PRODUCT_ID] = 10;
+					}
+				}
+				
+				$disableItem = false;
+				
+				$query = "  SELECT item.VALUE as item, del.VALUE as del
+								FROM b_xml_tree as item
+								INNER JOIN b_xml_tree as pr ON (item.PARENT_ID = pr.ID && pr.DEPTH_LEVEL = 3)
+								INNER JOIN b_xml_tree as del ON (del.LEFT_MARGIN BETWEEN pr.LEFT_MARGIN AND pr.RIGHT_MARGIN AND del.DEPTH_LEVEL = 4 AND del.NAME = 'ПометкаУдаления')
+								WHERE item.VALUE = '$XML_ID' AND item.NAME = 'Ид'";
+								
+				$results = $DB->Query($query);
+				
+				while($row = $results->Fetch()) {
+					// Есть ли пометка на удаление
+					if(trim($row['item']) == $XML_ID && trim($row['del']) === "true") {
+						$disableItem = true;
+						AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " = " . serialize($row));
+					}
+				}
+				
+				AddMessage2Log("Продукт $XML_ID ID-" . $PRODUCT_ID . " = " . ($disableItem?"DA":"NET"));
+				// Отключаем\Включаем товар, если пометка на удаление true/false
+				if($disableItem===true){
+					$PROP = ['533' => 6036];
+					$el::SetPropertyValuesEx($PRODUCT_ID, 16, $PROP);
+					$el->update($PRODUCT_ID,['ACTIVE'=>'N'], $WF=="Y", true, true);
+					
+					CPrice::DeleteByProduct($PRODUCT_ID);
+					$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '0' WHERE `ID` = '".$PRODUCT_ID."'");
+				} elseif($arItem["PROPERTY_NOT_WORK_VALUE"] == "ДА"){	
+					$PROP = ['533' => 6035];
+					$el::SetPropertyValuesEx($PRODUCT_ID, 16, $PROP);
+					$el->update($PRODUCT_ID,['ACTIVE'=>'Y'], $WF=="Y", true, true);
+				}
+				
+				if ($error === true) {
+					$errorMessage = 'Что-то случилось.';
+					break;
+				}
+		 
+				$NS['custom']['lastId'] = $arXMLItem['ID'];
+				$NS['custom']['counter']++;
+		 
+				// Прерывание по времени шага
+				if ($stepInterval > 0 && (time() - $startTime) > $stepInterval) {
+					break;
+				}
+			}
+		}
+		
+		if(0 < count($PRODUCT_SET_Q)){
+			$fp = fopen($_SERVER['DOCUMENT_ROOT']."/update_quantity_set","w");
+			fwrite($fp,serialize($PRODUCT_SET_Q));
+			fclose($fp);
+		}
+		//	AddMessage2Log("Продукт 123 " . serialize($PRODUCT_SET_Q));
 	}
 	
 	if($isPrices){
 		
-		// BONUS_KP BONUS_SO
+		/* BONUS_KP BONUS_SO Считаем бонусы */
 		$dbPriceType = CCatalogGroup::GetList(
 			['NAME'=>"ASC"],
 			['NAME'=>['LOGIC'=>'OR','ТО','СО','КП']],
@@ -56,19 +147,20 @@ function customCatalogImportStep()
 		
 		$query = "SELECT ID, VALUE FROM b_xml_tree WHERE ID > '".$NS['custom']['lastId']."' && DEPTH_LEVEL = '4' && NAME = 'Ид' ORDER BY ID ASC";
 		$res = $DB->Query($query);
+		
+		//$res = CIBlockElement::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('>ID' => $NS['custom']['lastId'])), false, false, ['ID','XML_ID','PROPERTY_OBEM_M3']);
 		$errorMessage = null;
 	 
 		while ($arXMLItem = $res->Fetch()) {			
 		
 			$XML_ID = $arXMLItem["VALUE"];
 			
-			$ires = CIBlockElement::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID)), false, false, ['ID',"PROPERTY_NOT_WORK"]);
+			$ires = CIBlockElement::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','PROPERTY_NOT_WORK']);
 			
 			if($arItem = $ires->Fetch()){
 				
 				$ELEMENT_ID = $arItem["ID"];
-				
-				
+								
 				if($arItem["PROPERTY_NOT_WORK_VALUE"] == "ДА"){	
 					CPrice::DeleteByProduct($ELEMENT_ID);
 				}
@@ -99,9 +191,11 @@ function customCatalogImportStep()
 						"BONUS_SO20" => ($PRICES['СО'] - $PRICES['ТО']) * 0.20,
 					];
 					
+				
 					CIBlockElement::SetPropertyValuesEx($ELEMENT_ID, false, $PROPERTIES);
 				
 				}
+				/* END BONUS_KP BONUS_SO Считаем бонусы */
 			}
 			
 			if ($error === true) {
@@ -119,88 +213,6 @@ function customCatalogImportStep()
 		}
 		
 	}
-	
-	if($isCatalog){
-		
-		$el = new CIBlockElement;
-		
-		$errorMessage = null;
-		$PRODUCT_SET_Q = [];
-		
-		$query = "SELECT ID, VALUE FROM b_xml_tree WHERE ID > '".$NS['custom']['lastId']."' && DEPTH_LEVEL = '4' && NAME = 'Ид' ORDER BY ID ASC";
-		$res = $DB->Query($query);
-	 
-		while ($arXMLItem = $res->Fetch()) {
-			
-			$XML_ID = $arXMLItem["VALUE"];
-			
-			#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arXMLItem));
-			
-			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID']);
-			
-			if($arItem = $ires->Fetch()){
-			
-				$PRODUCT_ID = $arItem["ID"];
-				
-				# Выбор реквизитов товара из таблицы обмена b_xml_tree
-				$query = "  SELECT item.VALUE as item,  type1.VALUE as NameRekv, type2.VALUE as ValRekv, del.VALUE as del
-								FROM b_xml_tree as item
-								INNER JOIN b_xml_tree as pr ON (item.PARENT_ID = pr.ID && pr.DEPTH_LEVEL = 3)
-								INNER JOIN b_xml_tree as rekv ON (rekv.LEFT_MARGIN BETWEEN pr.LEFT_MARGIN AND pr.RIGHT_MARGIN AND rekv.DEPTH_LEVEL = 5 AND rekv.NAME = 'ЗначениеРеквизита')
-								INNER JOIN b_xml_tree as type1 ON (type1.PARENT_ID = rekv.ID AND type1.DEPTH_LEVEL = 6 AND type1.NAME = 'Наименование')
-								INNER JOIN b_xml_tree as type2 ON (type2.PARENT_ID = rekv.ID AND type2.DEPTH_LEVEL = 6 AND type2.NAME = 'Значение')
-								INNER JOIN b_xml_tree as del ON (del.LEFT_MARGIN BETWEEN pr.LEFT_MARGIN AND pr.RIGHT_MARGIN AND del.DEPTH_LEVEL = 4 AND del.NAME = 'ПометкаУдаления')
-								WHERE item.VALUE = '$XML_ID' AND item.NAME = 'Ид'";
-								
-				$results = $DB->Query($query);
-				
-				$disableItem = false;
-				
-				while($row = $results->Fetch()) {
-					#	AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " = " . serialize($row));
-					
-					# Если товар-комплект то устанавливаем остаток 10 шт.
-					if($row['NameRekv'] == "ВидНоменклатуры" && $row['ValRekv'] == "Товар-комплект"){
-					#	AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " Наименование реквизита = " . $row['NameRekv'] . ", Значение реквизита = " . $row['ValRekv']);
-						//$DB->query("UPDATE `b_catalog_store_product` SET `AMOUNT` = '10' WHERE `PRODUCT_ID` = '".$PRODUCT_ID."' AND `STORE_ID` = '".$STORE_ID."'");
-						//$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '10' WHERE `ID` = '".$PRODUCT_ID."'");
-						$PRODUCT_SET_Q[$PRODUCT_ID] = 10;	
-					}
-					$disableItem = $row['del'] == "true" || (int)$row['del'] > 0 ? true : false;
-				}
-				
-				# Удаление цены товара и остатков, если есть пометка удаления
-				if($disableItem){
-					$PROP = [];
-					$PROP['533'] = 6036;
-					$el->update($PRODUCT_ID,['ACTIVE'=>'Y',"PROPERTY_VALUES"=> $PROP], $WF=="Y", true, true);
-					CPrice::DeleteByProduct($PRODUCT_ID);
-					$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '0' WHERE `ID` = '".$PRODUCT_ID."'");
-				}
-				
-				if ($error === true) {
-					$errorMessage = 'Что-то случилось.';
-					break;
-				}
-		 
-				$NS['custom']['lastId'] = $arXMLItem['ID'];
-				$NS['custom']['counter']++;
-		 
-				// Прерывание по времени шага
-				if ($stepInterval > 0 && (time() - $startTime) > $stepInterval) {
-					break;
-				}
-			}
-		}
-		
-		if(0 < count($PRODUCT_SET_Q)){
-			$fp = fopen($_SERVER['DOCUMENT_ROOT']."/update_quantity_set","w");
-			fwrite($fp,serialize($PRODUCT_SET_Q));
-			fclose($fp);
-		}
-		//	AddMessage2Log("Продукт 123 " . serialize($PRODUCT_SET_Q));
-	}
-	
 	if ($isRests) {
 		
 		if(file_exists($_SERVER['DOCUMENT_ROOT']."/update_quantity_set")){
@@ -241,7 +253,7 @@ function customCatalogImportStep()
 			
 			#AddMessage2Log("Продукт XML_ID REST - " . $XML_ID . ": " . serialize($arXMLItem));
 			
-			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID)), false, false, ['ID','ACTIVE','PROPERTY_OBEM_M3',"PROPERTY_NOT_WORK"]);
+			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','ACTIVE','PROPERTY_OBEM_M3','PROPERTY_NOT_WORK']);
 			
 			if($arItem = $ires->Fetch()){
 				/*
@@ -257,13 +269,15 @@ function customCatalogImportStep()
 				$V = (float)$arItem["PROPERTY_OBEM_M3_VALUE"];
 				$isV = false;
 				
+				#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arItem));
+				
 				if($arItem["PROPERTY_NOT_WORK_VALUE"] == "ДА"){
 					$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '0' WHERE `ID` = '".$PRODUCT_ID."'");
 					$el->update($PRODUCT_ID,['ACTIVE'=>'N'], $WF=="Y", true, true);
 				} else {
 					if($arItem["ACTIVE"] != "Y")
 						$el->update($PRODUCT_ID,['ACTIVE'=>'Y'], $WF=="Y", true, true);
-				}					
+				}		
 				
 				$pRes = $el::GetProperty(16, $PRODUCT_ID, "sort", "asc", array("CODE" => "CML2_TRAITS"));
 				while ($ob = $pRes->GetNext())

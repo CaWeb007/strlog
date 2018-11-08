@@ -2867,6 +2867,19 @@ button.close {
 
 /* end bonus history */
 
+/* fast view */
+.fast_view_frame .bonuses-popup-wrapper-detail-page::before {
+	left: 20%;
+}
+.fast_view_frame .catalog_detail .bonuses-popup-wrapper {
+    left: -20px;
+}
+
+.fast_view_frame.popup .like_icons span.added div {
+    color: #2975c0;
+}
+/* fast view */
+
 .one_click_buy_result.show {
     display: block;
 }
