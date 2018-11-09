@@ -138,7 +138,7 @@ if (!window.JCCatalogOnlyElement)
 			this.set_quantity = this.params.MIN_QUANTITY_BUY;
 			if($(this.obProduct).find('input[name=quantity]').length)
 				this.set_quantity = $(this.obProduct).find('input[name=quantity]').val();
-			
+
 			this.checkPriceRange(this.set_quantity);
 
 			$(this.obProduct).find('.not_matrix').hide();
@@ -152,7 +152,7 @@ if (!window.JCCatalogOnlyElement)
 
 			$(this.obProduct).find('.with_matrix .sale_block .text .values_wrapper').html(getCurrentPrice(this.currentPrices[this.currentPriceSelected].DISCOUNT, this.currentPrices[this.currentPriceSelected].CURRENCY, this.currentPrices[this.currentPriceSelected].PRINT_DISCOUNT));
 			$(this.obProduct).find('.with_matrix .sale_block .value span').html(this.currentPrices[this.currentPriceSelected].PERCENT);
-			
+
 			$(this.obProduct).find('.with_matrix').show();
 
 			if(arOptimusOptions['THEME']['SHOW_TOTAL_SUMM'] == 'Y')
@@ -168,7 +168,7 @@ if (!window.JCCatalogOnlyElement)
 				return;
 
 			var range, found = false;
-			
+
 			for (var i in this.currentQuantityRanges)
 			{
 				if (this.currentQuantityRanges.hasOwnProperty(i))
@@ -2104,7 +2104,7 @@ window.JCCatalogElement.prototype.QuantitySet = function(index)
 					BX.adjust(this.obBasisPrice, { style: { display: 'none' }, html: '' });
 				}
 			}
-			
+
 		}
 		this.currentBasisPrice = this.offers[index].BASIS_PRICE;
 	}
@@ -2522,7 +2522,7 @@ window.JCCatalogElement.prototype.ChangeInfo = function()
 		}
 	}
 	if (-1 < index)
-	{	
+	{
 
 		for (i = 0; i < this.offers.length; i++)
 		{
@@ -2703,7 +2703,7 @@ window.JCCatalogElement.prototype.ChangeInfo = function()
 
 		if($(this.obProduct).find('.quantity_block .values').length)
 			$(this.obProduct).find('.quantity_block .values .item span.value').text(this.offers[index].MAX_QUANTITY).css({'opacity':'1'});
-		
+
 		if(this.offers[index].SHOW_DISCOUNT_TIME_EACH_SKU == 'Y')
 			initCountdownTime($(this.obProduct), this.offers[index].DISCOUNT_ACTIVE);
 
@@ -3231,8 +3231,8 @@ window.JCCatalogElement.prototype.setPriceAction = function(change, sku)
 	var product = $(this.obProduct),
 		check_quantity = '',
 		is_sku = (typeof sku !== 'undefined' && sku == 'Y');
-		
-	this.offers[this.offerNum].offer_set_quantity = this.offers[this.offerNum].CONFIG.MIN_QUANTITY_BUY;			
+
+	this.offers[this.offerNum].offer_set_quantity = this.offers[this.offerNum].CONFIG.MIN_QUANTITY_BUY;
 	if($(product).find('input[name=quantity]').length)
 		this.offers[this.offerNum].offer_set_quantity = $(product).find('input[name=quantity]').val();
 
@@ -3342,10 +3342,10 @@ window.JCCatalogElement.prototype.setPrice = function(change, sku, obPrices, mea
 			$(this.obProduct).find('.with_matrix').hide();
 			$(this.obProduct).find('.not_matrix').show();
 
-			this.offers[this.offerNum].offer_set_quantity = this.offers[this.offerNum].CONFIG.MIN_QUANTITY_BUY;			
+			this.offers[this.offerNum].offer_set_quantity = this.offers[this.offerNum].CONFIG.MIN_QUANTITY_BUY;
 			if($(product).find('input[name=quantity]').length)
 				this.offers[this.offerNum].offer_set_quantity = $(product).find('input[name=quantity]').val();
-			
+
 			if(this.config.showOldPrice)
 			{
 				$(this.obProduct).find('.price.discount').hide();
@@ -3357,7 +3357,7 @@ window.JCCatalogElement.prototype.setPrice = function(change, sku, obPrices, mea
 				{
 					BX.adjust(this.obPrice.percent, {style: {display: 'none'}, html: ''});
 				}
-				
+
 				$(this.obPrice.price).closest('.cost').find('.sale_block:not(.matrix)').hide();
 				$(this.obPrice.price).closest('.cost').find('.sale_block:not(.matrix) .value').html('');
 				$(this.obPrice.price).closest('.cost').find('.sale_block:not(.matrix) .text span').html('');

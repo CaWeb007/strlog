@@ -590,18 +590,20 @@ if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFE
 			$arAddToBasketData = COptimus::GetAddToBasketArray($arOffer, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], false, $arItemIDs["ALL_ITEM_IDS"], 'big_btn w_icons', $arParams);
 			$arAddToBasketData["HTML"] = str_replace('data-item', 'data-props="'.$arOfferProps.'" data-item', $arAddToBasketData["HTML"]);
 
+
+
 			if($arOffer['PRICES'])
 			{
 				foreach($arOffer['PRICES'] as $priceKey => $arOfferPrice)
 				{
 					/*if($arResult['CATALOG_GROUP_NAME_'.$arOfferPrice['PRICE_ID']])
 						$arOffer['PRICES'][$priceKey]['GROUP_NAME'] = $arResult['CATALOG_GROUP_NAME_'.$arOfferPrice['PRICE_ID']];*/
-					//Pr($arResult['OFFERS'][$keyOffer]['PRICES'][$priceKey]["PRINT_DISCOUNT_VALUE"]);
-					//Pr($keyOffer);
-					Pr(array_shift($arResult['PRICES']));
-
+                    if($keyOffer === 0) continue;
+					$arResult['OFFERS'][$keyOffer]['PRICES'][$priceKey] = $arResult['PRICES'][$priceKey];//todo костыль
+					$arResult['OFFERS'][$keyOffer]["MIN_PRICE"] = $arResult['PRICES'][$priceKey];//todo костыль
 				}
 			}
+			$arOffer = $arResult['OFFERS'][$keyOffer];//todo костыль
 			$firstPhoto = current($arOffer['MORE_PHOTO']);
 			$arOneRow = array(
 				'ID' => $arOffer['ID'],
@@ -1117,7 +1119,21 @@ if(is_array($arParams["SECTION_TIZER"]) && $arParams["SECTION_TIZER"]){
 		$obCache->EndDataCache($arTizersData);
 	}
 	$arResult["TIZERS_ITEMS"]=$arTizersData;
-}?>
+}
+
+//Pr($arResult['OFFERS'][1]["CATALOG_PRICE_11"] = "246");
+/*$arResult['OFFERS'][1]["CATALOG_PRICE_11"] = "246";
+$arResult['OFFERS'][1]["~CATALOG_PRICE_11"] = "246";
+$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["UNROUND_BASE_PRICE"] = (float)246;
+$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["UNROUND_PRICE"] = (float)246;
+$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["BASE_PRICE"] = (float)246;
+$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["PRICE"] = (float)246;
+$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["PRINT_BASE_PRICE"] = '246 руб';
+$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["PRINT_PRICE"] = '246 руб';*/
+//Pr($arResult['OFFERS'][1]["ITEM_PRICES"][0]);
+//Pr($arResult['JS_OFFERS'])
+//todo это убрать
+?>
 
 <?COptimus::AddMeta(
 	array(
