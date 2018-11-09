@@ -8,6 +8,7 @@ use Bitrix\Sale\Order;
 use Bitrix\Sale\PaymentCollection;
 use Bitrix\Sale\Services\Base;
 use Bitrix\Sale\Payment;
+use Bitrix\Catalog\PriceTable;
 
 class BonusPayRestriction extends Price
 {
@@ -18,7 +19,6 @@ class BonusPayRestriction extends Price
 	{
 		self::$params = $params;
 	}
-	
 	
 	/**
 	 * @param $params
@@ -79,81 +79,32 @@ class BonusPayRestriction extends Price
 	}
 	
 	
-	protected static function extractParams(Entity $entity)
-	{
+	protected static function extractParams(Entity $entity){
 		$params = self::$params;
-		
 		if(isset($params['PROP_CODE']) && $params['PROP_CODE']){
 			$property_item = "PROPERTY_".$params['PROP_CODE'];
 		}
-		
 		$orderPrice = null;
 		$paymentPrice = null;
-
-		if ($entity instanceof Payment)
-		{
-			global $USER; 
-			$userID = $USER->GetID();
-
-			$userGroups = \CUser::GetUserGroup($userID);
-			$intersect = array_intersect([9,14,15], $userGroups);
-			if($intersect){
-				$PRICE_IDS = ['LOGIC'=>'OR',9,11];
-			}
-			
-			$intersect = array_intersect([10,12], $userGroups);
-			if($intersect){
-				$PRICE_IDS = ['LOGIC'=>'OR',9,10];
-			}
-			
-			$maxUserBudget = 0;
-			
-			
+		if ($entity instanceof Payment){
 			/** @var PaymentCollection $collection */
 			$collection = $entity->getCollection();
 			/** @var Order $order */
 			$order = $collection->getOrder();
+            $maxUserBudget = 0;
 			foreach($order->getBasket() as $basketItem){
-				$productID = $basketItem->getProductId(); 
-				
-				$dbProductPrice = CPrice::GetListEx(
-					['CATALOG_GROUP_ID'=>'DESC'],
-					["PRODUCT_ID" => $productID,"=CATALOG_GROUP_ID"=>$PRICE_IDS],
-					false,
-					false,
-					["ID", "CATALOG_GROUP_ID", "CATALOG_GROUP_NAME", "PRICE"]
-				);
-				
-				$prices = [];
-				
-				while($ar_prices = $dbProductPrice->GetNext())
-				{
-					$prices[] = (float)$ar_prices['PRICE'];
-				}
-
-				if(2 == count($prices) && $prices[0] . $prices[1]){
-					$maxUserBudget += $prices[0] - $prices[1];
-				}
-				
-				if(0 < $maxUserBudget){
-					$PRODUCT_IDS[] = $productID;
-					$PRODUCTS[$productID] = $basketItem->getFinalPrice();
-				}
+				$productID = $basketItem->getProductId();
+                $maxUserBudget += static::getBudget($basketItem);
+                if(0 < $maxUserBudget) $PRODUCT_IDS[] = $productID;
 			}
-	
 			$res = CIBlockElement::GetList(['IBLOCK_ID'=>16],['ID'=>array_merge(["LOGIC"=>"OR"],$PRODUCT_IDS)], false, false, ['ID',$property_item]);
-			while($ar_fields = $res->GetNext())
-			{
-				if($ar_fields[$property_item.'_VALUE']=='Да'){
-					$PRODUCTS[$ar_fields['ID']]=0;
-				}
+			while($ar_fields = $res->GetNext()){
+				if($ar_fields[$property_item.'_VALUE']=='Да') $PRODUCTS[$ar_fields['ID']] = 0;
 			}
-			
-			$orderPrice = array_sum($PRODUCTS);#$order->getPrice();
 			$paymentPrice = $entity->getField('SUM');
-			
+			$orderPrice = $order->getPrice();
+			$maxUserBudget = static::checkBudget($orderPrice, $maxUserBudget);
 		}
-
 		return array(
 			'PRICE_PAYMENT' => $paymentPrice,
 			'PRICE_ORDER' => $orderPrice,
@@ -207,8 +158,23 @@ class BonusPayRestriction extends Price
 		throw new ArgumentTypeException('');
 	}
 	
-	
 
+    protected static function getBudget($basketItem){
+        $params = array(
+            'filter' => array(
+                'PRODUCT_ID' => $basketItem->getProductId(),
+                'CATALOG_GROUP_ID' => 9),
+            'select' => array('PRICE')
+        );
+        $minPrice = (float)PriceTable::getRow($params)['PRICE'];
+        $thisPrice = $basketItem->getPrice();
+        return ($thisPrice - $minPrice);
+    }
+    protected static function checkBudget($orderPrice, $maxUserBudget){
+        $maxBudget = $orderPrice * 0.5;
+        if ($maxUserBudget > $maxBudget) return $maxBudget;
+        return $maxUserBudget;
+    }
 	public static function getParams($paySystemId)
 	{
 		$result = array();
