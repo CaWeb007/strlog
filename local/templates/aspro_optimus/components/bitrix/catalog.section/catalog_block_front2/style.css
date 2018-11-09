@@ -1,0 +1,23 @@
+.rows_block .row-block-prod-title.catalog_item {
+    background: #f6f6f6;
+    border-right:  0;
+    border-left: 0;
+		padding:19px 0;
+    padding-left: 10px;
+}
+
+.catalog .block .row-block-prod-title.item_wrap:not(.touch):hover, .catalog .block .row-block-prod-title.item_wrap.hover {
+	border: 0;
+}
+.rows_block .row-block-prod-title.catalog_item:first-child {
+    border-top: 0;
+}
+
+.rows_block .prod-title {
+    font-size:20px;
+    color:#000
+    }
+
+.rows_block .prod-title span {
+    color:#666;
+}

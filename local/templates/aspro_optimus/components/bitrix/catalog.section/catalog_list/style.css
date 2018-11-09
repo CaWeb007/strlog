@@ -1,0 +1,26 @@
+.display_list .row-block-prod-title.list_item_wrapp {
+    background: #f6f6f6;
+    border-right:  0;
+    border-left: 0;
+    border-bottom: 1px solid #e7e7e7;
+		padding:19px 0;
+    padding-left: 10px;
+}
+
+.display_list .row-block-prod-title.list_item_wrapp:first-child {
+    border-top: 0;
+}
+
+.catalog .row-block-prod-title.item_wrap:not(.touch):hover, .catalog .row-block-prod-title.item_wrap.hover {
+ border: 0;
+box-shadow:none;
+}
+
+.display_list .prod-title {
+    font-size:20px;
+    color:#000
+    }
+
+.display_list .prod-title span {
+    color:#666;
+}
