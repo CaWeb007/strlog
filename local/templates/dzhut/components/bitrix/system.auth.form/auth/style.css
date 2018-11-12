@@ -1,0 +1,11 @@
+.auth-form-wrap,
+.bx-auth-reg{
+ overflow: hidden;
+ max-height: 0px;	
+}
+.auth-form div.errormess{
+   display: block;
+   color:red;
+    margin-top:-15px;
+	padding-bottom:8px;
+}

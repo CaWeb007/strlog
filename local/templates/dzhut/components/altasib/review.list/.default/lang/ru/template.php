@@ -1,0 +1,17 @@
+<?
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_REVIEW'] = "Отзывы";
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_MESSAGE_PLUS'] = "Достоинства";
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_MESSAGE_MINUS'] = "Недостатки";
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_MESSAGE'] = "Отзыв";
+
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_REPORT'] = "Сообщить о нарушении";
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_VOTE'] = "Был ли полезен отзыв?";
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_SHOW_ALL'] = 'Показать остальные отзывы';
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_SHOW_ALL_VOTES'] = 'Показать все оценки';
+
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_MODER'] = 'Отзыв находится на модерации';
+$MESS['ALTASIB_REVIEW_T_REVIEW_LINK'] = 'ссылка на отзыв';
+
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_MODER_SET_BEST'] = 'Сделать лучшим';
+$MESS['ALTASIB_REVIEW_T_REVIEW_LIST_MODER_DEL_BEST'] = 'Сделать обычным';
+?>

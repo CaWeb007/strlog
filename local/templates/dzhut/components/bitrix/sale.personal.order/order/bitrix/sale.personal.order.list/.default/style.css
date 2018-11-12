@@ -1,0 +1,10 @@
+.open-order{
+  color: #f26541;
+  text-decoration:none;
+  display: block;
+  background: url('/local/templates/universal/image/dropdown-arrow.png') no-repeat 90% 50%;
+  width: 130px;
+}
+.open-order.active{
+background: url('/local/templates/universal/image/dropdown-arrow-inactive.png') no-repeat 90% 50%;
+}

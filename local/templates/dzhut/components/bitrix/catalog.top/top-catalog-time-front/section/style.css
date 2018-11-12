@@ -1,0 +1,31 @@
+.hidden-complet-catalog-top{
+	display:none;
+}
+
+.zagluzhka{
+	text-align-last: center;
+    padding: 5px 50px;
+}
+
+.zagluzhka p{
+    font-size: 18px;	
+	
+}
+.bx_catalog_item_controls .bx_catalog_item_controls_blocktwo a{
+margin-bottom: 25px!important;		
+}
+.bx_catalog_item_title a{
+margin-bottom: 10px!important;	
+}
+.anons{
+    text-align: center;
+    margin-bottom: 8px;
+    color: #453D3F;	
+}
+.ot-price{
+    font-weight: normal!important;
+    font-size: 19px!important;	
+}
+.second-part{
+font-size: 1rem;
+}

@@ -1,0 +1,6 @@
+<?
+$MESS["CT_BCSL_ELEMENT_DELETE_CONFIRM"] = "Будет удалена вся информация, связанная с этой записью. Продолжить?";
+$MESS["CAT_COUNT_ONE"] = "товар";
+$MESS["CAT_COUNT_EVEN"] = "товаров";
+$MESS["CAT_COUNT_ODD"] = "товара";
+?>

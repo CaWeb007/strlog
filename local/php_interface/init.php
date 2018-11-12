@@ -11,6 +11,32 @@ foreach(glob(__DIR__."/events/*") as $file){
 	//   bonus();
 	//   return 'bonusAgent()';
 //}
+function CheckBasket(){
+    if(CModule::IncludeModule("sale")){
+        $dbBasketItems = CSaleBasket::GetList(
+            array(
+                "NAME" => "ASC",
+                "ID" => "ASC"
+            ),
+            array(
+                "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+                "LID" => SITE_ID,
+                "ORDER_ID" => "NULL"
+            ),
+            false,
+            false,
+            array()
+        );
+        GLOBAL $arrProductId;
+        $arrProductId = array();
+        foreach($dbBasketItems->arResult as $productID){
+
+            $arrProductId[] = $productID['PRODUCT_ID'];
+
+        }
+    }
+    return $arrProductId;
+}
 
 function updateUsersFromHLBlockAgent(){
 	$added = false;

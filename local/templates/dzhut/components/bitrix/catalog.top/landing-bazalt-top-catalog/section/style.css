@@ -1,0 +1,8 @@
+.hidden-complet-catalog-top{
+	display:none;
+}
+.action{
+	background: green !important;
+	line-height: 1.9 !important;
+	text-transform: uppercase !important;
+}
