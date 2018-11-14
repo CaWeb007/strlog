@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetPageProperty("description", "Джут Иркутск, купить джут в Иркутске по низкой цене, межвенцовый утеплитель недорого, джут дешево! Доставка по РФ!");
 $APPLICATION->SetPageProperty("title", "Джут Иркутск, купить Джут в Иркутске");
 $APPLICATION->SetTitle("Джут");
-$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . "/components/bitrix/catalog/catalog/bitrix/catalog.element/.default/jquery.elevatezoom.js");
+$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH . "/js/jquery.elevatezoom.js");
 
 echo '
 <link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -194,10 +194,7 @@ echo '
                 "IBLOCK_ID" => "16",
                 "SECTION_ID" => "1663",
                 "SECTION_CODE" => "",
-                "SECTION_USER_FIELDS" => array(
-                    0 => "",
-                    1 => "",
-                ),
+                "SECTION_USER_FIELDS" => array(),
                 "ELEMENT_SORT_FIELD" => "sort",
                 "ELEMENT_SORT_ORDER" => "asc",
                 "ELEMENT_SORT_FIELD2" => "name",
@@ -229,18 +226,9 @@ echo '
                 "SET_STATUS_404" => "Y",
                 "PAGE_ELEMENT_COUNT" => "30",
                 "LINE_ELEMENT_COUNT" => "4",
-                "PROPERTY_CODE" => array(
-                    0 => "",
-                    1 => "",
-                ),
-                "OFFERS_FIELD_CODE" => array(
-                    0 => "",
-                    1 => "",
-                ),
-                "OFFERS_PROPERTY_CODE" => array(
-                    0 => "",
-                    1 => "",
-                ),
+                "PROPERTY_CODE" => array(),
+                "OFFERS_FIELD_CODE" => array(),
+                "OFFERS_PROPERTY_CODE" => array(),
                 "OFFERS_SORT_FIELD" => "sort",
                 "OFFERS_SORT_ORDER" => "asc",
                 "OFFERS_SORT_FIELD2" => "active_from",
@@ -248,7 +236,7 @@ echo '
                 "OFFERS_LIMIT" => "5",
                 "BACKGROUND_IMAGE" => "-",
                 "PRICE_CODE" => array(
-                    0 => "BASE",
+                    0 => "КП",
                 ),
                 "USE_PRICE_COUNT" => "Y",
                 "SHOW_PRICE_COUNT" => "1",
@@ -461,10 +449,18 @@ echo '
 		<span class="block-title"><h2>Для строительства<br><span style="text-transform:uppercase;font-weight:bold;">вам еще понадобится</span></h2></span>
 		<?
 		global $arrTopCatalog;
-		$arrTopCatalog[] = array("LOGIC"=>"OR","PROPERTY_HIT_VALUE"=>"да","PROPERTY_NEW_VALUE"=>"да","PROPERTY_BEST_VALUE"=>"да","PROPERTY_ACTION_1_VALUE"=>"да");
+		$arrTopCatalog[] = array(
+            "LOGIC"=>"OR",
+            "PROPERTY_HIT_VALUE"=>"да",
+            "PROPERTY_NEW_VALUE"=>"да",
+            "PROPERTY_BEST_VALUE"=>"да",
+            "PROPERTY_ACTION_1_VALUE"=>"да"
+        );
+        $arrTopCatalog["!SECTION_ID"] = 2147;
+        $arrTopCatalog["!PREVIEW_PICTURE"] = false;
 		 $APPLICATION->IncludeComponent(
-			"bitrix:catalog.top", 
-			"landing-bazalt-top-catalog", 
+			"bitrix:catalog.top",
+			"landing-bazalt-top-catalog",
 			array(
 				"ACTION_VARIABLE" => "action",
 				"ADD_PICT_PROP" => "-",
@@ -495,36 +491,23 @@ echo '
 				"MESS_BTN_COMPARE" => "Сравнить",
 				"MESS_BTN_DETAIL" => "Купить",
 				"MESS_NOT_AVAILABLE" => "Нет в наличии",
-				"OFFERS_CART_PROPERTIES" => array(
-				),
-				"OFFERS_FIELD_CODE" => array(
-					0 => "",
-					1 => "",
-				),
+				"OFFERS_CART_PROPERTIES" => array(),
+				"OFFERS_FIELD_CODE" => array(),
 				"OFFERS_LIMIT" => "5",
-				"OFFERS_PROPERTY_CODE" => array(
-					0 => "MORE_PHOTO",
-					1 => "",
-				),
+				"OFFERS_PROPERTY_CODE" => array("MORE_PHOTO"),
 				"OFFERS_SORT_FIELD" => "shows",
 				"OFFERS_SORT_FIELD2" => "id",
 				"OFFERS_SORT_ORDER" => "asc",
 				"OFFERS_SORT_ORDER2" => "desc",
 				"PARTIAL_PRODUCT_PROPERTIES" => "Y",
-				"PRICE_CODE" => array(
-					0 => "BASE",
-				),
+				"PRICE_CODE" => array("КП"),
 				"PRICE_VAT_INCLUDE" => "Y",
 				"PRODUCT_DISPLAY_MODE" => "Y",
 				"PRODUCT_ID_VARIABLE" => "id",
-				"PRODUCT_PROPERTIES" => array(
-				),
+				"PRODUCT_PROPERTIES" => array(),
 				"PRODUCT_PROPS_VARIABLE" => "prop",
 				"PRODUCT_QUANTITY_VARIABLE" => "",
-				"PROPERTY_CODE" => array(
-					0 => "",
-					1 => "",
-				),
+				"PROPERTY_CODE" => array(),
 				"SECTION_ID_VARIABLE" => "SECTION_ID",
 				"SECTION_URL" => "catalog/#SECTION_CODE#/",
 				"SEF_MODE" => "Y",
@@ -537,8 +520,7 @@ echo '
 				"USE_PRODUCT_QUANTITY" => "N",
 				"VIEW_MODE" => "SECTION",
 				"OFFER_ADD_PICT_PROP" => "-",
-				"OFFER_TREE_PROPS" => array(
-				),
+				"OFFER_TREE_PROPS" => array(),
 				"SEF_RULE" => "#SECTION_CODE#",
 				"COMPOSITE_FRAME_MODE" => "A",
 				"COMPOSITE_FRAME_TYPE" => "AUTO"
@@ -567,7 +549,7 @@ echo '
 		<div class="clear"></div>
 		<span class="block-title"><h2>Партнеры</h2></span>
 		
-		<?/*$APPLICATION->IncludeComponent(
+		<?$APPLICATION->IncludeComponent(
 			"bitrix:news.list", 
 			"dzhut_wins_scan", 
 			array(
@@ -593,14 +575,11 @@ echo '
 				"DISPLAY_PICTURE" => "Y",
 				"DISPLAY_PREVIEW_TEXT" => "Y",
 				"DISPLAY_TOP_PAGER" => "N",
-				"FIELD_CODE" => array(
-					0 => "",
-					1 => "",
-				),
+				"FIELD_CODE" => array(),
 				"FILTER_NAME" => "",
 				"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-				"IBLOCK_ID" => "62",
-				"IBLOCK_TYPE" => "Sliders",
+				"IBLOCK_ID" => "33",
+				"IBLOCK_TYPE" => "dzhut",
 				"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
 				"INCLUDE_SUBSECTIONS" => "Y",
 				"MESSAGE_404" => "",
@@ -615,11 +594,7 @@ echo '
 				"PARENT_SECTION" => "",
 				"PARENT_SECTION_CODE" => "",
 				"PREVIEW_TRUNCATE_LEN" => "",
-				"PROPERTY_CODE" => array(
-					0 => "",
-					1 => "ATT_WINS",
-					2 => "",
-				),
+				"PROPERTY_CODE" => array("ATT_WINS"),
 				"SET_BROWSER_TITLE" => "N",
 				"SET_LAST_MODIFIED" => "N",
 				"SET_META_DESCRIPTION" => "N",
@@ -633,7 +608,7 @@ echo '
 				"SORT_ORDER2" => "ASC"
 			),
 			false
-		);*/?>
+		);?>
 		
 		</div>
 		</div><!--/block-wrapper-->
@@ -732,73 +707,66 @@ echo '
 	<div class="block">
 		<span class="block-title"><h2>Примеры укладки</h2></span>
 		<div class="block-photo">
-		<?/*$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"dzhut_photogallery", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "dzhut_photogallery",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "N",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "63",
-		"IBLOCK_TYPE" => "photo",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => "",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "ATT_WINS",
-			2 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC"
-	),
-	false
-);*/?>
+            <?$APPLICATION->IncludeComponent(
+                "bitrix:news.list",
+                "dzhut_photogallery",
+                array(
+                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "AJAX_MODE" => "N",
+                    "AJAX_OPTION_ADDITIONAL" => "",
+                    "AJAX_OPTION_HISTORY" => "N",
+                    "AJAX_OPTION_JUMP" => "N",
+                    "AJAX_OPTION_STYLE" => "Y",
+                    "CACHE_FILTER" => "N",
+                    "CACHE_GROUPS" => "Y",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_TYPE" => "A",
+                    "CHECK_DATES" => "Y",
+                    "COMPONENT_TEMPLATE" => "dzhut_photogallery",
+                    "COMPOSITE_FRAME_MODE" => "A",
+                    "COMPOSITE_FRAME_TYPE" => "AUTO",
+                    "DETAIL_URL" => "",
+                    "DISPLAY_BOTTOM_PAGER" => "N",
+                    "DISPLAY_DATE" => "Y",
+                    "DISPLAY_NAME" => "Y",
+                    "DISPLAY_PICTURE" => "Y",
+                    "DISPLAY_PREVIEW_TEXT" => "Y",
+                    "DISPLAY_TOP_PAGER" => "N",
+                    "FIELD_CODE" => array(),
+                    "FILTER_NAME" => "",
+                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                    "IBLOCK_ID" => "34",
+                    "IBLOCK_TYPE" => "dzhut",
+                    "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                    "INCLUDE_SUBSECTIONS" => "Y",
+                    "MESSAGE_404" => "",
+                    "NEWS_COUNT" => "20",
+                    "PAGER_BASE_LINK_ENABLE" => "N",
+                    "PAGER_DESC_NUMBERING" => "N",
+                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                    "PAGER_SHOW_ALL" => "N",
+                    "PAGER_SHOW_ALWAYS" => "N",
+                    "PAGER_TEMPLATE" => "",
+                    "PAGER_TITLE" => "Новости",
+                    "PARENT_SECTION" => "",
+                    "PARENT_SECTION_CODE" => "",
+                    "PREVIEW_TRUNCATE_LEN" => "",
+                    "PROPERTY_CODE" => array("ATT_WINS"),
+                    "SET_BROWSER_TITLE" => "N",
+                    "SET_LAST_MODIFIED" => "N",
+                    "SET_META_DESCRIPTION" => "N",
+                    "SET_META_KEYWORDS" => "N",
+                    "SET_STATUS_404" => "N",
+                    "SET_TITLE" => "N",
+                    "SHOW_404" => "N",
+                    "SORT_BY1" => "ACTIVE_FROM",
+                    "SORT_BY2" => "SORT",
+                    "SORT_ORDER1" => "DESC",
+                    "SORT_ORDER2" => "ASC"
+                ),
+            false
+            );?>
 		</div>
 	</div>
 </div><!--/block-wrapper-->
@@ -842,73 +810,70 @@ echo '
 <div class="block-wrapper">
 <div class="block">
 <span class="block-title" style="margin: 25px auto 25px;"><h2>Награды</h2></span>
-		<?/*$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"dzhut_wins_scan", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "dzhut_wins_scan",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "N",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "61",
-		"IBLOCK_TYPE" => "Sliders",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => "",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "ATT_WINS",
-			2 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ACTIVE_FROM",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC"
-	),
-	false
-);*/?>
+		<?$APPLICATION->IncludeComponent(
+	"bitrix:news.list",
+	"dzhut_wins_scan",
+            array(
+                "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                "ADD_SECTIONS_CHAIN" => "N",
+                "AJAX_MODE" => "N",
+                "AJAX_OPTION_ADDITIONAL" => "",
+                "AJAX_OPTION_HISTORY" => "N",
+                "AJAX_OPTION_JUMP" => "N",
+                "AJAX_OPTION_STYLE" => "Y",
+                "CACHE_FILTER" => "N",
+                "CACHE_GROUPS" => "Y",
+                "CACHE_TIME" => "36000000",
+                "CACHE_TYPE" => "A",
+                "CHECK_DATES" => "Y",
+                "COMPONENT_TEMPLATE" => "dzhut_wins_scan",
+                "COMPOSITE_FRAME_MODE" => "A",
+                "COMPOSITE_FRAME_TYPE" => "AUTO",
+                "DETAIL_URL" => "",
+                "DISPLAY_BOTTOM_PAGER" => "N",
+                "DISPLAY_DATE" => "Y",
+                "DISPLAY_NAME" => "Y",
+                "DISPLAY_PICTURE" => "Y",
+                "DISPLAY_PREVIEW_TEXT" => "Y",
+                "DISPLAY_TOP_PAGER" => "N",
+                "FIELD_CODE" => array(),
+                "FILTER_NAME" => "",
+                "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                "IBLOCK_ID" => "35",
+                "IBLOCK_TYPE" => "dzhut",
+                "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                "INCLUDE_SUBSECTIONS" => "Y",
+                "MESSAGE_404" => "",
+                "NEWS_COUNT" => "20",
+                "PAGER_BASE_LINK_ENABLE" => "N",
+                "PAGER_DESC_NUMBERING" => "N",
+                "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                "PAGER_SHOW_ALL" => "N",
+                "PAGER_SHOW_ALWAYS" => "N",
+                "PAGER_TEMPLATE" => "",
+                "PAGER_TITLE" => "Новости",
+                "PARENT_SECTION" => "",
+                "PARENT_SECTION_CODE" => "",
+                "PREVIEW_TRUNCATE_LEN" => "",
+                "PROPERTY_CODE" => array(
+                    0 => "",
+                    1 => "ATT_WINS",
+                    2 => "",
+                ),
+                "SET_BROWSER_TITLE" => "N",
+                "SET_LAST_MODIFIED" => "N",
+                "SET_META_DESCRIPTION" => "N",
+                "SET_META_KEYWORDS" => "N",
+                "SET_STATUS_404" => "N",
+                "SET_TITLE" => "N",
+                "SHOW_404" => "N",
+                "SORT_BY1" => "ACTIVE_FROM",
+                "SORT_BY2" => "SORT",
+                "SORT_ORDER1" => "DESC",
+                "SORT_ORDER2" => "ASC"
+            ),
+            false
+        );?>
 	</div>
 </div><!--/block-wrapper-->
 

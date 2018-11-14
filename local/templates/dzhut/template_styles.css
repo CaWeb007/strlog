@@ -55,17 +55,17 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .desc-h2
-	{ 
+	{
 	margin:5px;
 	font-family: 'BlissPro-Light';
 	text-indent:10px;
 	}
-.desc-p 
+.desc-p
 	{
 	text-indent:10px;
 	text-align:justify;"
 	}
-.desc-b 
+.desc-b
 	{
 	border-left: 3px solid #f26541;
 	padding-left: 10px;
@@ -1202,7 +1202,7 @@ LEFTBAR
     border-left: 2px solid rgba(240,78,35,0.5) !important;
 }
 
-	
+
 .bx_vertical_menu_advanced > ul > li.hover .bx_children_container {
     visibility: visible;
     opacity: 1;
@@ -1279,7 +1279,7 @@ LEFTBAR
     color: #f04e23;
 }
 .prod-title
-{ 
+{
 text-transform: none !important;
 font-size: 20px !important;
 }
@@ -1872,7 +1872,7 @@ footer .content-container > div {
     vertical-align: top;
     width: 16%;
 	margin-right: 3%;
-	
+
 }
 footer .content-container > div:nth-of-type(2) {
     width: 16%;
@@ -1881,7 +1881,7 @@ footer .content-container > div:nth-of-type(3) {
     width: 18%;
 }
 footer .content-container > div:nth-of-type(4) {
-    width: 16%;	
+    width: 16%;
 }
 /*footer .content-container > div:nth-of-type(5) {
     width: 13%;
@@ -1889,7 +1889,7 @@ footer .content-container > div:nth-of-type(4) {
 */
 footer .content-container > div:nth-of-type(5) {
     width: 16%;
-	margin-right: 0%;	
+	margin-right: 0%;
 }
 
 footer .content-container div h3 {

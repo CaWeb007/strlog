@@ -158,7 +158,7 @@ if (!empty($arResult['ITEMS']))
 	<?if($arItem['PROPERTIES']['TOLSHCHINA_MM']['VALUE'] == 5):?>
 	<div class="good-wrapper">
 		<div class="good-anons-wrapper">
-			<span class="good-anons"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></span><br />руб/м.п.
+			<span class="good-anons"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></span><br />руб/м.п.
 		</div>
 		<div class="good-image">
 			<a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>" target="_blank"><img src="images/dzhut-1-1.png<?/* echo $arItem['PREVIEW_PICTURE']['SRC'] */?>" alt="Межвенцовый утеплитель" /></a>
@@ -176,11 +176,11 @@ if (!empty($arResult['ITEMS']))
 		</span>
 		<div class="good-price-wrapper">
 			<span class="good-price-title">Цена рулона: </span>
-			<span class="good-price-desc"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?> руб</span>
+			<span class="good-price-desc"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?> руб</span>
 		</div>
 		<div class="good-price-wrapper">
 			<span class="good-price-title">Цена упаковки: </span>
-			<span class="good-price-desc"><? echo $arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE']?> руб</span>
+			<span class="good-price-desc"><? echo $arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE']?> руб</span>
 		</div>
 		<div class="clear"></div>
 		<button class="order-send" data-name="<? echo $arItem['PROPERTIES']['RAZMER_MM']['VALUE'] ?>">Заказать</button>
@@ -266,9 +266,9 @@ if (!empty($arResult['ITEMS']))
 				<div class="table-good-desc-1"><? echo $arItem['PROPERTIES']['RULONOV_V_UPAKOVKE']['VALUE']?></div>
 				<div class="table-good-desc-1"><? echo $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE']?></div>
 				<div class="table-good-desc-1"><? echo $arItem['PROPERTIES']['METROV_V_UPAKOVKE']['VALUE']?></div>
-				<div class="table-good-desc-1"><? echo $arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE']?></div>
-				<div class="table-good-desc-1"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?></div>
-				<div class="table-good-desc-1"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></div>
+				<div class="table-good-desc-1"><? echo $arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE']?></div>
+				<div class="table-good-desc-1"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?></div>
+				<div class="table-good-desc-1"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></div>
 				<div class="table-good-desc-1" style="padding:4px 0 8px 0;background:#fff;"><button class="order-send" data-name="<? echo $arItem['PROPERTIES']['RAZMER_MM']['VALUE'] ?>">Заказать</button></div>
 			</div>
 			<?endif;?>
@@ -322,9 +322,9 @@ if (!empty($arResult['ITEMS']))
 				<div class="table-good-desc-2"><? echo $arItem['PROPERTIES']['RULONOV_V_UPAKOVKE']['VALUE']?></div>
 				<div class="table-good-desc-2"><? echo $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE']?></div>
 				<div class="table-good-desc-2"><? echo $arItem['PROPERTIES']['METROV_V_UPAKOVKE']['VALUE']?></div>
-				<div class="table-good-desc-2"><? echo $arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE']?></div>
-				<div class="table-good-desc-2"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?></div>
-				<div class="table-good-desc-2"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></div>
+				<div class="table-good-desc-2"><? echo $arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE']?></div>
+				<div class="table-good-desc-2"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?></div>
+				<div class="table-good-desc-2"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></div>
 				<div class="table-good-desc-1" style="padding:4px 0 8px 0;background:#fff;"><button class="order-send" data-name="<? echo $arItem['PROPERTIES']['RAZMER_MM']['VALUE'] ?>">Заказать</button></div>
 			</div>
 			<?endif;?>
@@ -378,9 +378,9 @@ if (!empty($arResult['ITEMS']))
 				<div class="table-good-desc-3"><? echo $arItem['PROPERTIES']['RULONOV_V_UPAKOVKE']['VALUE']?></div>
 				<div class="table-good-desc-3"><? echo $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE']?></div>
 				<div class="table-good-desc-3"><? echo $arItem['PROPERTIES']['METROV_V_UPAKOVKE']['VALUE']?></div>
-				<div class="table-good-desc-3"><? echo $arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE']?></div>
-				<div class="table-good-desc-3"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?></div>
-				<div class="table-good-desc-3"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></div>
+				<div class="table-good-desc-3"><? echo $arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE']?></div>
+				<div class="table-good-desc-3"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?></div>
+				<div class="table-good-desc-3"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?></div>
 				<div class="table-good-desc-3" style="padding:4px 0 8px 0;background:#fff;"><button class="order-send" data-name="<? echo $arItem['PROPERTIES']['RAZMER_MM']['VALUE'] ?>">Заказать</button></div>
 			</div>
 			<?endif;?>
@@ -481,9 +481,9 @@ foreach ($arResult['ITEMS'] as $key => $arItem)
 		<div class="bx_image" style="background:url('<? echo $arItem['PREVIEW_PICTURE']['SRC']; ?>') no-repeat center center;"></div>
 		<!--<div class="bx_catalog_item_title"><a href="<? echo $arItem['DETAIL_PAGE_URL']; ?>" title="<? echo $productTitle; ?>"><? echo $productTitle; ?></a></div>-->
 		<div class="title_desc_wrap"><span class="bx_title_1"><? echo $arItem['PROPERTIES']['RAZMER_MM']['VALUE'] ?> мм</span></div>
-		<div class="title_desc_wrap"><span class="bx_title">Цена рулона: </span><span class="bx_desc"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?> руб</span></div>
-		<div class="title_desc_wrap"><span class="bx_title">Цена упаковки: </span><span class="bx_desc"><? echo $arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE']?> руб</span></div>
-		<div class="title_desc_wrap"><span class="bx_title">Цена пог/метра: </span><span class="bx_desc"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['1']['0']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?> руб</span></div>
+		<div class="title_desc_wrap"><span class="bx_title">Цена рулона: </span><span class="bx_desc"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE']));?> руб</span></div>
+		<div class="title_desc_wrap"><span class="bx_title">Цена упаковки: </span><span class="bx_desc"><? echo $arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE']?> руб</span></div>
+		<div class="title_desc_wrap"><span class="bx_title">Цена пог/метра: </span><span class="bx_desc"><? echo (round($arItem['PRICE_MATRIX']['MATRIX']['11']['ZERO-INF']['DISCOUNT_PRICE'] / $arItem['PROPERTIES']['KOLICHESTVO_V_UPAKOVKE_SHT']['VALUE'] / $arItem['PROPERTIES']['METROV_V_RULONE']['VALUE'], 2));?> руб</span></div>
 		<div class="bx_catalog_item_price"><div id="<? echo $arItemIDs['PRICE']; ?>" class="bx_price"><?
 	if (!empty($minPrice))
 	{

@@ -14,7 +14,7 @@
 							"AREA_FILE_SUFFIX" => "inc",
 							"COMPONENT_TEMPLATE" => ".default",
 							"EDIT_TEMPLATE" => "",
-							"PATH" => "/include/dzhut/footer_col_1.php"
+							"PATH" => "/include/footer/dzhut/footer_col_1.php"
 						)
 					);?>
 					</div>
@@ -28,7 +28,7 @@
 							"AREA_FILE_SUFFIX" => "inc",
 							"COMPONENT_TEMPLATE" => ".default",
 							"EDIT_TEMPLATE" => "",
-							"PATH" => "/include/dzhut/footer_col_2.php"
+							"PATH" => "/include/footer/dzhut/footer_col_2.php"
 						)
 					);?>
 					</div>
@@ -42,22 +42,27 @@
 							"AREA_FILE_SUFFIX" => "inc",
 							"COMPONENT_TEMPLATE" => ".default",
 							"EDIT_TEMPLATE" => "",
-							"PATH" => "/include/dzhut/footer_col_3.php"
+							"PATH" => "/include/footer/dzhut/footer_col_3.php"
 						)
 					);?>
 					</div>
-						<div class="footer-col">
-					<h3>Прайс лист</h3>
-<?if(CModule::IncludeModule("iblock")){ $IblockID = 6; // Скачать прайс лист ?>
-	<? $File = CIBlockElement::GetList(array(), array("IBLOCK_ID"=>$IblockID,"CODE"=>"prays-list-stroylogistika"), false, array(), array("ID", "NAME", "PROPERTY_ATT_DOWNLOAD_PRICE"));
-   if($arFile = $File->GetNext()){
-		$fileInfo = CFile::GetFileArray($arFile['PROPERTY_ATT_DOWNLOAD_PRICE_VALUE']);?>
-		<a target="_blanc" title="Прайс лист" href="<?=$fileInfo['SRC']?>"><b>Microsoft Excel (932 КБ)</b></a><br><br>
-		<span>Обновлен 08.10.2018 10:05</span>
-	<?}?>
-
-<?}?>
-					</div>				
+                    <div class="footer-col">
+					    <h3>Прайс лист</h3>
+                        <?$uGr = getGroupUser()?>
+                        <?$fileXLS = getFilePrice($uGr);?>
+                        <?$exp = explode("/",$fileXLS)?>
+                        <?$filename = end($exp);?>
+                        <?if($fileXLS):?>
+                            <?$mbSize = round(filesize($fileXLS) / 1024 / 1024,2);?>
+                            <div class="f_price_text">
+                                <a style="font-weight: bold" target="_blanc" title="Прайс лист" href="/price/?filename=<?=$filename?>">
+                                    <span class="f_price_title">Microsoft Excel </span>
+                                    <span class="f_price_size"> (<?=$mbSize?>  Мб)<!--date('d.m.Y') (07.05.2018 12:35)--></span>
+                                </a>
+                                <span class="date-info-price">Обновлен <?=date('d.m.Y H:i',filemtime($fileXLS))?></span>
+                            </div>
+                        <?endif;?>
+                    </div>
 					
 						
 
@@ -71,7 +76,7 @@
 						"AREA_FILE_SUFFIX" => "inc",
 						"COMPONENT_TEMPLATE" => ".default",
 						"EDIT_TEMPLATE" => "",
-						"PATH" => "/include/dzhut/footer_col_4.php"
+						"PATH" => "/include/footer/dzhut/footer_col_4.php"
 					)
 				);?>
 				</div>-->
@@ -85,7 +90,7 @@
 						"AREA_FILE_SUFFIX" => "inc",
 						"COMPONENT_TEMPLATE" => ".default",
 						"EDIT_TEMPLATE" => "",
-						"PATH" => "/include/dzhut/footer_col_5.php"
+						"PATH" => "/include/footer/dzhut/footer_col_5.php"
 					)
 				);?>
 				</div>
@@ -100,7 +105,7 @@
 							"AREA_FILE_SUFFIX" => "inc",
 							"COMPONENT_TEMPLATE" => ".default",
 							"EDIT_TEMPLATE" => "",
-							"PATH" => "/include/dzhut/footer_text.php"
+							"PATH" => "/include/bottom_include1.php"
 						)
 					);?>
 				</div>

@@ -52,7 +52,7 @@ $curPage = $APPLICATION->GetCurPage();
 
 		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/velocity.min.js");?>
 		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.fancybox.js");?>
-		<?//$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.elevatezoom.js");?>
+		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/jquery.elevatezoom.js");?>
 		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/slick/slick.min.js");?>
 		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/inputmask.js");?>
 		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/inputmask.phone.extensions.js");?>

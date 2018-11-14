@@ -9,8 +9,8 @@
 		"TYPE_BANNERS_IBLOCK_ID" => "2",
 		"SET_BANNER_TYPE_FROM_THEME" => "N",
 		"NEWS_COUNT" => "1",
-		"SORT_BY1" => "rand",
-		"SORT_ORDER1" => "rand",
+		"SORT_BY1" => "RAND",
+		"SORT_ORDER1" => "ASC",
 		"SORT_BY2" => "",
 		"SORT_ORDER2" => "DESC",
 		"PROPERTY_CODE" => array(

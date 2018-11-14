@@ -165,18 +165,18 @@
 											<div class="social_wrapper">
 												<div class="social">
 													<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
-	"COMPONENT_TEMPLATE" => ".default",
-		"PATH" => SITE_DIR."include/footer/social.info.optimus.default.php",
-		"AREA_FILE_SHOW" => "file",
-		"AREA_FILE_SUFFIX" => "",
-		"AREA_FILE_RECURSIVE" => "Y",
-		"EDIT_TEMPLATE" => "standard.php"
-	),
-	false,
-	array(
-	"ACTIVE_COMPONENT" => "Y"
-	)
-);?>
+                                                        "COMPONENT_TEMPLATE" => ".default",
+                                                            "PATH" => SITE_DIR."include/footer/social.info.optimus.default.php",
+                                                            "AREA_FILE_SHOW" => "file",
+                                                            "AREA_FILE_SUFFIX" => "",
+                                                            "AREA_FILE_RECURSIVE" => "Y",
+                                                            "EDIT_TEMPLATE" => "standard.php"
+                                                        ),
+                                                        false,
+                                                        array(
+                                                        "ACTIVE_COMPONENT" => "Y"
+                                                        )
+                                                    );?>
 												</div>
 											</div>
 										</div>

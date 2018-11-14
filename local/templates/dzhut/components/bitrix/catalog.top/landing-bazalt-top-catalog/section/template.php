@@ -108,9 +108,9 @@ foreach ($arResult['ITEMS'] as $key => $arItem){
 			
 			</a>
 		</div>
-			<?$APPLICATION->IncludeComponent("altasib:review.rating", "rating_front", Array(
+			<?/*$APPLICATION->IncludeComponent("altasib:review.rating", "rating_front", Array(
 						"ALLOW_SET" => "N",	// Разрешать выставлять оценку
-						"CACHE_TIME" => "86400",	// Время кеширования (сек.) 
+						"CACHE_TIME" => "86400",	// Время кеширования (сек.)
 						"CACHE_TYPE" => "A",	// Тип кеширования
 						"DETAIL_PAGE_URL" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 						"ELEMENT_CODE" => $arItem['CODE'],	// Код элемента
@@ -125,7 +125,8 @@ foreach ($arResult['ITEMS'] as $key => $arItem){
 						"COMPONENT_TEMPLATE" => ".default"
 					),
 					false
-				);?>
+				);*/?>
+        <br/>
 		<div class="bx_catalog_item_price"><div id="<? echo $arItemIDs['PRICE']; ?>" class="bx_price">
 <?
 	if (!empty($minPrice))
@@ -159,10 +160,10 @@ foreach ($arResult['ITEMS'] as $key => $arItem){
 ?>
 <span style="font-size:12px;color:#999999;">/ <?=$arItem['PROPERTIES']['CML2_BASE_UNIT']['VALUE'];?>
 		</div></div>
-		
+		<?if(empty($arItem['PROPERTIES']['BONUS']['VALUE'])) $arItem['PROPERTIES']['BONUS']['VALUE'] = 0;?>
 		<!--Bonus-->
 				<div class="product-bonus">
-			<a href="">Бонус: <span class="orange"><?=$arItem['PROPERTIES']['BONUS']['VALUE']?></span></a>
+			        <a href="javascript:void(0)">Бонус: <span class="orange"><?=$arItem['PROPERTIES']['BONUS']['VALUE']?></span></a>
 				</div>
 				<div class="desc-bonus">
 					<p class="orange">Копите бонусы и оплачивайте
