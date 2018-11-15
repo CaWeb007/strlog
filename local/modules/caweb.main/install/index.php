@@ -15,7 +15,7 @@ class caweb_main extends \CModule{
         $arModuleVersion = array();
         include (__DIR__."/version.php");
         $this->exclusionAdminFiles = array();
-        $this->MODULE_ID = "caweb";
+        $this->MODULE_ID = "caweb.main";
         $this->MODULE_VERSION = $arModuleVersion["VERSION"];
         $this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
         $this->MODULE_NAME = Loc::getMessage("CAWEB_MODULE_NAME");

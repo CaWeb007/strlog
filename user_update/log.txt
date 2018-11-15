@@ -21234,3 +21234,432 @@ Module:
 	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
 	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
 ----------
+Host: 
+Date: 2018-10-31 12:41:21
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-10-31 15:36:11
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-10-31 15:48:11
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-10-31 18:37:21
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-10-31 21:42:23
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 00:36:22
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 00:47:05
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 03:37:19
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 06:42:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 09:38:16
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 12:36:13
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 12:47:09
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 15:44:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 18:41:19
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-01 21:38:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 00:41:19
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 03:38:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 06:38:21
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 09:43:18
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 12:36:11
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 12:47:10
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 14:50:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 17:55:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 20:50:21
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-02 23:48:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 02:53:21
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 05:47:18
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 08:54:17
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 11:47:17
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 14:52:20
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 17:45:07
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 17:56:13
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 20:51:18
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 23:46:14
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-03 23:57:08
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-04 02:54:19
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-04 05:49:17
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-04 08:53:16
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
+Host: 
+Date: 2018-11-04 11:49:17
+Module: 
+Пользователи обновлениы и добавлены из HighLoad блока
+    updateUsersFromHLBlockAgent < eval < CAgent::ExecuteAgents < CAskaronAgents::CheckAgents < CAskaronAgents::OnPageStartHandler
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php(163) : eval()'d code:1
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/mysql/agent.php:163
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:37
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/askaron.agents/include.php:17
+	/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/classes/general/module.php:490
+----------
