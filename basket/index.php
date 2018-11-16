@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Корзина");
-?><?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket", "template1", Array(
+?><?$APPLICATION->IncludeComponent("caweb:sale.basket.basket", "", Array(
 	"ACTION_VARIABLE" => "action",	// Название переменной действия
 		"ADDITIONAL_PICT_PROP_14" => "-",
 		"ADDITIONAL_PICT_PROP_15" => "-",	// Дополнительная картинка [Торговые предложения]
@@ -91,6 +91,7 @@ $APPLICATION->SetTitle("Корзина");
 		"USE_GIFTS" => "Y",	// Показывать блок "Подарки"
 		"USE_PREPAYMENT" => "N",	// Использовать предавторизацию для оформления заказа (PayPal Express Checkout)
 		"USE_PRICE_ANIMATION" => "Y",	// Использовать анимацию цен
+        'KP_PRICE_ID' => '11'
 	),
 	false
 );?>

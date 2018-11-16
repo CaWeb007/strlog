@@ -1,6 +1,6 @@
 <?php
 function Pr($z){
-    echo '<pre>'; echo var_dump($z); echo '</pre></hr>';
+    echo '<pre>'; echo var_dump($z); echo '</pre><hr/>';
 }
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
