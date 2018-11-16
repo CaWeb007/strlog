@@ -62,7 +62,7 @@ $APPLICATION->SetTitle("Корзина");
 		"GIFTS_SHOW_NAME" => "Y",	// Показывать название
 		"GIFTS_SHOW_OLD_PRICE" => "Y",	// Показывать старую цену
 		"GIFTS_TEXT_LABEL_GIFT" => "Подарок",	// Текст метки "Подарка"
-		"HIDE_COUPON" => "Y",	// Спрятать поле ввода купона
+		"HIDE_COUPON" => "N",	// Спрятать поле ввода купона
 		"LABEL_PROP" => "",	// Свойства меток товара
 		"LABEL_PROP_MOBILE" => "",
 		"LABEL_PROP_POSITION" => "",
