@@ -1196,14 +1196,58 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-
+            $this->cawebDiscountProcess();
 			if (self::includeCatalog())
 			{
 				$this->basketItems = $this->getSkuPropsData($this->basketItems, $this->storage['PARENTS'], $this->offersProps);
 			}
 		}
 	}
+    protected function cawebDiscountProcess(){
+	    $basketItems = $this->basketItems;
+        $basket = $this->getBasketStorage()->getBasket();
+	    foreach ($basketItems as &$item){
+            $item["PRICE"] = (float)10 + rand(1,4);
+            $item["DISCOUNT_PRICE"] = $item['BASE_PRICE'] - $item["PRICE"];
+            $item["SUM_DISCOUNT_PRICE"] = (float)10;
+            $item["SUM_VALUE"] = $item["PRICE"] * $item['QUANTITY'];
+            $item["SUM_FULL_PRICE"] = $item["BASE_PRICE"] * $item['QUANTITY'];
+            $item["SUM_DISCOUNT_PRICE"] = $item["DISCOUNT_PRICE"] * $item['QUANTITY'];
 
+            $item["SUM_DISCOUNT_PRICE_FORMATED"] = $item["SUM_DISCOUNT_PRICE"].' руб';
+            $item["DISCOUNT_PRICE_FORMATED"] = $item["DISCOUNT_PRICE"].' руб';
+            $item["PRICE_FORMATED"] = $item["PRICE"].' руб';
+            $item["SUM"] = $item["SUM_VALUE"].' руб';
+            //$item["SUM_DISCOUNT_PRICE_FORMATED"] = "10 руб";
+            //$item['PRICE_TYPE_ID'];
+            //$item['QUANTITY'];
+            //$item['BASE_PRICE'];
+            //$item["FULL_PRICE"];
+            $i = $basket->getItemByBasketCode($item['ID']);
+            $i->setField("PRICE", (float)10 + rand(1,4));
+            $i->setField("DISCOUNT_PRICE",$item['BASE_PRICE'] - $item["PRICE"]);
+            //$i->setField("SUM_DISCOUNT_PRICE",(float)10);
+            //$i->setField("SUM_VALUE",$item["PRICE"] * $item['QUANTITY']);
+            //$i->setField("SUM_FULL_PRICE",$item["BASE_PRICE"] * $item['QUANTITY']);
+            //$i->setField("SUM_DISCOUNT_PRICE",$item["DISCOUNT_PRICE"] * $item['QUANTITY']);
+            //$i->setField("SUM_DISCOUNT_PRICE_FORMATED",$item["SUM_DISCOUNT_PRICE"].' руб');
+            //$i->setField("DISCOUNT_PRICE_FORMATED",$item["DISCOUNT_PRICE"].' руб');
+            //$i->setField("PRICE_FORMATED",$item["PRICE"].' руб');
+            //$i->setField("SUM",$item["SUM_VALUE"].' руб');
+        }
+        Pr($this->initializeBasketOrderIfNotExists($basket));
+        $this->saveBasket();
+        //$basket->setOrder()
+        Pr($this->getBasketStorage()->getBasket()->getOrder());
+        //Pr($this->getBasketStorage()->getOrderableBasket()->getPrice());
+        //Pr($basketItems);
+        $this->basketItems = $basketItems;/*
+
+        $basket = $this->getBasketStorage()->getBasket();
+        $basket->save();
+        $this->getBasketStorage()->getOrderableBasket()->getOrder()->save();*/
+
+    }
 	// ToDo get gifts result via ajax to prevent BasketStorage loading while using fast load
 	protected function isFastLoadRequest()
 	{
@@ -1278,7 +1322,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 	protected function saveBasket()
 	{
 		$basket = $this->getBasketStorage()->getBasket();
-
 		if ($basket->isChanged())
 		{
 			$res = $basket->save();
@@ -1463,7 +1506,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		$basketStorage = $this->getBasketStorage();
 		$fullBasket = $basketStorage->getBasket();
-
 		if ($this->basketItemsMaxCountExceeded())
 		{
 			return array();
@@ -1506,15 +1548,13 @@ class CBitrixBasketComponent extends CBitrixComponent
 				{
 					$item = $orderableBasket->getItemByBasketCode($item->getBasketCode());
 				}
-
-				$basketItems[$item->getId()] = $this->processBasketItem($item);
-			}
+                $basketItems[$item->getId()] = $this->processBasketItem($item);
+            }
 		}
 
 		$this->storage['BASKET_ITEMS_COUNT'] = $fullBasket->count();
 		$this->storage['NOT_AVAILABLE_BASKET_ITEMS_COUNT'] = $notAvailableItemsCount;
 		$this->storage['DELAYED_BASKET_ITEMS_COUNT'] = $delayedItemsCount;
-
 		return $basketItems;
 	}
 
@@ -2532,7 +2572,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 			unset($coupons);
 		}
-
 		return $result;
 	}
 
