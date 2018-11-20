@@ -1196,7 +1196,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            $this->cawebDiscountProcess();
+            //$this->cawebDiscountProcess();
 			if (self::includeCatalog())
 			{
 				$this->basketItems = $this->getSkuPropsData($this->basketItems, $this->storage['PARENTS'], $this->offersProps);
@@ -1206,7 +1206,8 @@ class CBitrixBasketComponent extends CBitrixComponent
     protected function cawebDiscountProcess(){
 	    $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
-	    foreach ($basketItems as &$item){
+        $order = $basket->getOrderableItems();
+	    foreach ($basketItems as $key => &$item){
             $item["PRICE"] = (float)10 + rand(1,4);
             $item["DISCOUNT_PRICE"] = $item['BASE_PRICE'] - $item["PRICE"];
             $item["SUM_DISCOUNT_PRICE"] = (float)10;
@@ -1224,8 +1225,11 @@ class CBitrixBasketComponent extends CBitrixComponent
             //$item['BASE_PRICE'];
             //$item["FULL_PRICE"];
             $i = $basket->getItemByBasketCode($item['ID']);
+            //$o = $order->getItemByBasketCode($item['ID']);
             $i->setField("PRICE", (float)10 + rand(1,4));
             $i->setField("DISCOUNT_PRICE",$item['BASE_PRICE'] - $item["PRICE"]);
+            //$o->setField("PRICE", (float)10 + rand(1,4));
+            //$o->setField("DISCOUNT_PRICE",$item['BASE_PRICE'] - $item["PRICE"]);
             //$i->setField("SUM_DISCOUNT_PRICE",(float)10);
             //$i->setField("SUM_VALUE",$item["PRICE"] * $item['QUANTITY']);
             //$i->setField("SUM_FULL_PRICE",$item["BASE_PRICE"] * $item['QUANTITY']);
@@ -1234,12 +1238,30 @@ class CBitrixBasketComponent extends CBitrixComponent
             //$i->setField("DISCOUNT_PRICE_FORMATED",$item["DISCOUNT_PRICE"].' руб');
             //$i->setField("PRICE_FORMATED",$item["PRICE"].' руб');
             //$i->setField("SUM",$item["SUM_VALUE"].' руб');
+            //Pr($order[$key]);
+            //Pr($key);
         }
-        Pr($this->initializeBasketOrderIfNotExists($basket));
+        foreach ($order as $o){
+	        $o->setField("PRICE",10);
+	        $o->setField("DISCOUNT_PRICE",10);
+        }
+        $order->save();
         $this->saveBasket();
+        $this->initializeBasketOrderIfNotExists($basket);
+        //$basket->save();
+        $test = $basket->getOrder();
+        $test->appendBasket($basket);
+        Pr($basket->getOrder());
+        //Pr($basket->getOrderableItems());
+        return $basket;
+        /*$refreshStrategy = Basket\RefreshFactory::create(Basket\RefreshFactory::TYPE_FULL);
+        $result = $basket->refresh($refreshStrategy);*/
+        //$o->save();
         //$basket->setOrder()
-        Pr($this->getBasketStorage()->getBasket()->getOrder());
+        //Pr($this->getBasketStorage()->getBasket()->getOrder());
         //Pr($this->getBasketStorage()->getOrderableBasket()->getPrice());
+        //Pr($basket->getOrderableItems());
+        //Pr($this->getBasketStorage()->getBasket()->getPrice());
         //Pr($basketItems);
         $this->basketItems = $basketItems;/*
 
@@ -1505,7 +1527,11 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$delayedItemsCount = 0;
 
 		$basketStorage = $this->getBasketStorage();
-		$fullBasket = $basketStorage->getBasket();
+		//$fullBasket = $basketStorage->getBasket();
+
+		$fullBasket = $this->cawebDiscountProcess();
+
+
 		if ($this->basketItemsMaxCountExceeded())
 		{
 			return array();
@@ -2467,8 +2493,10 @@ class CBitrixBasketComponent extends CBitrixComponent
 		}
 		else
 		{
-			$basket = $this->getBasketStorage()->getOrderableBasket();
-			$this->initializeBasketOrderIfNotExists($basket);
+
+            $basket = $this->getBasketStorage()->getOrderableBasket();
+            //Pr($this->getBasketStorage()->getBasket()->getPrice());
+            $this->initializeBasketOrderIfNotExists($basket);
 			$basketPrice = $basket->getPrice();
 			$basketWeight = $basket->getWeight();
 			$basketBasePrice = $this->getBasePrice($basket);
