@@ -1078,8 +1078,9 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$userId = $this->getUserId() ?: CSaleUser::GetAnonymousUserID();
 			$order = Sale\Order::create($this->getSiteId(), $userId);
-
+            Pr($basket->getItemByBasketCode(4626)->getPrice());
 			$result = $order->appendBasket($basket);
+            Pr($basket->getItemByBasketCode(4626)->getPrice());
 			if (!$result->isSuccess())
 			{
 				$this->errorCollection->add($result->getErrors());
@@ -1196,7 +1197,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            //$this->cawebDiscountProcess();
+            $this->cawebDiscountProcess();
 			if (self::includeCatalog())
 			{
 				$this->basketItems = $this->getSkuPropsData($this->basketItems, $this->storage['PARENTS'], $this->offersProps);
@@ -1206,7 +1207,7 @@ class CBitrixBasketComponent extends CBitrixComponent
     protected function cawebDiscountProcess(){
 	    $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
-        $order = $basket->getOrderableItems();
+        //$order = $basket->getOrderableItems();
 	    foreach ($basketItems as $key => &$item){
             $item["PRICE"] = (float)10 + rand(1,4);
             $item["DISCOUNT_PRICE"] = $item['BASE_PRICE'] - $item["PRICE"];
@@ -1228,6 +1229,7 @@ class CBitrixBasketComponent extends CBitrixComponent
             //$o = $order->getItemByBasketCode($item['ID']);
             $i->setField("PRICE", (float)10 + rand(1,4));
             $i->setField("DISCOUNT_PRICE",$item['BASE_PRICE'] - $item["PRICE"]);
+            $i->setField("PRICE_TYPE_ID",10);
             //$o->setField("PRICE", (float)10 + rand(1,4));
             //$o->setField("DISCOUNT_PRICE",$item['BASE_PRICE'] - $item["PRICE"]);
             //$i->setField("SUM_DISCOUNT_PRICE",(float)10);
@@ -1241,17 +1243,20 @@ class CBitrixBasketComponent extends CBitrixComponent
             //Pr($order[$key]);
             //Pr($key);
         }
-        foreach ($order as $o){
+        /*foreach ($order as $o){
 	        $o->setField("PRICE",10);
 	        $o->setField("DISCOUNT_PRICE",10);
-        }
-        $order->save();
+        }*/
+        //$order->save();
         $this->saveBasket();
-        $this->initializeBasketOrderIfNotExists($basket);
         //$basket->save();
+        //Pr($basket->getItemByBasketCode(4626)->getPrice());
+        //Pr($basket->getItemByBasketCode(4626)->getPrice());
+        //Pr($basket->getPrice());
+        $this->initializeBasketOrderIfNotExists($basket);
+        //Pr($basket->getItemByBasketCode(4626)->getPrice());
         $test = $basket->getOrder();
-        $test->appendBasket($basket);
-        Pr($basket->getOrder());
+        //Pr($test->getBasket()->getPrice());
         //Pr($basket->getOrderableItems());
         return $basket;
         /*$refreshStrategy = Basket\RefreshFactory::create(Basket\RefreshFactory::TYPE_FULL);
@@ -1527,9 +1532,9 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$delayedItemsCount = 0;
 
 		$basketStorage = $this->getBasketStorage();
-		//$fullBasket = $basketStorage->getBasket();
+		$fullBasket = $basketStorage->getBasket();
 
-		$fullBasket = $this->cawebDiscountProcess();
+		//$fullBasket = $this->cawebDiscountProcess();
 
 
 		if ($this->basketItemsMaxCountExceeded())
@@ -1547,7 +1552,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$orderableBasket = $basketStorage->getOrderableBasket();
 			// in SOA case we already have real order
-			$this->initializeBasketOrderIfNotExists($orderableBasket);
+			//$this->initializeBasketOrderIfNotExists($orderableBasket);
 
 			$this->storage['ORDERABLE_BASKET_ITEMS_COUNT'] = $orderableBasket->count();
 
