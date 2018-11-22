@@ -1,7 +1,8 @@
-<?php
-function Pr($z){
-    echo '<pre>'; echo var_dump($z); echo '</pre><hr/>';
-}
+<?
+use Bitrix\Main\Loader;
+Loader::includeModule('caweb.main');
+function Pr($z){echo '<pre>'; echo var_dump($z); echo '</pre></hr>';}
+AddEventHandler("main", "OnBeforeUserRegister", array('Caweb\Main\Events\Main', 'OnBeforeUserRegister'));
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }

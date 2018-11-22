@@ -76,7 +76,7 @@ function OnAfterUserAddHandler(&$arFields){
 		"SET_TITLE" => "N",
 		"SHOW_FIELDS" => array("NAME","EMAIL","PERSONAL_PHONE","PERSONAL_PROFESSION"),
 		"SUCCESS_PAGE" => "",
-		"USER_PROPERTY" => array("UF_LEGAL_FORM","UF_COMPANY","UF_INN"),
+		"USER_PROPERTY" => array("UF_LEGAL_FORM","UF_COMPANY","UF_INN",'UF_KPP'),
 		"USER_PROPERTY_NAME" => "",
 		"USE_BACKURL" => "Y"
 	)

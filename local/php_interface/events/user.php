@@ -2,7 +2,6 @@
 	use Bitrix\Main\Loader; 
 	use Bitrix\Highloadblock as HL; 
 	use Bitrix\Main\Entity;
-	
 	AddEventHandler("main", "OnAfterUserRegister", "OnAfterUserRegisterHandler"); 
 
 function OnAfterUserRegisterHandler(&$arFields)
@@ -145,7 +144,7 @@ function OnBeforeUserRegisterHandler(&$args)
 		$userFullName = trim($args['UF_LEGAL_FORM']);
 
 		if(empty($userFullName)){
-			$GLOBALS['APPLICATION']->ThrowException('Не выбрано значение поля "Правовая форма организации"'. $args['UF_LEGAL_FORM']); 
+			$GLOBALS['APPLICATION']->ThrowException('Не выбрано значение поля "Правовая форма организации"'. $args['UF_LEGAL_FORM']);
   			return false;
 		} 
 
@@ -176,7 +175,6 @@ function OnBeforeUserRegisterHandler(&$args)
 
 	return true; 
 }
-
 AddEventHandler("main", "OnBeforeUserAdd", Array("UserModifyHandler", "OnBeforeUserAddHandler"));
 class UserModifyHandler
 {

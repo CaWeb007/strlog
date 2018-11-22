@@ -231,7 +231,7 @@
 								<div class="form-control bg">
 									<div class="wrap_md">
 										<div class="iblock label_block">
-											<?if($arUField["FIELD_NAME"] == "UF_INN" || $arUField["FIELD_NAME"] == "UF_COMPANY" || $arUField["FIELD_NAME"] == "UF_LEGAL_FORM" ) $arUField["MANDATORY"] = "Y";?>
+											<?if($arUField["FIELD_NAME"] == "UF_INN" || $arUField["FIELD_NAME"] == "UF_COMPANY" || $arUField["FIELD_NAME"] == "UF_LEGAL_FORM"|| $arUField["FIELD_NAME"] == "UF_KPP" ) $arUField["MANDATORY"] = "Y";?>
 											<label for="input_<?=$FIELD;?>"><?=$arUField["EDIT_FORM_LABEL"];?>:<?if ($arUField["MANDATORY"] == "Y"):?><span class="star">*</span><?endif;?></label>
 											<?$APPLICATION->IncludeComponent(
 											"bitrix:system.field.edit",
