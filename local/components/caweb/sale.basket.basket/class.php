@@ -16,6 +16,7 @@ use Bitrix\Main,
 	Bitrix\Catalog;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
+use Caweb\Main\Sale\Discount;
 
 class CBitrixBasketComponent extends CBitrixComponent
 {
@@ -36,7 +37,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 	protected $storage = array();
 	/** @var ErrorCollection $errorCollection */
 	protected $errorCollection;
-
+    protected $priceWithCustomDiscount = 0;
 	public $arCustomSelectFields = array();
 	public $arIblockProps = array();
 	public $weightKoef = 0;
@@ -1206,7 +1207,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 	    $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
 	    foreach ($basketItems as $key => &$item){
-	        if ($item["PRICE"] == 10) continue;
+	        //if ($item["PRICE"] == 10) continue;
             $item["PRICE"] = (float)10;
             $item["DISCOUNT_PRICE"] = $item['BASE_PRICE'] - $item["PRICE"];
             $item["SUM_DISCOUNT_PRICE"] = (float)10;
@@ -1218,16 +1219,13 @@ class CBitrixBasketComponent extends CBitrixComponent
             $item["PRICE_FORMATED"] = $item["PRICE"].' руб';
             $item["SUM"] = $item["SUM_VALUE"].' руб';
             $i = $basket->getItemByBasketCode($item['ID']);
-            /*$i->setField("PRICE", $item["PRICE"]);
-            $i->setField("DISCOUNT_PRICE",$item["DISCOUNT_PRICE"]);
-            $i->setField("PRICE_TYPE_ID",10);
-            $i->setField('CUSTOM_PRICE', 'Y');*/
             $i->setFields(array(
                 'PRICE' => $item["PRICE"],
                 "DISCOUNT_PRICE" => $item["DISCOUNT_PRICE"],
                 "PRICE_TYPE_ID" => 10,
                 'CUSTOM_PRICE' => 'Y'
             ));
+            $this->priceWithCustomDiscount += $item["SUM_VALUE"];
         }
         $this->saveBasket();
         $this->initializeBasketOrderIfNotExists($basket);
@@ -2456,7 +2454,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 
             $basket = $this->getBasketStorage()->getOrderableBasket();
             $this->initializeBasketOrderIfNotExists($basket);
-			$basketPrice = $basket->getPrice();
+			$basketPrice = $this->getPrice($basket);
 			$basketWeight = $basket->getWeight();
 			$basketBasePrice = $this->getBasePrice($basket);
 			$basketVatSum = $basket->getVatSum();
@@ -2495,6 +2493,10 @@ class CBitrixBasketComponent extends CBitrixComponent
             $result += (float)PriceTable::getRow($arParams)['PRICE'] * $basketItem->getQuantity();
         }
         return $result;
+    }
+    protected function getPrice($basket){
+        if (!empty($this->priceWithCustomDiscount)) return $this->priceWithCustomDiscount;
+        return $basket->getPrice();
     }
     protected function getBasePriceItem($basketItem){
         $arParams = array(
