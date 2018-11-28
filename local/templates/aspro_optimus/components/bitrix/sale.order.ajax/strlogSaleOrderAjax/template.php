@@ -586,7 +586,7 @@ else
 	$UserID = $USER->GetID();
 	$rsUser = $USER->GetByID($UserID);
 	$arUser = $rsUser->Fetch();
-	
+	//ToDo переделать если есть проблемы с идентификацией типа плательщика
 	if($USER->IsAuthorized())
     {
 		if($arUser['PERSONAL_PROFESSION'] == "КП(ФИЗ)"){
