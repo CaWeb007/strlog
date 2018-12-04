@@ -47,8 +47,8 @@ if ($lAdmin->EditAction()){
 if (($arID = $lAdmin->GroupAction())) {
     if ($_REQUEST['action_target']=='selected') {
         $arID = Array();
-        $dbResultList = DiscountTable::GetList(array('select' => array('ID')));
-        while ($arResult = $dbResultList->Fetch())
+        $dbResultList = DiscountTable::getList(array('select' => array('ID')));
+        while ($arResult = $dbResultList->fetch())
             $arID[] = $arResult['ID'];
     }
     foreach ($arID as $ID) {
@@ -57,7 +57,7 @@ if (($arID = $lAdmin->GroupAction())) {
             case "delete":
                 @set_time_limit(0);
                 $DB->StartTransaction();
-                if (!DiscountTable::delete($ID)->isSuccess()) {
+                if (!DiscountTable::deleteDiscount($ID)->isSuccess()) {
                     $DB->Rollback();
                     if ($ex = $APPLICATION->GetException())
                         $lAdmin->AddGroupError($ex->GetString(), $ID);
@@ -90,12 +90,12 @@ $lAdmin->AddHeaders(array(
         "sort" => "",
         "default" => true
     ),
-    array(
+    /*array(
         "id" => "ACTIVE",
         "content" => Loc::getMessage("ACTIVE"),
         "sort" => "",
         "default" => true
-    ),
+    ),*/
     array(
         "id" => "ACTIVE_FROM",
         "content" => Loc::getMessage("ACTIVE_FROM"),

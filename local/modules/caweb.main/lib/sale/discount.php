@@ -22,7 +22,12 @@ class DiscountTable extends Entity\DataManager {
             )),
             new Entity\StringField('KEYWORD',array(
                 'required' => true,
-                'title' => Loc::getMessage('TITLE_KEYWORD')
+                'title' => Loc::getMessage('TITLE_KEYWORD'),
+                'validation' => function(){
+                    return array(
+                        new Entity\Validator\Unique
+                    );
+                }
             )),
             new Entity\StringField('PRICE_ID',array(
                 'required' => true,
@@ -66,6 +71,26 @@ class DiscountTable extends Entity\DataManager {
         if ($timestampFrom > $timestampTo) return Loc::getMessage('DATA_TO_FROM_ERROR');
         if ($timestampDay > $timestampTo) return Loc::getMessage('DATA_TO_ERROR');
         return true;
+    }
+    public static function deleteDiscount($discount_id){
+        if (empty($discount_id)) return;
+        DiscountUserTable::deleteUsers($discount_id);
+        return self::delete($discount_id);
+    }
+    public static function getUserDiscountPrice($keyword){
+        $result = array();
+        $date = new Type\DateTime();
+        $arDiscount = DiscountUserTable::getUserDiscount();
+        if ($arDiscount) return false;
+        $param['filter'] = array(
+            '!ID' => $arDiscount,
+            'KEYWORD' => $keyword,
+            '<ACTIVE_FROM' => $date,
+            '>ACTIVE_TO' => $date
+        );
+        $param['select'] = array('ID', 'PRICE_ID');
+        $result = self::getRow($param)['PRICE_ID'];
+        return $result;
     }
 
 }

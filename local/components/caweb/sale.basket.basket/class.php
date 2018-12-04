@@ -16,7 +16,7 @@ use Bitrix\Main,
 	Bitrix\Catalog;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
-use Caweb\Main\Sale\Discount;
+use Caweb\Main\Sale\DiscountManager;
 
 class CBitrixBasketComponent extends CBitrixComponent
 {
@@ -1197,6 +1197,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
             $this->cawebDiscountProcess();
+
 			if (self::includeCatalog())
 			{
 				$this->basketItems = $this->getSkuPropsData($this->basketItems, $this->storage['PARENTS'], $this->offersProps);
@@ -1207,22 +1208,13 @@ class CBitrixBasketComponent extends CBitrixComponent
 	    $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
 	    foreach ($basketItems as $key => &$item){
-	        //if ($item["PRICE"] == 10) continue;
-            $item["PRICE"] = (float)10;
-            $item["DISCOUNT_PRICE"] = $item['BASE_PRICE'] - $item["PRICE"];
-            $item["SUM_DISCOUNT_PRICE"] = (float)10;
-            $item["SUM_VALUE"] = $item["PRICE"] * $item['QUANTITY'];
-            $item["SUM_FULL_PRICE"] = $item["BASE_PRICE"] * $item['QUANTITY'];
-            $item["SUM_DISCOUNT_PRICE"] = $item["DISCOUNT_PRICE"] * $item['QUANTITY'];
-            $item["SUM_DISCOUNT_PRICE_FORMATED"] = $item["SUM_DISCOUNT_PRICE"].' руб';
-            $item["DISCOUNT_PRICE_FORMATED"] = $item["DISCOUNT_PRICE"].' руб';
-            $item["PRICE_FORMATED"] = $item["PRICE"].' руб';
-            $item["SUM"] = $item["SUM_VALUE"].' руб';
-            $i = $basket->getItemByBasketCode($item['ID']);
-            $i->setFields(array(
+	        $discount = DiscountManager::discountProcess($item);
+	        if($discount) $item = $discount; else continue;
+            $basketItem = $basket->getItemByBasketCode($item['ID']);
+            $basketItem->setFields(array(
                 'PRICE' => $item["PRICE"],
                 "DISCOUNT_PRICE" => $item["DISCOUNT_PRICE"],
-                "PRICE_TYPE_ID" => 10,
+                "PRICE_TYPE_ID" => $item['PRICE_TYPE_ID'],
                 'CUSTOM_PRICE' => 'Y'
             ));
             $this->priceWithCustomDiscount += $item["SUM_VALUE"];
@@ -1330,7 +1322,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$result += $this->getBasketTotal();
 			$result += $this->getCouponInfo();
-
+            Pr($this->getCouponInfo());
 			if ($this->usePrepayment === 'Y' && (float)$result['allSum'] > 0)
 			{
 				$result += $this->getPrepayment();
@@ -2525,6 +2517,12 @@ class CBitrixBasketComponent extends CBitrixComponent
 						$result['COUPON'] = $coupon['COUPON'];
 					}
 
+					if ($customDiscount = DiscountManager::getDiscountInfo($coupon)){
+                        $result['COUPON_LIST'][] = $customDiscount;
+                        unset($coupon);
+                        continue;
+                    }
+
 					if ($coupon['STATUS'] == DiscountCouponsManager::STATUS_NOT_FOUND || $coupon['STATUS'] == DiscountCouponsManager::STATUS_FREEZE)
 					{
 						$coupon['JS_STATUS'] = 'BAD';
@@ -3205,7 +3203,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 			foreach ($postList['delete_coupon'] as $coupon)
 			{
-				$couponChanged = DiscountCouponsManager::delete($coupon) || $couponChanged;
+				$couponChanged = DiscountManager::delete($coupon) || DiscountCouponsManager::delete($coupon) || $couponChanged;
 			}
 		}
 		else
@@ -3216,7 +3214,8 @@ class CBitrixBasketComponent extends CBitrixComponent
 			{
 				if (!empty($coupon))
 				{
-					$couponChanged = DiscountCouponsManager::add($coupon);
+				    if (!$couponChanged = DiscountManager::add($coupon))
+					    $couponChanged = DiscountCouponsManager::add($coupon);
 				}
 				else
 				{
