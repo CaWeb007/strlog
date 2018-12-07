@@ -789,7 +789,14 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		$this->saveBasket();
 		$this->modifyResultAfterSave($result);
-
+        Debug::dumpToFile(
+            array(
+                $result['APPLIED_DISCOUNT_IDS'],
+                $this->request->get('lastAppliedDiscounts'),
+                $this->request->get('fullRecalculation'),
+                $this->isFastLoadRequest()
+            ), 'ar', 'caweb.log'
+        );
 		if (
 			!empty($result['APPLIED_DISCOUNT_IDS'])
 			|| implode(',', $result['APPLIED_DISCOUNT_IDS']) !== $this->request->get('lastAppliedDiscounts')
@@ -2508,6 +2515,9 @@ class CBitrixBasketComponent extends CBitrixComponent
 		if ($this->hideCoupon != 'Y')
 		{
 			$coupons = DiscountCouponsManager::get(true, array(), true, true);
+            if ($customDiscount = DiscountManager::getDiscountInfo()){
+                $result['COUPON_LIST'][] = $customDiscount;
+            }
 			if (!empty($coupons))
 			{
 				foreach ($coupons as &$coupon)
@@ -2517,11 +2527,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 						$result['COUPON'] = $coupon['COUPON'];
 					}
 
-					if ($customDiscount = DiscountManager::getDiscountInfo($coupon)){
-                        $result['COUPON_LIST'][] = $customDiscount;
-                        unset($coupon);
-                        continue;
-                    }
 
 					if ($coupon['STATUS'] == DiscountCouponsManager::STATUS_NOT_FOUND || $coupon['STATUS'] == DiscountCouponsManager::STATUS_FREEZE)
 					{
