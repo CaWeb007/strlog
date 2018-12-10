@@ -789,14 +789,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		$this->saveBasket();
 		$this->modifyResultAfterSave($result);
-        Debug::dumpToFile(
-            array(
-                $result['APPLIED_DISCOUNT_IDS'],
-                $this->request->get('lastAppliedDiscounts'),
-                $this->request->get('fullRecalculation'),
-                $this->isFastLoadRequest()
-            ), 'ar', 'caweb.log'
-        );
+
 		if (
 			!empty($result['APPLIED_DISCOUNT_IDS'])
 			|| implode(',', $result['APPLIED_DISCOUNT_IDS']) !== $this->request->get('lastAppliedDiscounts')
@@ -1203,7 +1196,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            $this->cawebDiscountProcess();
+            //$this->cawebDiscountProcess();
 
 			if (self::includeCatalog())
 			{
@@ -1212,6 +1205,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		}
 	}
     protected function cawebDiscountProcess(){
+	    if (!DiscountManager::changeDiscount()) return false;
 	    $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
 	    foreach ($basketItems as $key => &$item){
@@ -1329,7 +1323,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$result += $this->getBasketTotal();
 			$result += $this->getCouponInfo();
-            Pr($this->getCouponInfo());
+
 			if ($this->usePrepayment === 'Y' && (float)$result['allSum'] > 0)
 			{
 				$result += $this->getPrepayment();
@@ -3228,7 +3222,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 				}
 			}
 		}
-
+        $this->addErrors(new Error('testttt', 'discount'));
 		return $couponChanged;
 	}
 
