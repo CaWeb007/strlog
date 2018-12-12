@@ -791,6 +791,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$this->modifyResultAfterSave($result);
 
 		if (
+		    DiscountManager::changeDiscount() ||
 			!empty($result['APPLIED_DISCOUNT_IDS'])
 			|| implode(',', $result['APPLIED_DISCOUNT_IDS']) !== $this->request->get('lastAppliedDiscounts')
 			|| $this->request->get('fullRecalculation') === 'Y'
@@ -1196,7 +1197,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            //$this->cawebDiscountProcess();
+            $this->cawebDiscountProcess();
 
 			if (self::includeCatalog())
 			{
@@ -1209,9 +1210,10 @@ class CBitrixBasketComponent extends CBitrixComponent
 	    $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
 	    foreach ($basketItems as $key => &$item){
-	        $discount = DiscountManager::discountProcess($item);
+            $discount = DiscountManager::discountProcess($item);
 	        if($discount) $item = $discount; else continue;
             $basketItem = $basket->getItemByBasketCode($item['ID']);
+            Debug::dumpToFile($item['PRICE_TYPE_ID'],'writePriceId','caweb.log');
             $basketItem->setFields(array(
                 'PRICE' => $item["PRICE"],
                 "DISCOUNT_PRICE" => $item["DISCOUNT_PRICE"],
@@ -1223,6 +1225,7 @@ class CBitrixBasketComponent extends CBitrixComponent
         $this->saveBasket();
         $this->initializeBasketOrderIfNotExists($basket);
         $this->basketItems = $basketItems;
+        DiscountManager::changeStatus();
     }
 	// ToDo get gifts result via ajax to prevent BasketStorage loading while using fast load
 	protected function isFastLoadRequest()
@@ -2509,8 +2512,9 @@ class CBitrixBasketComponent extends CBitrixComponent
 		if ($this->hideCoupon != 'Y')
 		{
 			$coupons = DiscountCouponsManager::get(true, array(), true, true);
-            if ($customDiscount = DiscountManager::getDiscountInfo()){
-                $result['COUPON_LIST'][] = $customDiscount;
+            $customDiscount = DiscountManager::getDiscountInfo();
+            if (!empty($customDiscount)){
+                $result = $customDiscount;
             }
 			if (!empty($coupons))
 			{
@@ -3222,7 +3226,8 @@ class CBitrixBasketComponent extends CBitrixComponent
 				}
 			}
 		}
-        $this->addErrors(new Error('testttt', 'discount'));
+		if ($couponChanged['error'])
+            $this->addErrors($couponChanged['error'], 'discount');
 		return $couponChanged;
 	}
 

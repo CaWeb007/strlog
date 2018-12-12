@@ -8,12 +8,12 @@ Loader::includeModule('catalog');
 
 class Helper{
     const SITE_PRICE_MODEL = array(14,9,10,11);
-    protected static $userPriceId = 0;
+    public static $userPriceId = 0;
     public static function getUserPriceId(){
         if (!empty(static::$userPriceId)) return static::$userPriceId;
         global $USER;
         $userGroupsArray = $USER->GetUserGroupArray();
-        $params['filter'] = array('GROUP_ID' => $userGroupsArray, 'BUY' => GroupAccessTable::ACCESS_BUY);
+        $params['filter'] = array('GROUP_ID' => $userGroupsArray, 'ACCESS' => GroupAccessTable::ACCESS_BUY);
         $params['select'] = array('CATALOG_GROUP_ID');
         $priceArray = array();
         $db = GroupAccessTable::getList($params);

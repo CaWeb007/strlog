@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 /*Если пользователь не принадлежит ни к одной группе покупателей end*/
 ?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_banners_top_slider.php",
 		"AREA_FILE_SHOW" => "file",
@@ -27,7 +27,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	array(
 	"ACTIVE_COMPONENT" => "Y"
 	)
-);?>
+);*/?>
 
 <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(

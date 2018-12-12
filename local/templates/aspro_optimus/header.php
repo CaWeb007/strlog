@@ -138,7 +138,7 @@ function gtag_report_conversion2(url) {
                     <div class="top_inner our-projects-wrapper-anchor">
                         <div id="our-projects" class="our-projects-wrapper">
                             <a class="strlog-city-link" href="/company/contacts/">Иркутск</a>
-                            <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+                            <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
                                 array(
                                     "COMPONENT_TEMPLATE" => ".default",
                                     "PATH" => SITE_DIR."include/menu/menu.strlog_top_content_multilevel.php",
@@ -148,7 +148,7 @@ function gtag_report_conversion2(url) {
                                     "EDIT_TEMPLATE" => "standard.php"
                                 ),
                                 false
-                            );?>
+                            );*/?>
 							<div class="w-our-projects" v-on="{mouseenter:dropProjectsEnter,mouseleave:dropProjectsLeave}">
 							<span class="our-projects">Наши проекты<img v-bind:class="{scaled:isScaled}" src="/images/project-arrow.png" /></span>
                             <div class="our-projects-dropdown-wrapper" v-bind:class="{dropped: isDropped}">
@@ -261,7 +261,7 @@ function gtag_report_conversion2(url) {
                                     <div style="z-index:11;background: none;">
                                         <div class="wrapper_middle_menu wrap_menu" style="background: none;">
                                             <div class="catalog_menu_ext">
-                                                <?$APPLICATION->IncludeComponent(
+                                                <?/*$APPLICATION->IncludeComponent(
                                                     "bitrix:main.include",
                                                     ".default",
                                                     array(
@@ -275,7 +275,7 @@ function gtag_report_conversion2(url) {
                                                         "COMPOSITE_FRAME_TYPE" => "AUTO"
                                                     ),
                                                     false
-                                                );?>
+                                                );*/?>
                                             </div>
                                         </div>
                                     </div>
@@ -478,7 +478,7 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
 <?if(!COptimus::IsOrderPage() && !COptimus::IsBasketPage() && !$iSDetailPage){?>
     <div class="left_block">
         <?/*Статичное меню*start*JS скрипт выпадающего меню находится bitrix/menu/left_front_catalog/template.php*/?>
-        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/menu.left_menu.php",
@@ -488,12 +488,12 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );?>
+        );*/?>
         <?/*Статичное меню*end*/?>
 
-        <?$APPLICATION->ShowViewContent('left_menu');?>
+        <?/*$APPLICATION->ShowViewContent('left_menu');*/?><!--
 
-        <?$APPLICATION->IncludeComponent(
+        <?/*$APPLICATION->IncludeComponent(
 	"bitrix:main.include", 
 	".default", 
 	array(
@@ -507,8 +507,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);?>
-        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+);*/?>
+        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/comp_subscribe.php",
@@ -518,8 +518,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );?>
-        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        );*/?>
+        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/comp_news.php",
@@ -529,8 +529,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );?>
-        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        );*/?>
+        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/comp_news_articles.php",
@@ -540,8 +540,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );?>
-        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        );*/?>
+        --><?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/actions_list_info.php",
@@ -551,7 +551,7 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );?>
+        );*/?>
 		<?$uGr = getGroupUser()?>
 		<?$fileXLS = getFilePrice($uGr);?>
 		<?$exp = explode("/",$fileXLS)?>

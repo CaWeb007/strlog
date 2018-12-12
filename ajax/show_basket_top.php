@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
-<?/*$APPLICATION->IncludeComponent( "bitrix:sale.basket.basket.line", "normal", Array(
+<?$APPLICATION->IncludeComponent( "bitrix:sale.basket.basket.line", "normal", Array(
 	"PATH_TO_BASKET" => SITE_DIR."basket/", 
 	"PATH_TO_ORDER" => SITE_DIR."order/", 
 	"SHOW_DELAY" => "Y", 
@@ -13,4 +13,4 @@
 	"SHOW_NUM_PRODUCTS" => "Y",
 	"SHOW_TOTAL_PRICE" => "Y",
 	"HIDE_ON_BASKET_PAGES" => "Y"
-) );*/?>
+) );?>
