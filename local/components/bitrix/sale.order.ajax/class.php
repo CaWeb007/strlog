@@ -1506,7 +1506,8 @@ class SaleOrderAjax extends \CBitrixComponent
 			'LID' => $this->context->getSite(),
 			'PERSONAL_PHONE' => isset($userProps['PHONE']) ? $this->getNormalizedPhone($userProps['PHONE']) : '',
 			'PERSONAL_ZIP' => isset($userProps['ZIP']) ? $userProps['ZIP'] : '',
-			'PERSONAL_STREET' => isset($userProps['ADDRESS']) ? $userProps['ADDRESS'] : ''
+			'PERSONAL_STREET' => isset($userProps['ADDRESS']) ? $userProps['ADDRESS'] : '',
+            'PERSONAL_PROFESSION' => $userProps['PERSONAL_PROFESSION']
 		));
 
 		if (intval($arAuthResult) <= 0)
@@ -1557,6 +1558,11 @@ class SaleOrderAjax extends \CBitrixComponent
 		}
 
 		$userProps = Sale\PropertyValue::getMeaningfulValues($personType, $this->getPropertyValuesFromRequest());
+		if ($personType == 2){
+            $userProps['PERSONAL_PROFESSION'] = 'КП(ЮР)';
+        }else{
+            $userProps['PERSONAL_PROFESSION'] = 'КП(ФИЗ)';
+        }
 		$userId = false;
 		$saveToSession = false;
 
