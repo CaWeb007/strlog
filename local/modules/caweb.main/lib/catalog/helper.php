@@ -8,6 +8,7 @@ Loader::includeModule('catalog');
 
 class Helper{
     const SITE_PRICE_MODEL = array(14,9,10,11);
+    const SITE_GROUP_MODEL = array(9,10,11,12,14,15);
     public static $userPriceId = 0;
     public static function getUserPriceId(){
         if (!empty(static::$userPriceId)) return static::$userPriceId;

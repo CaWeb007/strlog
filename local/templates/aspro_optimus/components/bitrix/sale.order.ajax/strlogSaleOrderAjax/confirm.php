@@ -21,7 +21,6 @@ gtag('event', 'conversion', {
 'transaction_id': ''
 });
 </script>
-
 <? if (!empty($arResult["ORDER"])): ?>
 
 	<table class="sale_order_full_table">
@@ -56,7 +55,6 @@ gtag('event', 'conversion', {
 					)
 					{
 						$arPaySystem = $arResult['PAY_SYSTEM_LIST'][$payment["PAY_SYSTEM_ID"]];
-
 						if (empty($arPaySystem["ERROR"]))
 						{
 							?>
@@ -81,11 +79,11 @@ gtag('event', 'conversion', {
 											<script>
 												window.open('<?=$arParams["PATH_TO_PAYMENT"]?>?ORDER_ID=<?=$orderAccountNumber?>&PAYMENT_ID=<?=$paymentAccountNumber?>');
 											</script>
-										<?=Loc::getMessage("SOA_PAY_LINK", array("#LINK#" => $arParams["PATH_TO_PAYMENT"]."?ORDER_ID=".$orderAccountNumber."&PAYMENT_ID=".$paymentAccountNumber))?>
-										<? if (CSalePdf::isPdfAvailable() && $arPaySystem['IS_AFFORD_PDF']): ?>
-										<br/>
-											<?=Loc::getMessage("SOA_PAY_PDF", array("#LINK#" => $arParams["PATH_TO_PAYMENT"]."?ORDER_ID=".$orderAccountNumber."&pdf=1&DOWNLOAD=Y"))?>
-										<? endif ?>
+                                            <?=Loc::getMessage("SOA_PAY_LINK", array("#LINK#" => $arParams["PATH_TO_PAYMENT"]."?ORDER_ID=".$orderAccountNumber."&PAYMENT_ID=".$paymentAccountNumber))?>
+                                            <? if (CSalePdf::isPdfAvailable() && $arPaySystem['IS_AFFORD_PDF']): ?>
+                                            <br/>
+                                                <?=Loc::getMessage("SOA_PAY_PDF", array("#LINK#" => $arParams["PATH_TO_PAYMENT"]."?ORDER_ID=".$orderAccountNumber."&pdf=1&DOWNLOAD=Y"))?>
+                                            <? endif ?>
 										<? else: ?>
 											<?=$arPaySystem["BUFFERED_OUTPUT"]?>
 										<? endif ?>

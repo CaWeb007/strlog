@@ -4,6 +4,8 @@ use Bitrix\Sale\Internals\PersonTypeTable;
 use Bitrix\Sale\ShipmentCollection;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Sale\Order;
+use Bitrix\Main\Diag\Debug;
+use Caweb\Main\Catalog\Helper;
 
 Loc::loadMessages(__FILE__);
 
@@ -17,9 +19,13 @@ class groupUserRestriction extends Bitrix\Sale\Delivery\Restrictions\Base
     */
    public static function check($usergroupId, array $params, $deliveryId = 0)
    {
-      if (is_array($params) && isset($params['USER_GROUP_ID']))
+       global $USER;
+        if (count(array_intersect($usergroupId, Helper::SITE_GROUP_MODEL))){
+            unset($usergroupId[array_search('2',$usergroupId)]);
+        }
+      if (is_array($params) && !empty($params['USER_GROUP_ID']))
       {
-         return sizeof(array_intersect($usergroupId, $params['USER_GROUP_ID']))>0 || (count($usergroupId)==1 && $usergroupId[0] == 2);
+         return sizeof(array_intersect($usergroupId, $params['USER_GROUP_ID']))>0/* || (count($usergroupId)==1 && $usergroupId[0] == 2)*/;
       }
 
       return true;
@@ -38,8 +44,9 @@ class groupUserRestriction extends Bitrix\Sale\Delivery\Restrictions\Base
       $order = $collection->getOrder();
         if($GLOBALS['USER']->isAuthorized()){
             $usergroupId=$GLOBALS['USER']->GetUserGroupArray();
-        }else
+        }else{
             $usergroupId=array(2);
+        }
     return $usergroupId;
    }
 
