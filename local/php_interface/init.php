@@ -1,12 +1,17 @@
 <?
 use Bitrix\Main\Loader;
+use Bitrix\Main\EventManager;
 Loader::includeModule('caweb.main');
+Loader::includeModule('sale');
 function Pr($z){echo '<pre>'; echo var_dump($z); echo '</pre></hr>';}
 AddEventHandler("main", "OnBeforeUserRegister", array('Caweb\Main\Events\Main', 'OnBeforeUserRegister'));
+//EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'OnSaleOrderBeforeSaved'));
+EventManager::getInstance()->addEventHandler('sale', 'OnBeforeShipmentDeleted',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDeleted'));
+EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Shipment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDelete'));
+EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforePaymentDelete'));
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }
-
 //function bonusAgent() {
 	//   require_once $_SERVER['DOCUMENT_ROOT'].'/xml/bonus.php';
 	//   bonus();
