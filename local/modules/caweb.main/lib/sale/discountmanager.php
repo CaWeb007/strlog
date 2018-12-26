@@ -4,6 +4,9 @@ namespace Caweb\Main\Sale;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
 use Caweb\Main\Catalog\Helper;
+use Caweb\Main\Log\Write;
+use Bitrix\Sale\Fuser;
+
 
 class DiscountManager{
     const STATUS_START = 'START';
@@ -18,10 +21,30 @@ class DiscountManager{
     const DEFAULT_PRICE = 11;
     public static $jsText = array();
     public static $processedCoupon = array();
+    public static function init(){
+        $sessionContainer = $_SESSION[self::SESSION_KEY];
+        if (!empty($sessionContainer)) return;
+        $discount = DiscountUserTable::getUserDiscount(self::STATUS_ENTER, true);
+        if (count($discount) === 1) return $_SESSION[self::SESSION_KEY] = $discount;
+        $arPrice = array();
+        foreach ($discount as $item){
+            $arPrice[$discount['KEYWORD']] = $discount['PRICE_ID'];
+        };
+        $minPrice = Helper::getMinCatalogPrice($arPrice);
+        $price = array_intersect($arPrice,array($minPrice));
+        $discount = array_intersect_key($discount, $price);
+        return $_SESSION[self::SESSION_KEY] = $discount;
+    }
     public static function add($keyword){
-        $coupon = self::checkInSession($keyword);
+        $coupon = self::checkInSessionForAdd($keyword);
         if (!$coupon) return false;
         if ($coupon['error']) return $coupon['error'];
+        Write::file('coupon', $coupon);
+        if ($couponId = DiscountUserTable::addDiscount($coupon)){
+            $coupon['COUPON_ID'] = $couponId;
+        }else{
+            return false;
+        };
         $_SESSION[self::SESSION_KEY][$keyword] = $coupon;
         self::$processedCoupon = $coupon;
         return true;
@@ -35,12 +58,13 @@ class DiscountManager{
         if ($status === self::STATUS_DELETE)
             return false;
         $coupon = $session;
+        DiscountUserTable::deleteDiscount($coupon);
         $coupon['STATUS'] = self::STATUS_NEED_DELETE;
         $_SESSION[self::SESSION_KEY][$keyword] = $coupon;
         self::$processedCoupon = $coupon;
         return true;
     }
-    static function checkInSession($keyword){
+    static function checkInSessionForAdd($keyword){
         $session = $_SESSION[self::SESSION_KEY][$keyword];
         if ($session) {
             $status = $session['STATUS'];
@@ -52,25 +76,24 @@ class DiscountManager{
         }
         $coupon = array();
         $coupon['KEYWORD'] = $keyword;
-        $price = DiscountTable::getUserDiscountPrice($keyword);
+        //$price = DiscountTable::getUserDiscountPrice($keyword);
+        $discount = DiscountTable::getUserDiscount($keyword);
+        $price = $discount['PRICE_ID'];
         if (!$price) {
-            /*$coupon['STATUS'] = self::STATUS_NOT_FOUND;
-            return $coupon;*/
             return false;
         }
         $old_price = '';
         list($price,$old_price) = self::checkPrice($price);
 
         if (!$price) {
-            //$coupon['STATUS'] = self::STATUS_MAX_DISCOUNT;
-            //return $coupon;
             return array('error' => 'tetereres');
         }
         $coupon['STATUS'] = self::STATUS_START;
         $coupon['PRICE_ID'] = $price;
         $coupon['USER_PRICE_ID'] = $old_price;
+        $coupon['DISCOUNT_ID'] = $discount['ID'];
+        Write::file('sess', $coupon);
         return $coupon;
-
     }
     public static function checkPrice($price){
         $price = intval($price);
@@ -94,6 +117,7 @@ class DiscountManager{
     }
 
     public static function getDiscountInfo(){
+        global $USER;
         $session = $_SESSION[self::SESSION_KEY];
         if (empty($session)) return false;
         $result = array();
@@ -110,32 +134,68 @@ class DiscountManager{
                 $list['JS_STATUS'] = 'ENTERED';
             if ($session['STATUS'] === self::STATUS_APPLY)
                 $list['JS_STATUS'] = 'APPLYED';
-            $list['JS_CHECK_CODE'] = 'test';
+            $list['JS_CHECK_CODE'] = '"Бонусное слово" введён';
             $result['COUPON_LIST'][] = $list;
         }
         return $result;
     }
     public static function changeDiscount(){
-        return !empty(static::$processedCoupon);
+        if(!empty(static::$processedCoupon)) return true;
+        $session = $_SESSION[self::SESSION_KEY]; 
+        if (empty($session)) return false;
+        $discount = array();
+        foreach ($session as $item) {
+            if ($item['STATUS'] !== self::STATUS_ENTER) continue;
+            $discount[$item['KEYWORD']] = $item;
+        }
+        if (count($discount) === 1){
+            self::$processedCoupon = array_shift($discount);
+            return true;
+        }elseif (empty($discount)){
+            return false;
+        }
+        $arPrice = array();
+        foreach ($discount as $item){
+            $arPrice[$discount['KEYWORD']] = $discount['PRICE_ID'];
+        };
+        $minPrice = Helper::getMinCatalogPrice($arPrice);
+        $price = array_intersect($arPrice,array($minPrice));
+        $discount = array_intersect_key($discount, $price);
+        self::$processedCoupon = array_shift($discount);
+        return true;
     }
     public static function discountProcess($item){
         $result = $item;
         $discount = static::$processedCoupon;
-        /*Debug::dumpToFile(array(
-            'discount' => $discount,
-            'itemPrice' => (int)$item['PRICE_TYPE_ID'],
-            'logic' => $discount['STATUS'] === self::STATUS_NEED_DELETE
-        ),'process','caweb.log');*/
+
+
+        /*$price = $item['PRICE'];
+        $currency = $item['CURRENCY'];
+        $discountPrice = $result['BASE_PRICE'] - $price;
+        $result['PRICE'] = $price;
+        $result["DISCOUNT_PRICE"] = $discountPrice;
+        $result["SUM_DISCOUNT_PRICE"] = $price;
+        $result["SUM_VALUE"] = $price * $result['QUANTITY'];
+        $result["SUM_FULL_PRICE"] = $result["BASE_PRICE"] * $result['QUANTITY'];
+        $result["SUM_DISCOUNT_PRICE"] = $discountPrice * $result['QUANTITY'];
+        $result["SUM_DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["SUM_DISCOUNT_PRICE"],$currency);
+        $result["DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["DISCOUNT_PRICE"],$currency);
+        $result["PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["PRICE"],$currency);
+        $result["SUM"] = \CCurrencyLang::CurrencyFormat($result["SUM_VALUE"],$currency);
+        $result['PRICE_TYPE_ID'] = $item['CATALOG_GROUP_ID'];
+        return $result;*/
+
+
         if (empty($discount)) return false;
         $status = $discount['STATUS'];
 
-        if (empty($status) || (($status !== self::STATUS_START) && ($status !== self::STATUS_NEED_DELETE)))
+        if (empty($status) || (($status !== self::STATUS_START) && ($status !== self::STATUS_NEED_DELETE)
+                && ($status !== self::STATUS_ENTER)))
             return false;
         $boolDelete = $discount['STATUS'] === self::STATUS_NEED_DELETE;
         $priceID = $discount['PRICE_ID'];
         if ($boolDelete) $priceID = $discount['USER_PRICE_ID'];
-        Debug::dumpToFile($item['PRICE_TYPE_ID'],'readPriceId','caweb.log');
-        if (empty($priceID) || ((int)$priceID === (int)$item['PRICE_TYPE_ID']))
+        if (empty($priceID) || (!$boolDelete && ((int)$priceID === (int)$item['PRICE_TYPE_ID'])))
             return false;
         $param['filter'] = array(
             'PRODUCT_ID' => $result['PRODUCT_ID'],
@@ -143,17 +203,10 @@ class DiscountManager{
         );
         $param['select'] = array('ID','PRICE', 'CURRENCY', 'CATALOG_GROUP_ID');
         $arPrice = PriceTable::getRow($param);
-        /*Debug::dumpToFile(array(
-            'delete' => $boolDelete,
-            'priceId' => $priceID,
-            'arPrice' => $arPrice
-        ),'process','caweb.log');*/
         if (empty($arPrice)) return false;
         $price = $arPrice['PRICE'];
         $currency = $arPrice['CURRENCY'];
-
         $discountPrice = $result['BASE_PRICE'] - $price;
-
         $result['PRICE'] = $price;
         $result["DISCOUNT_PRICE"] = $discountPrice;
         $result["SUM_DISCOUNT_PRICE"] = $price;
@@ -171,9 +224,13 @@ class DiscountManager{
         $result = '';
         $status = static::$processedCoupon['STATUS'];
         $keyword = static::$processedCoupon['KEYWORD'];
+        $couponId = static::$processedCoupon['COUPON_ID'];
+        $result = $status;
         if ($status === self::STATUS_START) $result = self::STATUS_ENTER;
         if ($status === self::STATUS_NEED_DELETE) $result = self::STATUS_DELETE;
-        if ($status === self::STATUS_ENTER) $result = self::STATUS_APPLY;
+        //if ($status === self::STATUS_ENTER) $result = self::STATUS_APPLY;
+        if (!empty($couponId))
+            DiscountUserTable::update($couponId, array('STATUS' => $status));
         $_SESSION[self::SESSION_KEY][$keyword]['STATUS'] = $result;
     }
 }

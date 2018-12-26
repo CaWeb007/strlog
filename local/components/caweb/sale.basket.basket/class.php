@@ -915,6 +915,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		if ($this->includeModules())
 		{
 			DiscountCouponsManager::init();
+			DiscountManager::init();
 			$this->setFrameMode(false);
 
 			$this->action = $this->prepareAction();
@@ -1197,7 +1198,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            $this->cawebDiscountProcess();
+            //$this->cawebDiscountProcess();
 
 			if (self::includeCatalog())
 			{
@@ -1206,14 +1207,13 @@ class CBitrixBasketComponent extends CBitrixComponent
 		}
 	}
     protected function cawebDiscountProcess(){
-	    if (!DiscountManager::changeDiscount()) return false;
-	    $basketItems = $this->basketItems;
+        if (!DiscountManager::changeDiscount()) return false;//ToDo forgot this
+        $basketItems = $this->basketItems;
         $basket = $this->getBasketStorage()->getBasket();
 	    foreach ($basketItems as $key => &$item){
             $discount = DiscountManager::discountProcess($item);
 	        if($discount) $item = $discount; else continue;
             $basketItem = $basket->getItemByBasketCode($item['ID']);
-            Debug::dumpToFile($item['PRICE_TYPE_ID'],'writePriceId','caweb.log');
             $basketItem->setFields(array(
                 'PRICE' => $item["PRICE"],
                 "DISCOUNT_PRICE" => $item["DISCOUNT_PRICE"],
@@ -3217,7 +3217,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 			{
 				if (!empty($coupon))
 				{
-				    if (!$couponChanged = DiscountManager::add($coupon))
+				    if (!$couponChanged = DiscountManager:: add($coupon))
 					    $couponChanged = DiscountCouponsManager::add($coupon);
 				}
 				else

@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Корзина");
-Pr($_SESSION['CAWEB_DISCOUNT']);
+//Pr($_SESSION['CAWEB_DISCOUNT']);
 ?><?$APPLICATION->IncludeComponent("caweb:sale.basket.basket", "", Array(
 	"ACTION_VARIABLE" => "action",	// Название переменной действия
 		"ADDITIONAL_PICT_PROP_14" => "-",

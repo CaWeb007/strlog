@@ -4,6 +4,7 @@ namespace Caweb\Main\Sale;
 use Bitrix\Main\Entity;
 use Bitrix\Main\Type;
 use Bitrix\Main\Localization\Loc;
+use Caweb\Main\Log\Write;
 
 Loc::loadMessages(__FILE__);
 
@@ -54,7 +55,8 @@ class DiscountTable extends Entity\DataManager {
             new Entity\ReferenceField(
                 'PRICE',
                 '\Bitrix\Catalog\GroupTable',
-                array('=this.PRICE_ID' => 'ref.ID'))
+                array('=this.PRICE_ID' => 'ref.ID')),
+
         );
     }
     public static function dataValidator($value, $primary, $row, $field){
@@ -77,19 +79,19 @@ class DiscountTable extends Entity\DataManager {
         DiscountUserTable::deleteUsers($discount_id);
         return self::delete($discount_id);
     }
-    public static function getUserDiscountPrice($keyword){
+    public static function getUserDiscount($keyword){
         $result = array();
         $date = new Type\DateTime();
-        $arDiscount = DiscountUserTable::getUserDiscount();
+        $arDiscount = DiscountUserTable::getUserDiscount(DiscountManager::STATUS_APPLY, true, false, $keyword);
         if ($arDiscount) return false;
         $param['filter'] = array(
             '!ID' => $arDiscount,
             'KEYWORD' => $keyword,
-            '<ACTIVE_FROM' => $date,
+            '<=ACTIVE_FROM' => $date,
             '>ACTIVE_TO' => $date
         );
         $param['select'] = array('ID', 'PRICE_ID');
-        $result = self::getRow($param)['PRICE_ID'];
+        $result = self::getRow($param);
         return $result;
     }
 
