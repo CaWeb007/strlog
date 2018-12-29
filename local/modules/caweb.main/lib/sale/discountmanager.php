@@ -3,6 +3,8 @@ namespace Caweb\Main\Sale;
 
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
+use Bitrix\Main\Event;
+use Bitrix\Sale\Order;
 use Caweb\Main\Catalog\Helper;
 use Caweb\Main\Log\Write;
 use Bitrix\Sale\Fuser;
@@ -39,7 +41,6 @@ class DiscountManager{
         $coupon = self::checkInSessionForAdd($keyword);
         if (!$coupon) return false;
         if ($coupon['error']) return $coupon['error'];
-        Write::file('coupon', $coupon);
         if ($couponId = DiscountUserTable::addDiscount($coupon)){
             $coupon['COUPON_ID'] = $couponId;
         }else{
@@ -49,6 +50,7 @@ class DiscountManager{
         self::$processedCoupon = $coupon;
         return true;
     }
+
     public static function delete($keyword){
         $session = $_SESSION[self::SESSION_KEY][$keyword];
         if (!$session) return false;
@@ -126,15 +128,18 @@ class DiscountManager{
 
         foreach ($session as $discount){
             if (!in_array($discount['STATUS'],array(
-                self::STATUS_APPLY,self::STATUS_ENTER,
+                self::STATUS_APPLY, self::STATUS_ENTER,
             ))) continue;
             $list = array();
             $list['COUPON'] = $discount['KEYWORD'];
-            if ($session['STATUS'] === self::STATUS_ENTER)
-                $list['JS_STATUS'] = 'ENTERED';
-            if ($session['STATUS'] === self::STATUS_APPLY)
+            if ($discount['STATUS'] === self::STATUS_ENTER){
                 $list['JS_STATUS'] = 'APPLYED';
-            $list['JS_CHECK_CODE'] = '"Бонусное слово" введён';
+                $list['JS_CHECK_CODE'] = '"Бонусное слово" введён';
+            }
+            if ($discount['STATUS'] === self::STATUS_APPLY){
+                $list['JS_STATUS'] = 'BAD';
+                $list['JS_CHECK_CODE'] = '"Бонусное слово" использован';
+            }
             $result['COUPON_LIST'][] = $list;
         }
         return $result;
@@ -168,24 +173,6 @@ class DiscountManager{
         $result = $item;
         $discount = static::$processedCoupon;
 
-
-        /*$price = $item['PRICE'];
-        $currency = $item['CURRENCY'];
-        $discountPrice = $result['BASE_PRICE'] - $price;
-        $result['PRICE'] = $price;
-        $result["DISCOUNT_PRICE"] = $discountPrice;
-        $result["SUM_DISCOUNT_PRICE"] = $price;
-        $result["SUM_VALUE"] = $price * $result['QUANTITY'];
-        $result["SUM_FULL_PRICE"] = $result["BASE_PRICE"] * $result['QUANTITY'];
-        $result["SUM_DISCOUNT_PRICE"] = $discountPrice * $result['QUANTITY'];
-        $result["SUM_DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["SUM_DISCOUNT_PRICE"],$currency);
-        $result["DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["DISCOUNT_PRICE"],$currency);
-        $result["PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["PRICE"],$currency);
-        $result["SUM"] = \CCurrencyLang::CurrencyFormat($result["SUM_VALUE"],$currency);
-        $result['PRICE_TYPE_ID'] = $item['CATALOG_GROUP_ID'];
-        return $result;*/
-
-
         if (empty($discount)) return false;
         $status = $discount['STATUS'];
 
@@ -213,14 +200,14 @@ class DiscountManager{
         $result["SUM_VALUE"] = $price * $result['QUANTITY'];
         $result["SUM_FULL_PRICE"] = $result["BASE_PRICE"] * $result['QUANTITY'];
         $result["SUM_DISCOUNT_PRICE"] = $discountPrice * $result['QUANTITY'];
-        $result["SUM_DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["SUM_DISCOUNT_PRICE"],$currency);
-        $result["DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["DISCOUNT_PRICE"],$currency);
-        $result["PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["PRICE"],$currency);
-        $result["SUM"] = \CCurrencyLang::CurrencyFormat($result["SUM_VALUE"],$currency);
+        $result["SUM_DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["SUM_DISCOUNT_PRICE"], $currency);
+        $result["DISCOUNT_PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["DISCOUNT_PRICE"], $currency);
+        $result["PRICE_FORMATED"] = \CCurrencyLang::CurrencyFormat($result["PRICE"], $currency);
+        $result["SUM"] = \CCurrencyLang::CurrencyFormat($result["SUM_VALUE"], $currency);
         $result['PRICE_TYPE_ID'] = $arPrice['CATALOG_GROUP_ID'];
         return $result;
     }
-    public static function changeStatus(){
+    public static function changeStatus($apply = false){
         $result = '';
         $status = static::$processedCoupon['STATUS'];
         $keyword = static::$processedCoupon['KEYWORD'];
@@ -228,9 +215,33 @@ class DiscountManager{
         $result = $status;
         if ($status === self::STATUS_START) $result = self::STATUS_ENTER;
         if ($status === self::STATUS_NEED_DELETE) $result = self::STATUS_DELETE;
-        //if ($status === self::STATUS_ENTER) $result = self::STATUS_APPLY;
+        if ($apply && ($status === self::STATUS_ENTER)) $result = self::STATUS_APPLY;
         if (!empty($couponId))
-            DiscountUserTable::update($couponId, array('STATUS' => $status));
+            $r = DiscountUserTable::update($couponId, array('STATUS' => $status));
         $_SESSION[self::SESSION_KEY][$keyword]['STATUS'] = $result;
+    }
+    public function OnSaleOrderSaved(Event $event){
+        if (!$event->getParameter('IS_NEW')) return;
+        self::init();
+        $order = $event->getParameter('ENTITY');
+        if (!($order instanceof Order)) return;
+        $orderId = $order->getId();
+        $userId = $order->getField('CREATED_BY');
+        $coupon = array();
+        foreach ($_SESSION[self::SESSION_KEY] as $item) {
+            if ($item['STATUS'] !== self::STATUS_ENTER) continue;
+            $coupon = $item;
+            break;
+        }
+        $couponId = $coupon['COUPON_ID'];
+        if (empty($orderId) || empty($couponId)) return;
+        $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['STATUS'] = self::STATUS_APPLY;
+        $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['ORDER_ID'] = $orderId;
+        $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['ORDER_ID'] = $orderId;
+        $fields = array('ORDER_ID' => $orderId, 'STATUS' => self::STATUS_APPLY, 'USER_ID' => $userId);
+        $res = DiscountUserTable::update($couponId, $fields);
+        if (!$res->isSuccess()){
+            Write::file('OrderDiscount', $res->getErrorMessages());
+        }
     }
 }

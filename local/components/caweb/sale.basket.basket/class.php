@@ -1198,7 +1198,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            //$this->cawebDiscountProcess();
+            $this->cawebDiscountProcess();
 
 			if (self::includeCatalog())
 			{

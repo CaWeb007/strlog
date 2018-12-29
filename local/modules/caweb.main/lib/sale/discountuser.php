@@ -37,6 +37,9 @@ class DiscountUserTable extends Entity\DataManager {
             new Entity\StringField('STATUS', array(
                 'required' => true
             )),
+            new Entity\StringField('ORDER_ID', array(
+                'required' => false
+            )),
             new Entity\ReferenceField(
                 'DISCOUNT',
                 '\Caweb\Main\Sale\DiscountTable',
