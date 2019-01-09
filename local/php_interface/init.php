@@ -13,6 +13,11 @@ EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }
+use Caweb\Main\Migration\Helper;
+//use "\Caweb\Main\Sale\DiscountTable";
+//use "\Caweb\Main\Sale\DiscountUserTable";
+/*Helper::init("\Caweb\Main\Sale\DiscountTable");
+Helper::init("\Caweb\Main\Sale\DiscountUserTable");*/
 //function bonusAgent() {
 	//   require_once $_SERVER['DOCUMENT_ROOT'].'/xml/bonus.php';
 	//   bonus();

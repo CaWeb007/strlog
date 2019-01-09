@@ -3,6 +3,7 @@ namespace Caweb\Main\Catalog;
 
 use Bitrix\Catalog\GroupAccessTable;
 use Bitrix\Main\Loader;
+use Bitrix\Main\Page\Asset;
 
 Loader::includeModule('catalog');
 
@@ -31,5 +32,12 @@ class Helper{
         $result = array_intersect($model, $arPrices);
         if (empty($result)) return array_pop($model);
         return array_shift($result);
+    }
+    public static function setCanonicalLink($link){
+        if (empty($link)) return false;
+        $link = ltrim($link, '/');
+        $link = 'https://xn--80afpacjdwcqkhfi.xn--p1ai/'.$link;
+        $string = "<link rel=\"canonical\" href=\"".$link."\" />";
+        Asset::getInstance()->addString($string, true, 'BEFORE_CSS');
     }
 }
