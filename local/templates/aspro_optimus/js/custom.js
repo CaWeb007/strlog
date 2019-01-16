@@ -2,6 +2,13 @@
 You can use this file with your scripts.
 It will not be overwritten when you upgrade solution.
 */
+//НОВОГОДНИЙ СНЕГ
+/*$(document).ready(function(){
+    snowStorm.snowColor = '#99ccff';   // blue-ish snow!?
+    snowStorm.flakesMaxActive = 96;    // show more snow on screen at once
+    snowStorm.useTwinkleEffect = true; // let the snow flicker in and out of view
+    snowStorm.zIndex = 1000; // let the snow flicker in and out of view
+});*/
 $(document).ready(function(){
 
 	//setTimeout(function(){$('.sort-list-wrapper').css('width', $(".sort-list-wrapper > .sort-list").width());

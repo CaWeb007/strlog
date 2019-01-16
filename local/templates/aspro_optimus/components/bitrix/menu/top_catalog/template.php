@@ -6,7 +6,7 @@
 		<?foreach( $arResult as $key => $arItem ){?>
 			<li style="background: none;" class="catalog icons_fa <?=($arItem["CHILD"] ? " has-child" : "");?> <?=($arItem["SELECTED"] ? "current" : "");?>">
 				<!--<a class="<?/*=($arItem["CHILD"] ? "parent" : "");?>" href="<?=$arItem["LINK"]?>" ><?=$arItem["TEXT"]*/?></a>--><!--/Старое название каталога-->
-				<a ontouchstart="" class="strlog-catalog-menu-parent parent desktop-menu" href="<?//=$arItem["LINK"]?>/"><img src="/images/new_logo_ng.png" alt="logo" data-tooltip="tooltip" title="Вернуться на главную страницу" /></a>
+				<a ontouchstart="" class="strlog-catalog-menu-parent parent desktop-menu" href="<?//=$arItem["LINK"]?>/"><img src="/images/new_logo.png" alt="logo" data-tooltip="tooltip" title="Вернуться на главную страницу" /></a>
 				<!--a ontouchstart="" class="mobile-menu" href="<?//=$arItem["LINK"]?>/"></a-->
 				<?if($arItem["CHILD"]){?>
 					<ul class="dropdown">
