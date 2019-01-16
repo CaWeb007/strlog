@@ -22,8 +22,8 @@
 										"EDIT_TEMPLATE" => "standard.php"
 									),
 									false
-);*/?>
-					   </div>
+                                );*/?>
+                            </div>
 						</li>
 						<?foreach($arItem["CHILD"] as $arChildItem){?>
 						<?if((int)$arChildItem['ID'] == 2155) continue;?>
