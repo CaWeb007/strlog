@@ -593,6 +593,10 @@
 		
 
 	//merge parameters to one array 
-	$arTemplateParameters = array();
+	$arTemplateParameters = array(
+		'PRICE_CODE' => array('HIDDEN' => 'Y'),
+		'FILTER_PRICE_CODE' => array('HIDDEN' => 'Y'),
+		'FILTER_FIELD_CODE' => array('HIDDEN' => 'Y')
+	);
 	foreach($arTemplateParametersParts as $i => $part) { $arTemplateParameters = array_merge($arTemplateParameters, $part); }
 ?>
