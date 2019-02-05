@@ -86,11 +86,6 @@ while ($HLResult = $HLResultArray->fetch()) {
 			   if(empty($arrUserData["UF_KPP"])) 
 					$userUpdateFields["UF_KPP"] = $HLUserKPP;
 
-
-
-				#    "NAME" => "",
-				#    "SECOND_NAME" => " ",
-				#   "LAST_NAME" => " ",
 				$user->Update($userID, $userUpdateFields);
 
 				/* ADD or UPDATE User budget */
