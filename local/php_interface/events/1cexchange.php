@@ -231,6 +231,7 @@ function customCatalogImportStep()
 						foreach($PRODUCT_SET_Q as $IID=>$IQ){
 							$DB->query("UPDATE `b_catalog_store_product` SET `AMOUNT` = '".$IQ."' WHERE `PRODUCT_ID` = '".$IID."' AND `STORE_ID` = '".$STORE_ID."'");
 							$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '".$IQ."' WHERE `ID` = '".$IID."'");
+							$DB->query("UPDATE b_catalog_product SET `AVAILABLE` = 'Y' WHERE `ID` = '".$IID."'");
 						}
 					}
 				}
