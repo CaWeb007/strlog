@@ -596,7 +596,9 @@
 	$arTemplateParameters = array(
 		'PRICE_CODE' => array('HIDDEN' => 'Y'),
 		'FILTER_PRICE_CODE' => array('HIDDEN' => 'Y'),
-		'FILTER_FIELD_CODE' => array('HIDDEN' => 'Y')
+		'FILTER_FIELD_CODE' => array('HIDDEN' => 'Y'),
+		'OFFERS_SORT_FIELD2' => array('HIDDEN' => 'Y'),
+		'SECTION_DISPLAY_PROPERTY' => array('HIDDEN' => 'Y')
 	);
 	foreach($arTemplateParametersParts as $i => $part) { $arTemplateParameters = array_merge($arTemplateParameters, $part); }
 ?>
