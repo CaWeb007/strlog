@@ -818,7 +818,7 @@ if($this->startResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 	$arSections = array();
 
 	//EXECUTE
-	$rsElements = CIBlockElement::GetList(array('property_CML2_ARTICLE' => 'asc,nulls'), array('IBLOCK_ID' => 16,'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('DETAIL_TEXT' => false), array('DETAIL_PICTURE' => false))), false, $arNavParams, $arSelect);
+	$rsElements = CIBlockElement::GetList(array('property_CML2_ARTICLE' => 'asc,nulls'), array('IBLOCK_ID' => array(16, 24),'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('DETAIL_TEXT' => false), array('DETAIL_PICTURE' => false))), false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
 	if(
 		$arParams["BY_LINK"]!=="Y"
