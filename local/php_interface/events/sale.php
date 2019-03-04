@@ -79,7 +79,7 @@ function OnSaleOrderFinalActionHandler(\Bitrix\Main\Event $event) {
 		$priceGroups = [9=>"КП(физ)",10=>"СО(КМС)",11=>"ТО",12=>"СО(ПГС)",14=>"КП(юр)",15=>"КП(СО)"];
 		$userGroups = \CUser::GetUserGroup($userID);
 		
-		$intersect = array_intersect([10,11,12], $userGroups);
+		$intersect = array_intersect([10,11,12,15], $userGroups);
 		
 		if(!$intersect){
 			$arGroups[] = $personTypeId == 2 ? 14 : 9;
