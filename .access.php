@@ -1,8 +1,12 @@
 <?
+$PERM["spec-catalog"]["*"]="D";
+$PERM["spec-catalog"]["8"]="X";
+$PERM["include"]["8"]="R";
 $PERM["user_update"]["*"]="D";
 $PERM["user_update"]["1"]="W";
 $PERM["user_update_2"]["*"]="D";
 $PERM["user_update_2"]["1"]="W";
+$PERM["test"]["*"]="D";
 $PERM["tests"]["*"]="D";
 $PERM["personal"]["8"]="W";
 $PERM["catalog"]["8"]="W";
@@ -14,4 +18,3 @@ $PERM["upload"]["5"]="T_8";
 $PERM["online"]["*"]="R";
 $PERM["desktop_app"]["*"]="R";
 $PERM["/"]["*"]="R";
-?>
