@@ -9,6 +9,12 @@ if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();?>
 if (((int)$arResult['IBLOCK_SECTION_ID'] === 2147) && !empty($arResult["PROPERTIES"]['SHIRINA_M']["VALUE"])){
 	foreach ($arResult["OFFERS"] as $key => $value){
 		if (empty($value['PROPERTIES']['NAREZKA']["VALUE"])) continue;
+		if ($arResult["OFFERS"][$key]['SORT'] !== '100'){
+            $arResult["OFFERS"][$key]['SORT'] = "100";
+            $arResult["OFFERS"][$key]['~SORT'] = "100";
+            $el = new \CIBlockElement();
+            $el->Update($value['ID'], array('SORT' => 100));
+        }
 		$b = (float)str_replace(',', '.', $arResult["PROPERTIES"]['SHIRINA_M']["VALUE"]);
 		$k = $b / 2;
 		if ($k <= 0) continue;
