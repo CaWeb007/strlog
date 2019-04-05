@@ -10,19 +10,11 @@ EventManager::getInstance()->addEventHandler('sale', 'OnBeforeShipmentDeleted',a
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Shipment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDelete'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforePaymentDelete'));
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderSaved'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }
-use Caweb\Main\Migration\Helper;
-//use "\Caweb\Main\Sale\DiscountTable";
-//use "\Caweb\Main\Sale\DiscountUserTable";
-/*Helper::init("\Caweb\Main\Sale\DiscountTable");
-Helper::init("\Caweb\Main\Sale\DiscountUserTable");*/
-//function bonusAgent() {
-	//   require_once $_SERVER['DOCUMENT_ROOT'].'/xml/bonus.php';
-	//   bonus();
-	//   return 'bonusAgent()';
-//}
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){
         $dbBasketItems = CSaleBasket::GetList(
@@ -42,18 +34,14 @@ function CheckBasket(){
         GLOBAL $arrProductId;
         $arrProductId = array();
         foreach($dbBasketItems->arResult as $productID){
-
             $arrProductId[] = $productID['PRODUCT_ID'];
-
         }
     }
     return $arrProductId;
 }
-
 function updateUsersFromHLBlockAgent(){
 	$added = false;
     require '/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/user_update/user.php';
-//    addToLog();
 	if($added){
 		define("LOG_FILENAME", "/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/user_update/log.txt");
 		require("/var/www/u0505962/data/www/xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/modules/main/include/prolog_before.php");
@@ -61,7 +49,6 @@ function updateUsersFromHLBlockAgent(){
 	}
 	return 'updateUsersFromHLBlockAgent();';
 }
-
 AddEventHandler("main", "OnEpilog", "error_page");
 function error_page()
 {
@@ -77,10 +64,3 @@ function error_page()
         die();
     }
 }
-
-//updateUsersFromHLBlockAgent();
-//function addYandexNewsAgent(){
-	/* require_once($_SERVER['DOCUMENT_ROOT'].'/tests/index.php');//Путь до функции добавления
-addYandexNews();
-    return 'addYandexNewsAgent()';*/
-//}
