@@ -3,7 +3,31 @@ use Bitrix\Main\Type\Collection;
 use Bitrix\Currency\CurrencyTable;
 use Bitrix\Iblock;
 
-if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();?>
+
+<?
+if (((int)$arResult['IBLOCK_SECTION_ID'] === 2147) && !empty($arResult["PROPERTIES"]['SHIRINA_M']["VALUE"])){
+	foreach ($arResult["OFFERS"] as $key => $value){
+		if (empty($value['PROPERTIES']['NAREZKA']["VALUE"])) continue;
+		$b = (float)str_replace(',', '.', $arResult["PROPERTIES"]['SHIRINA_M']["VALUE"]);
+		$k = $b / 2;
+		if ($k <= 0) continue;
+		$arResult["OFFERS"][$key]['CATALOG_MEASURE_RATIO'] = $k;
+		$l = $value['ITEM_MEASURE_RATIO_SELECTED'];
+		$arResult["OFFERS"][$key]['ITEM_MEASURE_RATIOS'][$l]['RATIO'] = $k;
+		foreach ($value['ITEM_PRICES'] as $key2 => $value2){
+			$p = $value2["PRICE"];
+			$pr = $p * $k;
+			$prf = CurrencyFormat($pr, 'RUB');
+            $arResult["OFFERS"][$key]['ITEM_PRICES'][$key2]["MIN_QUANTITY"] = $k;
+            $arResult["OFFERS"][$key]['ITEM_PRICES'][$key2]["RATIO_BASE_PRICE"] = $pr;
+            $arResult["OFFERS"][$key]['ITEM_PRICES'][$key2]["PRINT_RATIO_BASE_PRICE"] = $prf;
+            $arResult["OFFERS"][$key]['ITEM_PRICES'][$key2]["PRINT_RATIO_PRICE"] = $prf;
+		}
+	}
+}
+?>
+<?
 /** @var CBitrixComponentTemplate $this */
 /** @var array $arParams */
 /** @var array $arResult */
@@ -1121,18 +1145,6 @@ if(is_array($arParams["SECTION_TIZER"]) && $arParams["SECTION_TIZER"]){
 	$arResult["TIZERS_ITEMS"]=$arTizersData;
 }
 
-//Pr($arResult['OFFERS'][1]["CATALOG_PRICE_11"] = "246");
-/*$arResult['OFFERS'][1]["CATALOG_PRICE_11"] = "246";
-$arResult['OFFERS'][1]["~CATALOG_PRICE_11"] = "246";
-$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["UNROUND_BASE_PRICE"] = (float)246;
-$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["UNROUND_PRICE"] = (float)246;
-$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["BASE_PRICE"] = (float)246;
-$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["PRICE"] = (float)246;
-$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["PRINT_BASE_PRICE"] = '246 руб';
-$arResult['OFFERS'][1]["ITEM_PRICES"][0] ["PRINT_PRICE"] = '246 руб';*/
-//Pr($arResult['OFFERS'][1]["ITEM_PRICES"][0]);
-//Pr($arResult['JS_OFFERS'])
-//todo это убрать
 ?>
 
 <?COptimus::AddMeta(
