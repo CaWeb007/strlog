@@ -5,7 +5,7 @@ $APPLICATION->SetTitle("Новый раздел");
 
 <?
 
-\Caweb\Main\Events\Iblock::getInstance()->makeSortScu();
+//\Caweb\Main\Events\Iblock::getInstance()->makeSortScu();
 
 ?>
 
