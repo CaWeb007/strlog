@@ -96,7 +96,7 @@ function OnSaleOrderFinalActionHandler(\Bitrix\Main\Event $event) {
 				}
 				$prop_value = current($intersect);
 			}
-		
+        }
 		
 			if($personTypeId == 2){
 				if(!$prop_value) $prop_value = "КП(юр)";
@@ -138,7 +138,7 @@ function OnSaleOrderFinalActionHandler(\Bitrix\Main\Event $event) {
 			if($bonusSum > 0 && $prop_id_PAY_BONUS)
 				AddOrderProperty($prop_id_PAY_BONUS, $bonusSum, $order->getId());
 
-		}
+
 
 	}
 
