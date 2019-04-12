@@ -20,7 +20,7 @@ function OnBuildGlobalMenuHandlerCaweb(&$arGlobalMenu, &$arModuleMenu){
                 'sort' => 1000,
                 'items_id' => 'global_menu_caweb_items',
                 'icon' => '',
-                'url' => '/local/admin/caweb_discount_list.php'
+                'url' => '/bitrix/admin/caweb_discount_list.php'
             );
 
             if(!isset($arGlobalMenu['global_menu_caweb'])){

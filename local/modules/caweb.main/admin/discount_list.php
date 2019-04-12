@@ -132,7 +132,7 @@ while ($arRes = $dbResultList->Fetch()) {
     $arRes['ID'] = (int)$arRes['ID'];
     $arRows[$arRes['ID']] = $row = &$lAdmin->AddRow($arRes['ID'], $arRes);
     $row->AddViewField("ID",
-        '<a href="/local/admin/caweb_discount_edit.php?lang='.LANGUAGE_ID.'&ID='.$arRes["ID"].'&'.GetFilterParams("filter_").'">'.$arRes["ID"].'</a>');
+        '<a href="/bitrix/admin/caweb_discount_edit.php?lang='.LANGUAGE_ID.'&ID='.$arRes["ID"].'&'.GetFilterParams("filter_").'">'.$arRes["ID"].'</a>');
     if ($arSelectFieldsMap['KEYWORD'])
         $row->AddInputField("KEYWORD", array("size" => 30));
     if ($arSelectFieldsMap['PRICE_ID'])
@@ -147,7 +147,7 @@ while ($arRes = $dbResultList->Fetch()) {
     $arActions[] = array(
         "ICON" => "edit",
         "TEXT" => Loc::getMessage("EDIT_STATUS_ALT"),
-        "ACTION" => $lAdmin->ActionRedirect("/local/admin/caweb_discount_edit.php?ID=".$arRes['ID']."&lang=".LANGUAGE_ID."&".GetFilterParams("filter_").""),
+        "ACTION" => $lAdmin->ActionRedirect("/bitrix/admin/caweb_discount_edit.php?ID=".$arRes['ID']."&lang=".LANGUAGE_ID."&".GetFilterParams("filter_").""),
         "DEFAULT" => true
     );
     $arActions[] = array(

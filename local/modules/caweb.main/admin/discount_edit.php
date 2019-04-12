@@ -91,7 +91,7 @@ $aMenu = array(
 	array(
 		"TEXT" => Loc::getMessage("CGEN_2FLIST"),
 		"ICON" => "btn_list",
-		"LINK" => "/local/admin/caweb_discount_list.php?lang=".LANGUAGE_ID."&".GetFilterParams("filter_", false)
+		"LINK" => "/bitrix/admin/caweb_discount_list.php?lang=".LANGUAGE_ID."&".GetFilterParams("filter_", false)
 	)
 );
 if ($ID > 0 && !$bReadOnly) {
@@ -99,7 +99,7 @@ if ($ID > 0 && !$bReadOnly) {
     $aMenu[] = array(
         "TEXT" => Loc::getMessage("CGEN_NEW_GROUP"),
         "ICON" => "btn_new",
-        "LINK" => "/local/admin/caweb_discount_edit.php?lang=".LANGUAGE_ID."&".GetFilterParams("filter_", false)
+        "LINK" => "/bitrix/admin/caweb_discount_edit.php?lang=".LANGUAGE_ID."&".GetFilterParams("filter_", false)
     );
     if (!$boolActive) {
 		$aMenu[] = array(
@@ -184,7 +184,7 @@ if (!empty($strError))
     $tabControl->Buttons(
             array(
                     "disabled" => $bReadOnly,
-                    "back_url" => "/local/admin/caweb_discount_edit.php?lang=".LANGUAGE_ID."&".GetFilterParams("filter_", false)
+                    "back_url" => "/bitrix/admin/caweb_discount_edit.php?lang=".LANGUAGE_ID."&".GetFilterParams("filter_", false)
                 )
         );
     $tabControl->End();
