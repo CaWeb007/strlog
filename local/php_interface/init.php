@@ -12,6 +12,7 @@ EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Pay
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderSaved'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
+EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
 foreach(glob(__DIR__."/events/*") as $file){
 	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }
