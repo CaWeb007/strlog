@@ -9,7 +9,6 @@ $APPLICATION->SetTitle("Новый раздел");
 ?>
 
 <?
-\Caweb\Main\Events\Main::getInstance()->updateUserGroups();
 ?>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
