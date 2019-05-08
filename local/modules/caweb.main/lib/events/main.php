@@ -24,6 +24,7 @@ class Main{
         $props['order'] = array('DATE_UPDATE' => 'desc');
         $props['limit'] = 1;
         $typeId = (int)UserPropsTable::getRow($props)['PERSON_TYPE_ID'];
+        if (empty($typeId)) return;
         $addGroup = 9;
         if ($typeId === 2) $addGroup = 14;
         \CUser::SetUserGroup($userId, array_merge(array($addGroup), $groups));
@@ -39,6 +40,7 @@ class Main{
             $props['order'] = array('DATE_UPDATE' => 'desc');
             $props['limit'] = 1;
             $typeId = (int)UserPropsTable::getRow($props)['PERSON_TYPE_ID'];
+            if (empty($typeId)) return;
             $new = 9;
             if ($typeId === 2) $new = 14;
             $arNew = array_merge($g, array($new));
