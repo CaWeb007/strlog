@@ -3,7 +3,7 @@ namespace Caweb\Main\Events;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\Internals\UserPropsTable;
-use Caweb\Main\Catalog\Helper;
+use Caweb\Main\Catalog\Helper as CatalogHelper;
 Loc::loadLanguageFile(__FILE__);
 class Main{
     public static $instance = null;
@@ -15,7 +15,7 @@ class Main{
         }
     }
     public function OnAfterSetUserGroup($userId, $arFields){
-        $systemGroups = \Caweb\Main\Catalog\Helper::SITE_GROUP_MODEL;
+        $systemGroups = CatalogHelper::SITE_GROUP_MODEL;
         $groups = array();
         $groups = array_keys($arFields);
         $check = array_intersect($groups, $systemGroups);
