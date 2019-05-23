@@ -906,7 +906,26 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 	if(strlen($arResult["SECTION_FULL"]["UF_VIDEO_YOUTUBE"])){
 		$arVideo[] = $arResult["SECTION_FULL"]["~UF_VIDEO_YOUTUBE"];
 	}
-	?>
+
+    ?>
+
+    <?
+    $arFiles = array();
+    if($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]){
+        $arFiles = $arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"];
+    }
+    else{
+        $arFiles = $arResult["SECTION_FULL"]["UF_FILES"];
+    }
+    if(is_array($arFiles)){
+        foreach($arFiles as $key => $value){
+            if(!intval($value)){
+                unset($arFiles[$key]);
+            }
+        }
+    }
+    ?>
+
 	<ul class="tabs1 main_tabs1 tabs-head">
 		<?$iTab = 0;?>
 		<?if($arResult["OFFERS"] && $arParams["TYPE_SKU"]=="N"):?>
@@ -924,6 +943,14 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				<span><?=GetMessage("PROPERTIES_TAB")?></span>
 			</li>
 		<?endif;?>
+        <?if($arFiles):?>
+            <li class="<?=(!($iTab++) ? ' current' : '')?>">
+                <span><?=GetMessage("DOCUMENTS_TITLE")?></span>
+                <?if(count($arFiles) > 1):?>
+                    <span class="count empty">&nbsp;(<?=count($arVideo)?>)</span>
+                <?endif;?>
+            </li>
+        <?endif;?>
 		<?if($arVideo):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
 				<span><?=GetMessage("VIDEO_TAB")?></span>
@@ -1308,52 +1335,36 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				<?if($arResult["SERVICES"] && $showProps){?>
 					</div>
 				<?}?>
-				<?
-				$arFiles = array();
-				if($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]){
-					$arFiles = $arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"];
-				}
-				else{
-					$arFiles = $arResult["SECTION_FULL"]["UF_FILES"];
-				}
-				if(is_array($arFiles)){
-					foreach($arFiles as $key => $value){
-						if(!intval($value)){
-							unset($arFiles[$key]);
-						}
-					}
-				}
-				?>
-				<?if($arFiles):?>
-					<div class="files_block">
-						<h4><?=GetMessage("DOCUMENTS_TITLE")?></h4>
-						<div class="wrap_md">
-							<div class="wrapp_docs iblock">
-							<?
-							$i=1;
-							foreach($arFiles as $arItem):?>
-								<?$arFile=COptimus::GetFileInfo($arItem);?>
-								<div class="file_type clearfix <?=$arFile["TYPE"];?>">
-									<i class="icon"></i>
-									<div class="description">
-										<a target="_blank" href="<?=$arFile["SRC"];?>"><?=$arFile["DESCRIPTION"];?></a>
-										<span class="size"><?=GetMessage('CT_NAME_SIZE')?>:
-											<?=$arFile["FILE_SIZE_FORMAT"];?>
-										</span>
-									</div>
-								</div>
-								<?if($i%3==0){?>
-									</div><div class="wrapp_docs iblock">
-								<?}?>
-								<?$i++;?>
-							<?endforeach;?>
-							</div>
-						</div>
-					</div>
-				<?endif;?>
 			</li>
 		<?endif;?>
-
+        <?if($arFiles):?>
+        <li class="<?=(!($iTab++) ? ' current' : '')?>">
+            <div class="files_block">
+                <div class="wrap_md">
+                    <div class="wrapp_docs iblock">
+                        <?
+                        $i=1;
+                        foreach($arFiles as $arItem):?>
+                        <?$arFile=COptimus::GetFileInfo($arItem);?>
+                        <div class="file_type clearfix <?=$arFile["TYPE"];?>">
+                            <i class="icon"></i>
+                            <div class="description">
+                                <a target="_blank" href="<?=$arFile["SRC"];?>"><?=$arFile["DESCRIPTION"];?></a>
+                                <span class="size"><?=GetMessage('CT_NAME_SIZE')?>:
+                                    <?=$arFile["FILE_SIZE_FORMAT"];?>
+										</span>
+                            </div>
+                        </div>
+                        <?if($i%3==0){?>
+                    </div><div class="wrapp_docs iblock">
+                        <?}?>
+                        <?$i++;?>
+                        <?endforeach;?>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <?endif;?>
 		<?if($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] == "TAB"):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
 				<?if($arParams["PROPERTIES_DISPLAY_TYPE"] != "TABLE"):?>
