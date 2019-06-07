@@ -6,3 +6,4 @@ $MESS['ERRORS_COUNT'] = "Ошибок #ERRORS_COUNT# из #COUNT#\r\n";
 $MESS['ERRORS_BD'] = "Ошибка обовления или добавления #NAME#\r\n";
 $MESS['ERRORS_EMPTY_RATIO'] = "Для товара #NAME# - не установлен свойство коэфициент\r\n";
 $MESS['ERRORS_EXCEPTION'] = "Исключение обовления или добавления #NAME#\r\n#TEXT#\r\n";
+$MESS['ERRORS_SKU'] = "У торговых предложений товара #NAME# нет свойства 'Нарезка' или больше одного\r\n";

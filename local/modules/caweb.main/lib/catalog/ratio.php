@@ -13,6 +13,7 @@ Loc::loadLanguageFile(__FILE__);
 
 class Ratio{
     const BRICKS_SECTION = 2193;
+    const LINO_SECTION = 2147;
     const STRLOG_IBLOCK_ID = 16;
     protected $log = array(
         'COMPLETE' => '', 'ERRORS' => '', 'COUNT' => 0, 'COMPLETE_COUNT' => 0, 'CONTINUE_COUNT' => 0, 'ERRORS_COUNT' => 0);
@@ -24,6 +25,7 @@ class Ratio{
     }
     public function measureRatioConfig($sectionId){
         if ((int)$sectionId === static::BRICKS_SECTION) $this->setBricksRatio();
+        if ((int)$sectionId === static::LINO_SECTION) $this->setLinoRatio();
     }
     protected function setBricksRatio(){
         $arElements = $this->getBricks();
@@ -31,29 +33,13 @@ class Ratio{
             $this->setRatio($fields['ID'], $fields['COUNT'], $fields['NAME']);
         }
     }
-    public function getLog(){
-        $result = '';
-        $log = $this->log;
-        $count = $log['COUNT'];
-        $d = "\r\n";
-        $result .= $log['COMPLETE'].$d;
-        $result .= Loc::getMessage(
-            'RATIO_COMPLETE', array('#COMPLETE_COUNT#' => $log['COMPLETE_COUNT'], '#COUNT#' => $count)).$d;
-        $result .= Loc::getMessage(
-                'RATIO_CONTINUE', array('#CONTINUE_COUNT#' => $log['CONTINUE_COUNT'], '#COUNT#' => $count)).$d;
-        $result .= Loc::getMessage(
-                'ERRORS_COUNT', array('#ERRORS_COUNT#' => $log['ERRORS_COUNT'], '#COUNT#' => $count)).$d;
-        $result .= $log['ERRORS'].$d;
-        return $result;
-    }
     protected function getBricks(){
         $result = array();
-        $elementCount = 0;
         $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'IBLOCK_SECTION_ID' => static::BRICKS_SECTION);
         $select = array('ID', 'NAME', 'IBLOCK_ID', 'PROPERTY_KOLICHESTVO_V_UPAKOVKE_SHT');
         $db = \CIBlockElement::GetList(array(), $filter, false, false, $select);
         while ($ar = $db->Fetch()){
-            $elementCount++;
+            $this->log['COUNT'] = $this->log['COUNT'] + 1;
             $k = (float)$ar["PROPERTY_KOLICHESTVO_V_UPAKOVKE_SHT_VALUE"];
             if ($k <= 0){
                 $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
@@ -62,7 +48,38 @@ class Ratio{
             }
             $result[] = array('ID' => (int)$ar['ID'], 'COUNT' => $k, 'NAME' => $ar['NAME']);
         }
-        $this->log['COUNT'] = $elementCount;
+        return $result;
+    }
+    protected function setLinoRatio(){
+        $arElements = $this->getLino();
+        foreach ($arElements as $fields){
+            $this->setRatio($fields['ID'], $fields['COUNT'], $fields['NAME']);
+        }
+    }
+    protected function getLino(){
+        $result = array();
+        $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'IBLOCK_SECTION_ID' => static::LINO_SECTION);
+        $select = array('ID', 'NAME', 'IBLOCK_ID', 'PROPERTY_SHIRINA_M');
+        $db = \CIBlockElement::GetList(array(), $filter, false, false, $select);
+        while ($ar = $db->Fetch()){
+            $this->log['COUNT'] = $this->log['COUNT'] + 1;
+            $k = (float)str_replace(',', '.', $ar["PROPERTY_SHIRINA_M_VALUE"]);
+            if ($k <= 0){
+                $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
+                $this->log['ERRORS'] .= Loc::getMessage('ERRORS_EMPTY_RATIO', array('#NAME#' => $ar['NAME']));
+                continue;
+            }
+            $skuFields = array('ID', 'PROPERTY_NAREZKA');
+            $skuFilter = array('!PROPERTY_NAREZKA' => false);
+            $sku = \CCatalogSku::getOffersList($ar['ID'], 0, $skuFilter, $skuFields);
+            if(count($sku) !== 1){
+                $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
+                $this->log['ERRORS'] .= Loc::getMessage('ERRORS_SKU', array('#NAME#' => $ar['NAME']));
+                continue;
+            };
+            $sku = array_shift(array_shift($sku));
+            $result[] = array('ID' => (int)$sku['ID'], 'COUNT' => ($k / 2), 'NAME' => $ar['NAME']);
+        }
         return $result;
     }
     protected function setRatio($productId, $ratio, $name = ''){
@@ -96,5 +113,20 @@ class Ratio{
             $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
             $this->log['ERRORS'] .= Loc::getMessage('ERRORS_BD', array('#NAME#' => $name));
         }
+    }
+    public function getLog(){
+        $result = '';
+        $log = $this->log;
+        $count = $log['COUNT'];
+        $d = "\r\n";
+        $result .= $log['COMPLETE'].$d;
+        $result .= Loc::getMessage(
+                'RATIO_COMPLETE', array('#COMPLETE_COUNT#' => $log['COMPLETE_COUNT'], '#COUNT#' => $count)).$d;
+        $result .= Loc::getMessage(
+                'RATIO_CONTINUE', array('#CONTINUE_COUNT#' => $log['CONTINUE_COUNT'], '#COUNT#' => $count)).$d;
+        $result .= Loc::getMessage(
+                'ERRORS_COUNT', array('#ERRORS_COUNT#' => $log['ERRORS_COUNT'], '#COUNT#' => $count)).$d;
+        $result .= $log['ERRORS'].$d;
+        return $result;
     }
 }
