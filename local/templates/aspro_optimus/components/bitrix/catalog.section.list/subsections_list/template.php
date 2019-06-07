@@ -46,7 +46,7 @@ while($itemCount = $itemsCount->GetNext()){
 						<td class="section_info">
 							<ul>
 								<li class="name">
-									<a href="<?=$arItems["SECTION_PAGE_URL"]?>"><span><?=$arItems["NAME"]?> <i style="cursor: default;user-select: none;"><?=$elementsQuantity;?></i></span></a>
+									<a title="<?=$arItems["NAME"]?>" href="<?=$arItems["SECTION_PAGE_URL"]?>"><span><?=$arItems["NAME"]?></span></a> <i style="cursor: default;user-select: none;"><?=$elementsQuantity;?></i>
 								</li>
 							</ul>
 							<?if($arParams["SECTIONS_LIST_PREVIEW_DESCRIPTION"] != 'N'):?>

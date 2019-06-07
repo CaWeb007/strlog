@@ -11,6 +11,12 @@ class Helper{
     const SITE_PRICE_MODEL = array(14,9,10,11);
     const SITE_GROUP_MODEL = array(9,10,11,12,14,15);
     public static $userPriceId = 0;
+    public static $instance = null;
+    public static function getInstance(){
+        if (!empty(self::$instance)) return self::$instance;
+        self::$instance = new self();
+        return self::$instance;
+    }
     public static function getUserPriceId(){
         if (!empty(static::$userPriceId)) return static::$userPriceId;
         global $USER;
@@ -34,7 +40,7 @@ class Helper{
         return array_shift($result);
     }
     public static function setCanonicalLink($link){
-        if (empty($link)) return false;
+        if (empty($link)) return;
         $link = ltrim($link, '/');
         $link = 'https://xn--80afpacjdwcqkhfi.xn--p1ai/'.$link;
         $string = "<link rel=\"canonical\" href=\"".$link."\" />";

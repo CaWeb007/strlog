@@ -2586,7 +2586,7 @@ body .bx_catalog_item_scu .bx_item_detail_scu ul li.active span.cnt1, body .bx_c
 
 .catalog_detail .element_detail_text { font-size: 12px; line-height: 15px; padding: 0px 0px 39px;float:left;width:100%; }
 .catalog_detail .element_detail_text .sh {width: 120px;float: left;}
-.catalog_detail .element_detail_text .price_txt { padding-left: 129px; color: #b3b3b3; font-size: 12px;}
+.catalog_detail .element_detail_text .price_txt { padding-left: 0px; color: #b3b3b3; font-size: 12px;}
 
 .catalog_detail .props_list{width:100%;margin:0px 0px 0px;color:#555;}
 .catalog_detail .tabs_content .char_block{margin-bottom:30px;}

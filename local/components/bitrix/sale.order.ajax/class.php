@@ -3486,11 +3486,6 @@ class SaleOrderAjax extends \CBitrixComponent
 			$innerPaySystemId = PaySystem\Manager::getInnerPaySystemId();
 			$innerPayment = $order->getPaymentCollection()->getInnerPayment();
 
-			if (!$innerPayment)
-			{
-				$innerPayment = $order->getPaymentCollection()->createInnerPayment();
-			}
-
 			$this->loadUserAccount($order);
 			$userBudget = (float)$arResult['USER_ACCOUNT']['CURRENT_BUDGET'];
 

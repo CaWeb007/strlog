@@ -12,7 +12,7 @@
 						$arSize=array("WIDTH"=>175, "HEIGHT" => 120);
 				}else{
 					if($arParams["IS_VERTICAL"]!="Y")
-						$arSize=array("WIDTH"=>190, "HEIGHT" => 130);
+						$arSize=array("WIDTH"=>220, "HEIGHT" => 270);
 				}
 				if(isset($arParams["BIG_IMG"]) && $arParams["BIG_IMG"] == "Y")
 					$arSize=array("WIDTH"=>400, "HEIGHT" => 290);
@@ -42,7 +42,7 @@
 								<div class="date_small"><?=$arItem["DISPLAY_ACTIVE_FROM"]?></div>
 							<?}?>
 						<?}?>
-						<div class="item-title"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><span><?=$arItem["NAME"]?></span></a></div>
+						<div class="item-title"><a title="<?=$arItem["NAME"]?>" href="<?=$arItem["DETAIL_PAGE_URL"]?>"><span><?=$arItem["NAME"]?></span></a></div>
 
 						<?if($arParams["SHOW_PREVIEW_TEXT"] != 'N'):?>
 							<div class="preview-text"><?=$arItem["PREVIEW_TEXT"]?></div>

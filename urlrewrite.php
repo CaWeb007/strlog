@@ -96,20 +96,20 @@ $arUrlRewrite=array (
     'PATH' => '/company/brands/index.php',
     'SORT' => 100,
   ),
-  12 => 
-  array (
-    'CONDITION' => '#^/info/articles/#',
-    'RULE' => '',
-    'ID' => 'bitrix:news',
-    'PATH' => '/info/articles/index.php',
-    'SORT' => 100,
-  ),
   47 => 
   array (
     'CONDITION' => '#^/help/articles/#',
     'RULE' => '',
     'ID' => 'bitrix:news',
     'PATH' => '/help/articles/index.php',
+    'SORT' => 100,
+  ),
+  12 => 
+  array (
+    'CONDITION' => '#^/info/articles/#',
+    'RULE' => '',
+    'ID' => 'bitrix:news',
+    'PATH' => '/info/articles/index.php',
     'SORT' => 100,
   ),
   14 => 

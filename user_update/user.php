@@ -55,7 +55,8 @@ while ($HLResult = $HLResultArray->fetch()) {
 				$userSpecGroup = 15;
 			}
 		}
-
+        CModule::IncludeModule('caweb.main');
+        \Caweb\Main\Log\Write::file('hluser', $HLResult);
 		//Обновление существующих пользователей
 		$arrUsers = Bitrix\Main\UserTable::getList(array(
 			'select' => array('ID', 'EMAIL', 'NAME', 'PERSONAL_PHONE','UF_INN','UF_KPP'),
@@ -86,6 +87,11 @@ while ($HLResult = $HLResultArray->fetch()) {
 			   if(empty($arrUserData["UF_KPP"])) 
 					$userUpdateFields["UF_KPP"] = $HLUserKPP;
 
+
+
+				#    "NAME" => "",
+				#    "SECOND_NAME" => " ",
+				#   "LAST_NAME" => " ",
 				$user->Update($userID, $userUpdateFields);
 
 				/* ADD or UPDATE User budget */

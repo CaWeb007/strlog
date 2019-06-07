@@ -122,6 +122,8 @@ class Exchange{
         $psw = ApplicationPasswordTable::generatePassword();
         $result['PASSWORD'] = $psw;
         $result['CONFIRM_PASSWORD'] = $psw;
+        if ($result['EMAIL'] === "Xxx_ues@mail.ru")
+            Write::file('Xxx_ues', $result, true);
         return $result;
     }
     protected function getUsers($email){

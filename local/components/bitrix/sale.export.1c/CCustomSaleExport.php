@@ -636,7 +636,7 @@ class CCustomSaleExport extends \CSaleExport {
 			$xmlResult['SaleProperties'] = self::getXmlSaleProperties($arOrder, $arShipment, $arPayment, $agent, $agentParams, $bExportFromCrm);
 			$xmlResult['RekvProperties'] = self::getXmlRekvProperties($agent, $agentParams);
 
-
+            //\Bitrix\Main\Diag\Debug::dumpToFile(array('order' => $arOrder, 'xml' => $xmlResult), 'test', 'caweb_sale.log');
 			if(self::getVersionSchema() >= self::CONTAINER_VERSION)
             {
                 ob_start();
