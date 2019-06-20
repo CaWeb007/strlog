@@ -1,5 +1,6 @@
 <?
 
+use Bitrix\Sale\BasketItem;
 use Bitrix\Sale\Services\PaySystem\Restrictions\Price;
 use Bitrix\Main\ArgumentTypeException;
 use Bitrix\Main\Localization\Loc;
@@ -79,7 +80,7 @@ class BonusPayRestriction extends Price
 	}
 	
 	
-	protected static function extractParams(Entity $entity){
+	protected static function extractParamsBack(Entity $entity){
 		$params = self::$params;
 		if(isset($params['PROP_CODE']) && $params['PROP_CODE']){
 			$property_item = "PROPERTY_".$params['PROP_CODE'];
@@ -111,7 +112,43 @@ class BonusPayRestriction extends Price
 			'MAX_BUDGET' => $maxUserBudget
 		);
 	}
-
+    protected static function extractParams(Entity $entity){
+        $params = self::$params;
+        if(isset($params['PROP_CODE']) && $params['PROP_CODE']){
+            $property_item = "PROPERTY_".$params['PROP_CODE'];
+        }
+        $orderPrice = null;
+        $paymentPrice = null;
+        $maxUserBudget = 0;
+        if ($entity instanceof Payment){
+            /** @var PaymentCollection $collection */
+            $collection = $entity->getCollection();
+            /** @var Order $order */
+            $order = $collection->getOrder();
+            $budget = array();
+            $PRODUCT_IDS = array();
+            foreach($order->getBasket() as $basketItem){
+                $productID = $basketItem->getProductId();
+                $budget[$productID] = static::getBudget($basketItem);
+                if(0 < $maxUserBudget) $PRODUCT_IDS[] = $productID;
+            }
+            $filter = array('IBLOCK_ID' => 16, 'ID' => $PRODUCT_IDS);
+            $select = array('ID','IBLOCK_ID','PROPERTY_NELZYA_OPLACHIVAT_BONUSAMI');
+            $res = CIBlockElement::GetList(array(), $filter, false, false, $select);
+            while($ar_fields = $res->GetNext()){
+                if($ar_fields['PROPERTY_NELZYA_OPLACHIVAT_BONUSAMI_VALUE'] === 'Да') unset($budget[$ar_fields['ID']]);
+            }
+            $maxUserBudget = array_sum($budget);
+            $paymentPrice = $entity->getField('SUM');
+            $orderPrice = $order->getPrice();
+            $maxUserBudget = static::checkBudget($orderPrice, $maxUserBudget);
+        }
+        return array(
+            'PRICE_PAYMENT' => $paymentPrice,
+            'PRICE_ORDER' => $orderPrice,
+            'MAX_BUDGET' => $maxUserBudget
+        );
+    }
 	/**
 	 * @param $entityId
 	 * @return array
@@ -160,6 +197,7 @@ class BonusPayRestriction extends Price
 	
 
     protected static function getBudget($basketItem){
+        /** @var BasketItem $basketItem */
         $params = array(
             'filter' => array(
                 'PRODUCT_ID' => $basketItem->getProductId(),
@@ -167,8 +205,8 @@ class BonusPayRestriction extends Price
             'select' => array('PRICE')
         );
         $minPrice = (float)PriceTable::getRow($params)['PRICE'];
-        $thisPrice = $basketItem->getPrice();
-        return ($thisPrice - $minPrice);
+        $thisPrice = (float)$basketItem->getPrice();
+        return ($thisPrice - $minPrice) * $basketItem->getQuantity();
     }
     protected static function checkBudget($orderPrice, $maxUserBudget){
         $maxBudget = $orderPrice * 0.5;

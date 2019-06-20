@@ -1,5 +1,6 @@
 <?
 
+use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\Internals\UserPropsTable;
 use Caweb\Main\Catalog\Helper;
@@ -10,6 +11,13 @@ $APPLICATION->SetTitle("Новый раздел");
 ?>
 
 <?
+/*Loader::includeModule('iblock');
+$filter = array('IBLOCK_ID' => 16, 'ID' => array(21668,21669));
+$select = array('ID','IBLOCK_ID','PROPERTY_NELZYA_OPLACHIVAT_BONUSAMI');
+$res = CIBlockElement::GetList(array(), $filter, false, false, $select);
+while($ar_fields = $res->GetNext()){
+    Pr($ar_fields);
+}*/
 //Ratio::getInstance()->measureRatioConfig(Ratio::LINO_SECTION);
 ?>
 
