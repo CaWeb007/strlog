@@ -108,6 +108,10 @@ class Exchange{
         $result['GROUP_ID'] = $this->getUserGroupId($newFields['UF_GRUPPANASAYTE'], $newFields['UF_OBSHCHIYOBOROT']);
         $result['PERSONAL_PROFESSION'] = $newFields['UF_GRUPPANASAYTE'];
         $result['UF_BONUSES'] = $newFields['UF_OSTATOKBONUSOV'];
+        if ((int)$result['GROUP_ID'] === 14) $result['UF_BONUSES'] = '0.0000';
+        if ((int)$result['GROUP_ID'] === 10) $result['UF_BONUSES'] = '0.0000';
+        if ((int)$result['GROUP_ID'] === 11) $result['UF_BONUSES'] = '0.0000';
+        if ((int)$result['GROUP_ID'] === 12) $result['UF_BONUSES'] = '0.0000';
         $result['UF_ACCUMULATION'] = $newFields['UF_OBSHCHIYOBOROT'];
         if (empty($oldFields['NAME'])) $result['NAME'] = $newFields['UF_NAME'];
         if (empty($oldFields['PERSONAL_PHONE'])) $result['PERSONAL_PHONE'] = $newFields['UF_TELEFONKONTRAGENT'];
