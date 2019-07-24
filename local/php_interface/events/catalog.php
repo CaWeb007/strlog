@@ -1,6 +1,9 @@
 <?php
 
 /* Выбор ценовой группы пользователя в каталоге */
+
+use Caweb\Main\Sale\Helper;
+
 function changePriceID(){
 	global $USER,$GLOBAL;
 	
@@ -88,14 +91,16 @@ function showProductBonus($arResult,$detail=false){
 		$userGroups = array(11, 12);
 		$arGroups = CUser::GetUserGroup($USER->GetID());
 		$result = array_intersect($userGroups, $arGroups);
-	
-		if(!empty($result)){
+		//if(!empty($result)){
+
+        if(!Helper::getInstance()->checkBonusAccess($arGroups)){
 			return '<span class="bonuses-quantity-title"></span>';
 		} else {
 			if((float)$arResult["PROPERTIES"]["_POROGA_NACHISLENIYA_BONUSOV"]["VALUE"] == 0) {
 				$totalBonus = 0;
 			} else {
-				$userGroups = array(9, 14);
+                $totalBonus = $arResult["PROPERTIES"]["BONUS_KP"]["VALUE"];
+				/*$userGroups = array(9, 14);
 				$result = array_intersect($userGroups, $arGroups);
 				if(count($result) > 0){
 					$totalBonus = $arResult["PROPERTIES"]["BONUS_KP"]["VALUE"];
@@ -105,7 +110,7 @@ function showProductBonus($arResult,$detail=false){
 				$result = array_intersect($userGroups, $arGroups);
 				if(count($result) > 0){
 					$totalBonus = $arResult["PROPERTIES"]["BONUS_SO"]["VALUE"];
-				}
+				}*/
 			}
 	
 			return '
