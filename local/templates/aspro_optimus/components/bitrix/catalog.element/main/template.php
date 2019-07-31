@@ -385,6 +385,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 			<?}?>
 			<div class="middle_info main_item_wrapper">
 				<div class="prices_block">
+					<h2 style="font-size:20px;">Купить <?=$arResult['NAME'];?></h2>
 					<?$frame = $this->createFrame()->begin();?>
 					<div class="cost prices clearfix">
 						<?if( count( $arResult["OFFERS"] ) > 0 ){?>

@@ -47,7 +47,7 @@
 			<?if(isset($arItem['groupper']) && $arItem['groupper'] && ($grouperTitleShow === "-0-" || $grouperTitleShow != $arItem['groupper']['VALUE'])):?>
 			<? $grouperTitleShow = $arItem['groupper']['VALUE']; ?>
 			<tr class="row-block-prod-title">
-				<td colspan="5"><div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?=$grouperTitleShow?></span></div></td>
+				<td colspan="5"><div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <h2 style="margin:0px;font-size:20px;display: inline;"><?=$grouperTitleShow?></h2></div></td>
 			</tr>
 		<?endif?>
 				<tr class="item main_item_wrapper" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
@@ -202,7 +202,7 @@
                         </div>
                         <div class="preview_text">
                             <?if(!empty($arItem['MINI_DEуSC']) && $arItem['MINI_DESC'] != ''):?>
-                                [<?echo $arItem['MINI_DESC'];?>]
+							[<span><?echo $arItem['MINI_DESC'];?></span>]
                             <?else:?>
 							<?endif;?>
 							<?if(0 < count($arItem["DISPLAY_PROPERTIES"])):

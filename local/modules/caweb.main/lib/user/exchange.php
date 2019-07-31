@@ -81,6 +81,7 @@ class Exchange{
         if (!empty($warn)) Write::file('warnUserExchange', $warn);
     }
     protected function writeSaleAccount($userId,$arFields){
+        if (empty($arFields['UF_BONUSES'])) return;
         $res = false;
         $account = new \CSaleUserAccount();
         $accountFields = $account->GetByUserID($userId, "RUB");

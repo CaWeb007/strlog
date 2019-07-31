@@ -1,1 +1,0 @@
-DROP TABLE IF EXISTS `rbs_credit_orders`;

@@ -105,6 +105,8 @@ $APPLICATION->SetTitle("Акции");
 		"CACHE_NOTES" => "",
 		"STRICT_SECTION_CHECK" => "N",
 		"LIST_VIEW" => "slider",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",

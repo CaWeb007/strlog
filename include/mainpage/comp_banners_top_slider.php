@@ -8,7 +8,7 @@
 		"IBLOCK_ID" => "2",
 		"TYPE_BANNERS_IBLOCK_ID" => "1",
 		"SET_BANNER_TYPE_FROM_THEME" => "N",
-		"NEWS_COUNT" => "10",
+		"NEWS_COUNT" => "15",
 		"SORT_BY1" => "TIMESTAMP_X",
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "ID",

@@ -1,5 +1,8 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Некондиция");
+$APPLICATION->SetPageProperty("description", "Уцененные товары");
+$APPLICATION->SetPageProperty("keywords", "Уцененные товары");
+$APPLICATION->SetPageProperty("title", "Уцененные товары");
+$APPLICATION->SetTitle("Уцененные товары");
 ?>
 
 <?

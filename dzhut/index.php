@@ -112,7 +112,7 @@ echo '
 			<div class="top-action">
 				<span class="top-action-title">Акция!</span>
 				<span class="top-action-desc">
-					Приобрети 10 упаковок джута и получи строительный степлер в подарок!
+					Приобрети 20 упаковок джута и получи строительный степлер в подарок!
 				</span>
 				<div class="clear"></div>
 				<span class="time-left">До конца акции осталось:</span>
