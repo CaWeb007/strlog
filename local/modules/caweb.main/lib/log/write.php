@@ -11,7 +11,7 @@ class Write{
     public static function file($name, $var, $rewrite = false){
         $path = self::DIR.$name.self::TYPE;
         $timeInt = new DateTime();
-        $time = $timeInt->format('H:i');
+        $time = $timeInt->format('m-d H:i');
         $timeInt->add('-10 hour');
         $timeInt = $timeInt->getTimestamp();
         $file = new File($path);
