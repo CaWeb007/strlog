@@ -1,7 +1,7 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
 <?global $SITE_THEME, $TEMPLATE_OPTIONS;?>
 <div class="wrapper_inner1 wides float_banners">
-	<?$APPLICATION->IncludeComponent("aspro:com.banners.optimus", "optimus", array(
+	<?/*$APPLICATION->IncludeComponent("aspro:com.banners.optimus", "optimus", array(
 	"IBLOCK_TYPE" => "aspro_optimus_adv",
 		"IBLOCK_ID" => "2",
 		"TYPE_BANNERS_IBLOCK_ID" => "1",
@@ -41,6 +41,6 @@
 	array(
 	"ACTIVE_COMPONENT" => "N"
 	)
-);?>
+);*/?>
 </div>
 <div class="clearfix"></div>

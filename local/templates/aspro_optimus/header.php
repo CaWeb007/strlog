@@ -19,7 +19,9 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 		<?$APPLICATION->ShowHead();?>
         <?$APPLICATION->AddHeadString('<script>BX.message('.CUtil::PhpToJSObject( $MESS, false ).')</script>', true);?>
         <?/*Подключение vue.js*start*/?>
-        <script src="https://unpkg.com/vue"></script>
+        <!--script src="https://unpkg.com/vue"></script-->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script type="text/javascript" src="//cp.onicon.ru/loader/577f59022866889f408b45a6.js"></script>
         <?/*Подключение vue.js*end*/?>
 		<link rel="stylesheet" type="text/css" href="<?= SITE_TEMPLATE_PATH ?>/tooltipster/dist/css/tooltipster.bundle.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?= SITE_TEMPLATE_PATH ?>/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css">
@@ -30,7 +32,9 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 
         <!--[if gte IE 9]><style type="text/css">.basket_button, .button30, .icon {filter: none;}</style><![endif]-->
         <!--<link href="<?=CMain::IsHTTPS() ? 'https' : 'http'?>://fonts.googleapis.com/css?family=Ubuntu:400,500,700,400italic&subset='latin,cyrillic'" rel='stylesheet' type='text/css' />-->
-
+		<?/*
+    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/snow/snowstorm-min.js');
+*/?>
 
 <?/*Костыли*start*показ меню каталога только на главной странице*/
 	//var_dump("<pre>",$TEMPLATE_OPTIONS);?>
@@ -138,7 +142,7 @@ function gtag_report_conversion2(url) {
                     <div class="top_inner our-projects-wrapper-anchor">
                         <div id="our-projects" class="our-projects-wrapper">
                             <a class="strlog-city-link" href="/company/contacts/">Иркутск</a>
-                            <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+                            <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
                                 array(
                                     "COMPONENT_TEMPLATE" => ".default",
                                     "PATH" => SITE_DIR."include/menu/menu.strlog_top_content_multilevel.php",
@@ -148,7 +152,7 @@ function gtag_report_conversion2(url) {
                                     "EDIT_TEMPLATE" => "standard.php"
                                 ),
                                 false
-                            );*/?>
+                            );?>
 							<div class="w-our-projects" v-on="{mouseenter:dropProjectsEnter,mouseleave:dropProjectsLeave}">
 							<span class="our-projects">Наши проекты<img v-bind:class="{scaled:isScaled}" src="/images/project-arrow.png" /></span>
                             <div class="our-projects-dropdown-wrapper" v-bind:class="{dropped: isDropped}">
@@ -261,7 +265,7 @@ function gtag_report_conversion2(url) {
                                     <div style="z-index:11;background: none;">
                                         <div class="wrapper_middle_menu wrap_menu" style="background: none;">
                                             <div class="catalog_menu_ext">
-                                                <?/*$APPLICATION->IncludeComponent(
+                                                <?$APPLICATION->IncludeComponent(
                                                     "bitrix:main.include",
                                                     ".default",
                                                     array(
@@ -275,7 +279,7 @@ function gtag_report_conversion2(url) {
                                                         "COMPOSITE_FRAME_TYPE" => "AUTO"
                                                     ),
                                                     false
-                                                );*/?>
+                                                );?>
                                             </div>
                                         </div>
                                     </div>
@@ -478,7 +482,7 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
 <?if(!COptimus::IsOrderPage() && !COptimus::IsBasketPage() && !$iSDetailPage){?>
     <div class="left_block">
         <?/*Статичное меню*start*JS скрипт выпадающего меню находится bitrix/menu/left_front_catalog/template.php*/?>
-        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/menu.left_menu.php",
@@ -488,12 +492,12 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );*/?>
+        );?>
         <?/*Статичное меню*end*/?>
 
-        <?/*$APPLICATION->ShowViewContent('left_menu');*/?><!--
+        <?$APPLICATION->ShowViewContent('left_menu');?>
 
-        <?/*$APPLICATION->IncludeComponent(
+        <?$APPLICATION->IncludeComponent(
 	"bitrix:main.include", 
 	".default", 
 	array(
@@ -507,8 +511,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);*/?>
-        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+);?>
+        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/comp_subscribe.php",
@@ -518,8 +522,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );*/?>
-        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        );?>
+        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/comp_news.php",
@@ -529,8 +533,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );*/?>
-        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        );?>
+        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/comp_news_articles.php",
@@ -540,8 +544,8 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );*/?>
-        --><?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        );?>
+        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/actions_list_info.php",
@@ -551,7 +555,7 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );*/?>
+        );?>
 		<?$uGr = getGroupUser()?>
 		<?$fileXLS = getFilePrice($uGr);?>
 		<?$exp = explode("/",$fileXLS)?>

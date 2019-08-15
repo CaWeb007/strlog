@@ -1,4 +1,4 @@
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
 	"bitrix:menu", 
 	"top_menu_multilevel", 
 	array(
@@ -18,4 +18,4 @@
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);?>
+);*/?>

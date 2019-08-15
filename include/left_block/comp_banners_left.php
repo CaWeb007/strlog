@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
 <?global $SITE_THEME, $TEMPLATE_OPTIONS;?>
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
 	"aspro:com.banners.optimus", 
 	"left_banner", 
 	array(
@@ -39,4 +39,4 @@
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);?>
+);*/?>

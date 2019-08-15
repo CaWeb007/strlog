@@ -1,5 +1,5 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
-<?$APPLICATION->IncludeComponent(
+<?/*$APPLICATION->IncludeComponent(
 	"aspro:tabs.optimus",
 	"main",
 	Array(
@@ -84,4 +84,4 @@
 		"USE_PRICE_COUNT" => "N",
 		"USE_PRODUCT_QUANTITY" => "N"
 	)
-);?>
+);*/?>

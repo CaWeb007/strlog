@@ -1,4 +1,4 @@
-<?if(!COptimus::IsMainPage()):?>
+<?/*if(!COptimus::IsMainPage()):?>
 	<?if(COptimus::IsCatalogPage()):?>
 		<?$APPLICATION->IncludeComponent("bitrix:menu", "left_front_catalog", array(
 			"ROOT_MENU_TYPE" => "left",
@@ -42,5 +42,5 @@
 		"DELAY" => "N",
 		"ALLOW_MULTI_SELECT" => "N" ),
 		false, array( "ACTIVE_COMPONENT" => "Y" )
-	);?>								
-<?endif;?>
+	);?>
+<?endif;*/?>
