@@ -2568,15 +2568,22 @@ ul.tabs_content > li.cur > div, ul.tabs_content > li.current > div {
 	display: none;
 }
 
-.pay_system_icons i {
-
+.pay_system_icons i:last-child {
+	margin-right: 0;
 }
 
 .pay_system_icons i.mir {
     background-position: -206px -1px;
 	width:40px;
 }
-
+ .pay_system_icons i.sber {
+	 background-image: url(../images/rbs/rbs_credit.png);
+	 width:22px;
+	 background-repeat: no-repeat;
+	 -webkit-background-size: contain;
+	 background-size: contain;
+	 background-position: center center;
+ }
 .RECOMENDATION_nav ul.flex-direction-nav li a {text-indent: 99999px;}
 
 /* Просьба Коли ))) */

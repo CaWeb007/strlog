@@ -1,4 +1,4 @@
-Options -Indexes 
+Options -Indexes
 ErrorDocument 404 /404.php
 #RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
 RewriteCond %{REQUEST_FILENAME} !robots\.txt
@@ -44,7 +44,7 @@ SetEnvIfNoCase User-Agent ".*bingbot" badbingbot
 Deny from env=badbingbot
 
 	php_value max_input_vars 10000
-	
+
 #### BAD BOTS ####
 SetEnvIfNoCase User-Agent "^SemrushBot" bad_bot
 SetEnvIfNoCase User-Agent "^SemrushBot/1.2~bl" bad_bot
@@ -52,8 +52,8 @@ SetEnvIfNoCase User-Agent "^bingbot" bad_bot
 SetEnvIfNoCase User-Agent "^bingbot/2.0" bad_bot
 SetEnvIfNoCase User-Agent "^bingbot" bad_bot
 
-<Limit GET POST HEAD> 
-Order Allow,Deny 
+<Limit GET POST HEAD>
+Order Allow,Deny
 Allow from all
 Deny from env=bad_bot
 </Limit>
@@ -86,13 +86,13 @@ Deny from env=bad_bot
   RewriteCond %{REQUEST_URI} ^(.*/[^/\.]+)$
   RewriteCond %{REQUEST_URI} !.html(.*)$
   RewriteCond %{REQUEST_URI} !.php(.*)$
-  RewriteRule ^(.*[^/])$ $1/ [L,R=301]
-  
-  RewriteCond %{SERVER_PORT} ^80$ 
+  #RewriteRule ^(.*[^/])$ $1/ [L,R=301]
+
+  #RewriteCond %{SERVER_PORT} ^80$
   RewriteCond %{REQUEST_URI} !^/bitrix/admin/1c_exchange.php
-  RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
+  #RewriteRule ^(.*)$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R=301]
   RewriteCond %{HTTP_HOST} ^www.xn--80afpacjdwcqkhfi.xn--p1ai$ [NC]
-  RewriteRule ^(.*)$ https://xn--80afpacjdwcqkhfi.xn--p1ai/$1 [R=301,L]
+  #RewriteRule ^(.*)$ https://xn--80afpacjdwcqkhfi.xn--p1ai/$1 [R=301,L]
   Redirect 301 /bonusnaya-karta/ http://strlogclub.ru/about/
   Redirect 301 /uslugi/dostavka/ https://xn--80afpacjdwcqkhfi.xn--p1ai/help/delivery/
   Redirect 301 /novosti/ https://xn--80afpacjdwcqkhfi.xn--p1ai/info/news/
@@ -115,5 +115,5 @@ Deny from env=bad_bot
   ExpiresByType image/gif "access plus 3 day"
   ExpiresByType image/png "access plus 3 day"
   ExpiresByType text/css "access plus 3 day"
-  ExpiresByType application/javascript "access plus 3 day"  
+  ExpiresByType application/javascript "access plus 3 day"
 </IfModule>

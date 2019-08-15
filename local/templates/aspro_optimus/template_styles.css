@@ -1563,7 +1563,7 @@ body .wrapper .catalog_item .item_info .buttons_block{margin-top:17px;text-align
 #footer .mobile_copy{display:none;}
 
 /*pay icons*/
-.pay_system_icons i{display:inline-block;height:20px;width:34px;background:url(images/pay_icons.png) no-repeat;margin:0px 11px 0px 0px;}
+.pay_system_icons i{display:inline-block;height:20px;width:34px;background:url(images/pay_icons.png) no-repeat;margin:0px 7px 0px 0px;}
 .pay_system_icons span i:last-child{margin-right:0px;}
 .pay_system_icons i.mastercard{background-position:0px -1px;}
 .pay_system_icons i.visa{background-position:-46px -1px;}
