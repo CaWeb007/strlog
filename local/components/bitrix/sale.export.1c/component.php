@@ -1,8 +1,12 @@
 <?
+
+use Bitrix\Main\Loader;
+use Caweb\Main\Sale\ImportOneCPackageCaweb;
+
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
+Loader::includeModule('caweb.main');
 include_once(__DIR__."/CCustomSaleExport.php");
-
 if(!is_array($arParams["GROUP_PERMISSIONS"]))
 	$arParams["GROUP_PERMISSIONS"] = array(1);
 if(empty($arParams["SITE_LIST"]))
@@ -563,9 +567,9 @@ else
             {
                 $o->registerNodeHandler("/".GetMessage("CC_BSC1_COM_INFO")."/".GetMessage("CC_BSC1_CONTAINER"), function (CDataXML $xmlObject) use ($o, $loader)
                 {
-					\Bitrix\Sale\Exchange\ImportOneCPackageSale::configuration();
-					$loader->importer = \Bitrix\Sale\Exchange\ImportOneCPackageSale::getInstance();
-					$loader->nodeHandler($xmlObject, $o);
+                    ImportOneCPackageCaweb::configuration();
+                    $loader->importer = ImportOneCPackageCaweb::getInstance();
+                    $loader->nodeHandler($xmlObject, $o);
 				});
             }
 
