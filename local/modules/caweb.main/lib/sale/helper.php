@@ -10,7 +10,7 @@ Loader::includeModule('catalog');
 class Helper{
     const SITE_PRICE_MODEL = Catalog\Helper::SITE_PRICE_MODEL;
     const SITE_GROUP_MODEL = Catalog\Helper::SITE_GROUP_MODEL;
-    const BONUS_ACCESS = array(9);
+    const BONUS_ACCESS = array(9, 15);
     public static $userPriceId = 0;
     public static $instance = null;
     public static function getInstance(){
