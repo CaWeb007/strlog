@@ -18,7 +18,7 @@ class Iblock{
         $iblockId = (int)$arParams['IBLOCK_ID'];
         if ($iblockId !== 23) return $arParams;
         if ((int)$arParams['SORT'] === 123) return $arParams;
-        Write::file('iblock_sku', $arParams, true);
+        //Write::file('iblock_sku', $arParams, true);
         $flag = null;
         $flag = $arParams["PROPERTY_VALUES"][609][0]['VALUE'];
         if (empty($flag)){
