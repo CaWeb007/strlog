@@ -337,6 +337,7 @@ ul.tabs li.stretch { display: none; }
 	body .personal_page #content .wrapper_inner .left_block .left_menu > li{display: inline-block;margin-top: 3px;}
 	body .personal_page #content .wrapper_inner .left_block .left_menu > li > a{border:none;}
 	body .personal_page #content .wrapper_inner .right_block .breadcrumbs{}
+	.fast_view_block{display: none;}
 }
 @media all and (max-width: 946px){
 	.wrapper_inner #content .catalog_block .catalog_item_wrapp:nth-child(3n) { width: 230px; }
