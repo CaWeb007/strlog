@@ -3317,7 +3317,7 @@ $(document).ready(function(){
 			// InitLabelAnimation('#bx-soa-order-form');
 			InitOrderCustom();
 			showPhoneMask('input[autocomplete=tel]');
-			if($('.catalog_detail').length){
+			if($('.catalog_detail').length && ($('.catalog_detail').parent('#fast_view_item').length < 1)){
 				$('.bx_filter').remove();
 				InitFlexSlider();
 			}
