@@ -88,31 +88,21 @@ function isIssetPG($value){
 function showProductBonus($arResult,$detail=false){
 	global $USER;
 	if($USER->IsAuthorized()){
-		$userGroups = array(11, 12);
 		$arGroups = CUser::GetUserGroup($USER->GetID());
-		$result = array_intersect($userGroups, $arGroups);
-		//if(!empty($result)){
-
         if(!Helper::getInstance()->checkBonusAccess($arGroups)){
 			return '<span class="bonuses-quantity-title"></span>';
 		} else {
 			if((float)$arResult["PROPERTIES"]["_POROGA_NACHISLENIYA_BONUSOV"]["VALUE"] == 0) {
 				$totalBonus = 0;
 			} else {
-                $totalBonus = $arResult["PROPERTIES"]["BONUS_KP"]["VALUE"];
-				/*$userGroups = array(9, 14);
-				$result = array_intersect($userGroups, $arGroups);
+				$result = array_intersect(array(9), $arGroups);
 				if(count($result) > 0){
 					$totalBonus = $arResult["PROPERTIES"]["BONUS_KP"]["VALUE"];
 				}
-		
-				$userGroups = array(10, 15);
-				$result = array_intersect($userGroups, $arGroups);
-				if(count($result) > 0){
+				if(count(array_intersect(array(15), $arGroups)) > 0){
 					$totalBonus = $arResult["PROPERTIES"]["BONUS_SO"]["VALUE"];
-				}*/
+				}
 			}
-	
 			return '
 				<div class="bonuses-wrapper bonuses-wrapper-list'.($detail?' bonuses-wrapper-detail-page':'').'">
 					<span class="bonuses-quantity-title">Бонус: </span>
