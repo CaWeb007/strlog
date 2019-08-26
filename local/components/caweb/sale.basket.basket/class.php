@@ -17,6 +17,7 @@ use Bitrix\Main,
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
 use Caweb\Main\Sale\DiscountManager;
+use Caweb\Main\Sale\Helper;
 
 class CBitrixBasketComponent extends CBitrixComponent
 {
@@ -1534,9 +1535,9 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		$this->storage['BASKET_ITEMS_COUNT'] = $fullBasket->count();
 		$this->storage['NOT_AVAILABLE_BASKET_ITEMS_COUNT'] = $notAvailableItemsCount;
-		$this->storage['DELAYED_BASKET_ITEMS_COUNT'] = $delayedItemsCount;
-		return $basketItems;
-	}
+        $this->storage['DELAYED_BASKET_ITEMS_COUNT'] = $delayedItemsCount;
+        return $basketItems;
+    }
 
 	protected function processBasketItem(Sale\BasketItem $item)
 	{
@@ -2433,7 +2434,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 			$basketWeight = 0;
 			$basketBasePrice = 0;
 			$basketVatSum = 0;
-
+            $basketBonus = 0;
 			foreach ($this->basketItems as $basketItem)
 			{
 				if ($basketItem['CAN_BUY'] === 'Y' && $basketItem['DELAY'] !== 'Y')
@@ -2442,15 +2443,16 @@ class CBitrixBasketComponent extends CBitrixComponent
 					$basketWeight += $basketItem['WEIGHT'] * $basketItem['QUANTITY'];
 					$basketBasePrice += $this->getBasePriceItem($basketItem);
                     $basketVatSum += $basketItem['VAT_VALUE'] * $basketItem['QUANTITY'];
+                    //$basketBonus += $basketItem[Helper::getInstance()->checkBonusForBasket()] * $basketItem['QUANTITY'];
 				}
 			}
 		}
 		else
 		{
-
             $basket = $this->getBasketStorage()->getOrderableBasket();
             $this->initializeBasketOrderIfNotExists($basket);
 			$basketPrice = $this->getPrice($basket);
+			$basketBonus = $this->getBonus($basket);
 			$basketWeight = $basket->getWeight();
 			$basketBasePrice = $this->getBasePrice($basket);
 			$basketVatSum = $basket->getVatSum();
@@ -2461,6 +2463,8 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		$result['allSum'] = PriceMaths::roundPrecision($basketPrice);
 		$result['allSum_FORMATED'] = CCurrencyLang::CurrencyFormat($result['allSum'], $siteCurrency, true);
+
+        $result['allBonus'] = $basketBonus;
 
 		$result['allWeight'] = $basketWeight;
 		$result['allWeight_FORMATED'] = roundEx($basketWeight / $this->weightKoef, SALE_WEIGHT_PRECISION).' '.$this->weightUnit;
@@ -2489,6 +2493,23 @@ class CBitrixBasketComponent extends CBitrixComponent
             $result += (float)PriceTable::getRow($arParams)['PRICE'] * $basketItem->getQuantity();
         }
         return $result;
+    }
+    protected function getBonus($basket){
+        $basketBonus = 0;
+        /**@var $basket Bitrix\Sale\Basket*/
+        /**@var $basketItem Bitrix\Sale\BasketItem*/
+        $basketItemsSave = array();
+        $basketItems = $basket->getBasketItems();
+        if (count($basketItems) !== count($this->basketItems)){
+            $basketItemsSave = $this->basketItems;
+            $this->loadBasketItems();
+        }
+        foreach ($this->basketItems as $id => $basketItem){
+            $basketBonus += $basketItem[Helper::getInstance()->checkBonusForBasket()] * $basketItem['QUANTITY'];
+        }
+        if (!empty($basketItemsSave))
+            $this->basketItems = $basketItemsSave;
+        return $basketBonus;
     }
     protected function getPrice($basket){
         if (!empty($this->priceWithCustomDiscount)) return $this->priceWithCustomDiscount;

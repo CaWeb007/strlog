@@ -33,6 +33,12 @@ use Bitrix\Main\Localization\Loc;
 				<div class="basket-checkout-block basket-checkout-block-total">
 					<div class="basket-checkout-block-total-inner">
 						<div class="basket-checkout-block-total-title"><?=Loc::getMessage('SBB_TOTAL')?>:</div>
+                        {{#BONUS}}
+                            <div class="bonuses-wrapper bonuses-wrapper-list">
+                                <span class="bonuses-quantity-title"><?=Loc::getMessage('SBB_BONUS')?>: </span>
+                                <span class="bonuses-quantity-desc">{{{BONUS}}}</span>
+                            </div>
+                        {{/BONUS}}
 						<div class="basket-checkout-block-total-description">
 							{{#WEIGHT_FORMATED}}
 								<?=Loc::getMessage('SBB_WEIGHT')?>: {{{WEIGHT_FORMATED}}}

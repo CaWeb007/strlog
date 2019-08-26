@@ -2,6 +2,7 @@
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Sale\PriceMaths;
+use Caweb\Main\Sale\Helper;
 
 /**
  *
@@ -342,13 +343,25 @@ foreach ($this->basketItems as $row)
 			}
 			elseif (!empty($row[$value['id']]))
 			{
-				$rowData['COLUMN_LIST'][] = array(
-					'CODE' => $value['id'],
-					'NAME' => $value['name'],
-					'VALUE' => $row[$value['id']],
-					'IS_TEXT' => true,
-					'HIDE_MOBILE' => !isset($mobileColumns[$value['id']])
-				);
+			    if (($value['id'] === "PROPERTY_BONUS_KP_VALUE") || ($value['id'] === "PROPERTY_BONUS_SO_VALUE")){
+			        if (Helper::getInstance()->checkBonusForBasket($value['id'])){
+                        $rowData['COLUMN_LIST'][] = array(
+                            'CODE' => "PROPERTY_BONUS",
+                            'NAME' => Loc::getMessage("SBB_BONUS_NAME"),
+                            'VALUE' => $row[$value['id']],
+                            'IS_TEXT' => true,
+                            'HIDE_MOBILE' => !isset($mobileColumns[$value['id']])
+                        );
+                    }
+                }else{
+                    $rowData['COLUMN_LIST'][] = array(
+                        'CODE' => $value['id'],
+                        'NAME' => $value['name'],
+                        'VALUE' => $row[$value['id']],
+                        'IS_TEXT' => true,
+                        'HIDE_MOBILE' => !isset($mobileColumns[$value['id']])
+                    );
+                }
 			}
 		}
 	}
@@ -377,7 +390,8 @@ $totalData = array(
 	'PRICE' => $result['allSum'],
 	'PRICE_FORMATED' => $result['allSum_FORMATED'],
 	'PRICE_WITHOUT_DISCOUNT_FORMATED' => $result['PRICE_WITHOUT_DISCOUNT'],
-	'CURRENCY' => $result['CURRENCY']
+	'CURRENCY' => $result['CURRENCY'],
+    'BONUS' => $result['allBonus']
 );
 
 if ($result['DISCOUNT_PRICE_ALL'] > 0)
