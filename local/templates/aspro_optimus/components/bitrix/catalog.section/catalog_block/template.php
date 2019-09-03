@@ -40,7 +40,7 @@
 			<? $grouperTitleShow = $arItem['groupper']['VALUE']; ?>
 				</div><div class="col-12">
 				<div class="row-block-prod-title catalog_item item_wrap">
-					<div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?=$grouperTitleShow?></span></div>
+					<div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?if ($arItem['groupper']['SECTION'] !== 'Y') echo $grouperTitleShow?></span></div>
 				</div>
 					</div>
 	<div class="catalog_block items block_list">

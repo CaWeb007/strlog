@@ -1,6 +1,7 @@
 <?
 use Bitrix\Main\Type\Collection;
 use Bitrix\Currency\CurrencyTable;
+use Caweb\Main\Catalog\Search;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();
 /** @var CBitrixComponentTemplate $this */
@@ -112,8 +113,10 @@ if (!empty($arResult['ITEMS'])){
 	}
 
 	$arNewItemsList = array();
+	Search::getInstance()->initSort();
 	foreach ($arResult['ITEMS'] as $key => $arItem)
 	{
+		Search::getInstance()->setElementArray($key, $arItem);
 		$arItem['CHECK_QUANTITY'] = false;
 		if (!isset($arItem['CATALOG_MEASURE_RATIO']))
 			$arItem['CATALOG_MEASURE_RATIO'] = 1;
@@ -236,7 +239,7 @@ if (!empty($arResult['ITEMS'])){
         foreach($arItem['PROPERTIES'] as $itemProp){
             if(in_array($itemProp['CODE'], $itemSearchProps)){
                 if(!empty($itemProp['VALUE'])){
-										$itemProps .= ($itemProps?', ':"").$itemProp['NAME'].': '.$itemProp['VALUE'];
+					$itemProps .= ($itemProps?', ':"").$itemProp['NAME'].': '.$itemProp['VALUE'];
                 }
             }
         }
@@ -293,7 +296,7 @@ if (!empty($arResult['ITEMS'])){
 		
 	}
 	$arNewItemsList[$key]['LAST_ELEMENT'] = 'Y';
-
+    $arNewItemsList = Search::getInstance()->sortElements($arNewItemsList);
 	$arResult['ITEMS'] = $arNewItemsList;
 	$arResult['SKU_PROPS'] = $arSKUPropList;
 	$arResult['DEFAULT_PICTURE'] = $arEmptyPreview;

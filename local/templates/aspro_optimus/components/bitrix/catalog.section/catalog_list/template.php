@@ -50,7 +50,7 @@
 			<?if(isset($arItem['groupper']) && $arItem['groupper'] && ($grouperTitleShow === "-0-" || $grouperTitleShow != $arItem['groupper']['VALUE'])):?>
 			<? $grouperTitleShow = $arItem['groupper']['VALUE']; ?>
 			<div class="row-block-prod-title list_item_wrapp item_wrap item">
-				<div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?=$grouperTitleShow?></span></div>
+				<div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?if ($arItem['groupper']['SECTION'] !== 'Y') echo $grouperTitleShow?></span></div>
 			</div>
 		<?endif?>
 
