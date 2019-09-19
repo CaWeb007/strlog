@@ -1,4 +1,8 @@
 <?
+
+use Bitrix\Catalog\ProductTable;
+use Caweb\Main\Log\Write;
+
 AddEventHandler('catalog', 'OnSuccessCatalogImport1C', 'customCatalogImportStep');
 
 function customCatalogImportStep()
@@ -43,84 +47,83 @@ function customCatalogImportStep()
 		$res = $DB->Query($query);
 		//$res = CIBlockElement::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('>ID' => $NS['custom']['lastId'])), false, false, ['ID','XML_ID','PROPERTY_OBEM_M3']);
 		$errorMessage = null;
-	 
-		while ($arXMLItem = $res->Fetch()) {
-			
-			$XML_ID = $arXMLItem["VALUE"];
-			
-			#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arXMLItem));
-			
-			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','PROPERTY_NOT_WORK']);
-			
-			if($arItem = $ires->Fetch()){
-			
-				$PRODUCT_ID = $arItem["ID"];
-				
-				$query = "  SELECT item.VALUE as item,  type1.VALUE as NameRekv, type2.VALUE as ValRekv
+        if (method_exists($res, 'Fetch')){
+            while ($arXMLItem = $res->Fetch()) {
+
+                $XML_ID = $arXMLItem["VALUE"];
+
+                #AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arXMLItem));
+
+                $ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','PROPERTY_NOT_WORK']);
+
+                if($arItem = $ires->Fetch()){
+                    $PRODUCT_ID = $arItem["ID"];
+                    $query = "  SELECT item.VALUE as item,  type1.VALUE as NameRekv, type2.VALUE as ValRekv
 								FROM b_xml_tree as item
 								INNER JOIN b_xml_tree as pr ON (item.PARENT_ID = pr.ID && pr.DEPTH_LEVEL = 3)
 								INNER JOIN b_xml_tree as rekv ON (rekv.LEFT_MARGIN BETWEEN pr.LEFT_MARGIN AND pr.RIGHT_MARGIN AND rekv.DEPTH_LEVEL = 5 AND rekv.NAME = 'ЗначениеРеквизита')
 								INNER JOIN b_xml_tree as type1 ON (type1.PARENT_ID = rekv.ID AND type1.DEPTH_LEVEL = 6 AND type1.NAME = 'Наименование')
 								INNER JOIN b_xml_tree as type2 ON (type2.PARENT_ID = rekv.ID AND type2.DEPTH_LEVEL = 6 AND type2.NAME = 'Значение')
 								WHERE item.VALUE = '$XML_ID' AND item.NAME = 'Ид'";
-								
-				$results = $DB->Query($query);
-				
-				while($row = $results->Fetch()) {
-					//	Товар комплект, установка остатков
-					if($row['NameRekv'] == "ВидНоменклатуры" && $row['ValRekv'] == "Товар-комплект"){
-						$PRODUCT_SET_Q[$PRODUCT_ID] = 10;
-					}
-				}
-				
-				$disableItem = false;
-				
-				$query = "  SELECT item.VALUE as item, del.VALUE as del
+
+                    $results = $DB->Query($query);
+
+                    while($row = $results->Fetch()) {
+                        //	Товар комплект, установка остатков
+                        if($row['NameRekv'] == "ВидНоменклатуры" && $row['ValRekv'] == "Товар-комплект"){
+                            $PRODUCT_SET_Q[$PRODUCT_ID] = 10;
+                        }
+                    }
+
+                    $disableItem = false;
+
+                    $query = "  SELECT item.VALUE as item, del.VALUE as del
 								FROM b_xml_tree as item
 								INNER JOIN b_xml_tree as pr ON (item.PARENT_ID = pr.ID && pr.DEPTH_LEVEL = 3)
 								INNER JOIN b_xml_tree as del ON (del.LEFT_MARGIN BETWEEN pr.LEFT_MARGIN AND pr.RIGHT_MARGIN AND del.DEPTH_LEVEL = 4 AND del.NAME = 'ПометкаУдаления')
 								WHERE item.VALUE = '$XML_ID' AND item.NAME = 'Ид'";
-								
-				$results = $DB->Query($query);
-				
-				while($row = $results->Fetch()) {
-					// Есть ли пометка на удаление
-					if(trim($row['item']) == $XML_ID && trim($row['del']) === "true") {
-						$disableItem = true;
-						AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " = " . serialize($row));
-					}
-				}
-				
-				AddMessage2Log("Продукт $XML_ID ID-" . $PRODUCT_ID . " = " . ($disableItem?"DA":"NET"));
-				// Отключаем\Включаем товар, если пометка на удаление true/false
-				if($disableItem===true){
-					$PROP = ['533' => 6036];
-					$el::SetPropertyValuesEx($PRODUCT_ID, 16, $PROP);
-					$el->update($PRODUCT_ID,['ACTIVE'=>'N'], $WF=="Y", true, true);
-					
-					CPrice::DeleteByProduct($PRODUCT_ID);
-					$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '0' WHERE `ID` = '".$PRODUCT_ID."'");
-				} elseif($arItem["PROPERTY_NOT_WORK_VALUE"] == "ДА"){	
-					$PROP = ['533' => 6035];
-					$el::SetPropertyValuesEx($PRODUCT_ID, 16, $PROP);
-					$el->update($PRODUCT_ID,['ACTIVE'=>'Y'], $WF=="Y", true, true);
-				}
-				
-				if ($error === true) {
-					$errorMessage = 'Что-то случилось.';
-					break;
-				}
-		 
-				$NS['custom']['lastId'] = $arXMLItem['ID'];
-				$NS['custom']['counter']++;
-		 
-				// Прерывание по времени шага
-				if ($stepInterval > 0 && (time() - $startTime) > $stepInterval) {
-					break;
-				}
-			}
-		}
-		
+
+                    $results = $DB->Query($query);
+
+                    while($row = $results->Fetch()) {
+                        // Есть ли пометка на удаление
+                        if(trim($row['item']) == $XML_ID && trim($row['del']) === "true") {
+                            $disableItem = true;
+                            AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " = " . serialize($row));
+                        }
+                    }
+
+                    AddMessage2Log("Продукт $XML_ID ID-" . $PRODUCT_ID . " = " . ($disableItem?"DA":"NET"));
+                    // Отключаем\Включаем товар, если пометка на удаление true/false
+                    if($disableItem===true){
+                        $PROP = ['533' => 6036];
+                        $el::SetPropertyValuesEx($PRODUCT_ID, 16, $PROP);
+                        $el->update($PRODUCT_ID,['ACTIVE'=>'N'], $WF=="Y", true, true);
+
+                        CPrice::DeleteByProduct($PRODUCT_ID);
+                        $DB->query("UPDATE b_catalog_product SET `QUANTITY` = '0' WHERE `ID` = '".$PRODUCT_ID."'");
+                    } elseif($arItem["PROPERTY_NOT_WORK_VALUE"] == "ДА"){
+                        $PROP = ['533' => 6035];
+                        $el::SetPropertyValuesEx($PRODUCT_ID, 16, $PROP);
+                        $el->update($PRODUCT_ID,['ACTIVE'=>'Y'], $WF=="Y", true, true);
+                    }
+
+                    if ($error === true) {
+                        $errorMessage = 'Что-то случилось.';
+                        break;
+                    }
+
+                    $NS['custom']['lastId'] = $arXMLItem['ID'];
+                    $NS['custom']['counter']++;
+
+                    // Прерывание по времени шага
+                    if ($stepInterval > 0 && (time() - $startTime) > $stepInterval) {
+                        break;
+                    }
+                }
+            }
+        }
+
 		if(0 < count($PRODUCT_SET_Q)){
 			$fp = fopen($_SERVER['DOCUMENT_ROOT']."/update_quantity_set","w");
 			fwrite($fp,serialize($PRODUCT_SET_Q));
@@ -263,8 +266,8 @@ function customCatalogImportStep()
 					$error = true;
 				}
 				*/
-				
-				$totalQuantity = 0;
+
+                $totalQuantity = 0;
 				$itemStore = [];
 				$PRODUCT_ID = $arItem["ID"];
 				$V = (float)$arItem["PROPERTY_OBEM_M3_VALUE"];

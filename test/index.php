@@ -15,7 +15,13 @@ $APPLICATION->SetTitle("Новый раздел");
 ?>
 
 <?
-$ABS_FILE_NAME = $_SERVER['DOCUMENT_ROOT']."/upload/1c_exchange/documents___aca7da11-869c-4406-a107-582ef24c255c.xml";
+/*CCatalogProduct::Update(20211, array(
+    "QUANTITY" => 3,
+    'WEIGHT' => 30
+));*/
+
+
+/*$ABS_FILE_NAME = $_SERVER['DOCUMENT_ROOT']."/upload/1c_exchange/documents___aca7da11-869c-4406-a107-582ef24c255c.xml";
 Loc::loadMessages($_SERVER['DOCUMENT_ROOT'].'/local/components/bitrix/sale.export.1c/component.php');
 if(!(CModule::IncludeModule('sale') && CModule::IncludeModule('catalog')))
 {
@@ -101,7 +107,7 @@ if(file_exists($ABS_FILE_NAME) && filesize($ABS_FILE_NAME)>0)
 else
 {
     echo "failure\n".GetMessage("CC_BSC1_EMPTY_CML");
-}
+}*/
 ?>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
