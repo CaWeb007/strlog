@@ -82,7 +82,7 @@ class Exchange{
         if (!empty($warn)) Write::file('warnUserExchange', $warn);
     }
     protected function writeSaleAccount($userId,$arFields){
-        if (empty($arFields['UF_BONUSES'])) return;
+        if (($arFields['UF_BONUSES'] === '') || ($arFields['UF_BONUSES'] === null) || ($arFields['UF_BONUSES'] === false)) return;
         $res = false;
         $account = new \CSaleUserAccount();
         $accountFields = $account->GetByUserID($userId, "RUB");
@@ -159,7 +159,7 @@ class Exchange{
         );
         if (!empty($array[$hlFieldGroup])) $result = $array[$hlFieldGroup];
         $hlFieldAccum = (float)preg_replace('/\s/','',$hlFieldAccum);
-        if ((($result === 9) || ($result === 14)) && ($hlFieldAccum > 10000))
+        if ((($result === 9) || ($result === 14)) && ($hlFieldAccum >= 10000))
             $result = 15;
         return array_merge(array(2,3,4,5,6), array($result));
     }

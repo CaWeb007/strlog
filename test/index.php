@@ -15,6 +15,21 @@ $APPLICATION->SetTitle("Новый раздел");
 ?>
 
 <?
+/*$db = CUser::GetList(($by="ID"), ($order="ASC"), array(), array('SELECT' => array('UF_BONUSES'), 'FIELDS'=> array('ID')));
+while ($ar = $db->Fetch()){
+    if (($ar['UF_BONUSES'] === '') || ($ar['UF_BONUSES'] === null) || ($ar['UF_BONUSES'] === false)) continue;
+    $userId = $ar['ID'];
+    $res = false;
+    $account = new \CSaleUserAccount();
+    $accountFields = $account->GetByUserID($userId, "RUB");
+    $array = array("USER_ID" => $userId, "CURRENCY" => "RUB", "CURRENT_BUDGET" => $ar['UF_BONUSES']);
+    if (empty($accountFields)){
+        $res = $account->Add($array);
+    }else{
+        $res = $account->Update($accountFields['ID'], $array);
+    }
+    Pr($ar);
+}*/
 /*CCatalogProduct::Update(20211, array(
     "QUANTITY" => 3,
     'WEIGHT' => 30
