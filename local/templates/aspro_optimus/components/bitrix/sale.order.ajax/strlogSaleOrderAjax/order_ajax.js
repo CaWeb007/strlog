@@ -5066,7 +5066,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				isSend = false;
 			
 			if(bonusInput && maxAvailableBonus){
-				bonusInputValue = parseFloat(bonusInput.value);
+                bonusInput.value = Math.floor(parseFloat(bonusInput.value));
+				bonusInputValue = bonusInput.value;
 				if(bonusInputValue.length == 0 || bonusInputValue == 0) {
 					alert("Для пересчета стоимости заказа введите количество бонусов для списания!");
 				}
@@ -5078,7 +5079,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				}
 				
 			}
-			
 			if(isSend)
 				this.sendRequest();
 		},
