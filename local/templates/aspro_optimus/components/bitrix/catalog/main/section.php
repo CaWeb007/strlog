@@ -719,10 +719,13 @@ if($arSeoItem)
 <?$ipropValues = new \Bitrix\Iblock\InheritedProperty\SectionValues($arParams["IBLOCK_ID"], IntVal($arSection["ID"]));
 $thisSeoProp = $ipropValues->getValues();
 $parentSeoProp = $ipropValues->getParent()->getValues();
-$keys = array('META_TITLE' => 'title', 'META_KEYWORDS' => 'keywords', 'META_DESCRIPTION' => 'description', 'PAGE_TITLE' => 'title');
+$keys = array('META_TITLE' => 'title', 'META_KEYWORDS' => 'keywords', 'META_DESCRIPTION' => 'description', 'PAGE_TITLE' => 'title_page');
 foreach ($keys as $key => $value){
-    if (($thisSeoProp['SECTION_'.$key] === $parentSeoProp['SECTION_'.$key]) && ($key !== 'PAGE_TITLE')){
-        $APPLICATION->SetPageProperty($value, $thisSeoProp['ELEMENT_'.$key]);
+    if ($thisSeoProp['SECTION_'.$key] === $parentSeoProp['SECTION_'.$key]){
+        if ($value === 'title_page'){
+            $APPLICATION->SetTitle($thisSeoProp['ELEMENT_'.$key]);
+        }else{
+            $APPLICATION->SetPageProperty($value, $thisSeoProp['ELEMENT_'.$key]);
+        }
     }
-    if ($key === 'PAGE_TITLE') $APPLICATION->SetTitle($thisSeoProp['ELEMENT_'.$key]);
 }
