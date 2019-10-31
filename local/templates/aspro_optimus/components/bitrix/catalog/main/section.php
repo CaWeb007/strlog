@@ -5,7 +5,6 @@
 use Bitrix\Main\Loader,
 	Bitrix\Main\ModuleManager;
 Loader::includeModule("iblock");
-
 //v get current section ID
 global $TEMPLATE_OPTIONS, $OptimusSectionID;
 $arPageParams = $arSection = $section = array();
@@ -717,3 +716,13 @@ if($arSeoItem)
 <?endif;?>
 
 <?COptimus::checkBreadcrumbsChain($arParams, $arSection);?>
+<?$ipropValues = new \Bitrix\Iblock\InheritedProperty\SectionValues($arParams["IBLOCK_ID"], IntVal($arSection["ID"]));
+$thisSeoProp = $ipropValues->getValues();
+$parentSeoProp = $ipropValues->getParent()->getValues();
+$keys = array('META_TITLE' => 'title', 'META_KEYWORDS' => 'keywords', 'META_DESCRIPTION' => 'description', 'PAGE_TITLE' => 'title');
+foreach ($keys as $key => $value){
+    if (($thisSeoProp['SECTION_'.$key] === $parentSeoProp['SECTION_'.$key]) && ($key !== 'PAGE_TITLE')){
+        $APPLICATION->SetPageProperty($value, $thisSeoProp['ELEMENT_'.$key]);
+    }
+    if ($key === 'PAGE_TITLE') $APPLICATION->SetTitle($thisSeoProp['ELEMENT_'.$key]);
+}
