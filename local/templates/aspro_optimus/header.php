@@ -141,7 +141,7 @@ function gtag_report_conversion2(url) {
                 <div class="wrapper_inner our-projects-wrap">
                     <div class="top_inner our-projects-wrapper-anchor">
                         <div id="our-projects" class="our-projects-wrapper">
-                            <a class="strlog-city-link" href="/company/contacts/">Иркутск</a>
+
                             <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
                                 array(
                                     "COMPONENT_TEMPLATE" => ".default",
@@ -237,12 +237,15 @@ function gtag_report_conversion2(url) {
                                             false
                                         );?>
                                     </span>
+
                                 </span>
+
                                 <!--
                                 <span class="order_wrap_btn">
                                     <span class="callback_btn"><?=GetMessage("CALLBACK")?></span>
                                 </span>
                                 -->
+<span class="order_wrap_btn"><a class="strlog-city-link" href="/company/contacts/">Контакты</a></span>
                             </div>
                         </div>
                         <div class="clearfix"></div>
