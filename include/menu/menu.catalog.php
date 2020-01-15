@@ -1,4 +1,4 @@
-<?/*$APPLICATION->IncludeComponent("bitrix:menu", "top_catalog", array(
+<?$APPLICATION->IncludeComponent("bitrix:menu", "top_catalog", array(
 "ROOT_MENU_TYPE" => "top_catalog",
 "MENU_CACHE_TYPE" => "A",
 "MENU_CACHE_TIME" => "3600000",
@@ -15,4 +15,4 @@ false,
 array(
 "ACTIVE_COMPONENT" => "Y"
 )
-);*/?>
+);?>

@@ -26,8 +26,8 @@
                             </div>
 						</li>
 						<?foreach($arItem["CHILD"] as $arChildItem){?>
-						<?//if((int)$arChildItem['ID'] == 2155) continue;?>
-							<li class="full <?=($arChildItem["CHILD"] ? "has-child" : "");?> <?if($arChildItem["SELECTED"]){?> current opened <?}?> m_<?=strtolower($TEMPLATE_OPTIONS["MENU_POSITION"]["CURRENT_VALUE"]);?> v_<?=strtolower($TEMPLATE_OPTIONS["MENU_TYPE_VIEW"]["CURRENT_VALUE"]);?>">
+						<?if((int)$arChildItem['ID'] == 2155) continue;?>
+							<li class="<?if($arChildItem['MOBILE']) echo 'mobile-section '?>full <?=($arChildItem["CHILD"] ? "has-child" : "");?> <?if($arChildItem["SELECTED"]){?> current opened <?}?> m_<?=strtolower($TEMPLATE_OPTIONS["MENU_POSITION"]["CURRENT_VALUE"]);?> v_<?=strtolower($TEMPLATE_OPTIONS["MENU_TYPE_VIEW"]["CURRENT_VALUE"]);?>">
 								<a class="icons_fa <?=($arChildItem["CHILD"] ? "parent" : "");?>" href="<?=$arChildItem["SECTION_PAGE_URL"];?>"><?=$arChildItem["NAME"];?><div class="toggle_block"></div></a>
 								<?if($arChildItem["CHILD"]){?>
 									<div class="strlog-dropdown-wrap dropdown" style="max-height:<?=$arResult['MAX_COLUM_HEIGHT']?>px;height:<?=$arResult['MAX_COLUM_HEIGHT']?>px;">

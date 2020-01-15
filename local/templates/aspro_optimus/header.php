@@ -153,59 +153,7 @@ function gtag_report_conversion2(url) {
                                 ),
                                 false
                             );?>
-							<div class="w-our-projects" v-on="{mouseenter:dropProjectsEnter,mouseleave:dropProjectsLeave}">
-							<span class="our-projects">Наши проекты<img v-bind:class="{scaled:isScaled}" src="/images/project-arrow.png" /></span>
-                            <div class="our-projects-dropdown-wrapper" v-bind:class="{dropped: isDropped}">
-                                <ul>
-                                    <li>
-                                        <a href="https://polzairk.ru/" target="_blank">
-                                            <div class="our-projects-image-wrapper">
-                                                <img src="/images/project_icon_1.png" alt="" title="" />
-                                            </div>
-                                            <span><center>
-                                                Готовые теплицы из поликарбоната по низкой цене от производителя!
-												Теплицы Польза – уютный дом для овощей!
-											</center></span>
-                                        </a>
-                                    </li>
-                                    <li>
-										<a href="http://фэлт.рф">
-                                            <div class="our-projects-image-wrapper">
-                                                <img src="/images/project_icon_2.png" alt="" title="" />
-                                            </div>
-                                            <span><center>
-                                                Завод межвенцового утеплителя в Иркутске.
-												Качественный джут по низкой цене от производителя!
-												Фэлт – стопроцентный джут!
-											</center></span>
-                                        </a>
-                                    </li>
-                                    <li>
-										<a href="http://периметр24.рф">
-                                            <div class="our-projects-image-wrapper">
-                                                <img src="/images/project_icon_3.png" alt="" title="" />
-                                            </div>
-                                            <span><center>
-                                                Производство, продажа и установка ворот, дверей, заборов и шлагбаумов для частных и промышленных объектов!
-												Правильные решения по всему периметру.
-											</center></span>
-                                        </a>
-                                    </li>
-                                    <li>
-										<a href="http://гудмарт.рф">
-                                            <div class="our-projects-image-wrapper">
-                                                <img src="/images/project_icon_4.png" alt="" title="" />
-                                            </div>
-                                            <span><center>
-                                                МПР Польза.<br>
-												Магазин постоянных распродаж в центре города!
-												Полезные вещи для дома в ТЦ "Оранж".
-											</center></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            </div>
+
                         </div>
                         <div class="h-user-block" id="personal_block">
                             <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
