@@ -6,7 +6,7 @@
 	$MESS["CATALOG_QUANTITY_TO"] = "До #TO#";
 	$MESS["CT_BCS_QUANTITY"] = "Количество";
 	$MESS["CT_BCS_ELEMENT_DELETE_CONFIRM"] = "Будет удалена вся информация, связанная с этой записью. Продолжить?";
-	$MESS["NO_PRODUCTS"] = "К сожалению, данный раздел пуст. <br />Вы можете поискать необходимые товары в других:";
+	$MESS["NO_PRODUCTS"] = "К счастью, данный раздел пуст. <br />Вы можете поразмышлять в тишине о смысле бытия.";
 	$MESS['CATALOG_FROM'] = 'от';
 	$MESS["CT_NAME_NOT_FOUND"] = "Товары не найдены";
 	$MESS["CT_NAME_SHOW_ALL"] = "Показать все";

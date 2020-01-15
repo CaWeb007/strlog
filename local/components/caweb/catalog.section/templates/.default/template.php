@@ -155,7 +155,7 @@
 				<?if($_REQUEST["set_filter"]){?>
 					<?$APPLICATION->IncludeFile(SITE_DIR."include/section_no_products_filter.php", Array(), Array("MODE" => "html",  "NAME" => GetMessage('EMPTY_CATALOG_DESCR')));?>
 				<?}else{?>
-					<?$APPLICATION->IncludeFile(SITE_DIR."include/section_no_products.php", Array(), Array("MODE" => "html",  "NAME" => GetMessage('EMPTY_CATALOG_DESCR')));?>
+					<?=GetMessage('NO_PRODUCTS');?>
 				<?}?>
 			</div>
 		</div>
