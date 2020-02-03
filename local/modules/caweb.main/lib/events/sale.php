@@ -46,7 +46,7 @@ class Sale{
             $family = $properties->getItemByOrderPropertyId(33);
             $lastName = $properties->getItemByOrderPropertyId(34);
         }else{
-            $fio = $properties->getItemByOrderPropertyId(1);
+            $fio = $properties->getItemByOrderPropertyId(12);
             $fio2 = $properties->getItemByOrderPropertyId(35);
             $name = $properties->getItemByOrderPropertyId(36);
             $family = $properties->getItemByOrderPropertyId(37);

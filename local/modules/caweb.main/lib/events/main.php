@@ -18,6 +18,7 @@ class Main{
     }
     public function OnAfterSetUserGroup($userId, $arFields){
         if ((int)$userId === 8643) return;
+        if ((int)$userId === 8643) return;
         $systemGroups = CatalogHelper::SITE_GROUP_MODEL;
         $groups = array();
         $groups = array_keys($arFields);

@@ -50,10 +50,12 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         }
         if ($response !== false){
             $order->setField('STATUS_ID', 'PW');
-            $payment->setField('STATUS', 'A');
-            $payment->setField('STATUS_MESSAGE', 'online_form');
-            $payment->setField('PS_VOUCHER_NUM', $response['id']);
-            $payment->setField('XML', $this->getToken($response['formUrl']));
+            $payment->setField('PS_STATUS', 'A');
+            $payment->setField('PS_STATUS_MESSAGE', 'online_form');
+            $payment->setField('PAY_VOUCHER_NUM', (int)$response['id']);
+            $payment->setField('XML_ID', $this->getToken($response['formUrl']));
+            $order->save();
+            $payment->save();
             return 'A';
         }
         return false;
@@ -66,7 +68,8 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         $http->setAuthorization($login, $password);
         $http->setHeader('Content-Type', 'application/json');
         $response = $http->post($url, json_encode($data));
-        $response = json_decode($response);
+        $response = json_decode($response, true);
+        Pr($response);
         if(($http->getStatus() === 200) && $response['accepted'] && !empty($response['id']))
             return $response;
         return false;
@@ -104,7 +107,7 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         return $data;
     }
     private function checkQuery(Order $order, Payment $payment){
-        $data = array('id' => $payment->getField('PS_VOUCHER_NUM'));
+        $data = array('id' => $payment->getField('PAY_VOUCHER_NUM'));
         $res = $this->http($data, self::CHECK_URL);
         Pr($res);
         return $res;
@@ -155,8 +158,8 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
     private function getLink(Payment $payment) {
         $obj = new Uri(self::ONLINE_URL);
         $obj->addParams(array(
-            'orderId' => $payment->getField('PS_VOUCHER_NUM'),
-            'token' => $payment->getField('XML')
+            'orderId' => $payment->getField('PAY_VOUCHER_NUM'),
+            'token' => $payment->getField('XML_ID')
         ));
         return $obj->getUri();
     }
