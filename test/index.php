@@ -4,7 +4,11 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\UserGroupTable;
 use Bitrix\Main\UserTable;
+use Bitrix\Main\Web\HttpClient;
+use Bitrix\Main\Web\Uri;
+use Bitrix\Sale\BasketItem;
 use Bitrix\Sale\Internals\UserPropsTable;
+use Bitrix\Sale\Order;
 use Caweb\Main\Catalog\Helper;
 use Caweb\Main\Catalog\Ratio;
 use Caweb\Main\Log\Write;
@@ -13,7 +17,42 @@ use Caweb\Main\Sale\ImportOneCPackageCaweb;
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Новый раздел");
 ?>
-
+<?
+/**@var $item BasketItem*/
+/*$order = Order::load(5930);
+$data = array();
+$url = 'https://rc1.moneycare.su/broker/api/v2/orders/create';
+$data['order_id'] = 62956491;
+$data['pointId'] = 'tt_test_1';
+$data['generateForm'] = true;
+$data['goods'] = array();
+$items = $order->getBasket()->getOrderableItems();
+foreach ($items as $item){
+    $tmp['title'] = $item->getField('NAME');
+    $tmp['price'] = $item->getPrice();
+    $tmp['count'] = $item->getQuantity();
+    $tmp['type'] = 'product';
+    $data['goods'][] = $tmp;
+}
+$errData = $data;
+$property = $order->getPropertyCollection();
+$data['firstName'] = $property->getPayerName()->getValue();
+$data['phone'] = str_replace(array(' ', '(', ')', '-'), '', $property->getPhone()->getValue());
+$http = new HttpClient();
+$http->setAuthorization('api_test', '1234567');
+$http->setHeader('Content-Type', 'application/json');
+$response = $http->post($url, json_encode($data));
+Pr($response);*/
+$url = 'https://rc1.moneycare.su/broker/online/?orderId=62956497&token=rs2fdmksholl08gd9r5hagekqr';
+$ob = new Uri($url);
+//$ob->deleteParams(array('token'));
+//Pr($ob->getPath());  // /broker/online/
+//Pr($ob->getUri());   /// https://rc1.moneycare.su/broker/online/?orderId=62956497&token=rs2fdmksholl08gd9r5hagekqr
+$query = array();
+parse_str($ob->getQuery(), $query);
+//Pr($ob->getQuery());  // orderId=62956497&token=rs2fdmksholl08gd9r5hagekqr
+Pr($query);
+?>
 <?
 /*$db = CUser::GetList(($by="ID"), ($order="ASC"), array(), array('SELECT' => array('UF_BONUSES'), 'FIELDS'=> array('ID')));
 while ($ar = $db->Fetch()){

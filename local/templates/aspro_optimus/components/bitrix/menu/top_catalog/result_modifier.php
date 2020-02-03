@@ -47,23 +47,25 @@ if($arResult){
 if(count($arResult) > 0){
 	$heightWrapMenu = 0;
 	foreach($arResult as $keys => $arItems){
-	foreach($arItems["CHILD"] as $key => $arItem){
-		$strlen = strlen($arItem["NAME"]);
-		$height1Level = 44;
+	    if (empty($arItems["CHILD"])) continue;
+        foreach($arItems["CHILD"] as $key => $arItem){
+            $strlen = strlen($arItem["NAME"]);
+            $height1Level = 44;
 
-		if ($strlen > 26) 
-			$height1Level = 65;
-		if ($strlen > 26*2) 
-			$height1Level = 85;
+            if ($strlen > 26)
+                $height1Level = 65;
+            if ($strlen > 26*2)
+                $height1Level = 85;
 
-		$heightWrapMenu += $height1Level;
-	}
+            $heightWrapMenu += $height1Level;
+        }
 	}
 
 	//	printArr($arResult);
 	$heightWrapMenu = 775;
 	$arResult['MAX_COLUM_HEIGHT'] = $heightWrapMenu+10;
 	foreach($arResult as $keys => $arItems){
+        if (empty($arItems["CHILD"])) continue;
 	foreach($arItems["CHILD"] as $key => $arItem){
 	
 		$columnHeight = $heightWrapMenu - 40;
