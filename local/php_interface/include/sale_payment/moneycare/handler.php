@@ -1,6 +1,7 @@
 <?
 namespace Sale\Handlers\PaySystem;
 
+use Bitrix\Main\Error;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Request;
 use Bitrix\Main\Web\HttpClient;
@@ -13,11 +14,12 @@ use Bitrix\Sale\PropertyValue;
 
 Loc::loadMessages(__FILE__);
 
-class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRefundExtended, PaySystem\IHold{
+class MoneyCareHandler extends PaySystem\ServiceHandler {
     const CREATE_URL = 'https://rc1.moneycare.su/broker/api/v2/orders/create';
     const ONLINE_URL = 'https://rc1.moneycare.su/broker/online/';
-    const CHECK_URL = '/broker/api/v2/orders/{id}/details';
+    const CHECK_URL = 'https://rc1.moneycare.su/broker/api/v2/orders/{id}/details';
     const PHONE_PREG = array(' ', '(', ')', '-');
+    const HANDLER_NAME = 'MONEYCARE';
     private $status = array(
         'online_form' => 'A',
         'processing' => 'B',
@@ -41,12 +43,15 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         $extraParam = $this->checkQuery($order, $payment);
         return $this->showTemplate($payment, 'template');
     }
+
+
+
     private function linkQuery(Payment $payment, Order $order){
-        $data = $this->getData($order);
+        $data = $this->getData($payment, $order);
         $response = array();
-        if (empty($response = $this->http($data, self::CREATE_URL))){
+        if (empty($response = $this->http($payment, $data, self::CREATE_URL))){
             $data = array_intersect_key($data, array_flip(array('point_id', 'goods')));
-            $response = $this->http($data, self::CREATE_URL);
+            $response = $this->http($payment, $data, self::CREATE_URL);
         }
         if ($response !== false){
             $order->setField('STATUS_ID', 'PW');
@@ -60,24 +65,29 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         }
         return false;
     }
-    private function http($data, $url){
-        $url = self::CREATE_URL;
-        $login = 'api_test';
-        $password = '1234567';
+    private function http(Payment $payment ,$data, $url){
+        $login = $this->getBusinessValue($payment, 'LOGIN');
+        $password = '1234567';//todo getBuisValue
         $http = new HttpClient();
         $http->setAuthorization($login, $password);
         $http->setHeader('Content-Type', 'application/json');
         $response = $http->post($url, json_encode($data));
         $response = json_decode($response, true);
-        Pr($response);
         if(($http->getStatus() === 200) && $response['accepted'] && !empty($response['id']))
             return $response;
         return false;
     }
-    private function getData(Order $order){
+    private function getData(Payment $payment,Order $order){
         $data['order_id'] = $order->getId();
-        $data['pointId'] = 'tt_test_1';
+        $data['pointId'] = 'tt_test_1'; //todo getBuisValue
         $data['generateForm'] = true;
+        $data['forceScore'] = false;
+        $requestUrl = new Uri("https://xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/tools/sale_ps_result.php");
+        $requestUrl->addParams(array(
+            'PAYMENT' => self::HANDLER_NAME, 'PAYMENT_ID' => $payment->getId(), 'SUCCESS' => 'Y'));
+        $data['formSuccessUrl'] = $requestUrl->getUri();
+        $requestUrl->addParams(array('SUCCESS' => 'N'));
+        $data['formCancelUrl'] = $requestUrl->getUri();
         $data['goods'] = array();
         $items = $order->getBasket()->getOrderableItems();
         /**@var $item BasketItem*/
@@ -107,10 +117,18 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         return $data;
     }
     private function checkQuery(Order $order, Payment $payment){
-        $data = array('id' => $payment->getField('PAY_VOUCHER_NUM'));
-        $res = $this->http($data, self::CHECK_URL);
-        Pr($res);
-        return $res;
+        $login = $this->getBusinessValue($payment, 'LOGIN');
+        $password = '1234567';//todo getBuisValue
+        $http = new HttpClient();
+        $http->setAuthorization($login, $password);
+        $http->setHeader('Content-Type', 'application/json');
+        $response = $http->get(str_replace('{id}', $payment->getField('PAY_VOUCHER_NUM'), self::CHECK_URL));
+        $response = json_decode($response, true);
+        if(($http->getStatus() === 200) && $response['accepted'] && !empty($response['id'])){
+            $this->setData($order, $payment, $response);
+            return $response;
+        }
+        return false;
     }
     private function getStatus (Payment $payment, Order $order){
         $dbStatus = $payment->getField('PS_STATUS');
@@ -119,7 +137,16 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
     }
     public function processRequest(Payment $payment, Request $request)
     {
-        return new PaySystem\ServiceResult();
+        $result = new PaySystem\ServiceResult();
+        if ($request->get('SUCCESS') === 'N'){
+            $result->addError(new Error(Loc::getMessage('MC_ERROR_REQUEST')));
+        }else{
+            $result->setPsData(array(
+                'PS_STATUS_MESSAGE' => 'processing',
+                'PS_STATUS' => $this->status['processing']
+            ));
+        }
+        return $result;
     }
 
     public function getPaymentIdFromRequest(Request $request)
@@ -127,27 +154,19 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
         $paymentId = $request->get('PAYMENT_ID');
         return intval($paymentId);
     }
-
     public function getCurrencyList()
     {
         return 'RUB';
     }
-
     public static function getIndicativeFields()
     {
-        return array();
+        return array('PAYMENT' => self::HANDLER_NAME);
     }
-
     static protected function isMyResponseExtended(Request $request, $paySystemId)
     {
-        return true;
+            return true;
     }
-
     public function isTuned(){}
-    public function isRefundableExtended(){}
-    public function confirm(Payment $payment){}
-    public function cancel(Payment $payment){}
-    public function refund(Payment $payment, $refundableSum){}
     public function sendResponse(PaySystem\ServiceResult $result, Request $request){}
     private function getToken($formUrl) {
         $obj = new Uri($formUrl);
@@ -162,5 +181,20 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\IRe
             'token' => $payment->getField('XML_ID')
         ));
         return $obj->getUri();
+    }
+    private function setData(Order $order,Payment $payment, $response) {
+        $status = $this->status[$response['status']];
+        $payment->setField('PS_STATUS_MESSAGE', $response['status']);
+        $payment->setField('PS_STATUS', $status);
+        switch ($status){
+            case 'D':
+                $order->setField('STATUS_ID', 'P');
+                break;
+            case 'E':
+            case 'F':
+                $order->setField('STATUS_ID', 'N');
+        }
+        $payment->save();
+        $order->save();
     }
 }

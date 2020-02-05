@@ -6,11 +6,12 @@
   cursor: pointer;
   padding: 7px 12px 8px;
   font-size: 14px;
-  line-height: 16;
+  line-height: 16px;
   font-weight: 400;
   color: #ffffff;
   display: block;
   text-decoration: none;
   vertical-align: middle; }
   .money-care-container a:hover {
-    color: #2975c0; }
+    background-color: #2975c0;
+    color: #ffffff; }
