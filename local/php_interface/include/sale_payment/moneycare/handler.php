@@ -11,10 +11,11 @@ use Bitrix\Sale\Order;
 use Bitrix\Sale\Payment;
 use Bitrix\Sale\PaySystem;
 use Bitrix\Sale\PropertyValue;
+use Caweb\Main\Log\Write;
 
 Loc::loadMessages(__FILE__);
 
-class MoneyCareHandler extends PaySystem\ServiceHandler {
+class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\ICheckable {
     const CREATE_URL = 'https://rc1.moneycare.su/broker/api/v2/orders/create';
     const ONLINE_URL = 'https://rc1.moneycare.su/broker/online/';
     const CHECK_URL = 'https://rc1.moneycare.su/broker/api/v2/orders/{id}/details';
@@ -26,7 +27,7 @@ class MoneyCareHandler extends PaySystem\ServiceHandler {
     private $status = array(
         'online_form' => 'A',
         'processing' => 'B',
-        'contruct' => 'C',
+        'contract' => 'C',
         'end' => 'D',
         'cancel' => 'E',
         'decline' => 'F',
@@ -129,12 +130,12 @@ class MoneyCareHandler extends PaySystem\ServiceHandler {
         $phone = $properties->getPhone();
         if ($personType === 2){
             $firstName = $properties->getItemByOrderPropertyId(36);
-            $secondName = $properties->getItemByOrderPropertyId(37);
-            $lastName = $properties->getItemByOrderPropertyId(38);
+            $secondName = $properties->getItemByOrderPropertyId(38);
+            $lastName = $properties->getItemByOrderPropertyId(37);
         }else{
             $firstName = $properties->getItemByOrderPropertyId(32);
-            $secondName = $properties->getItemByOrderPropertyId(33);
-            $lastName = $properties->getItemByOrderPropertyId(34);
+            $secondName = $properties->getItemByOrderPropertyId(34);
+            $lastName = $properties->getItemByOrderPropertyId(33);
         }
         if ($firstName instanceof PropertyValue) $result['firstName'] = $firstName->getValue();
         if ($secondName instanceof PropertyValue) $result['secondName'] = $secondName->getValue();
@@ -180,7 +181,7 @@ class MoneyCareHandler extends PaySystem\ServiceHandler {
         $http->setHeader('Content-Type', 'application/json');
         $response = $http->get($this->getCheckUrl());
         $response = json_decode($response, true);
-        if(($http->getStatus() === 200) && $response['accepted'] && !empty($response['id'])){
+        if(($http->getStatus() === 200) && $response['status']){
             $status = $this->status[$response['status']];
             $this->setData($response);
             return $status;
@@ -201,6 +202,7 @@ class MoneyCareHandler extends PaySystem\ServiceHandler {
         switch ($status){
             case 'D':
                 $this->getOrder()->setField('STATUS_ID', 'P');
+                $this->getPayment()->setPaid('Y');
                 break;
             case 'E':
             case 'F':
@@ -242,5 +244,15 @@ class MoneyCareHandler extends PaySystem\ServiceHandler {
     public function isTuned(){}
     public function sendResponse(PaySystem\ServiceResult $result, Request $request){
         LocalRedirect('/personal/orders/');
+    }
+    public function check(Payment $payment) {
+        $result = new PaySystem\ServiceResult();
+        $this->setEntities($payment);
+        $dbStatus = $this->getPsDbStatus();
+        if (($dbStatus === 'B') || ($dbStatus === 'C')){
+            $psStatus = $this->getCheckStatus();
+            Write::file('moneycare', $psStatus);
+        }
+        return $result;
     }
 }

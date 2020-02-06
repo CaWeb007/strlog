@@ -1,4 +1,6 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
+<? use Bitrix\Main\Page\Asset;
+
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 if($GET["debug"] == "y"){
     error_reporting(E_ERROR | E_PARSE);
 }
@@ -32,9 +34,9 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 
         <!--[if gte IE 9]><style type="text/css">.basket_button, .button30, .icon {filter: none;}</style><![endif]-->
         <!--<link href="<?=CMain::IsHTTPS() ? 'https' : 'http'?>://fonts.googleapis.com/css?family=Ubuntu:400,500,700,400italic&subset='latin,cyrillic'" rel='stylesheet' type='text/css' />-->
-		<?/*
-    $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/snow/snowstorm-min.js');
-*/?>
+        <?
+        Asset::getInstance()->addCss(SITE_TEMPLATE_PATH.'/css/custom2.css');
+        ?>
 
 <?/*Костыли*start*показ меню каталога только на главной странице*/
 	//var_dump("<pre>",$TEMPLATE_OPTIONS);?>
