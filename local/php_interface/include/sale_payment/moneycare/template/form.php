@@ -8,5 +8,5 @@ Loc::loadMessages(__FILE__);
 ?>
 <link href="/local/php_interface/include/sale_payment/moneycare/template/style.css" type="text/css" rel="stylesheet" />
 <div class="money-care-container">
-    <a href="<?=$params['url']?>" target="_self"><?=Loc::getMessage('MC_PAY')?></a>
+    <a href="<?=$params['CREATE_URL']?>" target="_self"><?=Loc::getMessage('MC_PAY')?></a>
 </div>

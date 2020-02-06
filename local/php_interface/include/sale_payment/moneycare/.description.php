@@ -10,6 +10,14 @@ $data = array(
         'LOGIN' => array(
             'NAME' => Loc::getMessage('MONEYCARE_LOGIN'),
             'SORT' => 100
-        )
+        ),
+        'PASSWORD' => array(
+            'NAME' => Loc::getMessage('MONEYCARE_PASSWORD'),
+            'SORT' => 100
+        ),
+        'POINT_ID' => array(
+            'NAME' => Loc::getMessage('MONEYCARE_POINT_ID'),
+            'SORT' => 100
+        ),
     )
 );
