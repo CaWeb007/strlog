@@ -1,5 +1,6 @@
 <?php
 use Bitrix\Sale\Internals\CollectableEntity;
+use Bitrix\Sale\Internals\Entity;
 use Bitrix\Sale\Internals\PersonTypeTable;
 use Bitrix\Sale\ShipmentCollection;
 use Bitrix\Main\Localization\Loc;
@@ -35,7 +36,7 @@ class groupUserRestriction extends Bitrix\Sale\Delivery\Restrictions\Base
     * @param CollectableEntity $entity
     * @return int
     */
-   public static function extractParams(CollectableEntity $entity)
+   public static function extractParams(Entity $entity)
    {
       /** @var ShipmentCollection $collection */
       $collection = $entity->getCollection();
