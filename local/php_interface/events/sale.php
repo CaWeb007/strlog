@@ -43,7 +43,7 @@ function OnSaleOrderBeforeSavedHandler(\Bitrix\Main\Event $event) {
 			if ($dbRes->getSelectedRowsCount() > 0) {
 				return new \Bitrix\Main\EventResult(
 					\Bitrix\Main\EventResult::ERROR,
-					new \Bitrix\Sale\ResultError('Данный емайл уже зарегистрирован на сайте. <span style="cursor:pointer;" onclick="showAuthFormPopup()"><strong>Войти</strong></span>'),
+					new \Bitrix\Sale\ResultError('Данный емайл уже зарегистрирован на сайте. <span class="btn btn-default" style="cursor:pointer;" onclick="showAuthFormPopup()">Войти</span>'),
 					'sale'
 				 );
 			}
