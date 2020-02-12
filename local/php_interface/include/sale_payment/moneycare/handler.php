@@ -16,9 +16,9 @@ use Caweb\Main\Log\Write;
 Loc::loadMessages(__FILE__);
 
 class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\ICheckable {
-    const CREATE_URL = 'https://rc1.moneycare.su/broker/api/v2/orders/create';
-    const ONLINE_URL = 'https://rc1.moneycare.su/broker/online/';
-    const CHECK_URL = 'https://rc1.moneycare.su/broker/api/v2/orders/{id}/details';
+    const CREATE_URL = 'https://mc.moneycare.su/broker/api/v2/orders/create';
+    const ONLINE_URL = 'https://mc.moneycare.su/broker/online/';
+    const CHECK_URL = 'https://mc.moneycare.su/broker/api/v2/orders/{id}/details';
     const REQUEST_URL = 'https://xn--80afpacjdwcqkhfi.xn--p1ai/bitrix/tools/sale_ps_result.php';
     const PHONE_PREG = array(' ', '(', ')', '-');
     const HANDLER_NAME = 'MONEYCARE';
