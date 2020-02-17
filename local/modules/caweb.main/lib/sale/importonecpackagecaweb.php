@@ -21,7 +21,7 @@ use Bitrix\Sale\Shipment;
 use Caweb\Main\Log\Write;
 
 final class ImportOneCPackageCaweb extends ImportOneCPackageSale {
-    protected $debugMode = true;
+    protected $debugMode = false;
     protected $logArray = array();
     protected function convert(array $documents)
     {
