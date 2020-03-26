@@ -1,6 +1,7 @@
 <?
 
 use Bitrix\Catalog\ProductTable;
+use Bitrix\Main\Loader;
 use Caweb\Main\Log\Write;
 
 AddEventHandler('catalog', 'OnSuccessCatalogImport1C', 'customCatalogImportStep');
@@ -250,7 +251,8 @@ function customCatalogImportStep()
 		$errorMessage = null;
 		
 		$el = new CIBlockElement();
-		
+        Loader::includeModule('caweb.main');
+        $log = new Write();
 		while ($arXMLItem = $res->Fetch()) {
 			
 			$XML_ID = $arXMLItem["VALUE"];
@@ -270,7 +272,7 @@ function customCatalogImportStep()
                 $totalQuantity = 0;
 				$itemStore = [];
 				$PRODUCT_ID = $arItem["ID"];
-				$V = (float)$arItem["PROPERTY_OBEM_M3_VALUE"];
+				$V = (float)$arItem["PROPERTY_OBEM_M3_VALUE"];//0216
 				$isV = false;
 				
 				#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arItem));
@@ -291,28 +293,31 @@ function customCatalogImportStep()
 						break;
 					}
 				}
-				
+				$log->setLogArray('PRODUCT_ID', $PRODUCT_ID);
+				$log->setLogArray('isV', $isV);
+				$log->setLogArray('V', $V);
 				if($isV && $V>0 && $V<1 && $PRODUCT_ID>0){
 					
 					$query = "  SELECT item.VALUE as item,  rest.VALUE as amount, stock.VALUE as stockID
 								FROM b_xml_tree as item
 								INNER JOIN b_xml_tree as offer ON (item.PARENT_ID = offer.ID && offer.DEPTH_LEVEL = 3)
 								INNER JOIN b_xml_tree as stock ON (stock.LEFT_MARGIN BETWEEN offer.LEFT_MARGIN AND offer.RIGHT_MARGIN AND stock.DEPTH_LEVEL = 7 AND stock.NAME = 'Ид')
-								INNER JOIN b_xml_tree as rest ON (rest.LEFT_MARGIN BETWEEN offer.LEFT_MARGIN AND offer.RIGHT_MARGIN AND rest.DEPTH_LEVEL = 7 AND rest.NAME = 'Количество')
+								INNER JOIN b_xml_tree as rest ON (rest.LEFT_MARGIN BETWEEN offer.LEFT_MARGIN AND offer.RIGHT_MARGIN AND rest.DEPTH_LEVEL = 7 AND rest.NAME = 'Количество' AND stock.PARENT_ID = rest.PARENT_ID)
 								WHERE item.VALUE = '$XML_ID' AND item.NAME = 'Ид'";
 								
 					$results = $DB->Query($query);
-					
-					while($stock = $results->Fetch()) {
-					
-						if(isset($stock['amount']) && (float)$stock['amount'] > 0){
+                    while($stock = $results->Fetch()) {
+                        $log->setLogArray('stock', $stock);
+
+                        if(isset($stock['amount']) && (float)$stock['amount'] > 0){
 						
 						#	AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " склад XML_ID = " . $stock['stockID'] . ", остаток из 1c = " . $stock['amount']);
 							//$rsStore = \CCatalogStoreProduct::GetList(array(), array('PRODUCT_ID' =>$arItem['ID']), false, false, array('ID','STORE_ID','AMOUNT')); 
 							$result = $DB->Query($q="SELECT ID FROM `b_catalog_store` WHERE `XML_ID` = '".$stock['stockID']."'");
 							$store = $result->Fetch();
-							
-							#AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " склад ID из БД = " . serialize($store) . ", QUERY = " . $q);
+                            $log->setLogArray('store', $store);
+
+                            #AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " склад ID из БД = " . serialize($store) . ", QUERY = " . $q);
 							
 							if(isset($store['ID']) && $store['ID']){
 								$storeID = $store['ID'];
@@ -333,7 +338,7 @@ function customCatalogImportStep()
 							}
 						}
 					}
-					
+					$log->setLogArray('itemStore', $itemStore);
 					if(count($itemStore)>0){
 						$ratio = false;
 						
@@ -347,6 +352,8 @@ function customCatalogImportStep()
 						}
 						
 						//AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " Общий остаток новый = " . $totalQuantity);
+                        $log->setLogArray('totalQuantity', $totalQuantity);
+                        $log->setLogArray('$ratio', $ratio);
 
 						if($totalQuantity>0){
 							$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '".$totalQuantity."' WHERE `ID` = '".$PRODUCT_ID."'");
@@ -358,8 +365,8 @@ function customCatalogImportStep()
 					}
 					
 				}
-			}
-			
+                $log->dumpLog('amount', false);
+            }
 			$exp = explode("#",$XML_ID);
 				#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arXMLItem));
 				

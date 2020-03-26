@@ -8,6 +8,7 @@ use Bitrix\Main\Type\DateTime;
 class Write{
     const DIR = 'logs/caweb/';
     const TYPE = '.log';
+    protected $logArray = array();
     public static function file($name, $var, $rewrite = false){
         $path = self::DIR.$name.self::TYPE;
         $timeInt = new DateTime();
@@ -20,5 +21,12 @@ class Write{
         if ($file->isExists() && $rewrite)
             $file->putContents('');
         Debug::dumpToFile($var,$time, $path);
+    }
+    public function setLogArray($key, $value){
+        $this->logArray[$key][] = $value;
+    }
+    public function dumpLog($name, $flag){
+        if (!$flag) return;
+        static::file($name, $this->logArray, true);
     }
 }
