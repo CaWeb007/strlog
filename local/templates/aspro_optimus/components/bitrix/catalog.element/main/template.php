@@ -385,7 +385,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 			<?}?>
 			<div class="middle_info main_item_wrapper">
 				<div class="prices_block">
-					<h2 style="font-size:20px;">Купить <?=$arResult['NAME'];?></h2>
+
 					<?$frame = $this->createFrame()->begin();?>
 					<div class="cost prices clearfix">
 						<?if( count( $arResult["OFFERS"] ) > 0 ){?>
@@ -1258,7 +1258,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || ((count($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]) && is_array($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"])) || count($arResult["SECTION_FULL"]["UF_FILES"])) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
 				<?if(strlen($arResult["DETAIL_TEXT"])):?>
-					<div class="detail_text"><h2 style="font-size:20px;">Купить <?=$arResult['NAME'];?> по низкой цене</h2><?=$arResult["DETAIL_TEXT"]?></div>
+					<div class="detail_text"><h2 style="font-size:20px;"><?=$arResult['NAME'];?></h2><?=$arResult["DETAIL_TEXT"]?></div>
 				<?endif;?>
 				<?if($arResult["SERVICES"] && $showProps){?>
 					<div class="wrap_md descr_div">

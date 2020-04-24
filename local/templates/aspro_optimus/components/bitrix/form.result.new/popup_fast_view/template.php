@@ -38,9 +38,9 @@
 				setStatusButton();
 				InitFlexSlider();
 
-				setTimeout(function(){
+				/*setTimeout(function(){
 					showTotalSummItem('Y');
-				}, 100);
+				}, 100);*/
 				
 				$(window).scroll();
 			}

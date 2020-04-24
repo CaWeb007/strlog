@@ -13,7 +13,7 @@ global $OptimusSectionID;
 $arSection = $arElement = array();
 
 $FAST_VIEW = false;
-if(isset($_POST['FAST_VIEW']) && $_POST['FAST_VIEW'] == "Y") {
+if(isset($_REQUEST['FAST_VIEW']) && $_REQUEST['FAST_VIEW'] == "Y") {
 	$FAST_VIEW = true;
 	unset($arResult["VARIABLES"]["SECTION_ID"]);
 	unset($arResult["VARIABLES"]["SECTION_CODE"]);

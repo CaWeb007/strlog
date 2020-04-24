@@ -548,10 +548,10 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 			<?$isArticle=(strlen($arResult["DISPLAY_PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) || ($arResult['SHOW_OFFERS_PROPS'] && $showCustomOffer));?>
 			<?if($isArticle || $arResult["BRAND_ITEM"] || $arParams["SHOW_RATING"] == "Y"){?>
 				<div class="top_info">
-					<?if($arParams["SHOW_RATING"] == "Y"):?>
-							<?$frame = $this->createFrame('dv_'.$arResult["ID"])->begin('');?>
+					<?/*if($arParams["SHOW_RATING"] == "Y"):*/?><!--
+							<?/*$frame = $this->createFrame('dv_'.$arResult["ID"])->begin('');*/?>
 								<div class="rating">
-									<?$APPLICATION->IncludeComponent(
+									<?/*$APPLICATION->IncludeComponent(
 									   "bitrix:iblock.vote",
 									   "element_rating",
 									   Array(
@@ -565,10 +565,10 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 										  "DISPLAY_AS_RATING" => 'vote_avg'
 									   ),
 									   $component, array("HIDE_ICONS" =>"Y")
-									);?>
+									);*/?>
 								</div>
-							<?$frame->end();?>
-					<?endif;?>
+							<?/*$frame->end();*/?>
+					--><?/*endif;*/?>
 					<div class="rows_block">
 						<?if($useStores){?>
 							<div class="item_block">
