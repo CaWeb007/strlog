@@ -10,7 +10,7 @@ $arSite = CSite::GetByID(SITE_ID)->Fetch();
 $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 ?>
 <!DOCTYPE html>
-<html xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" xmlns="http://www.w3.org/1999/xhtml" <?=($htmlClass ? 'class="'.$htmlClass.'"' : '')?>>
+<html xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" <?=($htmlClass ? 'class="'.$htmlClass.'"' : '')?>>
     <head>
         <title><?$APPLICATION->ShowTitle()?></title>
         <?$APPLICATION->ShowMeta("viewport");?>
