@@ -13,6 +13,7 @@ class Exchange{
     protected $test = 10;
     protected $errors = array();
     protected $warn = array();
+    public static $doExchange = false;
     const HL_ID = 4;
     function __construct(){
         $this->hlConstruct();
@@ -32,8 +33,10 @@ class Exchange{
         return '\Caweb\Main\User\Exchange::clearHLAgent();';
     }
     public static function updateUsers(){
+        self::$doExchange = true;
         $_this = new self();
         $_this->init();
+        self::$doExchange = false;
     }
     public static function delete(){
         $_this = new self();

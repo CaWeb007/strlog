@@ -9,6 +9,8 @@ EventManager::getInstance()->addEventHandler('sale', 'OnBeforeShipmentDeleted',a
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'OnSaleOrderBeforeSaved'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Shipment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDelete'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforePaymentDelete'));
+EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnBeforeUserAccountAdd',array('Caweb\Main\Events\Sale', 'CheckDoExchange'));
+EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnBeforeUserAccountUpdate',array('Caweb\Main\Events\Sale', 'CheckDoExchange'));
 EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Product::OnBeforeUpdate',array('Caweb\Main\Events\Catalog', 'OnBeforeProductUpdate'));
 //EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeUpdate',array('Caweb\Main\Events\Sale', 'OnBeforePaymentUpdate'));
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderSaved'));

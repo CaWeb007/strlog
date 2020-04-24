@@ -9,7 +9,7 @@ use Bitrix\Sale\Internals\ShipmentTable;
 use Bitrix\Sale\Order;
 use Bitrix\Sale\PropertyValue;
 use Caweb\Main\Log\Write;
-
+use Caweb\Main\User\Exchange;
 Loc::loadLanguageFile(__FILE__);
 class Sale{
     public function OnBeforeShipmentDelete(Entity\Event $event){
@@ -60,5 +60,9 @@ class Sale{
         }else{
             $fio->setValue('unknown');
         }
+    }
+    public function CheckDoExchange($arFields){
+        if (!Exchange::$doExchange)
+            return false;
     }
 }
