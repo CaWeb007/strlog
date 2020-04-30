@@ -928,6 +928,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 							}
 
 							break;
+                        case 'MAIN':
+                            this.showError(this.mainErrorsNode, this.result.WARNING[k]);
+                            this.animateScrollTo(this.mainErrorsNode, 800, 100);
+                            break;
 					}
 				}
 			}

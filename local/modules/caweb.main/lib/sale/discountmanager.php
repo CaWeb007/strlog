@@ -228,6 +228,7 @@ class DiscountManager{
         $orderId = $order->getId();
         $userId = $order->getField('CREATED_BY');
         $coupon = array();
+        if (!is_array($_SESSION[self::SESSION_KEY])) $_SESSION[self::SESSION_KEY] = array();
         foreach ($_SESSION[self::SESSION_KEY] as $item) {
             if ($item['STATUS'] !== self::STATUS_ENTER) continue;
             $coupon = $item;

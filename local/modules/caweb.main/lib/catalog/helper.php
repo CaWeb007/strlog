@@ -2,6 +2,7 @@
 namespace Caweb\Main\Catalog;
 
 use Bitrix\Catalog\GroupAccessTable;
+use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Page\Asset;
 
@@ -45,5 +46,10 @@ class Helper{
         $link = 'https://xn--80afpacjdwcqkhfi.xn--p1ai/'.$link;
         $string = "<link rel=\"canonical\" href=\"".$link."\" />";
         Asset::getInstance()->addString($string, true, 'BEFORE_CSS');
+    }
+    public static function getProductPrice($id, $priceId) {
+        $param['filter'] = array('PRODUCT_ID' => $id, 'CATALOG_GROUP_ID' => $priceId);
+        $param['select'] = array('ID','PRICE');
+        return PriceTable::getRow($param);
     }
 }

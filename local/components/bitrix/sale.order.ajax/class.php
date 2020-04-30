@@ -2311,12 +2311,22 @@ class SaleOrderAjax extends \CBitrixComponent
 		$arProperty["VALUE_FORMATED"] = $arProperty["VALUE"];
 	}
 
+	protected function checkBasketItemsPrice(){
+        if (\Caweb\Main\Events\Helper::checkNeedChangeProductPrice($this->order)){
+            $text = Loc::getMessage('CAWEB_PRICE_CHANGE');
+            $this->addWarning($text, 'MAIN');
+            $this->addWarning($text, self::PAY_SYSTEM_BLOCK);
+        }
+    }
+
 	/**
 	 * Set basket items data from order object to $this->arResult
 	 */
 	protected function obtainBasket()
 	{
-		$arResult =& $this->arResult;
+	    $this->checkBasketItemsPrice();
+
+        $arResult =& $this->arResult;
 
 		$arResult["MAX_DIMENSIONS"] = $arResult["ITEMS_DIMENSIONS"] = array();
 		$arResult["BASKET_ITEMS"] = array();

@@ -4,22 +4,23 @@ use Bitrix\Main\EventManager;
 Loader::includeModule('caweb.main');
 Loader::includeModule('sale');
 function Pr($z){echo '<pre>'; echo var_dump($z); echo '</pre><hr/>';}
+foreach(glob(__DIR__."/events/*") as $file){
+    if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
+}
 AddEventHandler("main", "OnBeforeUserRegister", array('Caweb\Main\Events\Main', 'OnBeforeUserRegister'));
 EventManager::getInstance()->addEventHandler('sale', 'OnBeforeShipmentDeleted',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDeleted'));
-EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'OnSaleOrderBeforeSaved'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Shipment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDelete'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforePaymentDelete'));
 EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnBeforeUserAccountAdd',array('Caweb\Main\Events\Sale', 'CheckDoExchange'));
 EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnBeforeUserAccountUpdate',array('Caweb\Main\Events\Sale', 'CheckDoExchange'));
-EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Product::OnBeforeUpdate',array('Caweb\Main\Events\Catalog', 'OnBeforeProductUpdate'));
-//EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeUpdate',array('Caweb\Main\Events\Sale', 'OnBeforePaymentUpdate'));
+EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'priceFromPaySystemOrderEntity'));
+EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'OnSaleOrderBeforeSaved'));
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderSaved'));
+EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Product::OnBeforeUpdate',array('Caweb\Main\Events\Catalog', 'OnBeforeProductUpdate'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
-foreach(glob(__DIR__."/events/*") as $file){
-	if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
-}
+
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){
         $dbBasketItems = CSaleBasket::GetList(
