@@ -7,7 +7,7 @@ $APPLICATION->AddChainItem(Loc::getMessage("SPS_CHAIN_ORDERS"), $arResult['PATH_
 <div class="personal_wrapper">
 	<div class="orders_wrapper">
 		<?$APPLICATION->IncludeComponent(
-			"bitrix:sale.personal.order.list",
+			"caweb:sale.personal.order.list",
 			"",
 			array(
 				"PATH_TO_DETAIL" => $arResult["PATH_TO_ORDER_DETAIL"],
@@ -30,7 +30,7 @@ $APPLICATION->AddChainItem(Loc::getMessage("SPS_CHAIN_ORDERS"), $arResult['PATH_
 				"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
 				"DEFAULT_SORT" => $arParams["ORDER_DEFAULT_SORT"],
 				"RESTRICT_CHANGE_PAYSYSTEM" => $arParams["ORDER_RESTRICT_CHANGE_PAYSYSTEM"],
-				"REFRESH_PRICES" => $arParams["ORDER_REFRESH_PRICES"],
+				"REFRESH_PRICES" => 'Y',
 			),
 			$component
 		);

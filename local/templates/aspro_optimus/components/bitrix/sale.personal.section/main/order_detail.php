@@ -36,7 +36,7 @@ foreach($arParams as $key => $val)
 <div class="personal_wrapper">
 	<div class="orders_wrapper">
 		<?$APPLICATION->IncludeComponent(
-			"bitrix:sale.personal.order.detail",
+			"caweb:sale.personal.order.detail",
 			"",
 			$arDetParams,
 			$component
