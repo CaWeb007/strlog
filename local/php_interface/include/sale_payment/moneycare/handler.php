@@ -102,7 +102,7 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\ICh
         return $obj->getUri();
     }
     private function getCreateData(){
-        $data['order_id'] = $this->getOrder()->getId();
+        $data['order_id'] = (string)$this->getOrder()->getId();
         $data['pointId'] = $this->getBusinessValue($this->getPayment(), 'POINT_ID');
         $data['generateForm'] = true;
         $data['forceScore'] = false;
