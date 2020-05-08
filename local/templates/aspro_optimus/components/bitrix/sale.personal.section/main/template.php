@@ -1,6 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
+use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Caweb\Main\Sale\Helper;
 
 /*$APPLICATION->SetTitle(Loc::getMessage("SPS_TITLE_MAIN"));
 $APPLICATION->AddChainItem(Loc::getMessage("SPS_CHAIN_MAIN"), $arResult['SEF_FOLDER']);
@@ -17,8 +19,8 @@ if ($arParams['SHOW_ORDER_PAGE'] === 'Y')
 		"icon" => '<i class="cur_orders"></i>'
 	);
 }
-
-if ($arParams['SHOW_ACCOUNT_PAGE'] === 'Y')
+Loader::includeModule('caweb.main');
+if (($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') && Helper::getInstance()->checkBonusAccess())
 {
 	$availablePages[] = array(
 		"path" => $arResult['PATH_TO_ACCOUNT'],
@@ -102,21 +104,16 @@ if (empty($availablePages))
 }
 else
 {
-	$userData = CUser::GetByID($USER->GetID());
-	$arUser = $userData->Fetch();
-	$userGroups = \CUser::GetUserGroup($USER->GetID());
-	$arGroups = [9];
-	$result = array_intersect($arGroups, $userGroups);
-	$userTotal = count($result) > 0 ? (float)$arUser["UF_ACCUMULATION"] : false;
-	
 	?>
-<?if($userTotal !== false && $userTotal<10000):?><div class="alert alert-warning alert-dismissible fade show" role="alert">
-	В настоящий момент Вам доступны только розничные цены.<br>
-После накопления общей суммы оплаченных заказов в 10 тыс. рублей (у вас <?=$userTotal?> рублей) - Вам будут доступны спец.цены на новые заказы.
-<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div><?endif?>
+    <?if(Helper::getInstance()->isKpUser()):?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        В настоящий момент Вам доступны только розничные цены.<br>
+        После накопления общей суммы оплаченных заказов в 10 тыс. рублей - Вам будут доступны спец.цены на новые заказы.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    <?endif?>
 	<div class="personal_wrapper">
 		<div class="row sale-personal-section-row-flex">
 			<?

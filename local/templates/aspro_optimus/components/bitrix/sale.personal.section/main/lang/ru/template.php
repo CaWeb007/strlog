@@ -1,5 +1,5 @@
 <?php
-$MESS["SPS_ACCOUNT_PAGE_NAME"] = "Личный счет";
+$MESS["SPS_ACCOUNT_PAGE_NAME"] = "Бонусы";
 $MESS["SPS_PERSONAL_PAGE_NAME"] = "Личные данные";
 $MESS["SPS_PROFILE_PAGE_NAME"] = "Профили заказов";
 $MESS["SPS_ORDER_PAGE_NAME"] = "Текущие заказы";

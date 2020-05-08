@@ -326,36 +326,9 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 						else
 						{?>
 							<?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arResult["PRICES"], $strMeasure, $min_price_id);?>
-							<?php
-							$userGroups = array(11, 12);
-							$arGroups = CUser::GetUserGroup($USER->GetID());
-							$result = array_intersect($userGroups, $arGroups);
-							if(!empty($result)):?>
-								<span class="bonuses-quantity-title"></span>
-							<?else:?>
-								<?foreach($arResult["PRICES"] as $priceType => $priceValue):?>
-									<?$priceVal = $priceValue["VALUE"];?>
-								<?endforeach;?>
-								<?if($arResult["PROPERTIES"]["_POROGA_NACHISLENIYA_BONUSOV"]["VALUE"] != ''):?>
-									<?$bonusPercent = $arResult["PROPERTIES"]["_POROGA_NACHISLENIYA_BONUSOV"]["VALUE"];?>
-								<?endif;?>
-								<?$totalBonus = round($priceVal * ($bonusPercent / 100));?>
-								<div class="bonuses-wrapper bonuses-wrapper-list bonuses-wrapper-detail-page">
-									<span class="bonuses-quantity-title">Бонус: </span>
-									<span class="bonuses-quantity-desc"><?echo $totalBonus;?></span>
-									<div class="bonuses-popup-wrapper bonuses-popup-wrapper-detail-page">
-										<div class="bonuses-popup">
-											<span class="bonuses-quantity-title">
-												Копите бонусы и оплачивайте ими ваши покупки<br />
-												1 бонус = 1 рубль<br />
-												<a href="http://strlogclub.ru/about/" target="_blank">Узнать больше</a>
-											</span>
-										</div>
-									</div>
-								</div>
-							<?endif;?>
 						<?}?>
 					<?}?>
+                    <?=showProductBonus($arResult,true);?>
 				</div>
 				<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y"){?>
 					<?$arUserGroups = $USER->GetUserGroupArray();?>

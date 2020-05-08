@@ -1,4 +1,9 @@
 <?
+use Bitrix\Main\Loader;
+use Caweb\Main\Sale\Helper;
+Loader::includeModule('caweb.main');
+global $checkBonus;
+$checkBonus = Helper::getInstance()->checkBonusAccess();
 $aMenuLinks = Array(
 	Array(
 		"Мой кабинет", 
@@ -18,8 +23,8 @@ $aMenuLinks = Array(
 		"Бонусы", 
 		"/personal/account/", 
 		Array(), 
-		Array(), 
-		"CBXFeatures::IsFeatureEnabled('SaleAccounts')" 
+		Array(),
+        '$GLOBALS["checkBonus"]'
 	),
 	Array(
 		"Личные данные", 
