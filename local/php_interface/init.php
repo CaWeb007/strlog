@@ -19,6 +19,7 @@ EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('
 EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Product::OnBeforeUpdate',array('Caweb\Main\Events\Catalog', 'OnBeforeProductUpdate'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockSectionUpdate', array('Caweb\Main\Events\Iblock', 'doNotDeactivate'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
 
 function CheckBasket(){

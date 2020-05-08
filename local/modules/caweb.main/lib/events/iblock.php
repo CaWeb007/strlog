@@ -9,11 +9,13 @@
 namespace Caweb\Main\Events;
 
 
+use Bitrix\Main\Application;
 use Caweb\Main\Log\Write;
 
 class Iblock{
     public static $instance = null;
     const SCU_IBLOCK = 23;
+    const DO_NOT_DEACTIVATE_SECTION = array(2155);
     public function SortSku(&$arParams){
         $iblockId = (int)$arParams['IBLOCK_ID'];
         if ($iblockId !== 23) return $arParams;
@@ -40,9 +42,18 @@ class Iblock{
             $el->Update($ar['ID'], array('SORT' => 123));
         }
     }
+    public function doNotDeactivate(&$arParams){
+        if (!$this->isImport()) return;
+        $id = (int)$arParams['ID'];
+        if (in_array($id, self::DO_NOT_DEACTIVATE_SECTION))
+            $arParams['ACTIVE'] = 'Y';
+    }
     public static function getInstance(){
         if (!empty(self::$instance)) return self::$instance;
         self::$instance = new self();
         return self::$instance;
+    }
+    protected function isImport(){
+        return (Application::getInstance()->getContext()->getRequest()->get('mode') === 'import');
     }
 }
