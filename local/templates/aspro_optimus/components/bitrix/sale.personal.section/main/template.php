@@ -105,7 +105,7 @@ else
 	$userData = CUser::GetByID($USER->GetID());
 	$arUser = $userData->Fetch();
 	$userGroups = \CUser::GetUserGroup($USER->GetID());
-	$arGroups = [9,14];
+	$arGroups = [9];
 	$result = array_intersect($arGroups, $userGroups);
 	$userTotal = count($result) > 0 ? (float)$arUser["UF_ACCUMULATION"] : false;
 	

@@ -10,7 +10,7 @@ $arSite = CSite::GetByID(SITE_ID)->Fetch();
 $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 ?>
 <!DOCTYPE html>
-<html xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" <?=($htmlClass ? 'class="'.$htmlClass.'"' : '')?>>
+<html xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" <?=($htmlClass ? 'class="'.$htmlClass.'"' : '')?>>
     <head>
         <title><?$APPLICATION->ShowTitle()?></title>
         <?$APPLICATION->ShowMeta("viewport");?>
@@ -23,7 +23,7 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
         <?/*Подключение vue.js*start*/?>
         <!--script src="https://unpkg.com/vue"></script-->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-<script type="text/javascript" src="//cp.onicon.ru/loader/577f59022866889f408b45a6.js"></script>
+        <script type="text/javascript" src="//cp.onicon.ru/loader/577f59022866889f408b45a6.js"></script>
         <?/*Подключение vue.js*end*/?>
 		<link rel="stylesheet" type="text/css" href="<?= SITE_TEMPLATE_PATH ?>/tooltipster/dist/css/tooltipster.bundle.min.css" />
 		<link rel="stylesheet" type="text/css" href="<?= SITE_TEMPLATE_PATH ?>/tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-borderless.min.css">
