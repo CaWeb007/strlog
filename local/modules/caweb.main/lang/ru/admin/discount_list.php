@@ -7,6 +7,7 @@ $MESS["KEYWORD"] = "Слово";
 $MESS["PRICE"] = "Тип цены";
 $MESS["ACTIVE"] = "Активность";
 $MESS["EDIT_STATUS_ALT"] = "Изменить скидку";
+$MESS["STAT_LINK"] = "Статистика";
 $MESS["EDIT"] = "Изменить";
 $MESS["DELETE_STATUS_ALT"] = "Удалить скидку";
 $MESS["DELETE"] = "Удалить";

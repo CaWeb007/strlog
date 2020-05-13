@@ -139,4 +139,8 @@ class DiscountUserTable extends Entity\DataManager {
     public static function getByDiscountId($discountId){
         $params['filter']['DISCOUNT_ID'] = $discountId;
     }
+    public static function getDiscountOrdersCount(int $discountId){
+        $filter = array('DISCOUNT_ID' => $discountId, 'STATUS' => 'APPLY');
+        return self::getCount($filter);
+    }
 }

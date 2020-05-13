@@ -5,6 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/catalog/prolog.php");
 use Bitrix\Main\Loader;
 use Caweb\Main\Sale\DiscountTable;
 use Bitrix\Main\Localization\Loc;
+use Caweb\Main\Sale\DiscountUserTable;
 
 Loader::includeModule('catalog');
 Loader::includeModule('caweb.main');
@@ -107,6 +108,12 @@ $lAdmin->AddHeaders(array(
         "content" => Loc::getMessage("ACTIVE_TO"),
         "sort" => "",
         "default" => true
+    ),
+    array(
+        "id" => "ORDERS_COUNT",
+        "content" => 'количество заказов',
+        "sort" => "",
+        "default" => true
     )
 ));
 
@@ -122,6 +129,7 @@ $arSelectFields = $lAdmin->GetVisibleHeaderColumns();
 $arSelectFields = array_values($arSelectFields);
 $arSelectFieldsMap = array_merge($arSelectFieldsMap, array_fill_keys($arSelectFields, true));
 $arSelectFields['PRICE_NAME'] = 'PRICE.NAME';
+$arSelectFields = array_diff($arSelectFields, array('ORDERS_COUNT'));
 $dbResultList = DiscountTable::getList(array('select'=> $arSelectFields));
 $dbResultList = new CAdminResult($dbResultList, $sTableID);
 $arUserList = array();
@@ -143,11 +151,20 @@ while ($arRes = $dbResultList->Fetch()) {
         $row->AddInputField("ACTIVE_FROM", array("size" => 30));
     if ($arSelectFieldsMap['ACTIVE_TO'])
         $row->AddInputField("ACTIVE_TO", array("size" => 30));
+
+    $row->AddField("ORDERS_COUNT", DiscountUserTable::getDiscountOrdersCount((int)$arRes['ID']));
+
     $arActions = array();
     $arActions[] = array(
         "ICON" => "edit",
         "TEXT" => Loc::getMessage("EDIT_STATUS_ALT"),
         "ACTION" => $lAdmin->ActionRedirect("/bitrix/admin/caweb_discount_edit.php?ID=".$arRes['ID']."&lang=".LANGUAGE_ID."&".GetFilterParams("filter_").""),
+        "DEFAULT" => true
+    );
+    $arActions[] = array(
+        "ICON" => "view",
+        "TEXT" => Loc::getMessage("STAT_LINK"),
+        "ACTION" => $lAdmin->ActionRedirect("/bitrix/admin/caweb_discount_stat.php?ID=".$arRes['ID'].""),
         "DEFAULT" => true
     );
     $arActions[] = array(
