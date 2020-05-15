@@ -3,6 +3,8 @@ namespace Caweb\Main\Sale;
 
 use Bitrix\Catalog\GroupAccessTable;
 use Bitrix\Main\Loader;
+use Bitrix\Sale\Order;
+use Bitrix\Sale\PropertyValue;
 use Caweb\Main\Catalog;
 
 Loader::includeModule('catalog');
@@ -13,6 +15,7 @@ class Helper{
     const BONUS_ACCESS = array(9, 15);
     const KP_USER = 9;
     protected $userGroupsStrlog = array();
+    protected $userBonus = null;
     public static $userPriceId = 0;
     public static $instance = null;
     public static function getInstance(){
@@ -21,6 +24,7 @@ class Helper{
         return self::$instance;
     }
     public function checkBonusAccess($groups = array()){
+        //if (!empty($this->getUserBonus())) return true;
         if (empty($groups))
             $groups = $this->getUsersStrlogGroups();
         if (!is_array($groups))
@@ -46,5 +50,51 @@ class Helper{
         $userGroups = $this->getUsersStrlogGroups();
         if (in_array(self::KP_USER, $userGroups)) return true;
         return false;
+    }
+    public static function updateOrderProperties(Order $order){
+        $properties = $order->getPropertyCollection();
+        $personType = (int)$order->getPersonTypeId();
+        if ($personType === 1){
+            $fio = $properties->getItemByOrderPropertyId(1);
+            $fio2 = $properties->getItemByOrderPropertyId(31);
+            $name = $properties->getItemByOrderPropertyId(32);
+            $family = $properties->getItemByOrderPropertyId(33);
+            $lastName = $properties->getItemByOrderPropertyId(34);
+        }else{
+            $fio = $properties->getItemByOrderPropertyId(12);
+            $fio2 = $properties->getItemByOrderPropertyId(35);
+            $name = $properties->getItemByOrderPropertyId(36);
+            $family = $properties->getItemByOrderPropertyId(37);
+            $lastName = $properties->getItemByOrderPropertyId(38);
+        }
+        $explode = array();
+        if (($fio2 instanceof PropertyValue) && !empty($fio2->getValue())){
+            $fio->setValue($fio2->getValue());
+            $explode = explode(' ', trim($fio2->getValue()));
+        }elseif (($name instanceof PropertyValue) && !empty($name->getValue())){
+            $string = implode(' ', array($family->getValue(), $name->getValue(), $lastName->getValue()));
+            $fio->setValue($string);
+            $fio2->setValue($string);
+        }elseif (($fio instanceof PropertyValue) && !empty($fio->getValue())){
+            $fio2->setValue($fio->getValue());
+            $explode = explode(' ', trim($fio->getValue()));
+        }
+        if (!empty($explode)){
+            $family->setValue($explode[0]);
+            $name->setValue($explode[1]);
+            $lastName->setValue($explode[2]);
+        }
+        return $order;
+    }
+    public function setUserBonus($userBonus = 0){
+        $this->userBonus = (float)$userBonus;
+    }
+    protected function getUserBonus(){
+        if ($this->userBonus !== null) return $this->userBonus;
+        global $USER;
+        /**@var $USER \CUser*/
+        $account = new \CSaleUserAccount();
+        $this->userBonus = (float)$account->GetByUserID($USER->GetID(), "RUB")['CURRENT_BUDGET'];
+        return $this->userBonus;
     }
 }

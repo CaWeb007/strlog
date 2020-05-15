@@ -16,6 +16,7 @@ use Bitrix\Main,
 	Bitrix\Sale\DiscountCouponsManager,
 	Bitrix\Sale\Services\Company,
 	Bitrix\Sale\Location\GeoIp;
+use Caweb\Main\Sale\Helper;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
@@ -4564,8 +4565,9 @@ class SaleOrderAjax extends \CBitrixComponent
 		}
 
 		$result["USER_PROFILES"] = $arResult["ORDER_PROP"]['USER_PROFILES'];
-
-		$arr = $this->order->getPropertyCollection()->getArray();
+        /**Контролирует своства ФИО*/
+        Helper::updateOrderProperties($this->order);
+        $arr = $this->order->getPropertyCollection()->getArray();
 		$paymentSystemIds = $this->order->getPaymentSystemId();
 		$deliverySystemIds = $this->order->getDeliverySystemId();
 		foreach ($arr['properties'] as $key => $property)

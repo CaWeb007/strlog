@@ -75,6 +75,10 @@ if(in_array("9",$userGroups)){
 			1 => "2",
 			2 => "3",
 			3 => "7",
+			4 => "31",
+			5 => "32",
+			6 => "33",
+			7 => "34"
 		),
 		"PROPS_FADE_LIST_2" => array(
 			0 => "8",
@@ -85,6 +89,10 @@ if(in_array("9",$userGroups)){
 			5 => "13",
 			6 => "14",
 			7 => "19",
+			8 => "35",
+			9 => "36",
+			10 => "37",
+			11 => "38"
 		),
 		"PRODUCT_COLUMNS_VISIBLE" => array(
 			0 => "PREVIEW_PICTURE",
