@@ -65,7 +65,10 @@ class Bonus {
     }
     public function getIblockPropertyCode(){
         if (!$this->isBonusAccess()) return '';
-        return self::IBLOCK_PROPERTIES_MODEL[$this->getBonusCard()];
+        if (!empty(self::IBLOCK_PROPERTIES_MODEL[$this->getBonusCard()]))
+            return self::IBLOCK_PROPERTIES_MODEL[$this->getBonusCard()];
+        else
+            return self::IBLOCK_PROPERTIES_MODEL[1];
     }
     public static function updateSessionsData(){
         self::$instance = null;
