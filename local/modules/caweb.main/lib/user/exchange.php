@@ -5,6 +5,7 @@ use Bitrix\Main\Authentication\ApplicationPasswordTable;
 use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
 use Caweb\Main\Log\Write;
+use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 
 class Exchange{
@@ -113,8 +114,8 @@ class Exchange{
         $result = array();
         $result['GROUP_ID'] = $this->getUserGroupId($newFields['UF_GRUPPANASAYTE'], $newFields['UF_OBSHCHIYOBOROT']);
         $result['PERSONAL_PROFESSION'] = $newFields['UF_GRUPPANASAYTE'];
-        //if (Helper::getInstance()->checkBonusAccess($result['GROUP_ID']))
-            $result['UF_BONUSES'] = $newFields['UF_OSTATOKBONUSOV'];
+        $result['UF_BONUSES'] = $newFields['UF_OSTATOKBONUSOV'];
+        $result['UF_BONUS_CARD'] = $newFields['UF_KODBONUSNOYKARTY'];
         $result['UF_ACCUMULATION'] = $newFields['UF_OBSHCHIYOBOROT'];
         if (empty($oldFields['NAME'])) $result['NAME'] = $newFields['UF_NAME'];
         if (empty($oldFields['PERSONAL_PHONE'])) $result['PERSONAL_PHONE'] = $newFields['UF_TELEFONKONTRAGENT'];
@@ -162,7 +163,7 @@ class Exchange{
         );
         if (!empty($array[$hlFieldGroup])) $result = $array[$hlFieldGroup];
         $hlFieldAccum = (float)preg_replace('/\s/','',$hlFieldAccum);
-        if ((($result === 9) || ($result === 14)) && ($hlFieldAccum >= 10000))
+        if (($result === 9) && ($hlFieldAccum >= 10000))
             $result = 15;
         return array_merge(array(2,3,4,5,6), array($result));
     }

@@ -15,9 +15,8 @@ use Bitrix\Main,
 	Bitrix\Iblock,
 	Bitrix\Catalog;
 use Bitrix\Catalog\PriceTable;
-use Bitrix\Main\Diag\Debug;
+use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\DiscountManager;
-use Caweb\Main\Sale\Helper;
 
 class CBitrixBasketComponent extends CBitrixComponent
 {
@@ -2505,7 +2504,7 @@ class CBitrixBasketComponent extends CBitrixComponent
             $this->loadBasketItems();
         }
         foreach ($this->basketItems as $id => $basketItem){
-            $basketBonus += $basketItem[Helper::getInstance()->checkBonusForBasket()] * $basketItem['QUANTITY'];
+            $basketBonus += $basketItem['PROPERTY_'.Bonus::getInstance()->getIblockPropertyCode().'_VALUE'] * $basketItem['QUANTITY'];
         }
         if (!empty($basketItemsSave))
             $this->basketItems = $basketItemsSave;

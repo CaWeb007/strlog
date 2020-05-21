@@ -1,8 +1,9 @@
 <? use Caweb\Main\Sale\Helper;
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?$accountValue = array_shift($arResult["ACCOUNT_LIST"]);?>
-<?if(Helper::getInstance()->checkBonusAccess() && ($accountValue["CURRENCY"] == "RUB")):?>
 <?$bonus = (float)$accountValue["ACCOUNT_LIST"]['CURRENT_BUDGET'];?>
+<?Helper::getInstance()->setUserBonus($bonus)?>
+<?if(Helper::getInstance()->checkBonusAccess() && ($accountValue["CURRENCY"] == "RUB")):?>
     <div class="user-bonus-wrapper">
         <?if($bonus):?>
             <span class="user-bonus-title">Количество бонусов: <span class="user-bonus-desc"><?=$bonus?></span></span>

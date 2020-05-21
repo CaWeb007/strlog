@@ -2,6 +2,7 @@
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 
 /*$APPLICATION->SetTitle(Loc::getMessage("SPS_TITLE_MAIN"));
@@ -19,8 +20,7 @@ if ($arParams['SHOW_ORDER_PAGE'] === 'Y')
 		"icon" => '<i class="cur_orders"></i>'
 	);
 }
-Loader::includeModule('caweb.main');
-if (($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') && Helper::getInstance()->checkBonusAccess())
+if (($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') && Bonus::getInstance()->isBonusAccess())
 {
 	$availablePages[] = array(
 		"path" => $arResult['PATH_TO_ACCOUNT'],
@@ -105,7 +105,7 @@ if (empty($availablePages))
 else
 {
 	?>
-    <?if(Helper::getInstance()->isKpUser()):?>
+    <?if(Bonus::getInstance()->isKpUser()):?>
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
         В настоящий момент Вам доступны только розничные цены.<br>
         После накопления общей суммы оплаченных заказов в 10 тыс. рублей - Вам будут доступны спец.цены на новые заказы.

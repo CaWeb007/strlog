@@ -43,7 +43,7 @@ class Iblock{
         }
     }
     public function doNotDeactivate(&$arParams){
-        if (!$this->isImport()) return;
+        if (!self::isImport()) return;
         $id = (int)$arParams['ID'];
         if (in_array($id, self::DO_NOT_DEACTIVATE_SECTION))
             $arParams['ACTIVE'] = 'Y';
@@ -53,7 +53,7 @@ class Iblock{
         self::$instance = new self();
         return self::$instance;
     }
-    protected function isImport(){
+    protected static function isImport(){
         return (Application::getInstance()->getContext()->getRequest()->get('mode') === 'import');
     }
 }

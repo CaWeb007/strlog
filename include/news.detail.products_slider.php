@@ -6,7 +6,7 @@
 		"IBLOCK_ID" => "16",
 		"ELEMENT_SORT_FIELD" => "sort",
 		"ELEMENT_SORT_ORDER" => "asc",
-		"ELEMENT_COUNT" => "20",
+		"ELEMENT_COUNT" => "50",
 		"LINE_ELEMENT_COUNT" => "",
 		"PROPERTY_CODE" => array(
 			0 => "",
@@ -25,7 +25,7 @@
 		"CACHE_TIME" => "3600000",
 		"CACHE_GROUPS" => "N",
 		"DISPLAY_COMPARE" => "Y",
-		"PRICE_CODE" => changePriceID(),
+		"PRICE_CODE" => array('КП','СО','ТО','С'),
 		"USE_PRICE_COUNT" => "N",
 		"SHOW_PRICE_COUNT" => "1",
 		"PRICE_VAT_INCLUDE" => "Y",
@@ -68,7 +68,9 @@
 		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"COMPATIBLE_MODE" => "Y"
+		"COMPATIBLE_MODE" => "Y",
+		"SHOW_MEASURE_WITH_RATIO" => "N",
+		"DISPLAY_WISH_BUTTONS" => "Y"
 	),
 	false
 );?>

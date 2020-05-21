@@ -1,4 +1,5 @@
 <? use Bitrix\Main\Loader;
+use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
@@ -21,15 +22,29 @@ $frame->setBrowserStorage(true);
 	</div>
 <?else:?>
 	<div class="module-enter have-user">
-			<?$APPLICATION->IncludeComponent(
-				"bitrix:sale.personal.account",
-				"personal.account",
-				Array(
-					"SET_TITLE" => "N"
-				)
-			);?>
+            <?if(Bonus::getInstance()->isBonusAccess()):?>
+                <?$bonus = Bonus::getInstance()->getBonusCount();?>
+                <div class="user-bonus-wrapper">
+                    <?if($bonus):?>
+                        <span class="user-bonus-title">Количество бонусов: <span class="user-bonus-desc"><?=$bonus?></span></span>
+                    <?else:?>
+                        <span class="user-bonus-title">У Вас нет бонусов</span>
+                    <?endif;?>
+                    <div class="user-bonus-popup-wrapper">
+                        <div class="user-bonus-popup">
+                    <span class="bonuses-quantity-title">
+                    Копите бонусы и оплачивайте ими ваши покупки<br>
+                    1 бонус = 1 рубль<br>
+                    <a href="http://strlogclub.ru/about/" target="_blank">Узнать больше</a>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+            <?endif?>
+
+
             <!--noindex-->
-                <?if(Loader::includeModule('caweb.main') && Helper::getInstance()->isKpUser()):?>
+                <?if(Bonus::getInstance()->isKpUser()):?>
                     <div id="user-profile-link-wrapp" style="display:inline-block">
                         <div class="user-bonus-popup-wrapper">
                             <div class="user-bonus-popup">

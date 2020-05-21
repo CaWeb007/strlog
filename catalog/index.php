@@ -1,4 +1,6 @@
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+<? use Caweb\Main\Sale\Bonus;
+
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Каталог");
 ?><?
 
@@ -26,7 +28,7 @@ $APPLICATION->SetTitle("Каталог");
 		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "3600000",
-		"CACHE_TYPE" => "N",
+		"CACHE_TYPE" => "A",
 		"COMMON_ADD_TO_BASKET_ACTION" => "ADD",
 		"COMMON_SHOW_CLOSE_POPUP" => "N",
 		"COMPARE_ELEMENT_SORT_FIELD" => "shows",
@@ -383,7 +385,7 @@ $APPLICATION->SetTitle("Каталог");
 			6 => "CML2_LINK",
 			7 => "",
 		),
-		"FILTER_PRICE_CODE" => changePriceID(),
+		"FILTER_PRICE_CODE" => array('КП','СО','ТО','С'),
 		"FILTER_PROPERTY_CODE" => array(
 			0 => "CML2_ARTICLE",
 			1 => "",
@@ -602,7 +604,7 @@ $APPLICATION->SetTitle("Каталог");
 		"PARTIAL_PRODUCT_PROPERTIES" => "Y",
 		"PATH_TO_SMILE" => "/bitrix/images/forum/smile/",
 		"POST_FIRST_MESSAGE" => "N",
-		"PRICE_CODE" => changePriceID(),
+		"PRICE_CODE" => array('КП','СО','ТО','С'),
 		"USE_WORD_EXPRESSION" => "Y",
 		"PRICE_VAT_INCLUDE" => "Y",
 		"PRICE_VAT_SHOW_VALUE" => "N",

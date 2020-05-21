@@ -2,7 +2,7 @@
 
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Sale\PriceMaths;
-use Caweb\Main\Sale\Helper;
+use Caweb\Main\Sale\Bonus;
 
 /**
  *
@@ -343,8 +343,8 @@ foreach ($this->basketItems as $row)
 			}
 			elseif (!empty($row[$value['id']]))
 			{
-			    if (($value['id'] === "PROPERTY_BONUS_KP_VALUE") || ($value['id'] === "PROPERTY_BONUS_SO_VALUE")){
-			        if (Helper::getInstance()->checkBonusForBasket($value['id'])){
+			    if (Bonus::getInstance()->isBonusPropertyName($value['id'])){
+                    if (($value['id'] === "PROPERTY_".Bonus::getInstance()->getIblockPropertyCode()."_VALUE"))
                         $rowData['COLUMN_LIST'][] = array(
                             'CODE' => "PROPERTY_BONUS",
                             'NAME' => Loc::getMessage("SBB_BONUS_NAME"),
@@ -352,7 +352,6 @@ foreach ($this->basketItems as $row)
                             'IS_TEXT' => true,
                             'HIDE_MOBILE' => !isset($mobileColumns[$value['id']])
                         );
-                    }
                 }else{
                     $rowData['COLUMN_LIST'][] = array(
                         'CODE' => $value['id'],

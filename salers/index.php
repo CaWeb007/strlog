@@ -37,7 +37,7 @@ $APPLICATION->SetTitle("Распродажа");?>
 			0 => "CML2_ARTICLE",
 			1 => "",
 		),
-		"FILTER_PRICE_CODE" => changePriceID(),
+		"FILTER_PRICE_CODE" => array('КП','СО','ТО','С'),
 		"FILTER_OFFERS_FIELD_CODE" => array(
 			0 => "NAME",
 			1 => "PREVIEW_PICTURE",
@@ -112,7 +112,7 @@ $APPLICATION->SetTitle("Распродажа");?>
 		"COMPARE_ELEMENT_SORT_FIELD" => "shows",
 		"COMPARE_ELEMENT_SORT_ORDER" => "asc",
 		"DISPLAY_ELEMENT_SELECT_BOX" => "N",
-		"PRICE_CODE" => changePriceID(),
+		"PRICE_CODE" => array('КП','СО','ТО','С'),
 		"USE_PRICE_COUNT" => "N",
 		"SHOW_PRICE_COUNT" => "1",
 		"PRICE_VAT_INCLUDE" => "Y",

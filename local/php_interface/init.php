@@ -1,6 +1,8 @@
 <?
 use Bitrix\Main\Loader;
 use Bitrix\Main\EventManager;
+use Caweb\Main\Sale\Bonus;
+
 Loader::includeModule('caweb.main');
 Loader::includeModule('sale');
 function Pr($z){echo '<pre>'; echo var_dump($z); echo '</pre><hr/>';}
@@ -21,6 +23,11 @@ EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlock
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockSectionUpdate', array('Caweb\Main\Events\Iblock', 'doNotDeactivate'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
+
+
+EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserAuthorize', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
+EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserUpdate', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
+
 
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){

@@ -23,6 +23,7 @@ class Helper{
         self::$instance = new self();
         return self::$instance;
     }
+    /**@deprecated Use \Caweb\Main\Sale\Bonus::getInstance()->isBonusAccess*/
     public function checkBonusAccess($groups = array()){
         //if (!empty($this->getUserBonus())) return true;
         if (empty($groups))
@@ -31,12 +32,14 @@ class Helper{
             $groups = array($groups);
         return (!empty(array_intersect($groups, self::BONUS_ACCESS)));
     }
+    /**@deprecated Use \Caweb\Main\Sale\Bonus::getInstance()->getUserGroupId*/
     protected function getUsersStrlogGroups(){
         if (!empty($this->userGroupsStrlog)) return $this->userGroupsStrlog;
         global $USER;
         $this->userGroupsStrlog = array_intersect($USER->GetUserGroupArray(), self::SITE_GROUP_MODEL);
         return $this->userGroupsStrlog;
     }
+    /**@deprecated Use \Caweb\Main\Sale\Bonus::getInstance()->getIblockPropertyCode*/
     public function checkBonusForBasket($string = ''){
         $check = '';
         if (!$this->checkBonusAccess()) return false;
@@ -46,6 +49,7 @@ class Helper{
         if (empty($string)) return $check;
         return ($string === $check);
     }
+    /**@deprecated don not use*/
     public function isKpUser(){
         $userGroups = $this->getUsersStrlogGroups();
         if (in_array(self::KP_USER, $userGroups)) return true;
@@ -86,9 +90,11 @@ class Helper{
         }
         return $order;
     }
+    /**@deprecated Use \Caweb\Main\Sale\Bonus::getInstance()*/
     public function setUserBonus($userBonus = 0){
         $this->userBonus = (float)$userBonus;
     }
+    /**@deprecated Use \Caweb\Main\Sale\Bonus::getInstance()->getBonusCount*/
     protected function getUserBonus(){
         if ($this->userBonus !== null) return $this->userBonus;
         global $USER;

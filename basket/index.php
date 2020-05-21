@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Корзина");
 ?><?$APPLICATION->IncludeComponent(
-	"caweb:sale.basket.basket", 
+	"caweb:sale.basket.basket",
 	".default", 
 	array(
 		"ACTION_VARIABLE" => "action",
@@ -34,7 +34,10 @@ $APPLICATION->SetTitle("Корзина");
 			3 => "DELAY",
 			4 => "SUM",
 			5 => "PROPERTY_BONUS_KP",
-			6 => "PROPERTY_BONUS_SO",
+			6 => "PROPERTY_BONUS_KP15",
+			7 => "PROPERTY_BONUS_SO",
+			8 => "PROPERTY_BONUS_SO15",
+			9 => "PROPERTY_BONUS_SO20",
 		),
 		"COLUMNS_LIST_MOBILE" => array(
 			0 => "PREVIEW_PICTURE",

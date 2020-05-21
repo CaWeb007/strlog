@@ -190,9 +190,10 @@ function customCatalogImportStep()
 				if(0 < count($PRICES)){
 					$PROPERTIES = [
 						"BONUS_KP" => roundEx((($PRICES['КП'] - $PRICES['ТО']) * 0.1), 2),
+						"BONUS_KP15" => roundEx((($PRICES['КП'] - $PRICES['ТО']) * 0.15), 2),
 						"BONUS_SO" => roundEx((($PRICES['СО'] - $PRICES['ТО']) * 0.1), 2),
 						"BONUS_SO15" => roundEx((($PRICES['СО'] - $PRICES['ТО']) * 0.15), 2),
-						"BONUS_SO20" => roundEx((($PRICES['СО'] - $PRICES['ТО']) * 0.20), 2),
+						"BONUS_SO20" => roundEx((($PRICES['СО'] - $PRICES['ТО']) * 0.20), 2)
 					];
 					
 				

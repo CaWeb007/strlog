@@ -1,9 +1,10 @@
 <?
 use Bitrix\Main\Loader;
+use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 Loader::includeModule('caweb.main');
 global $checkBonus;
-$checkBonus = Helper::getInstance()->checkBonusAccess();
+$checkBonus = Bonus::getInstance()->isBonusAccess();
 $aMenuLinks = Array(
 	Array(
 		"Мой кабинет", 

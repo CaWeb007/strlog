@@ -1,4 +1,4 @@
-<?
+<?/*
 #OnSaleBasketItemRefreshData
 \Bitrix\Main\EventManager::getInstance()->addEventHandler('sale', 'OonSaleBasketBeforeSaved', 'OnSaleBasketItemRefreshDataHandler');
 function OnSaleBasketItemRefreshDataHandler(\Bitrix\Main\Event $event) {
@@ -11,7 +11,7 @@ function OnSaleBasketItemRefreshDataHandler(\Bitrix\Main\Event $event) {
 
 }
 
-$eventManager = Bitrix\Main\EventManager::getInstance();
+/*$eventManager = Bitrix\Main\EventManager::getInstance();
 $eventManager->addEventHandler('catalog', 'OnGetOptimalPrice', function(
     $productId,
     $quantity = 1,
@@ -64,31 +64,7 @@ $eventManager->addEventHandler('catalog', 'OnGetOptimalPrice', function(
 		   ];
 		}
 	
-		/*if(0 < count($ALLOW_PRICES)) {
-			
-			$PRICE_ID = ['ТО'=>9,'СО'=>10,'КП'=>11,'С'=>14];
-			$allow = current($ALLOW_PRICES);
-			
-			$basePriceId = $PRICE_ID[$allow];
-			
-			$price = $prices['PRICES'][$basePriceId]['PRICE'];
-				
-			
-			return [
-				  'PRICE' => [
-					 "ID" => $productId,
-					 'CATALOG_GROUP_ID' => $basePriceId,
-					 'PRICE' => $price,
-					 'CURRENCY' => \Bitrix\Currency\CurrencyManager::getBaseCurrency(),
-					 'ELEMENT_IBLOCK_ID' => $productId,
-					 'VAT_INCLUDED' => "Y",
-				  ],
-				  'DISCOUNT' => [
-					  'VALUE' => '',
-					  'CURRENCY' => "RUB",
-				   ],
-			   ];
-		}*/
+
 		
 		return true;
 	}
@@ -112,6 +88,4 @@ $eventManager->addEventHandler('catalog', 'OnGetOptimalPrice', function(
 	   ],
 	];
 
-});
-
-?>
+});*/

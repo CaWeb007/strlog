@@ -25,7 +25,7 @@
 		"CACHE_TIME" => "3600000",
 		"CACHE_GROUPS" => "N",
 		"DISPLAY_COMPARE" => "Y",
-		"PRICE_CODE" => changePriceID(),
+		"PRICE_CODE" => array('КП','СО','ТО','С'),
 		"USE_PRICE_COUNT" => "N",
 		"SHOW_PRICE_COUNT" => "1",
 		"PRICE_VAT_INCLUDE" => "Y",

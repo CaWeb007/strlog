@@ -2,8 +2,8 @@
 
 /* Выбор ценовой группы пользователя в каталоге */
 
-use Caweb\Main\Sale\Helper;
-
+use Caweb\Main\Sale\Bonus;
+/**@deprecated*/
 function changePriceID(){
 	global $USER,$GLOBAL;
 	
@@ -51,7 +51,6 @@ function changePriceID(){
 			$GLOBAL['PRICE_CODE'] = [$PRICE_CODE[11]];
 		}
 	}
-	
 	return $GLOBAL['PRICE_CODE'];
 }
 
@@ -88,21 +87,15 @@ function isIssetPG($value){
 function showProductBonus($arResult,$detail=false){
 	global $USER;
 	if($USER->IsAuthorized()){
-		$arGroups = CUser::GetUserGroup($USER->GetID());
-        if(!Helper::getInstance()->checkBonusAccess($arGroups)){
+        if(!Bonus::getInstance()->isBonusAccess()){
 			return '<span class="bonuses-quantity-title"></span>';
 		} else {
 			if((float)$arResult["PROPERTIES"]["_POROGA_NACHISLENIYA_BONUSOV"]["VALUE"] == 0) {
 				$totalBonus = 0;
 			} else {
-				$result = array_intersect(array(9), $arGroups);
-				if(count($result) > 0){
-					$totalBonus = $arResult["PROPERTIES"]["BONUS_KP"]["VALUE"];
-				}
-				if(count(array_intersect(array(15), $arGroups)) > 0){
-					$totalBonus = $arResult["PROPERTIES"]["BONUS_SO"]["VALUE"];
-				}
+			    $totalBonus = $arResult['PROPERTIES'][Bonus::getInstance()->getIblockPropertyCode()]['VALUE'];
 			}
+			if (empty($totalBonus) && ($totalBonus !== 0)) return '';
 			return '
 				<div class="bonuses-wrapper bonuses-wrapper-list'.($detail?' bonuses-wrapper-detail-page':'').'">
 					<span class="bonuses-quantity-title">Бонус: </span>
