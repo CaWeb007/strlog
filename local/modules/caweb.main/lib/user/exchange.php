@@ -56,10 +56,9 @@ class Exchange{
         if (empty($hlResultList)) return;
         $userList = $this->getUsers(array_keys($hlResultList));
         foreach ($hlResultList as $email => $array){
-            if ($this->checkEmail($email)) continue;
+            if ($this->checkEmail($email, $array['ID'])) continue;
             $ID = false;
             $update = $userList[$email];
-
             $arFields = $this->prepareFields($array, $update);
             $user = new \CUser();
             if (empty($update)){
@@ -68,7 +67,7 @@ class Exchange{
                 if ($user->Update($update['ID'], $arFields)) $ID = $update['ID'];
             }
             if (!$ID) {
-                $this->errors[$email] = $user->LAST_ERROR;
+                $this->errors[$array['UF_NAME']] = $user->LAST_ERROR;
                 continue;
             }
             if (empty($update)) $this->sendEmail($ID, $arFields);
@@ -139,7 +138,7 @@ class Exchange{
         $params['select'] = array('ID', 'EMAIL', 'NAME', 'PERSONAL_PHONE','UF_INN','UF_KPP');
         $db = UserTable::getList($params);
         while ($ar = $db->fetch()){
-            $result[$ar['EMAIL']] = $ar;
+            $result[strtolower($ar['EMAIL'])] = $ar;
         }
         return $result;
     }
@@ -148,13 +147,17 @@ class Exchange{
         $hl = $this->hl;
         $db = $hl::getList();
         while ($ar = $db->fetch()){
-            $result[$ar['UF_ELEKTRONNAYAPOCHT']] = $ar;
+            $result[strtolower($ar['UF_ELEKTRONNAYAPOCHT'])] = $ar;
         }
         return $result;
     }
-    protected function checkEmail($email){
-        $array = array('dima19681@ya.ru', 'lenysion@gmail.com', 'sgn_sse@mail.ru', 'yarik780@yandex.ru', 'lightworksa@gmail.com', 'podluzhnaya.a@mail.ru', 'viprobinzon@irk.ru', 'mir-krepega@bk.ru', 'krasnik_andrey@mail.ru', 'sergradionov@yandex.ru', 'krpm@mail.ru', 'avs367@mail.ru', 'boronov_baitog@rambler.ru', 'novichkov_vn@demetra.ru', 'potap.irk@yandex.ru', 'asmakssn@gmail.com', 'gutehexee@gmail.com', 'komarinochka@mail.ru', 'm.krilov2015@yandex.ru', 'sg.dm@mail.ru', 'pushkarev93@yandex.ru', 'bars.irk@mail.ru', '17dis04@list.ru', 'irk.sklad@khabtt.ru', '424460@mail.ru', 'kapai46v@gmail.com', 'taigarden@yandex.ru', 'missmo.store.info@gmail.com', 'che_lex7@mail.ru', 'mkredentser@yandex.ru', 'gnovik009@gmail.com', 'yeollihyeon@gmail.com', 'ya.kapai@ya.ru', 'paw1964@mail.ru', 'kernel_asv@yahoo.com', 'ma-prezental@mail.ru', 'kr-dennis@mail.ru', 'benedyuk23@gmail.com', 'asgard@mail.ru', 'ys.tsvetkov@gmail.com', 'subochev_vladim@mail.ru', 'ne1drug@gmail.com', 'aviamexanik@icloud.com', 'palchikov.58@mail.ru', 'ddenisoff@mail.ru', 'py9aa@inbox.ru', 'fetisov-60@list.ru', 'bookkeeper2003@mail.ru', 'vlad38ru@gmail.com', 'vashal@mail.ru', 'biryuk_stanislav@mail.ru', 'profi1204@mail.ru', '1274423@gmail.com', 'berkut210777@yandex.ru', 'konovlyoha@mail.ru', 'ovchinnikov.im@yandex.ru', 'basheff.oleg@yandex.ru', 'decor@mirgos.ru', 'kuzminskaya@baikalsea.com', 'vaswet1003@gmail.com', 'apmbox@gmail.com', 'mymoding@mail.ru', 'yriy_konchakov@mail.ru', 'teplyakov89@gmail.com', '907-900@mail.ru', 'wit-vent@mail.ru', 'aviamexanik77@gmail.com', 'dukirill@mail.ru', 'ale13264@yandex.ru', 'bur4nov@yandex.ru', 'arteomz@yandex.ru', 'dimakirk@gmail.com', 'tvv.85@ya.ru', 'iznu@irk.ru', 'angarsk@inbox.ru', 'fartusova.katya@mail.ru', 'alex_pin@mail.ru', 'vafint@bk.ru', 'st-expo@mail.ru', 'kobreus@gmail.com', 'adigo777@list.ru', 'v.gilev@groupstp.ru', 'zav1964@yandex.ru', 'belovkirill@yandex.ru', 'strlogist@yandex.ru', 'sarma201@mail.ru', 'yasksergej@yandex.ru', 'ya.tna77@yandex.ru', 'griha888@gmail.com', 'a663903@yandex.ru', 'miks.st@mail.ru', 'vlastin-vm@yandex.ru', 'anik_60@mail.ru', 'kuliasov.v@yandex.ru', 'comradnikitin@yandex.ru', 'nalofree@gmail.com', '149@irk.ru', 'iltadi@mail.ru', 'papa@strlog.ru', 'astrlog@strlog.ru');
-        return in_array($email,$array);
+    protected function checkEmail($email, $id){
+        $array = array('papa@strlog.ru', 'astrlog@strlog.ru');
+        if (in_array($email,$array)){
+            $this->hl::delete($id);
+            return true;
+        }
+        return false;
     }
     protected function getUserGroupId($hlFieldGroup = '', $hlFieldAccum = null){
         $result = 9;
