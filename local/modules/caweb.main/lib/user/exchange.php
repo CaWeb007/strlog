@@ -2,6 +2,7 @@
 namespace Caweb\Main\User;
 use Bitrix\Highloadblock\HighloadBlockTable as HL;
 use Bitrix\Main\Authentication\ApplicationPasswordTable;
+use Bitrix\Main\Entity\DataManager;
 use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
 use Caweb\Main\Log\Write;
@@ -9,6 +10,7 @@ use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 
 class Exchange{
+    /**@var $hl DataManager*/
     protected $hl = array();
     protected $user = array();
     protected $test = 10;
