@@ -419,6 +419,9 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
                                     <?if ($arResult['PRICE_MATRIX']['AVAILABLE'] == 'Y'):?>
                                         <meta itemprop="price" content="<?=($arResult['MIN_PRICE']['DISCOUNT_VALUE'] ? $arResult['MIN_PRICE']['DISCOUNT_VALUE'] : $arResult['MIN_PRICE']['VALUE'])?>" />
                                         <meta itemprop="priceCurrency" content="<?=$arResult['MIN_PRICE']['CURRENCY']?>" />
+                                    <?else:?>
+                                        <meta itemprop="price" content="0" />
+                                        <meta itemprop="priceCurrency" content="RUB" />
                                     <?endif?>
 										<link itemprop="availability" href="http://schema.org/<?=($arResult['PRICE_MATRIX']['AVAILABLE'] == 'Y' ? 'InStock' : 'OutOfStock')?>" />
 									</div>
@@ -631,6 +634,9 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
                     <?if ($arResult['MIN_PRICE']['CAN_BUY']):?>
                         <meta itemprop="price" content="<?=($arOffer['MIN_PRICE']['DISCOUNT_VALUE']) ? $arOffer['MIN_PRICE']['DISCOUNT_VALUE'] : $arOffer['MIN_PRICE']['VALUE']?>" />
                         <meta itemprop="priceCurrency" content="<?=$arOffer['MIN_PRICE']['CURRENCY']?>" />
+                    <?else:?>
+                        <meta itemprop="price" content="0" />
+                        <meta itemprop="priceCurrency" content="RUB" />
                     <?endif?>
 					<link itemprop="availability" href="http://schema.org/<?=($arOffer['CAN_BUY'] ? 'InStock' : 'OutOfStock')?>" />
 				</span>
@@ -642,6 +648,9 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
             <?if ($arResult['MIN_PRICE']['CAN_BUY']):?>
                 <meta itemprop="price" content="<?=($arResult['MIN_PRICE']['DISCOUNT_VALUE'] ? $arResult['MIN_PRICE']['DISCOUNT_VALUE'] : $arResult['MIN_PRICE']['VALUE'])?>" />
                 <meta itemprop="priceCurrency" content="<?=$arResult['MIN_PRICE']['CURRENCY']?>" />
+            <?else:?>
+                <meta itemprop="price" content="0" />
+                <meta itemprop="priceCurrency" content="RUB" />
             <?endif?>
 			<link itemprop="availability" href="http://schema.org/<?=($arResult['MIN_PRICE']['CAN_BUY'] ? 'InStock' : 'OutOfStock')?>" />
 		</span>

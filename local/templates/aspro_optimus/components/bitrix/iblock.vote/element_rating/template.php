@@ -27,6 +27,8 @@ else
     <meta itemprop="ratingValue" content="5" />
     <meta itemprop="bestRating" content="5" />
 	<meta itemprop="worstRating" content="1" />
+	<meta itemprop="ratingCount" content="1" />
+	<meta itemprop="reviewCount" content="1" />
 <script type="text/javascript">
 if(!window.voteScript) window.voteScript =
 {
