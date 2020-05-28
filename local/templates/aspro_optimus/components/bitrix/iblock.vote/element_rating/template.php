@@ -24,14 +24,9 @@ else
 	$DISPLAY_VALUE = $arResult["PROPERTIES"]["rating"]["VALUE"];
 ?>
 <div class="iblock-vote" id="vote_<?echo $arResult["ID"]?>" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
-    <?if($DISPLAY_VALUE):?>
-        <meta itemprop="ratingValue" content="<?=$DISPLAY_VALUE?>" />
-    <?endif?>
-    <?if(intval($arResult["PROPERTIES"]["vote_count"]["VALUE"]) > 0):?>
-        <meta itemprop="reviewCount" content="<?=intval($arResult["PROPERTIES"]["vote_count"]["VALUE"])?>" />
-    <?endif?>
-	<meta itemprop="bestRating" content="<?=$arParams['MAX_VOTE']?>" />
-	<meta itemprop="worstRating" content="0" />
+    <meta itemprop="ratingValue" content="5" />
+    <meta itemprop="bestRating" content="5" />
+	<meta itemprop="worstRating" content="1" />
 <script type="text/javascript">
 if(!window.voteScript) window.voteScript =
 {
