@@ -19,7 +19,7 @@ $APPLICATION->SetTitle("Новый раздел");
 Loader::includeModule('caweb.main');
 ?>
 <?
-Caweb\Main\Agent\MoneyCare::checkStatus();
+\Caweb\Main\Secret\MyLittleHelper::writePersonalProfessionField();
 ?>
 
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
