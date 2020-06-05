@@ -7,9 +7,15 @@
  */
 
 namespace Caweb\Main\Secret;
+use Bitrix\Catalog\PriceTable;
+use Bitrix\Iblock\ElementTable;
 use Bitrix\Main\Application;
+use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
+use Bitrix\Sale\Internals\OrderTable;
 use Bitrix\Sale\Internals\UserPropsTable;
+use Bitrix\Sale\Internals\UserPropsValueTable;
+use Bitrix\Sale\Order;
 use Caweb\Main\Sale\Bonus;
 
 /**usage   \Bitrix\Main\Loader::includeModule('caweb.main');*/
@@ -81,5 +87,75 @@ class MyLittleHelper {
                 'action' => $action
             ));
         }
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::prepareDataToSexSiteBaikalIntegration();*/
+    public static function prepareDataToSexSiteBaikalIntegration(bool $are_you_ready = false){
+        $arUser = array();
+        $params = array();
+        $userIterator = UserTable::getList($params);
+        $k = 0;
+        while($ar = $userIterator->fetch()){
+            $id = (int)$ar['ID'];
+            if ($id === 1) continue;
+            $k++;
+            if ($k <= 10){
+                if (stripos($ar['EMAIL'], '@haha.com') !== false) continue;
+                $update = array();
+                $update['LOGIN'] = self::encode($ar['LOGIN']);
+                $update['EMAIL'] = $update['LOGIN'].'@haha.com';
+                $update['NAME'] = $update['LOGIN'];
+                $update['SECOND_NAME'] = $update['LOGIN'];
+                $update['LAST_NAME'] = $update['LOGIN'];
+                $update['TITLE'] = $update['LOGIN'];
+                $update['PERSONAL_PHONE'] = '123456789';
+                $update['PERSONAL_WWW'] = $update['LOGIN'];
+                if ($are_you_ready){
+                    $user = new \CUser();
+                    $user->Update($id, $update);
+                }
+                continue;
+            }
+            if ($are_you_ready)
+                \CUser::Delete($id);
+        }
+        Loader::includeModule('iblock');
+        Loader::includeModule('catalog');
+        $iterator = PriceTable::getList();
+        while ($ar = $iterator->fetch()){
+            $id = (int)$ar['ID'];
+            $price = 100 + (float)$ar['CATALOG_GROUP_ID'];
+            if ($price === (float)$ar['PRICE']) continue;
+            if ($are_you_ready)
+                PriceTable::update($id, array(
+                    'PRICE' => $price,
+                    'PRICE_SCALE' => $price
+                ));
+        }
+        $iterator = OrderTable::getList();
+        while ($ar = $iterator->fetch()){
+            if ($are_you_ready)
+                OrderTable::delete((int)$ar['ID']);
+        }
+        $object = new \CSaleUserAccount();
+        $iterator = $object->GetList();
+        while ($ar = $iterator->Fetch()){
+            if ($are_you_ready)
+                $object->Delete((int)$ar['ID']);
+        }
+        $iterator = UserPropsValueTable::getList();
+        while ($ar = $iterator->fetch()){
+            UserPropsValueTable::delete((int)$ar['ID']);
+        }
+    }
+    private static function encode ($unencoded, $key = '1111'){
+        $string=base64_encode($unencoded);//Переводим в base64
+
+        $arr=array();//Это массив
+        $x=0;
+        while ($x++< strlen($string)) {//Цикл
+            $arr[$x-1] = md5(md5($key.$string[$x-1]).$key);//Почти чистый md5
+            $newstr = $newstr.$arr[$x-1][3].$arr[$x-1][6].$arr[$x-1][1].$arr[$x-1][2];//Склеиваем символы
+        }
+        return $newstr;//Вертаем строку
     }
 }
