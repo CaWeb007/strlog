@@ -1768,7 +1768,8 @@ window.JCCatalogSection.prototype.setPrice = function(change, sku, obPrices, mea
 
 			for(var j in obPrices)
 			{
-				if(obPrices[j])
+                if (obPrices[j].hasOwnProperty('MIN_PRICE') && obPrices[j].MIN_PRICE !== 'Y') continue;
+                if(obPrices[j])
 				{
 					if('GROUP_NAME' in obPrices[j])
 					{
