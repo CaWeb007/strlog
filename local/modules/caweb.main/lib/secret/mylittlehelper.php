@@ -9,6 +9,7 @@
 namespace Caweb\Main\Secret;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Iblock\ElementTable;
+use Bitrix\Iblock\SectionElementTable;
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
@@ -157,5 +158,17 @@ class MyLittleHelper {
             $newstr = $newstr.$arr[$x-1][3].$arr[$x-1][6].$arr[$x-1][1].$arr[$x-1][2];//Склеиваем символы
         }
         return $newstr;//Вертаем строку
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::sectionHoreBitrixSystemFix();*/
+    public static function sectionHoreBitrixSystemFix(){
+        Loader::includeModule('iblock');
+        $param['filter'] = array('IBLOCK_SECTION_ID' => 2040);
+        $param['select'] = array('IBLOCK_SECTION_ID', 'IBLOCK_ELEMENT_ID');
+        $db = SectionElementTable::getList($param);
+        $el = new \CIBlockElement();
+        while ($ar = $db->fetch()){
+            $el->Update($ar['ID'], array('IBLOCK_SECTION_ID' => 2319));
+            SectionElementTable::delete(array('IBLOCK_SECTION_ID' => 2040, 'IBLOCK_ELEMENT_ID' => $ar['IBLOCK_ELEMENT_ID']));
+        }
     }
 }
