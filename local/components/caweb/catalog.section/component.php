@@ -816,9 +816,14 @@ if($this->startResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$arDefaultMeasure = CCatalogMeasure::getDefaultMeasure(true, true);
 	$currencyList = array();
 	$arSections = array();
-
+    $myFilter = array('IBLOCK_ID' => array(16, 24),'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('DETAIL_TEXT' => false), array('DETAIL_PICTURE' => false)));
+    if (Context::getCurrent()->getRequest()->get('type') == 'no-quant')
+        $myFilter = array('IBLOCK_ID' => array(16, 24), 'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('CATALOG_QUANTITY' => 0)));
 	//EXECUTE
-	$rsElements = CIBlockElement::GetList(array('property_CML2_ARTICLE' => 'asc,nulls'), array('IBLOCK_ID' => array(16, 24),'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('DETAIL_TEXT' => false), array('DETAIL_PICTURE' => false))), false, $arNavParams, $arSelect);
+	$rsElements = CIBlockElement::GetList(
+	    array('property_CML2_ARTICLE' => 'asc,nulls'),
+        $myFilter,
+        false, $arNavParams, $arSelect);
 	$rsElements->SetUrlTemplates($arParams["DETAIL_URL"]);
 	if(
 		$arParams["BY_LINK"]!=="Y"
