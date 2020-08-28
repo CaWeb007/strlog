@@ -816,9 +816,15 @@ if($this->startResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
 		$arDefaultMeasure = CCatalogMeasure::getDefaultMeasure(true, true);
 	$currencyList = array();
 	$arSections = array();
+	//region Spec-catalog
+    $title = $APPLICATION->GetTitle();
     $myFilter = array('IBLOCK_ID' => array(16, 24),'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('DETAIL_TEXT' => false), array('DETAIL_PICTURE' => false)));
-    if (Context::getCurrent()->getRequest()->get('type') == 'no-quant')
+    $APPLICATION->SetTitle($title.' - картинки');
+    if (Context::getCurrent()->getRequest()->get('type') == 'no-quant'){
         $myFilter = array('IBLOCK_ID' => array(16, 24), 'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('CATALOG_QUANTITY' => 0)));
+        $APPLICATION->SetTitle($title.' - не в наличии');
+    }
+    //endregion
 	//EXECUTE
 	$rsElements = CIBlockElement::GetList(
 	    array('property_CML2_ARTICLE' => 'asc,nulls'),
