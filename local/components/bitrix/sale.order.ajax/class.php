@@ -3310,8 +3310,15 @@ class SaleOrderAjax extends \CBitrixComponent
 	{
 		$arResult =& $this->arResult;
 		$personTypeId = intval($this->arUserResult['PERSON_TYPE_ID']);
-		$personTypeIdOld = intval($this->arUserResult['PERSON_TYPE_OLD']);
+		/**prepare personTypeId with personal profession fild in UserTable*/
+        global $USER;
+        try{
+		    $professionString = strtolower(Main\UserTable::getRowById($USER->GetID())['PERSONAL_PROFESSION']);
+		    $personTypeId = 1;
+		    if ($professionString === 'кп(юр)') $personTypeId = 2;
+        }catch (\Exception $e){};
 
+        $personTypeIdOld = intval($this->arUserResult['PERSON_TYPE_OLD']);
 		$personTypes = PersonType::load($this->context->getSite());
 		foreach ($personTypes as $personType)
 		{
