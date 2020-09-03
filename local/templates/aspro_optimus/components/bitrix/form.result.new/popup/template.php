@@ -26,7 +26,7 @@
 							"event": 'zvonok'
 						});
 					});
-					gtag_report_conversion2('obratniizvonok');
+					gtag_report_conversion2();
 				});
 				</script>
 				<?$successNoteFile = SITE_DIR."include/form/success_{$arResult["arForm"]["SID"]}.php";?>
