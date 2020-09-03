@@ -65,7 +65,8 @@ if($arResult['ITEMS']){?>
 									: $arItem['NAME']
 								);
 								$totalCount = COptimus::GetTotalCount($arItem);
-								$arQuantityData = COptimus::GetQuantityArray($totalCount);
+                                $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
+                                $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
 								$arItem["FRONT_CATALOG"]="Y";
 								$arItem["RID"]=$arResult["RID"];
 								$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], true);

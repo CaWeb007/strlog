@@ -36,7 +36,8 @@
 			$arItemIDs=COptimus::GetItemsIDs($arItem);
 
 			$totalCount = COptimus::GetTotalCount($arItem);
-			$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"]);
+            $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
+            $arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], 'N', $forOrder);
 
 			$item_id = $arItem["ID"];
 			$strMeasure = '';

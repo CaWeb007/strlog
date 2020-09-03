@@ -75,11 +75,11 @@ if (!empty($arResult['SKU_PROPS'])){
 $strMainID = $this->GetEditAreaId($arResult['ID']);
 
 $strObName = 'ob'.preg_replace("/[^a-zA-Z0-9_]/", "x", $strMainID);
-
+$forOrder = in_array('Заказная позиция', $arResult['PROPERTIES']['CML2_TRAITS']['VALUE']);
 $arResult["strMainID"] = $this->GetEditAreaId($arResult['ID']);
 $arItemIDs=COptimus::GetItemsIDs($arResult, "Y");
 $totalCount = COptimus::GetTotalCount($arResult);
-$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], "Y");
+$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], "Y", $forOrder);
 
 $arParams["BASKET_ITEMS"]=($arParams["BASKET_ITEMS"] ? $arParams["BASKET_ITEMS"] : array());
 $useStores = $arParams["USE_STORE"] == "Y" && $arResult["STORES_COUNT"] && $arQuantityData["RIGHTS"]["SHOW_QUANTITY"];

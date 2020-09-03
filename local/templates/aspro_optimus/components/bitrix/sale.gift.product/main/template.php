@@ -115,7 +115,8 @@ if (!empty($arResult['ITEMS'])){
 
 							$strMeasure = '';
 							$totalCount = COptimus::GetTotalCount($arItem);
-							$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"]);
+                            $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
+                            $arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], 'N', $forOrder);
 							if(!$arItem["OFFERS"]){
 								if($arParams["SHOW_MEASURE"] == "Y" && $arItem["CATALOG_MEASURE"]){
 									$arMeasure = CCatalogMeasure::getList(array(), array("ID" => $arItem["CATALOG_MEASURE"]), false, false, array())->GetNext();

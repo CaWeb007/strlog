@@ -11,7 +11,8 @@ $arNotify = unserialize($notifyOption);
 	$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
 	$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
 	$totalCount = COptimus::GetTotalCount($arItem);
-	$arQuantityData = COptimus::GetQuantityArray($totalCount);
+        $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
+        $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
 	$arItem["FRONT_CATALOG"]="Y";
 	
 	$strMeasure='';

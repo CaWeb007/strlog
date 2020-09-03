@@ -3,6 +3,7 @@
 !/bitrix/modules/sale/
 !/bitrix/templates/
 /bitrix/
+!/bitrix/modules/aspro.optimus/
 /gulpfile.js
 /.idea/
 /logs/
