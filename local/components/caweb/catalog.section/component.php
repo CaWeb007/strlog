@@ -821,7 +821,10 @@ if($this->startResultCache(false, array($arrFilter, ($arParams["CACHE_GROUPS"]==
     $myFilter = array('IBLOCK_ID' => array(16, 24),'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('DETAIL_TEXT' => false), array('DETAIL_PICTURE' => false)));
     $APPLICATION->SetTitle($title.' - картинки');
     if (Context::getCurrent()->getRequest()->get('type') == 'no-quant'){
-        $myFilter = array('IBLOCK_ID' => array(16, 24), 'ACTIVE' => 'Y', array('LOGIC' => 'OR', array('CATALOG_QUANTITY' => 0)));
+        $myFilter = array('IBLOCK_ID' => array(16, 24), 'ACTIVE' => 'Y', 'CATALOG_QUANTITY' => 0, '!ID' => \CIBlockElement::SubQuery('ID', array(
+            'IBLOCK_ID' => array(16, 24),
+            'PROPERTY_CML2_TRAITS' => 'Заказная позиция'
+        )));
         $APPLICATION->SetTitle($title.' - не в наличии');
     }
     //endregion
