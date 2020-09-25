@@ -123,7 +123,8 @@
 									</div>
 								<?endif;?>
 								<?=$arQuantityData["HTML"];?>
-								<div class="cost prices clearfix">
+                                <?if(!$forOrder):?>
+								    <div class="cost prices clearfix">
 									<?if( $arItem["OFFERS"]){?>
 										<?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id, $arItemIDs);?>
 										<?=showProductBonus($arItem)?>
@@ -138,6 +139,7 @@
 										<?=showProductBonus($arItem)?>
 									<?}?>
 								</div>
+                                <?endif?>
 								<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y"){?>
 									<?$arUserGroups = $USER->GetUserGroupArray();?>
 									<?if($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] != 'Y' || ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] == 'Y' && !$arItem['OFFERS'])):?>

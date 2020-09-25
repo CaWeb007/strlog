@@ -199,7 +199,8 @@
 									</div>
 								<?endif;?>
 								<?//=$arQuantityData["HTML"];?>
-								<div class="cost prices clearfix">
+                                <?if(!$forOrder):?>
+								    <div class="cost prices clearfix">
 									<?if( $arItem["OFFERS"]){?>
 										<div class="with_matrix <?=($arParams["SHOW_OLD_PRICE"]=="Y" ? 'with_old' : '');?>" style="display:none;">
 											<div class="price price_value_block"><span class="values_wrapper"></span></div>
@@ -239,6 +240,7 @@
 										<?}?>
 									<?}?>
 								</div>
+                                <?endif?>
 								<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y" && $arParams['SHOW_COUNTER_LIST'] != 'N'){?>
 									<?$arUserGroups = $USER->GetUserGroupArray();?>
 									<?if($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] != 'Y' || ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] == 'Y' && !$arItem['OFFERS'])):?>

@@ -49,11 +49,11 @@
 			?>
 
 			<?if(isset($arItem['groupper']) && $arItem['groupper'] && ($grouperTitleShow === "-0-" || $grouperTitleShow != $arItem['groupper']['VALUE'])):?>
-			<? $grouperTitleShow = $arItem['groupper']['VALUE']; ?>
-			<div class="row-block-prod-title list_item_wrapp item_wrap item">
-				<div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?if ($arItem['groupper']['SECTION'] !== 'Y') echo $grouperTitleShow?></span></div>
-			</div>
-		<?endif?>
+                <? $grouperTitleShow = $arItem['groupper']['VALUE']; ?>
+                <div class="row-block-prod-title list_item_wrapp item_wrap item">
+                    <div class="prod-title"><?=$arItem['groupper']['TITLE']?>: <span><?if ($arItem['groupper']['SECTION'] !== 'Y') echo $grouperTitleShow?></span></div>
+                </div>
+		    <?endif?>
 
 			<div class="list_item_wrapp item_wrap item">
 				<table class="list_item" id="<?=$arItemIDs["strMainID"];?>" cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -192,7 +192,8 @@
 					<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], false, $arItemIDs["ALL_ITEM_IDS"], 'small', $arParams);?>
 					<td class="information_wrapp main_item_wrapper">
 						<div class="information">
-							<div class="cost prices clearfix">
+                            <?if(!$forOrder):?>
+							    <div class="cost prices clearfix">
 								<?if( count( $arItem["OFFERS"] ) > 0 ){?>
 									<div class="with_matrix" style="display:none;">
 										<div class="price price_value_block"><span class="values_wrapper"></span></div>
@@ -234,6 +235,7 @@
 									<?}?>
 								<?}?>
 							</div>
+                            <?endif?>
 							<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y" && $arParams['SHOW_COUNTER_LIST'] != 'N'){?>
 								<?$arUserGroups = $USER->GetUserGroupArray();?>
 								<?if($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] != 'Y' || ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] == 'Y' && !$arItem['OFFERS'])):?>

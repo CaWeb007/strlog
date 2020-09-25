@@ -217,7 +217,8 @@
 					</td>
 					<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], false, array(), 'small', $arParams);?>
 					<td class="price-cell">
-						<div class="cost prices clearfix">
+                        <?if(!$forOrder):?>
+						    <div class="cost prices clearfix">
 							<?if( count( $arItem["OFFERS"] ) > 0 ){?>
 								<div class="with_matrix" style="display:none;">
 									<div class="price price_value_block"><span class="values_wrapper"></span></div>
@@ -255,7 +256,7 @@
 							<?}?>
 							<div class="counter_wrapp"></div>
 						</div>
-
+                        <?endif;?>
 						<div class="basket_props_block" id="bx_basket_div_<?=$arItem["ID"];?>" style="display: none;">
 							<?if (!empty($arItem['PRODUCT_PROPERTIES_FILL'])){
 								foreach ($arItem['PRODUCT_PROPERTIES_FILL'] as $propID => $propInfo){?>

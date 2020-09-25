@@ -387,7 +387,8 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				<div class="prices_block">
 					<h2 style="font-size:20px;">Купить <?=$arResult['NAME'];?></h2>
 					<?$frame = $this->createFrame()->begin();?>
-					<div class="cost prices clearfix">
+                    <?if(!$forOrder):?>
+					    <div class="cost prices clearfix">
 						<?if( count( $arResult["OFFERS"] ) > 0 ){?>
 							<div class="with_matrix" style="display:none;">
 								<div class="price price_value_block"><span class="values_wrapper"></span></div>
@@ -439,6 +440,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 						<?}?>
 							<?=showProductBonus($arResult,true);?>
 					</div>
+                    <?endif;?>
 					<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y"){?>
 						<?$arUserGroups = $USER->GetUserGroupArray();?>
 						<?if($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] != 'Y' || ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] == 'Y' && !$arResult['OFFERS'])):?>

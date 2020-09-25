@@ -106,7 +106,8 @@
 								</div>
 							<?endif;?>
 							<?//=$arQuantityData["HTML"];?><!--Наличие на складе-->
-							<div class="cost prices clearfix">
+                            <?if(!$forOrder):?>
+							    <div class="cost prices clearfix">
 								<?if( $arItem["OFFERS"]){?>
 									<?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
 										<?=showProductBonus($arItem)?>
@@ -130,6 +131,7 @@
 									<?}?>
 								<?}?>
 							</div>
+                            <?endif?>
 							<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y"){?>
 								<?$arDiscounts = CCatalogDiscount::GetDiscountByProduct($item_id, $USER->GetUserGroupArray(), "N", $min_price_id, SITE_ID);
 								$arDiscount=array();

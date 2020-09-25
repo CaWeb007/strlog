@@ -82,10 +82,11 @@ $strMainID = $this->GetEditAreaId($arResult['ID']);
 
 $strObName = 'ob'.preg_replace("/[^a-zA-Z0-9_]/", "x", $strMainID);
 
+$forOrder = in_array('Заказная позиция', $arResult['PROPERTIES']['CML2_TRAITS']['VALUE']);
 $arResult["strMainID"] = $this->GetEditAreaId($arResult['ID']);
 $arItemIDs=COptimus::GetItemsIDs($arResult, "Y");
 $totalCount = COptimus::GetTotalCount($arResult);
-$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], "Y");
+$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], "Y", $forOrder);
 
 $arParams["BASKET_ITEMS"]=($arParams["BASKET_ITEMS"] ? $arParams["BASKET_ITEMS"] : array());
 $useStores = $arParams["USE_STORE"] == "Y" && $arResult["STORES_COUNT"] && $arQuantityData["RIGHTS"]["SHOW_QUANTITY"];
@@ -283,7 +284,8 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 		<div class="middle_info main_item_wrapper">
 			<div class="prices_block">
 				<?$frame = $this->createFrame()->begin();?>
-				<div class="cost prices clearfix">
+                <?if(!$forOrder):?>
+				    <div class="cost prices clearfix">
 					<?if( count( $arResult["OFFERS"] ) > 0 ){?>
 						<div class="with_matrix" style="display:none;">
 							<div class="price price_value_block"><span class="values_wrapper"></span></div>
@@ -330,6 +332,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 					<?}?>
                     <?=showProductBonus($arResult,true);?>
 				</div>
+                <?endif?>
 				<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y"){?>
 					<?$arUserGroups = $USER->GetUserGroupArray();?>
 					<?if($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] != 'Y' || ($arParams['SHOW_DISCOUNT_TIME_EACH_SKU'] == 'Y' && !$arResult['OFFERS'])):?>
