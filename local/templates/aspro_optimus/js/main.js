@@ -1692,7 +1692,7 @@ scrollToTop = function(){
 }
 
 checkScrollToTop = function(){
-	var bottom = 55,
+	var bottom = 135,
 		scrollVal = $(window).scrollTop(),
 		windowHeight = $(window).height(),
 		footerOffset = 70;
