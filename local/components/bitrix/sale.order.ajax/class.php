@@ -16,6 +16,7 @@ use Bitrix\Main,
 	Bitrix\Sale\DiscountCouponsManager,
 	Bitrix\Sale\Services\Company,
 	Bitrix\Sale\Location\GeoIp;
+use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
@@ -3310,12 +3311,12 @@ class SaleOrderAjax extends \CBitrixComponent
 	{
 		$arResult =& $this->arResult;
 		$personTypeId = intval($this->arUserResult['PERSON_TYPE_ID']);
-		/**prepare personTypeId with personal profession fild in UserTable*/
+		/**prepare personTypeId with personal profession field in UserTable*/
         global $USER;
         try{
 		    $professionString = strtolower(Main\UserTable::getRowById($USER->GetID())['PERSONAL_PROFESSION']);
-		    $personTypeId = 1;
-		    if ($professionString === 'кп(юр)') $personTypeId = 2;
+		    $personTypeId = 2;
+		    if (($professionString === 'кп(физ)') || ($professionString === 'кп(со)') || Bonus::getInstance()->isIndividualUser()) $personTypeId = 1;
         }catch (\Exception $e){};
 
         $personTypeIdOld = intval($this->arUserResult['PERSON_TYPE_OLD']);

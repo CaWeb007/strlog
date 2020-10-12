@@ -77,6 +77,9 @@ class Bonus {
     public function isKpUser(){
         return ($this->getUserGroupId() === self::SITE_GROUP_MODEL[0]);
     }
+    public function isIndividualUser(){
+        return (($this->getUserGroupId() === self::SITE_GROUP_MODEL[5]) || $this->isKpUser());
+    }
     public function isBonusPropertyName($name){
         foreach (self::IBLOCK_PROPERTIES_MODEL as $item)
             if (strpos($name, $item) !== false) return true;
