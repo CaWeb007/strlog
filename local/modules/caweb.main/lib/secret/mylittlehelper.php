@@ -12,6 +12,7 @@ use Bitrix\Iblock\ElementTable;
 use Bitrix\Iblock\SectionElementTable;
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
+use Bitrix\Main\UserGroupTable;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\Internals\OrderTable;
 use Bitrix\Sale\Internals\UserPropsTable;
@@ -169,6 +170,49 @@ class MyLittleHelper {
         while ($ar = $db->fetch()){
             $el->Update($ar['ID'], array('IBLOCK_SECTION_ID' => 2319));
             SectionElementTable::delete(array('IBLOCK_SECTION_ID' => 2040, 'IBLOCK_ELEMENT_ID' => $ar['IBLOCK_ELEMENT_ID']));
+        }
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::checkUserSaleProfiles();*/
+    public static function checkUserSaleProfiles(){
+        $db = UserGroupTable::getList(array('filter' => array('GROUP_ID' => 11)));
+        $resultUserId = array();
+        while ($ar = $db->fetch()){
+            $resultUserId[] = $ar['USER_ID'];
+        }
+        $db = UserPropsTable::getList(array('filter' => array('USER_ID' => $resultUserId, 'PERSON_TYPE_ID' => 1)));
+        $resultStr = array();
+        while ($ar = $db->fetch()){
+             $resultStr[] = '<a href ="/bitrix/admin/user_edit.php?lang=ru&ID='.$ar['USER_ID'].'">'.$ar['USER_ID'].'</a></br>';
+        }
+         print_r($resultStr);
+    }
+    public static function deleteDoubleProfiles(){
+        $db = UserGroupTable::getList(array('filter' => array('GROUP_ID' => Bonus::SITE_GROUP_MODEL)));
+        $userIdBYuserProfileId = array();
+        while ($ar = $db->fetch()){
+            $profileId = 2;
+            $check = ($ar['GROUP_ID'] == 9) || ($ar['GROUP_ID'] == 15);
+            if ($check) $profileId = 1;
+            $userIdBYuserProfileId[$ar['USER_ID']] = $profileId;
+        }
+        unset($db, $ar);
+        $params['group'] = array('USER_ID');
+        $params['order'] = array('DATE_UPDATE' => 'DESC');
+        $db = UserPropsTable::getList($params);
+        $userIdBYuserProfilesArray = array();
+        while($ar = $db->fetch()){
+            $check = ((int)$ar['PERSON_TYPE_ID'] !== $userIdBYuserProfileId[$ar['USER_ID']]) || !empty($userIdBYuserProfilesArray[$ar['USER_ID']]);
+            if ($check){
+                $res = UserPropsTable::delete($ar['ID']);
+                if ($res->isSuccess()){
+                    continue;
+                }else{
+                    echo 'error delete '.$ar['ID'];
+                    return;
+                }
+            }
+            $ar['CHECK'] = $check;
+            $userIdBYuserProfilesArray[$ar['USER_ID']][] = $ar;
         }
     }
 }
