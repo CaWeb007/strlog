@@ -12,6 +12,7 @@ use Bitrix\Iblock\ElementTable;
 use Bitrix\Iblock\SectionElementTable;
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
+use Bitrix\Main\Type\DateTime;
 use Bitrix\Main\UserGroupTable;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\Internals\OrderTable;
@@ -213,6 +214,21 @@ class MyLittleHelper {
             }
             $ar['CHECK'] = $check;
             $userIdBYuserProfilesArray[$ar['USER_ID']][] = $ar;
+        }
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::adminsIsAMotherFuckers();*/
+    public static function adminsIsAMotherFuckers($startOrderId = 0){
+        if ($startOrderId === 0){
+            Pr('write order');
+            return;
+        }
+        $params['filter'] = array('>=ID'=> $startOrderId);
+        $params['select'] = array('ID');
+        $db = OrderTable::getList($params);
+        $date = new DateTime();
+        while ($ar = $db->fetch()){
+            $res = OrderTable::update((int)$ar['ID'], array('DATE_UPDATE' => $date));
+            if (!$res->isSuccess()) Pr($res->getErrorMessages());
         }
     }
 }
