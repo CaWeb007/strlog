@@ -17,7 +17,6 @@ use Bitrix\Main,
 	Bitrix\Currency,
 	Bitrix\Iblock,
 	Bitrix\Catalog;
-use Caweb\Main\Log\Write;
 
 IncludeModuleLangFile($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/catalog/export_yandex.php');
 IncludeModuleLangFile(__FILE__);
@@ -359,7 +358,6 @@ function yandex_get_value($arOffer, $param, $PROPERTY, $arProperties, $arUserTyp
 			{
 				foreach ($value as $key => $val)
 				{
-				    if (empty($val)) continue;
 					$strProperty .= $strProperty ? "\n" : "";
 					$strProperty .= '<param name="'.yandex_text2xml($description[$key], true).'">'.
 						yandex_text2xml($val, true).'</param>';
@@ -367,18 +365,14 @@ function yandex_get_value($arOffer, $param, $PROPERTY, $arProperties, $arUserTyp
 			}
 			else
 			{
-			    if (!empty($value)){
-                    $strProperty .= '<param name="'.yandex_text2xml($iblockProperty['NAME'], true).'">'.
-                        yandex_text2xml($value, true).'</param>';
-                }
+				$strProperty .= '<param name="'.yandex_text2xml($iblockProperty['NAME'], true).'">'.
+					yandex_text2xml($value, true).'</param>';
 			}
 		}
 		else
 		{
-		    if (!empty($value)){
-                $param_h = yandex_text2xml($param, true);
-                $strProperty .= '<'.$param_h.'>'.yandex_text2xml($value, true).'</'.$param_h.'>';
-            }
+			$param_h = yandex_text2xml($param, true);
+			$strProperty .= '<'.$param_h.'>'.yandex_text2xml($value, true).'</'.$param_h.'>';
 		}
 
 		unset($iblockProperty);
@@ -1292,6 +1286,7 @@ if (empty($arRunErrors))
 				unset($row, $iterator);
 			}
 			unset($pageIds);
+
 			if ($needProperties || $needDiscountCache)
 			{
 				if (!empty($propertyIdList))
@@ -1330,7 +1325,7 @@ if (empty($arRunErrors))
 						foreach (array_keys($items[$id]['PROPERTIES']) as $index)
 						{
 							$propertyId = $items[$id]['PROPERTIES'][$index]['ID'];
-							if (isset($yandexNeedPropertyIds[$propertyId]))
+							if (!isset($yandexNeedPropertyIds[$propertyId]))
 								unset($items[$id]['PROPERTIES'][$index]);
 						}
 						unset($propertyId, $index);
@@ -1392,7 +1387,7 @@ if (empty($arRunErrors))
 									foreach (array_keys($productOffer['PROPERTIES']) as $index)
 									{
 										$propertyId = $productOffer['PROPERTIES'][$index]['ID'];
-										if (isset($yandexNeedPropertyIds[$propertyId]))
+										if (!isset($yandexNeedPropertyIds[$propertyId]))
 											unset($productOffer['PROPERTIES'][$index]);
 									}
 									unset($propertyId, $index);
@@ -1838,14 +1833,9 @@ if (empty($arRunErrors))
 								$itemsContent .= "<description>".$row['DESCRIPTION']."</description>\n";
 								break;
 							case 'param':
-                                /*Write::file('prEx', $propertyIdList);
-                                Write::file('prEx2', $parametricFields);
-                                Write::file('prExR', $row);
-                                Write::file('prExP', $arProperties);*/
-
-                                if ($parametricFieldsExist)
+								if ($parametricFieldsExist)
 								{
-									foreach ($propertyIdList as $paramKey => $prop_id)
+									foreach ($parametricFields as $paramKey => $prop_id)
 									{
 										$value = yandex_get_value(
 											$row,
