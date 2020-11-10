@@ -145,7 +145,6 @@ if (!function_exists('yandex_get_value'))
 function yandex_get_value($arOffer, $param, $PROPERTY, $arProperties, $arUserTypeFormat, $usedProtocol)
 {
 	global $iblockServerName;
-
 	$strProperty = '';
 	$bParam = (strncmp($param, 'PARAM_', 6) == 0);
 	if (isset($arProperties[$PROPERTY]) && !empty($arProperties[$PROPERTY]))
@@ -350,8 +349,8 @@ function yandex_get_value($arOffer, $param, $PROPERTY, $arProperties, $arUserTyp
 				}
 		}
 
-		// !!!! check multiple properties and properties like CML2_ATTRIBUTES
-
+        if(empty($value)) return '';
+        // !!!! check multiple properties and properties like CML2_ATTRIBUTES
 		if ($bParam)
 		{
 			if (is_array($description))
