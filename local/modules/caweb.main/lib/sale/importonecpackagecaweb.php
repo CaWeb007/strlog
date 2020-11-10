@@ -156,7 +156,7 @@ final class ImportOneCPackageCaweb extends ImportOneCPackageSale {
                     $fieldsArray[$key] = $documentOrder->getField('VERSION_1C');
                     break;
                 case 'ID_1C':
-                    if ($v = $orderShipment->getField('ID_1C')){
+                    if (($orderShipment instanceof Shipment) && ($v = $orderShipment->getField('ID_1C'))){
                         $fieldsArray[$key] = $v;
                     }else{
                         $fieldsArray[$key] = $documentOrder->getField('ID_1C');
@@ -166,6 +166,7 @@ final class ImportOneCPackageCaweb extends ImportOneCPackageSale {
                     $fieldsArray[$key] = $documentOrder->getField('AGENT');
                     break;
                 case 'REK_VALUES':
+                    if (!($orderShipment instanceof Shipment)) break;
                     $fieldsArray[$key] = array(
                         'CANCEL' => $orderShipment->getField('CANCELED'),
                         'DEDUCTED' => $orderShipment->getField('DEDUCTED'),
