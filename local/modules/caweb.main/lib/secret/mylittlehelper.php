@@ -231,4 +231,15 @@ class MyLittleHelper {
             if (!$res->isSuccess()) Pr($res->getErrorMessages());
         }
     }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::getList();*/
+    public static function getList(){
+        Loader::includeModule('iblock');
+        $filter = array('ACTIVE' => 'Y', 'SECTION_ID' => 2401, 'IBLOCK_ID' => 16);
+        $db = \CIBlockElement::GetList(array(), $filter);
+        $res = array();
+        while ($ar = $db->Fetch()){
+            $res[] = $ar;
+        }
+        Pr(count($res));
+    }
 }
