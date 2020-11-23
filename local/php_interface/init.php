@@ -27,6 +27,7 @@ EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGr
 
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserAuthorize', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserUpdate', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
+EventManager::getInstance()->addEventHandlerCompatible('main', 'OnBeforeEventAdd', array('Caweb\Main\Events\Main', 'OnBeforeEventAdd'));
 
 
 function CheckBasket(){

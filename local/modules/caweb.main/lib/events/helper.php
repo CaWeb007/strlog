@@ -1,6 +1,7 @@
 <?
 namespace Caweb\Main\Events;
 
+use Bitrix\Catalog\SubscribeTable;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\BasketItem;
 use Bitrix\Sale\Order;
@@ -67,5 +68,24 @@ class Helper{
     }
     public static function setNeedRefreshProductPrices(){
         self::$REFRESH_PRICES = true;
+    }
+
+    /**
+     * @param string $userContact
+     * @param int|null $productId
+     */
+    public static function setNeedSubscribeSanding(string $userContact = '', int $productId = null){
+        if (empty($userContact) || empty($productId)) return;
+        $param = array();
+        $param['filter'] = array('USER_CONTACT' => $userContact, 'ITEM_ID' => $productId);
+        $param['select'] = array('ID');
+        try {
+            $iterator = SubscribeTable::getList($param);
+            while ($subscribe = $iterator->fetch()) {
+                SubscribeTable::update((int)$subscribe['ID'], array('NEED_SENDING' => 'Y'));
+            }
+        }catch (\Exception $exception){
+            return;
+        }
     }
 }

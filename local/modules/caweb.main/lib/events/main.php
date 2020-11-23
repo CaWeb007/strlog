@@ -1,9 +1,12 @@
 <?
 namespace Caweb\Main\Events;
+use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\Internals\UserPropsTable;
 use Caweb\Main\Catalog\Helper as CatalogHelper;
+use Caweb\Main\Log\Write;
+
 Loc::loadLanguageFile(__FILE__);
 class Main{
     public static $instance = null;
@@ -55,5 +58,29 @@ class Main{
         if (!empty(self::$instance)) return self::$instance;
         self::$instance = new self();
         return self::$instance;
+    }
+    public static function OnBeforeEventAdd(&$event, &$lid, &$arFields, &$message_id, &$files, &$languageId){
+        if (($event !== 'CATALOG_PRODUCT_SUBSCRIBE_NOTIFY') && ($event !== 'CATALOG_PRODUCT_SUBSCRIBE_NOTIFY_REPEATED')) return true;
+        if (empty($arFields['PRODUCT_ID'])) return true;
+        if (!Loader::includeModule('iblock')) return true;
+        $db = \CIBlockElement::GetList(
+                array(),
+                array('ID' => (int)$arFields['PRODUCT_ID']),
+                false,
+                false,
+                array('ID', 'ACTIVE', 'IBLOCK_ID')
+            );
+        $item = $db->GetNextElement();
+        $itemFields = array();
+        $itemFields = $item->GetFields();
+        $itemFields['NOT_WORK'] = $item->GetProperty(533);
+        $itemFields['CML2_TRAITS'] = $item->GetProperty(90);
+        $notActive = $itemFields['ACTIVE'] !== 'Y';
+        $disable = (int)$itemFields['NOT_WORK']['VALUE_ENUM_ID'] === 6036;
+        $cmlDontWork = in_array(Loc::getMessage('CML_DONT_WORK'),$itemFields['CML2_TRAITS']['VALUE']);
+        if ($notActive || $disable || $cmlDontWork){
+            Helper::setNeedSubscribeSanding($arFields['USER_CONTACT'], $arFields['PRODUCT_ID']);
+            return false;
+        }
     }
 }
