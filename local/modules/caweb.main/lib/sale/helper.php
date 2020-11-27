@@ -55,7 +55,8 @@ class Helper{
         if (in_array(self::KP_USER, $userGroups)) return true;
         return false;
     }
-    public static function updateOrderProperties(Order $order){
+    /**@deprecated dont use anymore fio fields in order form*/
+    public static function updateOrderPropertiesEx(Order $order){
         $properties = $order->getPropertyCollection();
         $personType = (int)$order->getPersonTypeId();
         if ($personType === 1){
@@ -87,6 +88,26 @@ class Helper{
             $family->setValue($explode[0]);
             $name->setValue($explode[1]);
             $lastName->setValue($explode[2]);
+        }
+        return $order;
+    }
+    public static function updateOrderProperties(Order $order){
+        $properties = $order->getPropertyCollection();
+        $personType = (int)$order->getPersonTypeId();
+        if ($personType === 1){
+            $fio = $properties->getItemByOrderPropertyId(1);
+            $name = $properties->getItemByOrderPropertyId(32);
+            $family = $properties->getItemByOrderPropertyId(33);
+            $lastName = $properties->getItemByOrderPropertyId(34);
+        }else{
+            $fio = $properties->getItemByOrderPropertyId(12);
+            $name = $properties->getItemByOrderPropertyId(36);
+            $family = $properties->getItemByOrderPropertyId(37);
+            $lastName = $properties->getItemByOrderPropertyId(38);
+        }
+        if (($name instanceof PropertyValue) && ($fio instanceof PropertyValue) && !empty($name->getValue())){
+            $string = implode(' ', array($family->getValue(), $name->getValue(), $lastName->getValue()));
+            $fio->setValue($string);
         }
         return $order;
     }
