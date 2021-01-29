@@ -14,8 +14,8 @@ class Bonus {
     const SITE_GROUP_MODEL = array(9,10,11,12,14,15);
     const IBLOCK_PROPERTIES_MODEL = array(
         1 => "BONUS_KP",
-        2 => "BONUS_KP",
-        3 => "BONUS_KP15",
+        2 => "BONUS_SO",
+        3 => "BONUS_SO15",
         4 => "BONUS_SO",
         5 => "BONUS_SO15",
         6 => "BONUS_SO20"
