@@ -1,4 +1,8 @@
 <?
+
+use Bitrix\Main\Loader;
+use Caweb\Main\Log\Write;
+
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 /** @global CMain $APPLICATION */
 /** @global CUser $USER */
@@ -191,6 +195,8 @@ if (!$bDesignMode)
 $FILE_NAME = false;
 $ABS_FILE_NAME = false;
 $WORK_DIR_NAME = false;
+
+Loader::includeModule('caweb.main');
 
 if ($arParams["USE_TEMP_DIR"] === "Y" && strlen($_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"]) > 0)
 	$DIR_NAME = $_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"];
