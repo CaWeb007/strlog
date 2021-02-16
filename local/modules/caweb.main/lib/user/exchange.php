@@ -102,13 +102,10 @@ class Exchange{
     protected function sendEmail($ID, $arFields){
         $arEventFields= array(
             "LOGIN" => $arFields['EMAIL'],
-            "NAME" => $arFields['NAME'],
-            "PASSWORD" => "Пароль: " . $arFields['PASSWORD'],
-            "EMAIL" => $arFields['EMAIL'],
-            "SERVER_NAME" => "stroylogistika.ru",
-            "USER_ID" => $ID,
+            "PASSWORD" => $arFields['PASSWORD'],
+            "EMAIL" => $arFields['EMAIL']
         );
-        $CV = \CEvent::Send("USER_INFO_STRLOG", SITE_ID, $arEventFields, "N", 96,[],LANGUAGE_ID);
+        $CV = \CEvent::Send("USER_INFO_STRLOG", SITE_ID, $arEventFields, "N", 95, array(),LANGUAGE_ID);
         if (empty($CV)) $this->warn['mail'][] = $arFields['EMAIL'];
     }
     protected function prepareFields($newFields, $oldFields = array()){
