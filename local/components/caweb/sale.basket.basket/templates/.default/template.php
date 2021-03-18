@@ -266,22 +266,8 @@ if (empty($arResult['ERROR_MESSAGE']))
 	<?
 	if ($arParams['USE_GIFTS'] === 'Y' && $arParams['GIFTS_PLACE'] === 'BOTTOM')
 	{
-	    if (is_array($giftParameters['FULL_DISCOUNT_LIST']))
-	        foreach ($giftParameters['FULL_DISCOUNT_LIST'] as &$discountCond)
-	            foreach ($discountCond['ACTIONS']['CHILDREN'] as &$children)
-	                if ($children['CLASS_ID'] === 'CawebGiftCondGroup')
-                        $children['CLASS_ID'] = 'GiftCondGroup';
-
-        if (is_array($giftParameters['APPLIED_DISCOUNT_LIST']))
-            foreach ($giftParameters['APPLIED_DISCOUNT_LIST'] as $key => &$discountCond)
-                foreach ($discountCond['ACTIONS']['CHILDREN'] as &$children)
-                    if ($children['CLASS_ID'] === 'CawebGiftCondGroup'){
-                    $children['CLASS_ID'] = 'GiftCondGroup';
-                    unset($giftParameters['FULL_DISCOUNT_LIST'][$key]);
-                }
-
         $APPLICATION->IncludeComponent(
-			'bitrix:sale.gift.basket',
+			'caweb:sale.gift.basket',
 			'.default',
 			$giftParameters,
 			$component
