@@ -3,7 +3,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Корзина");
 ?><?$APPLICATION->IncludeComponent(
 	"caweb:sale.basket.basket",
-	".default", 
+	".default",
 	array(
 		"ACTION_VARIABLE" => "action",
 		"ADDITIONAL_PICT_PROP_14" => "-",
@@ -58,7 +58,7 @@ $APPLICATION->SetTitle("Корзина");
 		"GIFTS_BLOCK_TITLE" => "Выберите один из подарков",
 		"GIFTS_CONVERT_CURRENCY" => "N",
 		"GIFTS_HIDE_BLOCK_TITLE" => "N",
-		"GIFTS_HIDE_NOT_AVAILABLE" => "N",
+		"GIFTS_HIDE_NOT_AVAILABLE" => "Y",
 		"GIFTS_MESS_BTN_BUY" => "Выбрать",
 		"GIFTS_MESS_BTN_DETAIL" => "Подробнее",
 		"GIFTS_PAGE_ELEMENT_COUNT" => "10",

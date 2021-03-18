@@ -1501,7 +1501,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$orderableBasket = $basketStorage->getOrderableBasket();
 			// in SOA case we already have real order
-			//$this->initializeBasketOrderIfNotExists($orderableBasket);//ToDo comment if not work cawebDiscountProcess
+			$this->initializeBasketOrderIfNotExists($orderableBasket);//ToDo comment if not work cawebDiscountProcess
 
 			$this->storage['ORDERABLE_BASKET_ITEMS_COUNT'] = $orderableBasket->count();
 
