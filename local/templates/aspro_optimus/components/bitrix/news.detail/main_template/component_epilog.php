@@ -13,10 +13,29 @@
 				<div class="module-products-corusel product-list-items catalog">
 					<?$GLOBALS[$arParams["CATALOG_FILTER_NAME"]] = array("ID" => $arResult["DISPLAY_PROPERTIES"][$arParams["LINKED_PRODUCTS_PROPERTY"]]["VALUE"] );?>
 					<?$list_view = ($arParams['LIST_VIEW'] ? $arParams['LIST_VIEW'] : 'slider');?>
+                    <?$arParams['LINK_IBLOCK_ID'] = '16'?>
 					<?include($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'include/news.detail.products_'.$list_view.'.php');?>
 				</div>
 		</div>
-	<?endif;?>
+	<?elseif ($arParams["SHOW_LINKED_PRODUCTS"]=="Y" && $arResult["DISPLAY_PROPERTIES"]['NK']["VALUE"]):?>
+        <hr class="long"/>
+        <div class="similar_products_wrapp main_temp">
+            <?if(CSite::InDir(SITE_DIR."sale")){?>
+                <h3><?=GetMessage("ACTION_PRODUCTS");?></h3>
+            <?}else{?>
+                <h3><?=GetMessage("ACTION_PRODUCTS_LINK");?></h3>
+            <?}?>
+            <?if(!$arParams["CATALOG_FILTER_NAME"]){
+                $arParams["CATALOG_FILTER_NAME"]="arrProductsFilter";
+            }?>
+            <div class="module-products-corusel product-list-items catalog">
+                <?$GLOBALS[$arParams["CATALOG_FILTER_NAME"]] = array("ID" => $arResult["DISPLAY_PROPERTIES"]['NK']["VALUE"] );?>
+                <?$list_view = ($arParams['LIST_VIEW'] ? $arParams['LIST_VIEW'] : 'slider');?>
+                <?$arParams['LINK_IBLOCK_ID'] = '24'?>
+                <?include($_SERVER['DOCUMENT_ROOT'].SITE_DIR.'include/news.detail.products_'.$list_view.'.php');?>
+            </div>
+        </div>
+    <?endif?>
 	<?if ($arParams["SHOW_SERVICES_BLOCK"]=="Y"):?>
 		<div class="ask_big_block">
 			<div class="ask_btn_block">

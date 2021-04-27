@@ -71,8 +71,9 @@
 		),
 		"DETAIL_PROPERTY_CODE" => array(
 			0 => "LINK",
-			1 => "MORE_PHOTO",
-			2 => "",
+			1 => "NK",
+			2 => "MORE_PHOTO",
+			3 => "",
 		),
 		"IBLOCK_CATALOG_TYPE" => "aspro_optimus_catalog",
 		"CATALOG_IBLOCK_ID1" => "14",
@@ -116,6 +117,7 @@
 		"STRICT_SECTION_CHECK" => "N",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"LIST_VIEW" => "slider",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "#YEAR#/",
