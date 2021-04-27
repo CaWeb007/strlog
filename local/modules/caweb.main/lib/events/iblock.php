@@ -11,10 +11,12 @@ namespace Caweb\Main\Events;
 
 use Bitrix\Main\Application;
 use Caweb\Main\Log\Write;
+use \Bitrix\Main\Entity;
 
 class Iblock{
     public static $instance = null;
     const SCU_IBLOCK = 23;
+    const CATALOG_IBLOCK = 10;
     const DO_NOT_DEACTIVATE_SECTION = array(2155);
     public function SortSku(&$arParams){
         $iblockId = (int)$arParams['IBLOCK_ID'];
@@ -55,5 +57,18 @@ class Iblock{
     }
     protected static function isImport(){
         return (Application::getInstance()->getContext()->getRequest()->get('mode') === 'import');
+    }
+    public static function doNotUseFacet(&$arFields){
+        if ((int)$arFields['ID'] !== self::CATALOG_IBLOCK) return;
+        if ($arFields['PROPERTY_INDEX'] === 'N') return;
+        $arFields['PROPERTY_INDEX'] = 'N';
+    }
+    public static function doNotUseFacetD7(Entity\Event $event){
+        $result = new Entity\EventResult();
+        $data = $event->getParameter('fields');
+        if ((int)$data['ID'] !== self::CATALOG_IBLOCK) return;
+        if ($data['PROPERTY_INDEX'] === 'N') return;
+        $result->modifyFields(array('PROPERTY_INDEX' => 'N'));
+        return $result;
     }
 }

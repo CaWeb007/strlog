@@ -3,6 +3,8 @@ define("NO_AGENT_CHECK", true);
 define("NO_KEEP_STATISTIC", true);
 require_once($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 
+\Bitrix\Iblock\IblockTable::update(10, array('PROPERTY_INDEX' => 'Y'));
+
 if(!$GLOBALS['USER']->IsAdmin())
 {
     die  ("Доступно только для администратора.");

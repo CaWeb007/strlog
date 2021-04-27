@@ -23,8 +23,10 @@ EventManager::getInstance()->addEventHandler('sale', 'OnCondSaleActionsControlBu
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockSectionUpdate', array('Caweb\Main\Events\Iblock', 'doNotDeactivate'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockUpdate', array('\Caweb\Main\Events\Iblock', 'doNotUseFacet'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
 
+EventManager::getInstance()->addEventHandler('iblock', 'Bitrix\Iblock\IblockTable::OnBeforeUpdate', array('\Caweb\Main\Events\Iblock', 'doNotUseFacetD7'));
 
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserAuthorize', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserUpdate', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
