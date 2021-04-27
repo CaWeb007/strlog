@@ -15,18 +15,18 @@
 
 				<?if($APPLICATION->GetProperty("viewed_show")=="Y" || defined("ERROR_404")):?>
 					<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
-	"COMPONENT_TEMPLATE" => ".default",
-		"PATH" => SITE_DIR."include/footer/comp_viewed.php",
-		"AREA_FILE_SHOW" => "file",
-		"AREA_FILE_SUFFIX" => "",
-		"AREA_FILE_RECURSIVE" => "Y",
-		"EDIT_TEMPLATE" => "standard.php"
-	),
-	false,
-	array(
-	"ACTIVE_COMPONENT" => "N"
-	)
-);?>
+                        "COMPONENT_TEMPLATE" => ".default",
+                            "PATH" => SITE_DIR."include/footer/comp_viewed.php",
+                            "AREA_FILE_SHOW" => "file",
+                            "AREA_FILE_SUFFIX" => "",
+                            "AREA_FILE_RECURSIVE" => "Y",
+                            "EDIT_TEMPLATE" => "standard.php"
+                        ),
+                        false,
+                        array(
+                        "ACTIVE_COMPONENT" => "N"
+                        )
+                    );?>
 				<?endif;?>
 				<div class="wrapper_inner" style="background: #e4e4e4;">
 					<div class="footer_bottom_inner">
@@ -165,18 +165,18 @@
 											<div class="social_wrapper">
 												<div class="social">
 													<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
-	"COMPONENT_TEMPLATE" => ".default",
-		"PATH" => SITE_DIR."include/footer/social.info.optimus.default.php",
-		"AREA_FILE_SHOW" => "file",
-		"AREA_FILE_SUFFIX" => "",
-		"AREA_FILE_RECURSIVE" => "Y",
-		"EDIT_TEMPLATE" => "standard.php"
-	),
-	false,
-	array(
-	"ACTIVE_COMPONENT" => "Y"
-	)
-);?>
+                                                        "COMPONENT_TEMPLATE" => ".default",
+                                                            "PATH" => SITE_DIR."include/footer/social.info.optimus.default.php",
+                                                            "AREA_FILE_SHOW" => "file",
+                                                            "AREA_FILE_SUFFIX" => "",
+                                                            "AREA_FILE_RECURSIVE" => "Y",
+                                                            "EDIT_TEMPLATE" => "standard.php"
+                                                        ),
+                                                        false,
+                                                        array(
+                                                        "ACTIVE_COMPONENT" => "Y"
+                                                        )
+                                                    );?>
 												</div>
 											</div>
 										</div>
@@ -204,6 +204,12 @@
 				</div>
 			</div>
 		</footer>
+<script>
+    (function(w,d,u){
+        var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
+        var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+    })(window,document,'https://crm.strlog.ru/upload/crm/site_button/loader_3_lrizq0.js');
+</script>
 		<?
 		COptimus::setFooterTitle();
 		COptimus::showFooterBasket();
