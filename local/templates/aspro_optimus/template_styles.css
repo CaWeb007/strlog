@@ -2466,7 +2466,7 @@ body .ajax_load.table .main_item_wrapper .counter_wrapp div.total_summ{margin: -
     opacity: 0;z-index: 99;left: 50%;top: 50%;font-size:13px;
 }
 .with_fast_view .item:hover .fast_view_block, .with_fast_view .catalog_item:hover .fast_view_block, .with_fast_view .list_item:hover .fast_view_block, .with_fast_view .catalog_item.hover .fast_view_block{visibility: visible;opacity:1;}
-.with_fast_view .list_item .fast_view_block{position:relative;margin:10px auto 0px;left:0px;top:0px;padding: 0px 14px 0px 36px;width: auto;}
+.with_fast_view .list_item .fast_view_block{position:absolute;margin:0px auto;left:0px;right:0;top:50%;padding: 0px 14px 0px 36px;width: auto;transform: translateY(-50%)}
 .with_fast_view .list_item .fast_view_block:before, .icons.fast_view_block:before{content:"";opacity:0.5;position:absolute;left:12px;top:50%;margin-top: -8px;width:17px;height:16px;background:url('images/zoom.png') 0px 0px no-repeat;}
 .icons.fast_view_block{font-size:0px;width:50px;height:50px;}
 .with_fast_view .module_products_list .icons.fast_view_block{width: 40px;height: 40px;margin: 0px;top: 5px;left: 5px;}
