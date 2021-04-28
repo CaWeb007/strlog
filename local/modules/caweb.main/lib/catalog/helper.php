@@ -4,10 +4,11 @@ namespace Caweb\Main\Catalog;
 use Bitrix\Catalog\GroupAccessTable;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Loader;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Page\Asset;
 
 Loader::includeModule('catalog');
-
+Loc::loadMessages(__FILE__);
 class Helper{
     const SITE_PRICE_MODEL = array(14,9,10,11);
     const SITE_GROUP_MODEL = array(9,10,11,12,14,15);
@@ -51,5 +52,11 @@ class Helper{
         $param['filter'] = array('PRODUCT_ID' => $id, 'CATALOG_GROUP_ID' => $priceId);
         $param['select'] = array('ID','PRICE');
         return PriceTable::getRow($param);
+    }
+    public static function  FormatCurrency($fSum = ""){
+        if (empty($fSum)) return "";
+        $fSumArray = explode(' ', $fSum);
+        return Loc::getMessage('CAWEB_CATALOG_HELPER_CUR_FORMAT', array('#NUM#'=>$fSumArray[0],'#CUR#'=>$fSumArray[1]));
+
     }
 }

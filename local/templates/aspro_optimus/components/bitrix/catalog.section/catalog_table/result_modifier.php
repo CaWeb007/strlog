@@ -269,26 +269,27 @@ if (!empty($arResult['ITEMS'])){
 		/* end PRICE 'TO' */
 
 		/* OLD PRICE */
-		if(isset($arItem["PROPERTIES"]["OLDPRICE_TO"]) || isset($arItem["PROPERTIES"]["OLDPRICE_SO"]) || isset($arItem["PROPERTIES"]["OLDPRICE_KP"])){
-			$arPRICES_ID = ['ТО' => 'TO','СО' => 'SO','КП' => 'KP'];
-			if((float)$arItem["PROPERTIES"]["OLDPRICE_TO"] > 0 || (float)$arItem["PROPERTIES"]["OLDPRICE_SO"] > 0 || (float)$arItem["PROPERTIES"]["OLDPRICE_KP"] > 0) {
-				foreach($arItem['PRICES'] as $PKEY => $PRICE){
-					if(isset($arPRICES_ID[$PKEY]) && (float)$arItem["PROPERTIES"]["OLDPRICE_" . $arPRICES_ID[$PKEY]]['VALUE'] > 0) {
-						$oldPrice = (float)$arItem["PROPERTIES"]["OLDPRICE_" . $arPRICES_ID[$PKEY]]['VALUE'];
-						if((float)$PRICE['DISCOUNT_VALUE'] > 0 && (float)$PRICE['DISCOUNT_VALUE'] < $oldPrice){
-							$arItem['PRICES'][$PKEY]['VALUE'] = $oldPrice;
-							$arItem['PRICES'][$PKEY]['PRINT_VALUE'] = $oldPrice . " руб";
-						}elseif((float)$PRICE['VALUE'] > 0 && (float)$PRICE['VALUE'] < $oldPrice){
-							$arItem['PRICES'][$PKEY]['DISCOUNT_VALUE'] = $arItem['PRICES'][$PKEY]['VALUE'];
-							$arItem['PRICES'][$PKEY]['PRINT_DISCOUNT_VALUE'] = $arItem['PRICES'][$PKEY]['VALUE'] . " руб";
-							$arItem['PRICES'][$PKEY]['VALUE'] = $oldPrice;
-							$arItem['PRICES'][$PKEY]['PRINT_VALUE'] = $oldPrice . " руб";
+		if (empty($arItem['OFFERS']))
+			if(isset($arItem["PROPERTIES"]["OLDPRICE_TO"]) || isset($arItem["PROPERTIES"]["OLDPRICE_SO"]) || isset($arItem["PROPERTIES"]["OLDPRICE_KP"])){
+				$arPRICES_ID = ['ТО' => 'TO','СО' => 'SO','КП' => 'KP'];
+				if((float)$arItem["PROPERTIES"]["OLDPRICE_TO"] > 0 || (float)$arItem["PROPERTIES"]["OLDPRICE_SO"] > 0 || (float)$arItem["PROPERTIES"]["OLDPRICE_KP"] > 0) {
+					foreach($arItem['PRICES'] as $PKEY => $PRICE){
+						if(isset($arPRICES_ID[$PKEY]) && (float)$arItem["PROPERTIES"]["OLDPRICE_" . $arPRICES_ID[$PKEY]]['VALUE'] > 0) {
+							$oldPrice = (float)$arItem["PROPERTIES"]["OLDPRICE_" . $arPRICES_ID[$PKEY]]['VALUE'];
+							if((float)$PRICE['DISCOUNT_VALUE'] > 0 && (float)$PRICE['DISCOUNT_VALUE'] < $oldPrice){
+								$arItem['PRICES'][$PKEY]['VALUE'] = $oldPrice;
+								$arItem['PRICES'][$PKEY]['PRINT_VALUE'] = $oldPrice . " руб";
+							}elseif((float)$PRICE['VALUE'] > 0 && (float)$PRICE['VALUE'] < $oldPrice){
+								$arItem['PRICES'][$PKEY]['DISCOUNT_VALUE'] = $arItem['PRICES'][$PKEY]['VALUE'];
+								$arItem['PRICES'][$PKEY]['PRINT_DISCOUNT_VALUE'] = $arItem['PRICES'][$PKEY]['VALUE'] . " руб";
+								$arItem['PRICES'][$PKEY]['VALUE'] = $oldPrice;
+								$arItem['PRICES'][$PKEY]['PRINT_VALUE'] = $oldPrice . " руб";
+							}
 						}
+
 					}
-					
 				}
 			}
-		}
 		
 		$arItem['LAST_ELEMENT'] = 'N';
 		$arNewItemsList[$key] = $arItem;

@@ -8,6 +8,7 @@ use Bitrix\Main\Web\DOM\CssParser;
 use Bitrix\Main\Text\HtmlFilter;
 use Bitrix\Main\IO\File;
 use Bitrix\Main\IO\Directory;
+use Caweb\Main\Catalog\Helper;
 
 if(!defined('FUNCTION_MODULE_ID'))
 	define('FUNCTION_MODULE_ID', 'aspro.optimus');
@@ -71,14 +72,14 @@ if(!class_exists("CAsproSku"))
 					if(isset($arItemIDs["ALL_ITEM_IDS"]) && (isset($arItemIDs["ALL_ITEM_IDS"]['DISCOUNT_PRICE']) && $arItemIDs["ALL_ITEM_IDS"]['DISCOUNT_PRICE']))
 						$str_price_old_id = 'id="'.$arItemIDs["ALL_ITEM_IDS"]['DISCOUNT_PRICE'].'"';
 				}
-				if ('N' == $arParams['TYPE_SKU'] || $arParams['DISPLAY_TYPE'] === 'table' || empty($arItem['OFFERS_PROP']))
+				/*if ('N' == $arParams['TYPE_SKU'] || $arParams['DISPLAY_TYPE'] === 'table' || empty($arItem['OFFERS_PROP']))
                     $prefix = 'от ';
-                ?>
+                */?>
 				<?$measure_block = self::getMeasureRatio($arParams, $minPrice);?>
 				<?if($arParams["SHOW_OLD_PRICE"]=="Y"){?>
 					<div class="price" <?=$str_price_id;?>>
 						<?if(strlen($minPrice["PRINT_DISCOUNT_VALUE"])):?>
-							<?=$prefix;?> <span class="values_wrapper"><?=$minPrice["PRINT_DISCOUNT_VALUE"];?></span><?=$measure_block;?>
+							<span class="values_wrapper"><?=Helper::FormatCurrency($minPrice['PRINT_DISCOUNT_VALUE'])?></span><span class="price_measure">/<?=$minPrice['CATALOG_MEASURE_NAME']?></span>
 						<?endif;?>
 					</div>
 					<?if($arParams["SHOW_OLD_PRICE"]=="Y"):?>
