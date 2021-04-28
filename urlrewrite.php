@@ -112,14 +112,6 @@ $arUrlRewrite=array (
     'PATH' => '/info/articles/index.php',
     'SORT' => 100,
   ),
-  14 => 
-  array (
-    'CONDITION' => '#^/info/article/#',
-    'RULE' => '',
-    'ID' => 'bitrix:news',
-    'PATH' => '/info/article/index.php',
-    'SORT' => 100,
-  ),
   15 => 
   array (
     'CONDITION' => '#^/company/news/#',
@@ -128,12 +120,12 @@ $arUrlRewrite=array (
     'PATH' => '/company/news/index.php',
     'SORT' => 100,
   ),
-  30 => 
+  14 => 
   array (
-    'CONDITION' => '#^/necondition/#',
+    'CONDITION' => '#^/info/article/#',
     'RULE' => '',
-    'ID' => 'bitrix:catalog',
-    'PATH' => '/necondition/index.php',
+    'ID' => 'bitrix:news',
+    'PATH' => '/info/article/index.php',
     'SORT' => 100,
   ),
   16 => 
@@ -144,6 +136,14 @@ $arUrlRewrite=array (
     'PATH' => '/info/brands/index.php',
     'SORT' => 100,
   ),
+  50 => 
+  array (
+    'CONDITION' => '#^/necondition/#',
+    'RULE' => '',
+    'ID' => 'bitrix:catalog',
+    'PATH' => '/necondition/index.php',
+    'SORT' => 100,
+  ),
   17 => 
   array (
     'CONDITION' => '#^/info/brand/#',
@@ -152,7 +152,7 @@ $arUrlRewrite=array (
     'PATH' => '/info/brand/index.php',
     'SORT' => 100,
   ),
-  18 => 
+  49 => 
   array (
     'CONDITION' => '#^/info/news/#',
     'RULE' => '',
