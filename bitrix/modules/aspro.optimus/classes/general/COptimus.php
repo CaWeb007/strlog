@@ -1382,7 +1382,6 @@ class COptimus{
 	'</div></div>';
 				}elseif ('TEXT' == $arProp['SHOW_MODE']){
 					$templateRow .= '<div class="bx_item_detail_size" id="#ITEM#_prop_'.$arProp['ID'].'_cont">'.
-	'<span class="'.$class_title.'">'.$hint_block.htmlspecialcharsex($arProp['NAME']).'</span>'.
 	'<div class="bx_size_scroller_container"><div class="bx_size"><ul id="#ITEM#_prop_'.$arProp['ID'].'_list">';
 					foreach ($arProp['VALUES'] as $arOneValue){
 						//if($arOneValue['ID']>0){
