@@ -1,0 +1,97 @@
+<?
+if(!defined('OPTIMUS_MODULE_ID'))
+	define('OPTIMUS_MODULE_ID', 'aspro.optimus');
+
+use \Bitrix\Main\Localization\Loc,
+	Bitrix\Main\Application,
+	\Bitrix\Main\Config\Option,
+	Bitrix\Main\IO\File,
+	Bitrix\Main\Page\Asset;
+Loc::loadMessages(__FILE__);
+
+class COptimusEvents{
+	const partnerName	= 'aspro';
+	const solutionName	= 'optimus';
+	const moduleID		= OPTIMUS_MODULE_ID;
+	const wizardID		= 'aspro:optimus';
+	
+	static function OnBeforeSubscriptionAddHandler(&$arFields){
+		if(!defined('ADMIN_SECTION'))
+		{
+			global $APPLICATION;
+			$show_licenses = Option::get(self::moduleID, 'SHOW_LICENCE', 'Y', SITE_ID);
+			if($show_licenses == 'Y' && !isset($_REQUEST['licenses_subscribe']))
+			{
+				$APPLICATION->ThrowException(Loc::getMessage('ERROR_FORM_LICENSE'));
+				return false;
+			}
+		}
+	}
+
+	public static function OnPageStartHandler(){
+		
+		if(defined("ADMIN_SECTION") || !\Aspro\Functions\CAsproOptmusReCaptcha::checkRecaptchaActive())
+			return;
+
+		$captcha_public_key = \Aspro\Functions\CAsproOptmusReCaptcha::getPublicKey();
+		$assets = Asset::getInstance();
+
+		$arCaptchaProp = array();
+		$arCaptchaProp['recaptchaColor'] = strtolower(Option::get(self::moduleID, 'GOOGLE_RECAPTCHA_COLOR', 'LIGHT'));
+		$arCaptchaProp['recaptchaLogoShow'] = strtolower(Option::get(self::moduleID, 'GOOGLE_RECAPTCHA_SHOW_LOGO', 'Y'));
+		$arCaptchaProp['recaptchaSize'] = strtolower(Option::get(self::moduleID, 'GOOGLE_RECAPTCHA_SIZE', 'NORMAL'));
+		$arCaptchaProp['recaptchaBadge'] = strtolower(Option::get(self::moduleID, 'GOOGLE_RECAPTCHA_BADGE', 'BOTTOMRIGHT'));
+		$arCaptchaProp['recaptchaLang'] = LANGUAGE_ID;
+
+		//add global object asproRecaptcha
+		$scripts = "<script type='text/javascript' data-skip-moving='true'>";
+		$scripts .= "window['asproRecaptcha'] = {params: ".\CUtil::PhpToJsObject($arCaptchaProp).",key: '".$captcha_public_key."'};";
+		$scripts .= "</script>";
+		$assets->addString($scripts);
+
+		//add scripts
+		$scriptsDir = $_SERVER['DOCUMENT_ROOT'].'/bitrix/js/'.self::moduleID.'/captcha/';
+		$scriptsPath = File::isFileExists($scriptsDir.'recaptcha.min.js')? $scriptsDir.'recaptcha.min.js' : $scriptsDir.'recaptcha.js';
+		$scriptCode = File::getFileContents($scriptsPath);
+		$scripts = "<script type='text/javascript' data-skip-moving='true'>".$scriptCode."</script>";
+		$assets->addString($scripts);
+
+		$scriptsPath = File::isFileExists($scriptsDir . 'replacescript.min.js') ? $scriptsDir . 'replacescript.min.js' : $scriptsDir . 'replacescript.js';
+		$scriptCode = File::getFileContents($scriptsPath);
+		$scripts = "<script type='text/javascript' data-skip-moving='true'>".$scriptCode."</script>";
+		$assets->addString($scripts);
+
+		//process post request
+		$application = Application::getInstance();
+		$request = $application->getContext()->getRequest();
+		$arPostData = $request->getPostList()->toArray();
+
+		$needReInit = false;
+
+		if($arPostData['g-recaptcha-response'])
+		{
+			if($code = \Aspro\Functions\CAsproOptmusReCaptcha::getCodeByPostList($arPostData))
+			{
+				$_REQUEST['captcha_word'] = $_POST['captcha_word'] = $code;
+				$needReInit = true;
+			}
+		}
+
+		foreach($arPostData as $key => $arPost)
+		{
+			if(!is_array($arPost) || !$arPost['g-recaptcha-response'])
+				continue;
+
+			if($code = \Aspro\Functions\CAsproOptmusReCaptcha::getCodeByPostList($arPost))
+			{
+				$_REQUEST[$key]['captcha_word'] = $_POST[$key]['captcha_word'] = $code;
+				$needReInit = true;
+			}
+		}
+
+		if($needReInit)
+		{
+			\Aspro\Functions\CAsproOptmusReCaptcha::reInitContext($application, $request);
+		}
+	}
+}

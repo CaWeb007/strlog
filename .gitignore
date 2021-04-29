@@ -13,3 +13,4 @@
 !/bitrix/modules/aspro.optimus
 /bitrix/modules/aspro.optimus/*
 !/bitrix/modules/aspro.optimus/lib
+!/bitrix/modules/aspro.optimus/classes
