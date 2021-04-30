@@ -169,7 +169,7 @@ if (is_array($arElements) && !empty($arElements))
 					"LINE_ELEMENT_COUNT" => $arParams["LINE_ELEMENT_COUNT"],
 					"HIDE_NOT_AVAILABLE" => $arParams["HIDE_NOT_AVAILABLE"],
 					"PROPERTY_CODE" => $arParams["PROPERTY_CODE"],
-
+                    "OFFER_TREE_PROPS" => $arParams['OFFER_TREE_PROPS'],
 					"OFFERS_CART_PROPERTIES" => $arParams["OFFERS_CART_PROPERTIES"],
 					"OFFERS_FIELD_CODE" => $arParams["OFFERS_FIELD_CODE"],
 					"OFFERS_PROPERTY_CODE" => $arParams["OFFERS_PROPERTY_CODE"],
