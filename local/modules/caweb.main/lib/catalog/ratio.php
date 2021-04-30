@@ -15,6 +15,7 @@ class Ratio{
     const BRICKS_SECTION = 2193;
     const LINO_SECTION = 2147;
     const STRLOG_IBLOCK_ID = 16;
+    const OFFER_NAREZKA_ENUM_ID = 6389;
     protected $log = array(
         'COMPLETE' => '', 'ERRORS' => '', 'COUNT' => 0, 'COMPLETE_COUNT' => 0, 'CONTINUE_COUNT' => 0, 'ERRORS_COUNT' => 0);
     public static $instance = null;
@@ -58,7 +59,7 @@ class Ratio{
     }
     protected function getLino(){
         $result = array();
-        $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'IBLOCK_SECTION_ID' => static::LINO_SECTION);
+        $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'SECTION_ID' => static::LINO_SECTION, 'ACTIVE' => 'Y');
         $select = array('ID', 'NAME', 'IBLOCK_ID', 'PROPERTY_SHIRINA_M');
         $db = \CIBlockElement::GetList(array(), $filter, false, false, $select);
         while ($ar = $db->Fetch()){
@@ -69,8 +70,8 @@ class Ratio{
                 $this->log['ERRORS'] .= Loc::getMessage('ERRORS_EMPTY_RATIO', array('#NAME#' => $ar['NAME']));
                 continue;
             }
-            $skuFields = array('ID', 'PROPERTY_NAREZKA');
-            $skuFilter = array('!PROPERTY_NAREZKA' => false);
+            $skuFields = array('ID', 'PROPERTY_M2');
+            $skuFilter = array('PROPERTY_M2' => self::OFFER_NAREZKA_ENUM_ID);
             $sku = \CCatalogSku::getOffersList($ar['ID'], 0, $skuFilter, $skuFields);
             if(count($sku) !== 1){
                 $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
