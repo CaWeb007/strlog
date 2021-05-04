@@ -9,14 +9,16 @@
 namespace Caweb\Main\Events;
 
 
+use Bitrix\Iblock\IblockTable;
 use Bitrix\Main\Application;
+use Bitrix\Main\Loader;
 use Caweb\Main\Log\Write;
 use \Bitrix\Main\Entity;
 
 class Iblock{
     public static $instance = null;
     const SCU_IBLOCK = 23;
-    const CATALOG_IBLOCK = 10;
+    const CATALOG_IBLOCK = 16;
     const DO_NOT_DEACTIVATE_SECTION = array(2155);
     public function SortSku(&$arParams){
         $iblockId = (int)$arParams['IBLOCK_ID'];
@@ -60,15 +62,22 @@ class Iblock{
     }
     public static function doNotUseFacet(&$arFields){
         if ((int)$arFields['ID'] !== self::CATALOG_IBLOCK) return;
-        if ($arFields['PROPERTY_INDEX'] === 'N') return;
-        $arFields['PROPERTY_INDEX'] = 'N';
+        if ($arFields['PROPERTY_INDEX'] !== 'Y') return;
+        $arFields['PROPERTY_INDEX'] = 'I';
     }
     public static function doNotUseFacetD7(Entity\Event $event){
         $result = new Entity\EventResult();
         $data = $event->getParameter('fields');
-        if ((int)$data['ID'] !== self::CATALOG_IBLOCK) return;
-        if ($data['PROPERTY_INDEX'] === 'N') return;
-        $result->modifyFields(array('PROPERTY_INDEX' => 'N'));
+        $primary = $event->getParameter('primary');
+        if ((int)$primary['ID'] !== self::CATALOG_IBLOCK) return;
+        if ($data['PROPERTY_INDEX'] !== 'Y') return;
+        $result->modifyFields(array('PROPERTY_INDEX' => 'I'));
         return $result;
+    }
+    public static function test(){
+        Loader::includeModule('iblock');
+        IblockTable::update(self::CATALOG_IBLOCK, array('PROPERTY_INDEX' => 'Y'));
+        $res = IblockTable::getRow(array('filter' => array('ID' => self::CATALOG_IBLOCK), 'select' => array('ID', 'PROPERTY_INDEX')));
+        var_dump($res);
     }
 }
