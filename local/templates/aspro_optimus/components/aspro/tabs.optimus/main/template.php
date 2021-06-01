@@ -29,8 +29,18 @@ $this->setFrameMode(true);
 			</div>
 			<ul class="tabs_content">
 				<?$j=1;?>
-				<?$GLOBALS[$arParams["FILTER_NAME"]][0]=['LOGIC'=>'OR'];?>
-				<?foreach($arResult["TABS"] as $code=>$title){?>
+                <?
+                    /*region UnsetProductsForHome*/
+                    $sectionsNot = array(2007);
+                    $arFilter = array('IBLOCK_ID' => 16,'>LEFT_MARGIN' => 1139,'<RIGHT_MARGIN' => 1436,'>DEPTH_LEVEL' => 1); // выберет потомков без учета активности
+                    $arSect = \COptimusCache::CIBlockSection_GetList(array('left_margin' => 'asc'),$arFilter);
+                    foreach ($arSect as $item) $sectionsNot[] = $item['ID'];
+                    $GLOBALS[$arParams['FILTER_NAME']]['!SECTION_ID'] = $sectionsNot;
+                    $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_FLAG_VALUE'] = 'LIKVIDATION';
+                    /*endregion*/
+                ?>
+                <?$GLOBALS[$arParams["FILTER_NAME"]][0]=['LOGIC'=>'OR'];?>
+                <?foreach($arResult["TABS"] as $code=>$title){?>
 							<?
 							if($code != "1852c989-9eb6-11e8-80f3-00155d5b5d16"){
 								$GLOBALS[$arParams["FILTER_NAME"]][0][]=array("PROPERTY_FLAG_VALUE" => array($title));
