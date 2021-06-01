@@ -69,7 +69,7 @@ class DiscountTable extends Entity\DataManager {
         $copyData = clone $dataFrom;
         $copyData->add("1 day");
         $timestampDay = $copyData->getTimestamp();
-        if ($timestampThis > $timestampFrom) return Loc::getMessage('DATA_FROM_ERROR');
+        //if ($timestampThis > $timestampFrom) return Loc::getMessage('DATA_FROM_ERROR');
         if ($timestampFrom > $timestampTo) return Loc::getMessage('DATA_TO_FROM_ERROR');
         if ($timestampDay > $timestampTo) return Loc::getMessage('DATA_TO_ERROR');
         return true;
