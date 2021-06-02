@@ -31,10 +31,19 @@ $this->setFrameMode(true);
 				<?$j=1;?>
                 <?
                     /*region UnsetProductsForHome*/
-                    $sectionsNot = array(2007);
-                    $arFilter = array('IBLOCK_ID' => 16,'>LEFT_MARGIN' => 1139,'<RIGHT_MARGIN' => 1436,'>DEPTH_LEVEL' => 1); // выберет потомков без учета активности
+                    // product for home unset
+                    $sectionsNot[] = 2007;
+                    $arParentSection = CIBlockSection::GetByID(2007)->Fetch();
+                    $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']); // выберет потомков без учета активности
                     $arSect = \COptimusCache::CIBlockSection_GetList(array('left_margin' => 'asc'),$arFilter);
-                    foreach ($arSect as $item) $sectionsNot[] = $item['ID'];
+                    foreach ($arSect as $item) $sectionsNot[] = (int)$item['ID'];
+                    // product for garden.... unset
+                    $sectionsNot[] = 2075;
+                    $arParentSection = CIBlockSection::GetByID(2075)->Fetch();
+                    $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']); // выберет потомков без учета активности
+                    $arSect = \COptimusCache::CIBlockSection_GetList(array('left_margin' => 'asc'),$arFilter);
+                    foreach ($arSect as $item) $sectionsNot[] = (int)$item['ID'];
+
                     $GLOBALS[$arParams['FILTER_NAME']]['!SECTION_ID'] = $sectionsNot;
                     $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_FLAG_VALUE'] = 'LIKVIDATION';
                     /*endregion*/
