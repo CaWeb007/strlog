@@ -32,6 +32,13 @@ while ($arGroup = $rsCatalogGroups->fetch()) {
 		'NAME' => $arGroup['NAME'],
 	);
 }
+$dbUserGroups = \Bitrix\Main\GroupTable::getList();
+$arUserGroups = array();
+while ($iterator = $dbUserGroups->fetch()){
+    if (array_search((int)$iterator['ID'], \Caweb\Main\Catalog\Helper::SITE_GROUP_MODEL) !== false)
+        $arUserGroups[] = $iterator;
+}
+
 if ('POST' == $_SERVER['REQUEST_METHOD'] && (strlen($save)>0 || strlen($apply)>0) && check_bitrix_sessid()) {
 	$arGroupID = array();
 	$arFields = array(
@@ -39,7 +46,8 @@ if ('POST' == $_SERVER['REQUEST_METHOD'] && (strlen($save)>0 || strlen($apply)>0
 		'PRICE_ID' => isset($_POST['PRICE_ID']) ? $_POST['PRICE_ID'] : '',
         'ACTIVE' => (isset($_POST['ACTIVE']) && 'Y' == $_POST['ACTIVE'] ? 'Y' : 'N'),
         'ACTIVE_FROM' => (isset($_POST['ACTIVE_FROM']) ? DateTime::createFromUserTime($_POST['ACTIVE_FROM']) : ''),
-        'ACTIVE_TO' => (isset($_POST['ACTIVE_TO']) ? DateTime::createFromUserTime($_POST['ACTIVE_TO']) : '')
+        'ACTIVE_TO' => (isset($_POST['ACTIVE_TO']) ? DateTime::createFromUserTime($_POST['ACTIVE_TO']) : ''),
+        'NO_RIGHTS' => serialize($_POST['NO_RIGHTS'])
 	);
 	$DB->StartTransaction();
 	$result = array();
@@ -70,7 +78,7 @@ $arDefaultValues = array(
     'KEYWORD' => '',
     'ACTIVE' => 'N'
 );
-$arSelect = array_merge(array('ID', 'ACTIVE_FROM', 'ACTIVE_TO', 'PRICE_ID'), array_keys($arDefaultValues));
+$arSelect = array_merge(array('ID', 'ACTIVE_FROM', 'ACTIVE_TO', 'PRICE_ID', 'NO_RIGHTS'), array_keys($arDefaultValues));
 $arFilter = array('ID' => $ID);
 $arDiscount = array();
 $arDiscount = DiscountTable::getRow(array('filter' => $arFilter, 'select' => $arSelect));
@@ -79,6 +87,7 @@ if (empty($arDiscount)) {
     $arDiscount = $arDefaultValues;
 }else{
 	$boolActive = (0 < $ID && 'Y' == $arDiscount['ACTIVE']);
+	$arDiscount['NO_RIGHTS'] = unserialize($arDiscount['NO_RIGHTS']);
 }
 
 if ($bVarsFromForm) {
@@ -176,6 +185,18 @@ if (!empty($strError))
                 <option value="<?=$arOneGroup["ID"]?>"<?if ($arOneGroup["ID"] == $arDiscount['PRICE_ID']) echo " selected"?>><? echo "[".$arOneGroup["ID"]."] ".htmlspecialcharsbx($arOneGroup["NAME"]); ?></option>
             <?}
             if (isset($arOneGroup)) unset($arOneGroup);?>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top" width="40%">
+            <?=Loc::getMessage('NO_RIGHTS')?>
+        </td>
+        <td width="60%">
+            <select name="NO_RIGHTS[]" multiple size="<?=count($arUserGroups)?>">
+                <?foreach ($arUserGroups as $arOneUserGroup){?>
+                    <option value="<?=(int)$arOneUserGroup["ID"]?>"<?if (array_search($arOneUserGroup["ID"], $arDiscount['NO_RIGHTS']) !== false) echo " selected"?>><? echo "[".$arOneUserGroup["ID"]."] ".htmlspecialcharsbx($arOneUserGroup["NAME"]); ?></option>
+                <?}?>
             </select>
         </td>
     </tr>

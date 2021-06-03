@@ -52,6 +52,10 @@ class DiscountTable extends Entity\DataManager {
                     );
                 }
             )),
+            new Entity\StringField('NO_RIGHTS',array(
+                'required' => true,
+                'title' => Loc::getMessage('NO_RIGHTS')
+            )),
             new Entity\ReferenceField(
                 'PRICE',
                 '\Bitrix\Catalog\GroupTable',
@@ -90,8 +94,9 @@ class DiscountTable extends Entity\DataManager {
             '<=ACTIVE_FROM' => $date,
             '>ACTIVE_TO' => $date
         );
-        $param['select'] = array('ID', 'PRICE_ID');
+        $param['select'] = array('ID', 'PRICE_ID', 'KEYWORD', 'NO_RIGHTS');
         $result = self::getRow($param);
+        $result['NO_RIGHTS'] = unserialize($result['NO_RIGHTS']);
         return $result;
     }
 

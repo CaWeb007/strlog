@@ -4,11 +4,13 @@ namespace Caweb\Main\Sale;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Event;
+use Bitrix\Main\Localization\Loc;
 use Bitrix\Sale\Order;
 use Caweb\Main\Catalog\Helper;
 use Caweb\Main\Log\Write;
 use Bitrix\Sale\Fuser;
 
+Loc::loadMessages(__FILE__);
 
 class DiscountManager{
     const STATUS_START = 'START';
@@ -21,8 +23,15 @@ class DiscountManager{
     const STATUS_MAX_DISCOUNT = 'MAX_DISCOUNT';
     const SESSION_KEY = 'CAWEB_DISCOUNT';
     const DEFAULT_PRICE = 11;
+    protected static $exception = null;
     public static $jsText = array();
     public static $processedCoupon = array();
+    private static function checkRights($dbDiscount) {
+        $intUserGroup = Bonus::getInstance()->getUserGroupId();
+        if (array_search($intUserGroup, $dbDiscount['NO_RIGHTS']) === false) return true;
+        self::$exception[$dbDiscount['KEYWORD']] = Loc::getMessage('DO_NOT_RIGHTS');
+        return false;
+    }
     public static function init(){
         $sessionContainer = $_SESSION[self::SESSION_KEY];
         if (!empty($sessionContainer)) return;
@@ -38,9 +47,9 @@ class DiscountManager{
         return $_SESSION[self::SESSION_KEY] = $discount;
     }
     public static function add($keyword){
+        self::$exception = null;
         $coupon = self::checkInSessionForAdd($keyword);
         if (!$coupon) return false;
-        if ($coupon['error']) return $coupon['error'];
         if ($couponId = DiscountUserTable::addDiscount($coupon)){
             $coupon['COUPON_ID'] = $couponId;
         }else{
@@ -56,7 +65,7 @@ class DiscountManager{
         if (!$session) return false;
         $status = $session['STATUS'];
         if ($status === self::STATUS_APPLY)
-            return array('error' => 'tetereres');
+            return false;
         if ($status === self::STATUS_DELETE)
             return false;
         $coupon = $session;
@@ -85,19 +94,20 @@ class DiscountManager{
             return false;
         }
         $old_price = '';
-        list($price,$old_price) = self::checkPrice($price);
+        list($price,$old_price) = self::checkPrice($price, $keyword);
+
+        if (!self::checkRights($discount)) return false;
 
         if (!$price) {
-            return array('error' => 'tetereres');
+            return false;
         }
         $coupon['STATUS'] = self::STATUS_START;
         $coupon['PRICE_ID'] = $price;
         $coupon['USER_PRICE_ID'] = $old_price;
         $coupon['DISCOUNT_ID'] = $discount['ID'];
-        Write::file('sess', $coupon);
         return $coupon;
     }
-    public static function checkPrice($price){
+    public static function checkPrice($price, $keyword){
         $price = intval($price);
         if (empty($price)) return array('','');
         $old_price = Helper::getUserPriceId();
@@ -108,22 +118,23 @@ class DiscountManager{
         if (!empty($session)){
             foreach ($session as $coupon){
                 $status = $coupon['STATUS'];
-                if (($status[self::STATUS_ENTER]) || ($status[self::STATUS_APPLY]))
+                if (($status === self::STATUS_ENTER) || ($status === self::STATUS_APPLY))
                     $arPrices[] = $coupon['PRICE_ID'];
             }
         }
         $arPrices = array_merge($arPrices, array($old_price,$price));
         $minPrice = Helper::getMinCatalogPrice($arPrices);
         if ($minPrice === $price) return array($price,$old_price);
+        self::$exception[$keyword] = Loc::getMessage("DO_NOT_RIGHTS");
         return array('','');
     }
 
     public static function getDiscountInfo(){
         global $USER;
         $session = $_SESSION[self::SESSION_KEY];
-        if (empty($session)) return false;
+        if (empty($session) && empty(self::$exception)) return false;
         $result = array();
-        if (!empty(static::$processedCoupon))
+        if (!empty(static::$processedCoupon) && empty(self::$exception[static::$processedCoupon['KEYWORD']]))
             $result['COUPON'] = static::$processedCoupon['KEYWORD'];
 
         foreach ($session as $discount){
@@ -142,6 +153,14 @@ class DiscountManager{
             }
             $result['COUPON_LIST'][] = $list;
         }
+        if (is_array(self::$exception))
+            foreach (self::$exception as $keyword => $exceptionMess){
+                $result['COUPON_LIST'][] = array(
+                    'COUPON' => $keyword,
+                    'JS_STATUS' => 'BAD',
+                    'JS_CHECK_CODE' => $exceptionMess
+                );
+            }
         return $result;
     }
     public static function changeDiscount(){

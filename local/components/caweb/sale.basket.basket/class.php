@@ -2534,6 +2534,9 @@ class CBitrixBasketComponent extends CBitrixComponent
 			$coupons = DiscountCouponsManager::get(true, array(), true, true);
             $customDiscount = DiscountManager::getDiscountInfo();
             if (!empty($customDiscount)){
+                foreach ($customDiscount['COUPON_LIST'] as $customCoupon){
+                    if (array_key_exists($customCoupon['COUPON'], $coupons)) unset($coupons[$customCoupon['COUPON']]);
+                }
                 $result = $customDiscount;
             }
 			if (!empty($coupons))
