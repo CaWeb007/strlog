@@ -620,14 +620,14 @@ if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFE
 			{
 				foreach($arOffer['PRICES'] as $priceKey => $arOfferPrice)
 				{
-					/*if($arResult['CATALOG_GROUP_NAME_'.$arOfferPrice['PRICE_ID']])
-						$arOffer['PRICES'][$priceKey]['GROUP_NAME'] = $arResult['CATALOG_GROUP_NAME_'.$arOfferPrice['PRICE_ID']];*/
+					if($arResult['CATALOG_GROUP_NAME_'.$arOfferPrice['PRICE_ID']])
+						$arOffer['PRICES'][$priceKey]['GROUP_NAME'] = $arResult['CATALOG_GROUP_NAME_'.$arOfferPrice['PRICE_ID']];
                     if($keyOffer === 0) continue;
-					$arResult['OFFERS'][$keyOffer]['PRICES'][$priceKey] = $arResult['PRICES'][$priceKey];//todo костыль
-					$arResult['OFFERS'][$keyOffer]["MIN_PRICE"] = $arResult['PRICES'][$priceKey];//todo костыль
+					//$arResult['OFFERS'][$keyOffer]['PRICES'][$priceKey] = $arResult['PRICES'][$priceKey];//todo костыль
+					//$arResult['OFFERS'][$keyOffer]["MIN_PRICE"] = $arResult['PRICES'][$priceKey];//todo костыль
 				}
 			}
-			$arOffer = $arResult['OFFERS'][$keyOffer];//todo костыль
+			//$arOffer = $arResult['OFFERS'][$keyOffer];//todo костыль
 			$firstPhoto = current($arOffer['MORE_PHOTO']);
 			$arOneRow = array(
 				'ID' => $arOffer['ID'],
