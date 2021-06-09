@@ -9,6 +9,7 @@ use Bitrix\Sale\Order;
 use Caweb\Main\Catalog\Helper;
 use Caweb\Main\Log\Write;
 use Bitrix\Sale\Fuser;
+use Bitrix\Main;
 
 Loc::loadMessages(__FILE__);
 
@@ -27,6 +28,7 @@ class DiscountManager{
     public static $jsText = array();
     public static $processedCoupon = array();
     private static function checkRights($dbDiscount) {
+        if (empty($dbDiscount['NO_RIGHTS'])) return true;
         $intUserGroup = Bonus::getInstance()->getUserGroupId();
         if (array_search($intUserGroup, $dbDiscount['NO_RIGHTS']) === false) return true;
         self::$exception[$dbDiscount['KEYWORD']] = Loc::getMessage('DO_NOT_RIGHTS');
@@ -254,12 +256,17 @@ class DiscountManager{
             break;
         }
         $couponId = $coupon['COUPON_ID'];
-        if (empty($orderId) || empty($couponId)) return;
+        if (empty($orderId) && empty($couponId)) return;
         $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['STATUS'] = self::STATUS_APPLY;
         $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['ORDER_ID'] = $orderId;
         $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['ORDER_ID'] = $orderId;
         $fields = array('ORDER_ID' => $orderId, 'STATUS' => self::STATUS_APPLY, 'USER_ID' => $userId);
         $res = DiscountUserTable::update($couponId, $fields);
+        $defaultComment = $order->getField('COMMENTS');
+        if ($defaultComment === null) $defaultComment = '';
+        $order->setField('COMMENTS', '('.strtoupper($coupon['KEYWORD']).')____');
+        $order->save();
+        mail("reutov@caweb.ru", "COUPON", "CHECK COUPON ORDER");
         if (!$res->isSuccess()){
             Write::file('OrderDiscount', $res->getErrorMessages());
         }
