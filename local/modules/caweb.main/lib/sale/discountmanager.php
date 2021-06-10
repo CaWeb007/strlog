@@ -5,7 +5,9 @@ use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Event;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Sale\BasketItem;
 use Bitrix\Sale\Order;
+use Bitrix\Sale\PropertyValue;
 use Caweb\Main\Catalog\Helper;
 use Caweb\Main\Log\Write;
 use Bitrix\Sale\Fuser;
@@ -241,7 +243,7 @@ class DiscountManager{
             $r = DiscountUserTable::update($couponId, array('STATUS' => $status));
         $_SESSION[self::SESSION_KEY][$keyword]['STATUS'] = $result;
     }
-    public function OnSaleOrderSaved(Event $event){
+    public static function OnSaleOrderSaved(Event $event){
         if (!$event->getParameter('IS_NEW')) return;
         self::init();
         $order = $event->getParameter('ENTITY');
@@ -256,19 +258,57 @@ class DiscountManager{
             break;
         }
         $couponId = $coupon['COUPON_ID'];
-        if (empty($orderId) && empty($couponId)) return;
+        if (empty($orderId) || empty($couponId)) return;
         $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['STATUS'] = self::STATUS_APPLY;
-        $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['ORDER_ID'] = $orderId;
         $_SESSION[self::SESSION_KEY][$coupon['KEYWORD']]['ORDER_ID'] = $orderId;
         $fields = array('ORDER_ID' => $orderId, 'STATUS' => self::STATUS_APPLY, 'USER_ID' => $userId);
         $res = DiscountUserTable::update($couponId, $fields);
-        $defaultComment = $order->getField('COMMENTS');
-        if ($defaultComment === null) $defaultComment = '';
-        $order->setField('COMMENTS', '('.strtoupper($coupon['KEYWORD']).')____');
-        $order->save();
-        mail("reutov@caweb.ru", "COUPON", "CHECK COUPON ORDER");
         if (!$res->isSuccess()){
             Write::file('OrderDiscount', $res->getErrorMessages());
         }
     }
+
+    public static function OnSaleOrderBeforeSaved(Event $event){
+        self::init();
+        $order = $event->getParameter('ENTITY');
+        $properties = $order->getPropertyCollection();
+        $promo = array(
+            $properties->getItemByOrderPropertyId(39),
+            $properties->getItemByOrderPropertyId(40)
+        );
+        if (!($order instanceof Order)) return;
+        $coupon = array();
+        if (!is_array($_SESSION[self::SESSION_KEY])) $_SESSION[self::SESSION_KEY] = array();
+        foreach ($_SESSION[self::SESSION_KEY] as $item) {
+            if ($item['STATUS'] !== self::STATUS_ENTER) continue;
+            $coupon = $item;
+            break;
+        }
+        $couponId = $coupon['COUPON_ID'];
+        if (!empty($couponId)) {
+            foreach ($promo as $item)
+                if ($item instanceof PropertyValue)
+                    $item->setValue($coupon['KEYWORD']);
+        }elseif (($orderId = $order->getId()) && ($orderCoupon = DiscountUserTable::getRow(array('filter' => array('ORDER_ID' => $orderId), 'select' => array('*', 'PRICE_ID' => 'DISCOUNT.PRICE_ID', 'KEYWORD' => 'DISCOUNT.KEYWORD'))))){
+            try {
+                $items = $order->getBasket()->getOrderableItems();
+                /**@var $item BasketItem */
+                foreach ($items as $item) {
+                    $params = array('filter' => array('PRODUCT_ID' => (int)$item->getProductId(), 'CATALOG_GROUP_ID' => (int)$orderCoupon['PRICE_ID']));
+                    $price = PriceTable::getRow($params)['PRICE'];
+                    if ($price && ($price < $item->getPrice()))
+                        $item->setPrice($price, true);
+                }
+                foreach ($promo as $item)
+                    if ($item instanceof PropertyValue)
+                        $item->setValue($orderCoupon['KEYWORD']);
+            }catch(\Exception $exception){}
+
+        }
+        $event->addResult(new Main\EventResult(
+            Main\EventResult::SUCCESS,
+            $order
+        ));
+    }
+
 }
