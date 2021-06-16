@@ -215,6 +215,7 @@ class DiscountManager{
         $arPrice = PriceTable::getRow($param);
         if (empty($arPrice)) return false;
         $price = $arPrice['PRICE'];
+        if ((float)$price > (float)$item['PRICE']) return false;
         $currency = $arPrice['CURRENCY'];
         $discountPrice = $result['BASE_PRICE'] - $price;
         $result['PRICE'] = $price;
@@ -296,6 +297,8 @@ class DiscountManager{
                 foreach ($items as $item) {
                     $params = array('filter' => array('PRODUCT_ID' => (int)$item->getProductId(), 'CATALOG_GROUP_ID' => (int)$orderCoupon['PRICE_ID']));
                     $price = PriceTable::getRow($params)['PRICE'];
+                    $basePrice = (float)$item->getBasePrice();
+                    if ($price > $basePrice) $price = $basePrice;
                     if ($price && ($price < $item->getPrice()))
                         $item->setPrice($price, true);
                 }
