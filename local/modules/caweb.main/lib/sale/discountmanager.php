@@ -215,7 +215,7 @@ class DiscountManager{
         $arPrice = PriceTable::getRow($param);
         if (empty($arPrice)) return false;
         $price = $arPrice['PRICE'];
-        if ((float)$price > (float)$item['PRICE']) return false;
+        if (($status !== self::STATUS_NEED_DELETE) && ((float)$price > (float)$item['PRICE'])) return false;
         $currency = $arPrice['CURRENCY'];
         $discountPrice = $result['BASE_PRICE'] - $price;
         $result['PRICE'] = $price;
