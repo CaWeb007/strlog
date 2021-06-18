@@ -46,6 +46,7 @@ $this->setFrameMode(true);
 
                     $GLOBALS[$arParams['FILTER_NAME']]['!SECTION_ID'] = $sectionsNot;
                     $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_FLAG_VALUE'] = 'LIKVIDATION';
+                    $GLOBALS[$arParams['FILTER_NAME']]['!DETAIL_PICTURE'] = false;
                     /*endregion*/
                 ?>
                 <?$GLOBALS[$arParams["FILTER_NAME"]][0]=['LOGIC'=>'OR'];?>
