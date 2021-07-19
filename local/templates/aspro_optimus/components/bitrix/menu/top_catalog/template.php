@@ -39,14 +39,14 @@
 													<span class="image"><a href="<?=$arChildItem1["SECTION_PAGE_URL"];?>"><img src="<?=$arChildItem1["IMAGES"]["src"];?>" alt="<?=$arChildItem1["NAME"];?>"/></a></span>
 												<?}*/?>
 												<?if(isset($arChildItem1['endColumn']) && $arChildItem1['endColumn'] == true):?></div></div><div class="column-links"><div class="column-links-wrapp"><?endif?>
-                                   				<a class="link-column section dark_link" href="<?=$arChildItem1["SECTION_PAGE_URL"];?>"><span><?=$arChildItem1["NAME"];?>&nbsp;<span class="section_count_1"><?=$arChildItem1["COUNT"];?></span></span></a>
+                                   				<a class="link-column section dark_link" href="<?=$arChildItem1["SECTION_PAGE_URL"];?>"><span><?=$arChildItem1["NAME"];?>&nbsp;<span class="section_count_1"><?=$arChildItem1["ELEMENT_CNT"];?></span></span></a>
 												<?if($arChildItem1["CHILD"]){?>
 												<?$cnChild = count($arChildItem1["CHILD"]);?>
 													<!--ul class="dropdown"-->
 														<?foreach($arChildItem1["CHILD"] as $arChildItem2){?>
 															<?$cnChild--;?>
 															<!--li class="menu_item <?if($arChildItem2["SELECTED"]){?> current <?}?>"-->
-																<a class="link-column parent1 section1<?if($cnChild==0):?> end-child<?endif?>" href="<?=$arChildItem2["SECTION_PAGE_URL"];?>"><span><?=$arChildItem2["NAME"];?>&nbsp;<span class="section_count_2"><?=$arChildItem2["COUNT"];?></span></span></a>
+																<a class="link-column parent1 section1<?if($cnChild==0):?> end-child<?endif?>" href="<?=$arChildItem2["SECTION_PAGE_URL"];?>"><span><?=$arChildItem2["NAME"];?>&nbsp;<span class="section_count_2"><?=$arChildItem2["ELEMENT_CNT"];?></span></span></a>
 															<!--/li-->
 														<?}?>
 													<!--/ul-->

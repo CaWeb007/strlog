@@ -7,7 +7,7 @@ foreach ($arResult as $key => $arSection){
 }
 if($arResult){
 	$catalog_id = \Bitrix\Main\Config\Option::get("aspro.optimus", "CATALOG_IBLOCK_ID", COptimusCache::$arIBlocks[SITE_ID]['aspro_optimus_catalog']['aspro_optimus_catalog'][0]);
-	$arSections = COptimusCache::CIBlockSection_GetList(array('SORT' => 'ASC', 'ID' => 'ASC', 'CACHE' => array('TAG' => COptimusCache::GetIBlockCacheTag($catalog_id), 'GROUP' => array('ID'))), array('IBLOCK_ID' => $catalog_id, 'ACTIVE' => 'Y', 'GLOBAL_ACTIVE' => 'Y', 'ACTIVE_DATE' => 'Y', '<DEPTH_LEVEL' =>\Bitrix\Main\Config\Option::get("aspro.optimus", "MAX_DEPTH_MENU", 2)), false, array("ID", "NAME", "PICTURE", "LEFT_MARGIN", "RIGHT_MARGIN", "DEPTH_LEVEL", "SECTION_PAGE_URL", "IBLOCK_SECTION_ID"));
+	$arSections = COptimusCache::CIBlockSection_GetList(array('SORT' => 'ASC', 'ID' => 'ASC', 'CACHE' => array('TAG' => COptimusCache::GetIBlockCacheTag($catalog_id), 'GROUP' => array('ID'))), array('IBLOCK_ID' => $catalog_id, 'ACTIVE' => 'Y', 'GLOBAL_ACTIVE' => 'Y', 'ACTIVE_DATE' => 'Y','CNT_ACTIVE' => 'Y' ,'<DEPTH_LEVEL' =>\Bitrix\Main\Config\Option::get("aspro.optimus", "MAX_DEPTH_MENU", 2)), true, array("ID", "NAME", "PICTURE", "LEFT_MARGIN", "RIGHT_MARGIN", "DEPTH_LEVEL", "SECTION_PAGE_URL", "IBLOCK_SECTION_ID"));
 	if($arSections){
 
 		$arTmpResult = array();
@@ -16,14 +16,14 @@ if($arResult){
 
 		foreach($arSections as $ID => $arSection){
 			//Вывод количества элементов*start
-			$cnt = CIBlockElement::GetList(
+			/*$cnt = CIBlockElement::GetList(
 				array(),
 				array('IBLOCK_ID' => 16, 'SECTION_ID'=>$ID, 'INCLUDE_SUBSECTIONS'=>'Y', 'CNT_ACTIVE'=>true, "ACTIVE" => 'Y'),
 				array(),
 				false,
 				array('ID', 'NAME')
 			);
-			$arSections[$ID]["COUNT"] = $cnt;
+			$arSections[$ID]["COUNT"] = $cnt;*/
 			//Вывод количества элементов*end
 			$arSections[$ID]['SELECTED'] = CMenu::IsItemSelected($arSection['SECTION_PAGE_URL'], $cur_page, $cur_page_no_index);
 			if($arSection['PICTURE']){

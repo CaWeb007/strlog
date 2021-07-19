@@ -55,13 +55,13 @@
 										<!--<span class="image"><a href="<?=$arChildItem["SECTION_PAGE_URL"];?>"><img src="<?=$arChildItem["IMAGES"]["src"];?>" alt="<?=$arChildItem["NAME"];?>" /></a></span>-->
 									<?//}?>
 									<?if(isset($arChildItem['endColumn']) && $arChildItem['endColumn'] == true):?></div></div><div class="column-links"><div class="column-links-wrapp"><?endif?>
-                                    <a class="link-column section dark_link" href="<?=$arChildItem["SECTION_PAGE_URL"];?>"><span><?=$arChildItem["NAME"];?>&nbsp;<span class="section_count_1"><?=$arChildItem["COUNT"];?></span></span></a>
+                                    <a class="link-column section dark_link" href="<?=$arChildItem["SECTION_PAGE_URL"];?>"><span><?=$arChildItem["NAME"];?>&nbsp;<span class="section_count_1"><?=$arChildItem["ELEMENT_CNT"];?></span></span></a>
 									<?if($arChildItem["CHILD"]){?>
 									<?$cnChild = count($arChildItem["CHILD"]);?>
 											<?foreach($arChildItem["CHILD"] as $arChildItem1){?>
 												<?$cnChild--;?>
 												<!--li class="second-li menu_item <?if($arChildItem1["SELECTED"]){?> current <?}?>"-->
-													<a class="link-column parent1 section1<?if($cnChild==0):?> end-child<?endif?>" href="<?=$arChildItem1["SECTION_PAGE_URL"];?>"><span><?=$arChildItem1["NAME"];?>&nbsp;<span class="section_count_2"><?=$arChildItem1["COUNT"];?></span></span></a>
+													<a class="link-column parent1 section1<?if($cnChild==0):?> end-child<?endif?>" href="<?=$arChildItem1["SECTION_PAGE_URL"];?>"><span><?=$arChildItem1["NAME"];?>&nbsp;<span class="section_count_2"><?=$arChildItem1["ELEMENT_CNT"];?></span></span></a>
 												<!--/li-->
 											<?}?>
 									<?}?>
