@@ -7,7 +7,7 @@ use Bitrix\Main\Loader,
 Loader::includeModule("iblock");
 //v get current section ID
 global $TEMPLATE_OPTIONS, $OptimusSectionID;
-$arPageParams = $arSection = $section = array();
+$arPageParams = $arSection = $section = $banner = array();
 if($arResult["VARIABLES"]["SECTION_ID"] > 0){
 	$section=COptimusCache::CIBlockSection_GetList(array('CACHE' => array("MULTI" =>"N", "TAG" => COptimusCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array('GLOBAL_ACTIVE' => 'Y', "ID" => $arResult["VARIABLES"]["SECTION_ID"], "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, array("ID", "IBLOCK_ID", "NAME", "DESCRIPTION", "UF_SECTION_DESCR", "UF_OFFERS_TYPE", $arParams["SECTION_DISPLAY_PROPERTY"], "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "LEFT_MARGIN", "RIGHT_MARGIN"));
 }
@@ -15,6 +15,11 @@ elseif(strlen(trim($arResult["VARIABLES"]["SECTION_CODE"])) > 0){
 
 	$section=COptimusCache::CIBlockSection_GetList(array('CACHE' => array("MULTI" =>"N", "TAG" => COptimusCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array('GLOBAL_ACTIVE' => 'Y', "=CODE" => $arResult["VARIABLES"]["SECTION_CODE"], "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, array("ID", "IBLOCK_ID", "NAME", "DESCRIPTION", "UF_SECTION_DESCR", "UF_OFFERS_TYPE", $arParams["SECTION_DISPLAY_PROPERTY"], "IBLOCK_SECTION_ID", "DEPTH_LEVEL", "LEFT_MARGIN", "RIGHT_MARGIN"));
 }
+
+$banner = COptimusCache::CIBlockElement_GetList(
+        array('CACHE' => array("MULTI" =>"Y", "TAG" => COptimusCache::GetIBlockCacheTag(2))),
+        array("IBLOCK_ID" => 2, "ACTIVE" => "Y", "ACTIVE_DATE" => 'Y', "PROPERTY_SHOW_IN_CATALOG_SECTION" => $section['ID']), false, false, array('NAME', 'DETAIL_PICTURE', 'PROPERTY_URL_STRING')
+);
 
 Caweb\Main\Catalog\Helper::setCanonicalLink($section['UF_CAN']);
 $itemsCnt = 0;
@@ -304,6 +309,13 @@ if($isAjaxFilter == "Y")
 		<?}?>
 		<div class="inner_wrapper">
 <?endif;?>
+        <?if (!empty($banner[0]['DETAIL_PICTURE'])):?>
+            <div class="group_description_block top">
+                <div>
+                    <a href="<?= $banner[0]['PROPERTY_URL_STRING_VALUE'] ?>"><img src="<?=\CFile::GetPath($banner[0]['DETAIL_PICTURE']) ?>" alt="<?=$banner['NAME']?> title="<?=$banner['NAME']?>"></a>
+                </div>
+            </div>
+        <?endif?>
 		<?if(!$arSeoItem):?>
 			<?if($arParams["SECTION_PREVIEW_DESCRIPTION"] != 'N' && strpos($_SERVER['REQUEST_URI'], 'PAGEN') === false):?>
 				<?if($posSectionDescr=="BOTH"):?>
@@ -329,6 +341,7 @@ if($isAjaxFilter == "Y")
 				<?endif;?>
 			<?endif;?>
 		<?endif;?>
+
             <?$APPLICATION->IncludeComponent(
                 "bitrix:catalog.section.list",
                 "subsections_list",
