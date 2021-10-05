@@ -92,9 +92,9 @@ if(count($arResult) > 0){
 					$columnHeight -= 20;
 				}
 				$endColumn = false;
-				$ch = count($arChildItem["CHILD"]);
-				if($arChildItem["CHILD"]){
-					foreach($arChildItem["CHILD"] as $chKey1 => $arChildItem1){
+				if(is_array($arChildItem["CHILD"])){
+                    $ch = count($arChildItem["CHILD"]);
+                    foreach($arChildItem["CHILD"] as $chKey1 => $arChildItem1){
 						$strlen = iconv_strlen($arChildItem1["NAME"], "UTF8");
 						if($strlen > 32)
 							$columnHeight -= $chSecondLevel3;
