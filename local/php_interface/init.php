@@ -26,13 +26,12 @@ EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlock
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockSectionUpdate', array('Caweb\Main\Events\Iblock', 'doNotDeactivate'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockUpdate', array('\Caweb\Main\Events\Iblock', 'doNotUseFacet'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
-
 EventManager::getInstance()->addEventHandler('iblock', '\Bitrix\Iblock\Iblock::OnBeforeUpdate', array('\Caweb\Main\Events\Iblock', 'doNotUseFacetD7'));
-
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserAuthorize', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserUpdate', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnBeforeEventAdd', array('Caweb\Main\Events\Main', 'OnBeforeEventAdd'));
-
+/**контроль остатков линолеума*/
+EventManager::getInstance()->addEventHandler('sale', 'OnSaleBasketBeforeSaved', array('Caweb\Main\Events\Sale', 'linoMinBalanceController'));
 
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){
@@ -83,3 +82,4 @@ function error_page()
         die();
     }
 }
+?>

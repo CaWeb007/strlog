@@ -48,4 +48,36 @@ class Sale{
         $order = $event->getParameter('ENTITY');
         Helper::checkNeedChangeProductPrice($order);
     }
+    public static function linoMinBalanceController(Main\Event $event){
+        $offerIblockXmlId = '1c_catalog-123456#';
+        $propertyWidthId = 594;
+        $enumSliceId = 6389;
+        $minBalance = 15;
+        $isAddAction = $_REQUEST['add_item'] === 'Y';
+        /** @var \Bitrix\Sale\Basket $basket */
+        $basket = $event->getParameter("ENTITY");
+        $basketItemsCollection = $basket->getBasketItems();
+        /**@var $item \Bitrix\Sale\\BasketItem*/
+        foreach ($basketItemsCollection as $item){
+            if ($item->getField('CATALOG_XML_ID') !== $offerIblockXmlId) continue;
+            $itemId = (int)$item->getProductId();
+            $dbElement = \CIBlockElement::GetByID($itemId)->GetNextElement();
+            $propertyWidthValue = (int)$dbElement->GetProperty($propertyWidthId)['VALUE_ENUM_ID'];
+            $isSlice = $propertyWidthValue === $enumSliceId;
+            if (!$isSlice) continue;
+            $balance = (float)\Bitrix\Catalog\ProductTable::getRowById($itemId)['QUANTITY'];
+            $maxBuyQuantity = $balance - $minBalance;
+            if ($item->getQuantity() > $maxBuyQuantity){
+                $errorText = Loc::getMessage('CES_MAX_QUANTITY_ERROR', array('#MAX_QUANTITY_BUY#' => $maxBuyQuantity));
+                if (!$isAddAction){
+                    $item->setFieldsNoDemand(array('QUANTITY' => $maxBuyQuantity));
+                    $item->save();
+                }
+                return new Main\EventResult(
+                    Main\EventResult::ERROR,
+                    \Bitrix\Sale\ResultError::create(new Main\Error($errorText, "ERROR_MAX_QUANTITY_LINO"))
+                );
+            }
+        }
+    }
 }
