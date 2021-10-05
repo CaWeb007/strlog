@@ -57,7 +57,7 @@ class Sale{
         /** @var \Bitrix\Sale\Basket $basket */
         $basket = $event->getParameter("ENTITY");
         $basketItemsCollection = $basket->getBasketItems();
-        /**@var $item \Bitrix\Sale\\BasketItem*/
+        /**@var $item \Bitrix\Sale\BasketItem*/
         foreach ($basketItemsCollection as $item){
             if ($item->getField('CATALOG_XML_ID') !== $offerIblockXmlId) continue;
             $itemId = (int)$item->getProductId();
