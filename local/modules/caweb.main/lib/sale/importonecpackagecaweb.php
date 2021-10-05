@@ -128,7 +128,7 @@ final class ImportOneCPackageCaweb extends ImportOneCPackageSale {
                     break;
                 default:
                     if ($value['TYPE'] === 'string') $fieldsArray[$key] = '';
-                    if($v = $orderPayment->getField($key)) $fieldsArray[$key] = $v;
+                    if(($orderPayment instanceof Payment) && ($v = $orderPayment->getField($key))) $fieldsArray[$key] = $v;
                     break;
             }
         }
@@ -175,7 +175,7 @@ final class ImportOneCPackageCaweb extends ImportOneCPackageSale {
                     break;
                 default:
                     if ($value['TYPE'] === 'string') $fieldsArray[$key] = '';
-                    if($v = $orderShipment->getField($key)) $fieldsArray[$key] = $v;
+                    if(($orderShipment instanceof Shipment) && ($v = $orderShipment->getField($key))) $fieldsArray[$key] = $v;
                     break;
             }
         }
