@@ -12,7 +12,7 @@ $APPLICATION->IncludeComponent(
 	array(
 		"IBLOCK_TYPE" => "1c_catalog",
 		"IBLOCK_ID" => "24",
-		"HIDE_NOT_AVAILABLE" => "L",
+		"HIDE_NOT_AVAILABLE" => "Y",
 		"BASKET_URL" => "/basket/",
 		"ACTION_VARIABLE" => "action",
 		"PRODUCT_ID_VARIABLE" => "id",
