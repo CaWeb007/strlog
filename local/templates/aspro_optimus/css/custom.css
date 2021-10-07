@@ -620,6 +620,7 @@ input[type="text"], input[type="tel"], input[type="password"], input[type="email
 }
 .catalog_section_list .section_item {
     border: 1px solid #ddd;
+	min-height: 188px;
 }
 .catalog_section_list .item_block:nth-child(2n+2) .section_item,
 .catalog_section_list .item_block:last-child .section_item,
