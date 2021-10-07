@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
 <?global $SITE_THEME, $TEMPLATE_OPTIONS;?>
-<?/*$APPLICATION->IncludeComponent(
+<?$APPLICATION->IncludeComponent(
 	"aspro:com.banners.optimus", 
 	"top_slider_banners", 
 	array(
@@ -38,4 +38,4 @@
 	array(
 		"ACTIVE_COMPONENT" => "Y"
 	)
-);*/?>
+);?>
