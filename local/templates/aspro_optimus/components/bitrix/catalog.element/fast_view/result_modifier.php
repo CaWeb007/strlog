@@ -1060,7 +1060,16 @@ if(is_array($arParams["SECTION_TIZER"]) && $arParams["SECTION_TIZER"]){
 		$obCache->EndDataCache($arTizersData);
 	}
 	$arResult["TIZERS_ITEMS"]=$arTizersData;
-}?>
+}
+$firstStep = true;
+foreach ($arResult['OFFERS'] as $key => $value){
+	if ($firstStep)
+		$arResult['MIN_PRICE'] = $value['MIN_PRICE'];
+	if ($arResult['MIN_PRICE']['VALUE'] > $value['MIN_PRICE']['VALUE'])
+		$arResult['MIN_PRICE'] = $value['MIN_PRICE'];
+	$firstStep = false;
+}
+?>
 
 <?COptimus::AddMeta(
 	array(
