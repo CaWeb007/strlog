@@ -27,7 +27,7 @@
 		"CHECK_DATES" => "Y",
 		"CACHE_GROUPS" => "N",
 		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "36000000",
+		"CACHE_TIME" => "86400",
 		"SITE_THEME" => $SITE_THEME,
 		"BANNER_TYPE_THEME" => "TOP",
 		"COMPONENT_TEMPLATE" => "top_slider_banners",
