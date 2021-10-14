@@ -117,6 +117,6 @@ $APPLICATION->SetTitle("Корзина");
 		"AREA_FILE_SUFFIX" => "",
 		"COMPONENT_TEMPLATE" => ".default",
 		"EDIT_TEMPLATE" => "standard.php",
-		"PATH" => SITE_DIR."include/comp_basket_bigdata.php"
+		"PATH" => SITE_DIR."include/custom.products_slider.php"
 	)
 );?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
