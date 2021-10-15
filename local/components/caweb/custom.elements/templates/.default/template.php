@@ -93,7 +93,8 @@ $this->setFrameMode(true);?>
                 "USE_PRODUCT_QUANTITY" => "N",
                 "COMPONENT_TEMPLATE" => "products_slider"
             ),
-            false
+            $component,
+            array('HIDE_ICONS' => 'Y')
         );?>
     </div>
 </div>

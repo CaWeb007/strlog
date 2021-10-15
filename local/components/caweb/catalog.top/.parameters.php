@@ -467,7 +467,6 @@ if ($catalogIncluded)
 			)),
 			'JS_DATA' => Json::encode($filterDataValues),
 			'DEFAULT' => '',
-            'REFRESH' => 'Y'
 		);
 	}
 

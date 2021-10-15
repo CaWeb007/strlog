@@ -70,7 +70,7 @@ $APPLICATION->SetTitle("Обзоры");
 		"CATALOG_IBLOCK_ID2" => "",
 		"CATALOG_IBLOCK_ID3" => "",
 		"DISPLAY_DATE" => "Y",
-		"SHOW_FAQ_BLOCK" => "Y",
+		"SHOW_FAQ_BLOCK" => "N",
 		"SHOW_BACK_LINK" => "Y",
 		"GALLERY_PROPERTY" => "MORE_PHOTO",
 		"SHOW_GALLERY" => "Y",
