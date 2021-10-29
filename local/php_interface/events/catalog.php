@@ -129,13 +129,13 @@ function showProductBonus($arResult,$detail=false){
 /* обновление фасетных индексов, работает как Агент */
 function updateFacetIndex($IBLOCK_ID=16){
 	
-	$index = \Bitrix\Iblock\PropertyIndex\Manager::createIndexer($IBLOCK_ID);
+	//$index = \Bitrix\Iblock\PropertyIndex\Manager::createIndexer($IBLOCK_ID);
 
-	$index->startIndex();
+	//$index->startIndex();
 
-	$index->continueIndex(0); // создание без ограничения по времени
+	//$index->continueIndex(0); // создание без ограничения по времени
 
-	$index->endIndex();
+	//$index->endIndex();
 	
 	return "updateFacetIndex(16);";
 }

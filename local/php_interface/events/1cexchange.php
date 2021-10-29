@@ -368,18 +368,28 @@ function customCatalogImportStep()
 				}
                 $log->dumpLog('amount', false);
             }
+			/** начало костыля под линолеум
+             * берется $XML_ID и эксплодится на решетку
+             * у торг предложений $XML_ID = ***#***
+             * если торг предложение запускается код
+             * который заполняет его цены из основного элемента
+             * в случае если его цена пустая или отсутствует
+             * по сути если бы не было косяка в 1с то этот код можно не исполнять совсем
+             * да и вообще код бестолковый и отрабатывает очень редко, не обновляя цены торг предложений совсем
+             */
 			$exp = explode("#",$XML_ID);
 				#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arXMLItem));
 				
-			if(isset($exp[1])) {
-				
+			//if(isset($exp[1])) {  //пока отрубим код
+			if(false) {
+
 				$arFilter2 = array(
 					'IBLOCK_ID' => 23
 				);
 				
 				$PARENT_XML_ID = $exp[0];
 				#AddMessage2Log("Продукт PARENT_XML_ID - " . $PARENT_XML_ID . ": " . serialize($arXMLItem));
-			
+			    /**достал родителя*/
 				$ires = CIBlockElement::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $PARENT_XML_ID)), false, false, ['ID']);
 				
 				if($arOItem = $ires->Fetch()){
@@ -405,11 +415,12 @@ function customCatalogImportStep()
 							'CURRENCY' => $arPrice['CURRENCY']
 						 ];
 					}
+					/**@var $prices цены родителя*/
 					#AddMessage2Log("Продукт prices - " . serialize($prices));
 			
 					if(0 < count($prices)) {
 						$ores = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter2, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','PROPERTY_M2']);
-					
+
 						if($arOffer = $ores->Fetch()){
 							$pricesOffer = [];
 							$OFFER_ID = $arOffer["ID"];
@@ -433,14 +444,21 @@ function customCatalogImportStep()
 								
 							}
 						#	AddMessage2Log("Продукт pricesOffer - " . serialize($pricesOffer));
-							
-							foreach($prices as $PrID=>$value){
+                            /**@var $pricesOffer цены торгового предложения*/
+
+                            foreach($prices as $PrID=>$value){
 								$arFields = Array(
 									"PRODUCT_ID" => $OFFER_ID,
 									"CATALOG_GROUP_ID" => $PrID,
 									"PRICE" => $value['PRICE'],
 									"CURRENCY" => $value['CURRENCY']
 								);
+								/**а тут косяк
+                                 если у предложения цена 0 или отсутствует
+                                 то цена пишется из основного товара
+                                 хотя по идее у основного товара не должно быть цены
+                                 связано с ошибкой в 1с, и не правильно построенной логике обмена
+                                 в последствии в некоторых шаблонах каталога был изменен вывод, опять же очень серьезный костыль*/
 								if(isset($pricesOffer[$PrID])){
 									if((float)$pricesOffer[$PrID]["PRICE"] == 0)
 										\CPrice::Update($pricesOffer[$PrID]["ID"], $arFields);
@@ -455,7 +473,7 @@ function customCatalogImportStep()
 							/* RATIO */
 							
 							$ratio = (float)$arOffer["PROPERTY_M2_VALUE"];
-							
+
 							if($ratio>0){
 								$arFields = Array(
 									"PRODUCT_ID" => $OFFER_ID,
@@ -478,7 +496,7 @@ function customCatalogImportStep()
 					}
 				}
 			}
-		 
+		 /**конец костыля под линолеум*/
 			if ($error === true) {
 				$errorMessage = 'Что-то случилось.';
 				break;

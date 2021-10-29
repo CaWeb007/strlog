@@ -2,6 +2,8 @@
 
 use Bitrix\Main\Loader;
 use Caweb\Main\Log\Write;
+use Caweb\Main\Iblock\cmlImport;
+Loader::includeModule('caweb.main');
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 /** @global CMain $APPLICATION */
@@ -196,7 +198,6 @@ $FILE_NAME = false;
 $ABS_FILE_NAME = false;
 $WORK_DIR_NAME = false;
 
-Loader::includeModule('caweb.main');
 
 if ($arParams["USE_TEMP_DIR"] === "Y" && strlen($_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"]) > 0)
 	$DIR_NAME = $_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"];
@@ -432,7 +433,7 @@ elseif (($_GET["mode"] == "import") && $ABS_FILE_NAME)
 	}
 	elseif ($NS["STEP"] == 4)
 	{
-		$obCatalog = new CIBlockCMLImport;
+		$obCatalog = new cmlImport;
 		$obCatalog->InitEx($NS, array(
 			"files_dir" => $WORK_DIR_NAME,
 			"use_crc" => $arParams["USE_CRC"],
@@ -464,7 +465,7 @@ elseif (($_GET["mode"] == "import") && $ABS_FILE_NAME)
 	}
 	elseif ($NS["STEP"] == 5)
 	{
-		$obCatalog = new CIBlockCMLImport;
+		$obCatalog = new cmlImport;
 		$obCatalog->InitEx($NS, array(
 			"files_dir" => $WORK_DIR_NAME,
 			"use_crc" => $arParams["USE_CRC"],
@@ -492,7 +493,7 @@ elseif (($_GET["mode"] == "import") && $ABS_FILE_NAME)
 	}
 	elseif ($NS["STEP"] == 6)
 	{
-		$obCatalog = new CIBlockCMLImport;
+		$obCatalog = new cmlImport;
 		$obCatalog->InitEx($NS, array(
 			"files_dir" => $WORK_DIR_NAME,
 			"use_crc" => $arParams["USE_CRC"],
@@ -529,7 +530,7 @@ elseif (($_GET["mode"] == "import") && $ABS_FILE_NAME)
 
 		if ($strError == "")
 		{
-			$obCatalog = new CIBlockCMLImport;
+			$obCatalog = new cmlImport;
 			$obCatalog->InitEx($NS, array(
 				"files_dir" => $WORK_DIR_NAME,
 				"use_crc" => $arParams["USE_CRC"],
@@ -571,7 +572,7 @@ elseif (($_GET["mode"] == "import") && $ABS_FILE_NAME)
 	}
 	elseif ($NS["STEP"] == 8)
 	{
-		$obCatalog = new CIBlockCMLImport;
+		$obCatalog = new cmlImport;
 		$obCatalog->Init($NS);
 		$result = $obCatalog->DeactivateElement($arParams["ELEMENT_ACTION"], $start_time, $arParams["INTERVAL"]);
 
@@ -594,7 +595,7 @@ elseif (($_GET["mode"] == "import") && $ABS_FILE_NAME)
 	}
 	elseif ($NS["STEP"] == 9)
     {
-        $obCatalog = new CIBlockCMLImport;
+        $obCatalog = new cmlImport;
         $obCatalog->InitEx($NS, array(
             "files_dir" => $WORK_DIR_NAME,
             "use_crc" => $arParams["USE_CRC"],

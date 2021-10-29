@@ -36,6 +36,30 @@ class Iblock{
         $arParams['SORT'] = 123;
         return $arParams;
     }
+    public function setLinoMeasure(&$arParams){
+        $iblockId = (int)$arParams['IBLOCK_ID'];
+        if ($iblockId !== 23) return $arParams;
+        $propertyM2Id = 348;
+        $propertyM2Value = (int)$arParams['PROPERTY_VALUES'][$propertyM2Id]['n0']['VALUE'];
+        if (!empty($propertyM2Value)){
+            $arFields = Array(
+                "PRODUCT_ID" => $arParams['ID'],
+                "RATIO" => $propertyM2Value,
+                "IS_DEFAULT" => 'Y'
+            );
+
+            $existRatio = \Bitrix\Catalog\MeasureRatioTable::getList(array(
+                'select' => ['ID'],
+                'filter' => ['=PRODUCT_ID' => $arParams['ID']]
+            ))->Fetch();
+
+            if($existRatio){
+                \Bitrix\Catalog\MeasureRatioTable::Update($existRatio['ID'],$arFields);
+            } else {
+                \Bitrix\Catalog\MeasureRatioTable::Add($arFields);
+            }
+        }
+    }
     public function makeSortScu(){
         $arFilter = array('IBLOCK_ID' => self::SCU_IBLOCK, '!SORT' => '123', '!PROPERTY_NAREZKA' => false);
         $arSelect = array('ID');

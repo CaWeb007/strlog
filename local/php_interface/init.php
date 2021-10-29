@@ -23,6 +23,10 @@ EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Pr
 EventManager::getInstance()->addEventHandler('sale', 'OnCondSaleActionsControlBuildList', array('Caweb\Main\Sale\SaleActionGiftCtrl', 'GetControlDescr'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
+/**start установка коэф для лино в рулонах*/
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'setLinoMeasure'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'setLinoMeasure'));
+/**end*/
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockSectionUpdate', array('Caweb\Main\Events\Iblock', 'doNotDeactivate'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockUpdate', array('\Caweb\Main\Events\Iblock', 'doNotUseFacet'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
