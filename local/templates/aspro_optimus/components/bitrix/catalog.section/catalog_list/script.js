@@ -1247,7 +1247,7 @@ window.JCCatalogSection.prototype.ChangeInfo = function()
 		this.offerNum = index;
 		this.QuantitySet(this.offerNum);
 
-		$(this.obProduct).find('.item-title a').attr('href', this.offers[this.offerNum].URL);
+		//$(this.obProduct).find('.item-title a').attr('href', this.offers[this.offerNum].URL);
 		$(this.obProduct).find('.image_wrapper_block > a').attr('href', this.offers[this.offerNum].URL);
 
 
