@@ -23,6 +23,21 @@ use Caweb\Main\Sale\Bonus;
 
 /**usage   \Bitrix\Main\Loader::includeModule('caweb.main');*/
 class MyLittleHelper {
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::SortEnumOffer();*/
+    public static function SortEnumOffer(){
+        Loader::includeModule('iblock');
+        $result = array();
+        $db = \CIBlockPropertyEnum::GetList(array('value' => 'asc'), array('PROPERTY_ID' => 594));
+        while ($ar = $db->Fetch()){
+            if (empty((int)$ar['VALUE']))
+                $sort = 100000;
+            else
+                $sort = floatval(str_replace(',', '.', $ar['VALUE'])) * 100;
+            \CIBlockPropertyEnum::Update((int)$ar['ID'], array('SORT' => $sort));
+
+        }
+        return 'done';
+    }
     /**usage   \Caweb\Main\Secret\MyLittleHelper::writePersonalProfessionField();*/
     public static function writePersonalProfessionField(bool $are_you_ready = false){
         $domain = Application::getInstance()->getContext()->getServer()->getHttpHost();

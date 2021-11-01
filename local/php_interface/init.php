@@ -21,8 +21,8 @@ EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderBeforeSaved'));
 EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Product::OnBeforeUpdate',array('Caweb\Main\Events\Catalog', 'OnBeforeProductUpdate'));
 EventManager::getInstance()->addEventHandler('sale', 'OnCondSaleActionsControlBuildList', array('Caweb\Main\Sale\SaleActionGiftCtrl', 'GetControlDescr'));
-EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
-EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
+//EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
+//EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'SortSku'));
 /**start установка коэф для лино в рулонах*/
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'setLinoMeasure'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'setLinoMeasure'));

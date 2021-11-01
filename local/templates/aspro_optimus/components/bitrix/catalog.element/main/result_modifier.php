@@ -6,7 +6,7 @@ use Bitrix\Iblock;
 if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED!==true) die();?>
 
 <?
-if (((int)$arResult['IBLOCK_SECTION_ID'] === 2147) && !empty($arResult["PROPERTIES"]['SHIRINA_M']["VALUE"])){
+/*if (((int)$arResult['IBLOCK_SECTION_ID'] === 2147) && !empty($arResult["PROPERTIES"]['SHIRINA_M']["VALUE"])){
 	foreach ($arResult["OFFERS"] as $key => $value){
 		if (empty($value['PROPERTIES']['NAREZKA']["VALUE"])) continue;
 		$b = (float)str_replace(',', '.', $arResult["PROPERTIES"]['SHIRINA_M']["VALUE"]);
@@ -25,7 +25,7 @@ if (((int)$arResult['IBLOCK_SECTION_ID'] === 2147) && !empty($arResult["PROPERTI
             $arResult["OFFERS"][$key]['ITEM_PRICES'][$key2]["PRINT_RATIO_PRICE"] = $prf;
 		}
 	}
-}
+}*/
 ?>
 <?
 /** @var CBitrixComponentTemplate $this */
