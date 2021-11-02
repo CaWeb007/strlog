@@ -8,7 +8,7 @@ $templateData = array(
 
 /**/
 ?>
-<div class="news_detail_wrapp big item">
+<div class="news_detail_wrapp big">
 	<?if( !empty($arResult["DETAIL_PICTURE"])):?>
 		<div class="detail_picture_block clearfix">
 			<?$img = CFile::ResizeImageGet($arResult["DETAIL_PICTURE"], array( "width" => 938, "height" => 214 ), BX_RESIZE_IMAGE_PROPORTIONAL, true, array() );?>
