@@ -41,7 +41,7 @@ $this->setFrameMode(true);?>
                 "ELEMENT_SORT_ORDER" => "asc",
                 "ELEMENT_SORT_ORDER2" => "desc",
                 "FILTER_NAME" => "",
-                "HIDE_NOT_AVAILABLE" => "Y",
+                "HIDE_NOT_AVAILABLE" => "L",
                 "HIDE_NOT_AVAILABLE_OFFERS" => "Y",
                 "IBLOCK_ID" => "16",
                 "IBLOCK_TYPE" => "1c_catalog",
