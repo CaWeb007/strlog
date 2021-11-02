@@ -192,11 +192,4 @@ $arNotify = unserialize($notifyOption);
 			
 		<?endif;?>
 	</div>
-<?else:?>
-	<?$this->setFrameMode(true);?>
-	<script type="text/javascript">
-	$(document).ready(function(){
-		$(".news_detail_wrapp .similar_products_wrapp").remove();
-	}); /* dirty hack, remove this code */
-	</script>
 <?endif;?>
