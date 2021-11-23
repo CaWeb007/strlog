@@ -111,6 +111,14 @@ if(!empty( $_REQUEST["change_password"])){
 		$(".authorization-cols .col.authorization .soc-avt .row a").click(function(){
 			$(window).resize();
 		});
+		$('#avtorization-form-page').find("input[name='USER_LOGIN']").change(function () {
+            var $_this = $(this), val, newVal;
+            val = $_this.val();
+            if (!val) return;
+            newVal = val.replace(/\s+/g, '');
+            if (!newVal) return;
+		    $_this.val(newVal);
+        });
 		
 		$("#avtorization-form-page").validate({
 			rules: {
