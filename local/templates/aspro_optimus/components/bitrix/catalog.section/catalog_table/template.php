@@ -202,7 +202,7 @@
                             -->
                         </div>
                         <div class="preview_text">
-                            <?if(!empty($arItem['MINI_DEуSC']) && $arItem['MINI_DESC'] != ''):?>
+                            <?if(!empty($arItem['MINI_DESC']) && $arItem['MINI_DESC'] != ''):?>
 							[<span><?echo $arItem['MINI_DESC'];?></span>]
                             <?else:?>
 							<?endif;?>
