@@ -56,6 +56,13 @@ class Helper{
     public static function  FormatCurrency($fSum = ""){
         if (empty($fSum)) return "";
         $fSumArray = explode(' ', $fSum);
+        $fCountSumArray = count($fSumArray);
+        if ($fCountSumArray > 2){
+            $keyCur = array_key_last($fSumArray);
+            $cur = $fSumArray[$keyCur];
+            unset($fSumArray[$keyCur]);
+            $fSumArray = array(implode(" ", $fSumArray), $cur);
+        }
         return Loc::getMessage('CAWEB_CATALOG_HELPER_CUR_FORMAT', array('#NUM#'=>$fSumArray[0],'#CUR#'=>$fSumArray[1]));
 
     }

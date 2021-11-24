@@ -62,6 +62,8 @@ class Sale{
             if ($item->getField('CATALOG_XML_ID') !== $offerIblockXmlId) continue;
             $itemId = (int)$item->getProductId();
             $dbElement = \CIBlockElement::GetByID($itemId)->GetNextElement();
+            $isLino = stripos($dbElement->GetFields()['NAME'], Loc::getMessage('REG_LINO'));
+            if ($isLino === false) continue;
             $propertyWidthValue = (int)$dbElement->GetProperty($propertyWidthId)['VALUE_ENUM_ID'];
             $isSlice = $propertyWidthValue === $enumSliceId;
             if (!$isSlice) continue;
