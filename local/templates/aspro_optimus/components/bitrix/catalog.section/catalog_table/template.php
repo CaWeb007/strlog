@@ -202,10 +202,7 @@
                             -->
                         </div>
                         <div class="preview_text">
-                            <?if(!empty($arItem['MINI_DESC']) && $arItem['MINI_DESC'] != ''):?>
-							[<span><?echo $arItem['MINI_DESC'];?></span>]
-                            <?else:?>
-							<?endif;?>
+
 							<?if(0 < count($arItem["DISPLAY_PROPERTIES"])):
 								$rEcho="";?>
 								<?foreach($arItem["DISPLAY_PROPERTIES"] as $dprop):?>
