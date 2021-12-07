@@ -2480,17 +2480,17 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 		return $result;
 	}
-    protected function getBasePrice($basket){
-        $basketItems = $basket->getBasketItems();
-        $arParams = array(
-            'filter' => array('CATALOG_GROUP_ID' => $this->arParams['KP_PRICE_ID']),
-            'select' => array('PRICE')
-        );
-        $result = (float)0;
-	    foreach ($basketItems as $id => $basketItem){
-            $arParams['filter']['PRODUCT_ID'] = $basketItem->getField('PRODUCT_ID');
-            $result += (float)PriceTable::getRow($arParams)['PRICE'] * $basketItem->getQuantity();
+	/**@param $basket Basket
+     * @return float
+     */
+    protected function getBasePrice(Basket $basket){
+        $result = 0;
+        foreach ($basket as $item){
+            if (!($item instanceof Sale\BasketItem)) continue;
+            $result += (float)$item->getBasePrice() * (float)$item->getQuantity();
         }
+        if (empty($result))
+            $result = $basket->getBasePrice();
         return $result;
     }
     protected function getBonus($basket){
