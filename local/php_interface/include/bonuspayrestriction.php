@@ -15,7 +15,7 @@ class BonusPayRestriction extends Price
 {
 	
 	public static $params;
-	
+    public static $kpNalPriceType = 15;
 	public function setParams($params)
 	{
 		self::$params = $params;
@@ -30,6 +30,10 @@ class BonusPayRestriction extends Price
 	 
 	public static function check($params, array $restrictionParams, $serviceId = 0)
 	{
+
+        if ($params['PRICE_TYPE'] === self::$kpNalPriceType)
+            return false;
+
 		if ($params['PRICE_PAYMENT'] === null)
 			return true;
 
@@ -120,6 +124,7 @@ class BonusPayRestriction extends Price
         $orderPrice = null;
         $paymentPrice = null;
         $maxUserBudget = 0;
+        $priceType = null;
         if ($entity instanceof Payment){
             /** @var PaymentCollection $collection */
             $collection = $entity->getCollection();
@@ -127,7 +132,9 @@ class BonusPayRestriction extends Price
             $order = $collection->getOrder();
             $budget = array();
             $PRODUCT_IDS = array();
-            foreach($order->getBasket() as $basketItem){
+            $basket = $order->getBasket();
+            /**@var $basketItem BasketItem*/
+            foreach($basket as $basketItem){
                 $productID = $basketItem->getProductId();
                 $budget[$productID] = static::getBudget($basketItem);
                 if(0 < $maxUserBudget) $PRODUCT_IDS[] = $productID;
@@ -138,6 +145,7 @@ class BonusPayRestriction extends Price
             while($ar_fields = $res->GetNext()){
                 if($ar_fields['PROPERTY_NELZYA_OPLACHIVAT_BONUSAMI_VALUE'] === 'Да') unset($budget[$ar_fields['ID']]);
             }
+            $priceType = self::getPriceType($basket);
             $maxUserBudget = array_sum($budget);
             $paymentPrice = $entity->getField('SUM');
             $orderPrice = $order->getPrice();
@@ -146,8 +154,38 @@ class BonusPayRestriction extends Price
         return array(
             'PRICE_PAYMENT' => $paymentPrice,
             'PRICE_ORDER' => $orderPrice,
-            'MAX_BUDGET' => $maxUserBudget
+            'MAX_BUDGET' => $maxUserBudget,
+            'PRICE_TYPE' => $priceType
         );
+    }
+    protected static function getPriceType(\Bitrix\Sale\Basket $basket){
+        $kpNalPriceTypeId = self::$kpNalPriceType;
+        $basketItems = $basket->getBasketItems();
+        $basketItemLastKey = array_key_last($basketItems);
+        /**@var $item BasketItem*/
+        foreach ($basketItems as $key => $item){
+            $arPrice = array();
+            if (!$item->isCustomPrice()) continue;
+            $db = PriceTable::getList(array('filter' => array('PRODUCT_ID' => (int)$item->getProductId(), 'PRICE' => (float)$item->getPrice()), 'select' => array('CATALOG_GROUP_ID')));
+            while($ar = $db->fetch()){
+                $arPrice[] = (int)$ar['CATALOG_GROUP_ID'];
+            }
+            if (!is_array($arPrice)) return null;
+            if (count($arPrice) > 1){
+                if ($key === $basketItemLastKey){
+                    if (array_search($kpNalPriceTypeId, $arPrice) !== false){
+                        return $kpNalPriceTypeId;
+                    }else{
+                        return array_shift($arPrice);
+                    }
+                }else{
+                    continue;
+                }
+            }else{
+                return array_shift($arPrice);
+            }
+        }
+
     }
 	/**
 	 * @param $entityId
