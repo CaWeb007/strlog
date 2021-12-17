@@ -122,17 +122,20 @@ a.strlog-city-link:before {
 	display: block;
 	width: auto;
 	height: auto;
-	margin: 0 10px;
+	margin-right: 27px;
 	padding: 0;
 	position: relative;
 	cursor: pointer;
 }
+ .strlog-top-dropdown-menu li:last-child{
+	 margin-right: 0;
+ }
 .strlog-top-dropdown-menu li:hover > a{
 	color: #000;
 }
-.strlog-top-dropdown-menu-has-child{
+/*.strlog-top-dropdown-menu-has-child{
 	padding: 0 15px 10px 0 !important;
-}
+}*/
 .strlog-top-dropdown-menu-has-child::after{
 	content: '';
 	display: block;
@@ -143,12 +146,12 @@ a.strlog-city-link:before {
 	background: url("/images/project-arrow.png") no-repeat center center;
 	position: absolute;
 	top: 2px;
-	right: 0;
+	right: -13px;
 	bottom: 0;
 }
-.strlog-top-dropdown-menu-has-child::after {
+/*.strlog-top-dropdown-menu-has-child::after {
 	margin-top:-10px;
-}
+}*/
 
 .strlog-top-dropdown-menu li::before{
 	content: '';

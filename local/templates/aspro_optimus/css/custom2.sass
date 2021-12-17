@@ -16,3 +16,105 @@
     &:hover
       background-color: #2975c0
       color: #ffffff
+.header_wrap
+  .flex-line
+    padding-top: 5px
+    padding-bottom: 5px
+    display: flex
+    flex-wrap: nowrap
+    justify-content: space-between
+    align-items: center
+    .flex-item:nth-child(1)
+      flex-basis: 398px
+    .flex-item:nth-child(2)
+      flex-grow: 1
+      flex-basis: 247px
+      .flex-item__phone
+        display: inline-block
+        text-align: right
+        width: 100%
+        white-space: nowrap
+        span.icons
+          color: #005fb1
+        span.phone_text
+          a
+            font-weight: 600
+    .flex-item:nth-child(3)
+      flex-basis: 169px
+      .flex-item__top-auth
+        .module-enter
+          a
+            color: #666666
+            text-decoration: none
+            &.avtorization-call
+              position: relative
+              &:before
+                content: ''
+                position: absolute
+                left: 0
+                top: -1px
+                width: 21px
+                height: 21px
+                background: url(../images/ai.png) -423px -3px no-repeat
+                z-index: 2
+
+@media (max-width: 921px)
+  .header_wrap
+    .flex-line
+      .flex-item:nth-child(1)
+        flex-basis: 309px
+        .flex-item__menu
+          ul
+            li
+              &:nth-child(3)
+                margin-right: 0
+              &:last-child
+                display: none
+@media (max-width: 842px)
+  .header_wrap
+    .flex-line
+      .flex-item:nth-child(1)
+        flex-basis: 199px
+        .flex-item__menu
+          ul
+            li
+              &:nth-child(1)
+                display: none
+@media (max-width: 670px)
+  .header_wrap
+    .flex-line
+      flex-wrap: wrap
+      .flex-item:nth-child(2)
+        order: 3
+        margin-top: 15px
+        text-align: center
+        flex-basis: 263px
+        .flex-item__phone
+          display: inline
+@media (max-width: 408px)
+  .header_wrap
+    .flex-line
+      .flex-item:nth-child(1)
+        flex-basis: 164px
+        .flex-item__menu
+          ul
+            li
+              &:nth-child(2)
+                margin-right: 19px
+      .flex-item:nth-child(3)
+        flex-basis: 156px
+        .flex-item__top-auth
+          a.avtorization-call
+            margin-left: 10px
+            padding-right: 15px !important
+@media (max-width: 360px)
+  .header_wrap
+    .flex-line
+      .flex-item:nth-child(1)
+        display: none
+      .flex-item:nth-child(3)
+        flex-basis: 100%
+        .flex-item__top-auth
+          text-align: center
+          .module-enter
+            display: inline
