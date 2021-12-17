@@ -1323,6 +1323,7 @@ body #header .catalog_menu ul.menu > .current{background: #F4F4F4;}
 	top: 100%;
 	right: 0;
 	left: 0;
+	white-space: normal;
 }
 .user-bonus-popup{
 	box-sizing: border-box;

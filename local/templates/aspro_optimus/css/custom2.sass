@@ -26,9 +26,22 @@
     align-items: center
     .flex-item:nth-child(1)
       flex-basis: 398px
+      .flex-item__menu
+        .strlog-top-dropdown-menu-wrapper
+          > ul
+            > li
+              &:before
+                content: ''
+                position: absolute
+                width: 100%
+                height: 10px
+                left: 0
+                bottom: -10px
     .flex-item:nth-child(2)
       flex-grow: 1
       flex-basis: 247px
+      padding-left: 20px
+      padding-right: 20px
       .flex-item__phone
         display: inline-block
         text-align: right
@@ -46,7 +59,7 @@
           a
             color: #666666
             text-decoration: none
-            &.avtorization-call
+            &.avtorization-call, &.reg
               position: relative
               &:before
                 content: ''
@@ -57,30 +70,60 @@
                 height: 21px
                 background: url(../images/ai.png) -423px -3px no-repeat
                 z-index: 2
+            &.avtorization-call
+              margin-left: 0
+            &.reg
+              margin-right: 10px
+              &:before
+                left: -19px
+          &.have-user
+            margin-left: 12px
+            white-space: nowrap
+            .user-bonus-wrapper
+              display: block
 
-@media (max-width: 921px)
+@media (max-width: 1390px)
+  .header_wrap
+    .flex-line
+      .flex-item:nth-child(1)
+        .flex-item__menu
+          .strlog-top-dropdown-menu-wrapper
+            > ul
+              > li:nth-child(1)[data-click-count = '1']
+                .strlog-top-dropdown-submenu
+                  left: 0
+                  &::before
+                    left: -147px
+@media (max-width: 925px)
   .header_wrap
     .flex-line
       .flex-item:nth-child(1)
         flex-basis: 309px
         .flex-item__menu
-          ul
-            li
-              &:nth-child(3)
-                margin-right: 0
-              &:last-child
-                display: none
+          .strlog-top-dropdown-menu-wrapper
+            > ul
+              > li
+                &:nth-child(3)
+                  margin-right: 0
+                &:last-child
+                  display: none
 @media (max-width: 842px)
   .header_wrap
     .flex-line
       .flex-item:nth-child(1)
         flex-basis: 199px
         .flex-item__menu
-          ul
-            li
-              &:nth-child(1)
-                display: none
-@media (max-width: 670px)
+          .strlog-top-dropdown-menu-wrapper
+            > ul
+              > li
+                &:nth-child(1)
+                  display: none
+                &:nth-child(2)[data-click-count = '1']
+                  .strlog-top-dropdown-submenu
+                    left: 0
+                    &::before
+                      left: -100px
+@media (max-width: 703px)
   .header_wrap
     .flex-line
       flex-wrap: wrap
@@ -93,21 +136,24 @@
           display: inline
 @media (max-width: 408px)
   .header_wrap
+    .wrapper_inner
+      padding: 0 10px
     .flex-line
       .flex-item:nth-child(1)
         flex-basis: 164px
         .flex-item__menu
-          ul
-            li
-              &:nth-child(2)
-                margin-right: 19px
+          .strlog-top-dropdown-menu-wrapper
+            > ul
+              > li
+                &:nth-child(2)
+                  margin-right: 19px
       .flex-item:nth-child(3)
         flex-basis: 156px
         .flex-item__top-auth
           a.avtorization-call
             margin-left: 10px
             padding-right: 15px !important
-@media (max-width: 360px)
+@media (max-width: 355px)
   .header_wrap
     .flex-line
       .flex-item:nth-child(1)
