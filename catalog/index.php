@@ -805,11 +805,15 @@ $APPLICATION->SetTitle("Каталог");
 			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 			"compare" => "compare.php?action=#ACTION_CODE#",
 			"smart_filter" => "#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
+            "redirect" => "redirect.php?product_xml=#XML_ID#"
 		),
 		"VARIABLE_ALIASES" => array(
 			"compare" => array(
 				"ACTION_CODE" => "action",
 			),
+            "redirect" => array(
+                "XML_ID" => 'product_xml'
+            )
 		)
 	),
 	false
