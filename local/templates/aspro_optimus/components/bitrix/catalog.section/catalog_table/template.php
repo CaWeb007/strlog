@@ -247,8 +247,9 @@
 								}
 								else
 								{?>
-									<?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
-									 <?=showProductBonus($arItem)?>
+                                    <?$showPrice = null?>
+									<?$showPrice = \Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
+                                    <?if($showPrice !== false) echo showProductBonus($arItem);?>
 								<?}?>
 							<?}?>
 							<div class="counter_wrapp"></div>

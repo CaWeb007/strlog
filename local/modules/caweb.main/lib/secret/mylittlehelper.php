@@ -371,4 +371,17 @@ class MyLittleHelper {
             }
         }
     }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::forumMessageCleaner();*/
+    public static function setForOrderProperty(){
+        Loader::includeModule('iblock');
+        $traitsPropertyId = 90;
+        $flagPropertyId = 663;
+        $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => 16));
+        while($ar = $db->GetNextElement()){
+            $traits = $ar->GetProperty($traitsPropertyId);
+            $elementId = (int)$ar->GetFields()['ID'];
+            if (!in_array('Заказная позиция', $traits['VALUE'])) continue;
+            \CIBlockElement::SetPropertyValuesEx($elementId, 16, array($flagPropertyId => 1));
+        }
+    }
 }
