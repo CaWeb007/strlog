@@ -41,7 +41,8 @@ if((IntVal($arCurrentValues["CATALOG_IBLOCK_ID1"]) > 0)||(IntVal($arCurrentValue
 $arListView = array(
 	'slider' => GetMessage("SLIDER_VIEW"),
 	'block' => GetMessage("BLOCK_VIEW"),
-);	
+	'list' => GetMessage("LIST_VIEW_TYPE"),
+);
 
 $arTemplateParameters = array(
 	"CATALOG_FILTER_NAME" => Array(

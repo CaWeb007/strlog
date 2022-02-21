@@ -35,5 +35,6 @@ $MESS["SHOW_PERIOD"] = 'Показывать период';
 
 $MESS["SLIDER_VIEW"] = 'слайдер';
 $MESS["BLOCK_VIEW"] = 'блочный';
+$MESS["LIST_VIEW_TYPE"] = 'строчный';
 $MESS["LIST_VIEW"] = 'Вид отображения связанных товаров';
 ?>
