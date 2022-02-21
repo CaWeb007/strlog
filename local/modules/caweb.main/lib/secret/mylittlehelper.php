@@ -8,6 +8,7 @@
 
 namespace Caweb\Main\Secret;
 use Bitrix\Catalog\PriceTable;
+use Bitrix\Forum\MessageTable;
 use Bitrix\Iblock\ElementTable;
 use Bitrix\Iblock\SectionElementTable;
 use Bitrix\Main\Application;
@@ -329,5 +330,58 @@ class MyLittleHelper {
         closedir($hRootDir);
         echo $removeFile;
         return "CleanUpUpload();";
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::forumMessageCleaner();*/
+    public static function forumMessageCleaner($clean = false){
+        Loader::includeModule('forum');
+        $db = MessageTable::getList();
+        $cPattern = '(?:(?:(?:http[s]?):\/\/)|(?:www.))(?:[-_0-9a-z]+.)+[-_0-9a-z]{2,4}[:0-9]*[\/]*';
+        mb_regex_encoding('UTF-8');
+        $groupArray = array();
+        $spamTopicId = array();
+        $ipRule = new \CSecurityIPRule();
+        $ipRuleSpamBlock = \CSecurityIPRule::GetRuleInclIPs(2);
+        $spamIp = array();
+        while($ar = $db->fetch()){
+                $groupArray[$ar['TOPIC_ID']][] = $ar;
+                if ($ar['PARAM1'] === 'IB') continue;
+                $message = $ar['POST_MESSAGE'];
+                $vRegs = array();
+                mb_eregi($cPattern, $message, $vRegs);
+                if (count($vRegs) > 0){
+                    $spamTopicId[] = $ar['TOPIC_ID'];
+                    $spamIp[] = $ar['AUTHOR_IP'];
+                }
+        }
+        if (!$clean)
+            $updateIpArray = array_unique(array_merge($ipRuleSpamBlock, $spamIp));
+        else
+            $updateIpArray = $spamIp;
+
+        if (!empty($spamIp)){
+            $ipRule->UpdateRuleIPs(2, $updateIpArray);
+            $date = new DateTime();
+            $date->add('1 month');
+            $ipRule->Update(2, array('ACTIVE_TO' => $date));
+        }
+        foreach ($spamTopicId as $id){
+            $spam = $groupArray[$id];
+            foreach ($spam as $item){
+                \CForumMessage::Delete((int)$item['ID']);
+            }
+        }
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::forumMessageCleaner();*/
+    public static function setForOrderProperty(){
+        Loader::includeModule('iblock');
+        $traitsPropertyId = 90;
+        $flagPropertyId = 663;
+        $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => 16));
+        while($ar = $db->GetNextElement()){
+            $traits = $ar->GetProperty($traitsPropertyId);
+            $elementId = (int)$ar->GetFields()['ID'];
+            if (!in_array('Заказная позиция', $traits['VALUE'])) continue;
+            \CIBlockElement::SetPropertyValuesEx($elementId, 16, array($flagPropertyId => 1));
+        }
     }
 }

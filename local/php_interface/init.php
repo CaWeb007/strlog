@@ -37,6 +37,11 @@ EventManager::getInstance()->addEventHandlerCompatible('main', 'OnBeforeEventAdd
 /**контроль остатков линолеума*/
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleBasketBeforeSaved', array('Caweb\Main\Events\Sale', 'linoMinBalanceController'));
 
+EventManager::getInstance()->addEventHandlerCompatible('forum', 'onBeforeMessageAdd', array('Caweb\Main\Events\Forum', 'checkSpam'));
+EventManager::getInstance()->addEventHandlerCompatible('forum', 'onBeforeMessageUpdate', array('Caweb\Main\Events\Forum', 'checkSpam'));
+
+EventManager::getInstance()->addEventHandlerCompatible('forum', 'onAfterMessageAdd', array('Caweb\Main\Events\Forum', 'sendMessage'));
+
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){
         $dbBasketItems = CSaleBasket::GetList(

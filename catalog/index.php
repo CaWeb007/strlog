@@ -215,7 +215,7 @@ $APPLICATION->SetTitle("Каталог");
 			2 => "VOLUME",
 			3 => "SIZES",
 			4 => "COLOR_REF",
-			5 => "",
+            5 => "M_P"
 		),
 		"DETAIL_PRODUCT_INFO_BLOCK_ORDER" => "sku,props",
 		"DETAIL_PRODUCT_PAY_BLOCK_ORDER" => "rating,price,priceRanges,quantityLimit,quantity,buttons",
@@ -355,12 +355,12 @@ $APPLICATION->SetTitle("Каталог");
 		"DISPLAY_ELEMENT_SLIDER" => "10",
 		"DISPLAY_TOP_PAGER" => "N",
 		"DISPLAY_WISH_BUTTONS" => "Y",
-		"ELEMENT_SORT_FIELD" => "sort",
-		"ELEMENT_SORT_FIELD2" => "catalog_QUANTITY",
+		"ELEMENT_SORT_FIELD" => "CATALOG_AVAILABLE",
+		//"ELEMENT_SORT_FIELD2" => "CATALOG_PRICE_11",
 		"ELEMENT_SORT_FIELD_BOX" => "name",
 		"ELEMENT_SORT_FIELD_BOX2" => "id",
-		"ELEMENT_SORT_ORDER" => "asc",
-		"ELEMENT_SORT_ORDER2" => "asc",
+		"ELEMENT_SORT_ORDER" => "desc,nulls",
+		//"ELEMENT_SORT_ORDER2" => "asc",
 		"ELEMENT_SORT_ORDER_BOX" => "asc",
 		"ELEMENT_SORT_ORDER_BOX2" => "desc",
 		"FIELDS" => array(
@@ -444,7 +444,7 @@ $APPLICATION->SetTitle("Каталог");
 			2 => "VOLUME",
 			3 => "SIZES",
 			4 => "COLOR_REF",
-			5 => "",
+            5 => "M_P"
 		),
 		"LIST_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons,compare",
 		"LIST_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'3','BIG_DATA':false},{'VARIANT':'3','BIG_DATA':false},{'VARIANT':'3','BIG_DATA':false}]",
@@ -592,6 +592,7 @@ $APPLICATION->SetTitle("Каталог");
 		"OFFER_HIDE_NAME_PROPS" => "N",
 		"OFFER_TREE_PROPS" => array(
 			0 => "M2",
+            1 => "M_P"
 		),
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
@@ -804,11 +805,15 @@ $APPLICATION->SetTitle("Каталог");
 			"element" => "#SECTION_CODE#/#ELEMENT_CODE#/",
 			"compare" => "compare.php?action=#ACTION_CODE#",
 			"smart_filter" => "#SECTION_CODE#/filter/#SMART_FILTER_PATH#/apply/",
+            "redirect" => "redirect.php?product_xml=#XML_ID#"
 		),
 		"VARIABLE_ALIASES" => array(
 			"compare" => array(
 				"ACTION_CODE" => "action",
 			),
+            "redirect" => array(
+                "XML_ID" => 'product_xml'
+            )
 		)
 	),
 	false

@@ -33,6 +33,7 @@ if(!class_exists("CAsproItem"))
 
 		public static function showItemPrices($arParams = array(), $arPrices = array(), $strMeasure = '', &$price_id = 0, $bShort = 'N'){
 			$price_id = 0;
+			$bShowPrice = false;
 			if((is_array($arParams) && $arParams)&& (is_array($arPrices) && $arPrices))
 			{
 				ob_start();
@@ -44,8 +45,11 @@ if(!class_exists("CAsproItem"))
 				$iCountPriceGroup = 0;
 				foreach($arPrices as $key => $arPrice)
 				{
-					if($arPrice['CAN_ACCESS'])
-						$iCountPriceGroup++;
+					if($arPrice['CAN_ACCESS']){
+                        $iCountPriceGroup++;
+                        if ($arPrice['VALUE'] > 0)
+                            $bShowPrice = true;
+                    }
 				}
 				foreach($arPrices as $key => $arPrice){?>
 					<?if($arPrice["CAN_ACCESS"]){
@@ -96,7 +100,7 @@ if(!class_exists("CAsproItem"))
 										</div>
 									</div>
 								<?}?>
-							<?}else{?>
+							<?}elseif ($arPrice['VALUE'] > 0){?>
 								<div class="price" data-currency="<?=$arPrice["CURRENCY"];?>" data-value="<?=$arPrice["VALUE"];?>">
 									<?if(strlen($arPrice["PRINT_VALUE"])):?>
 										<span class="values_wrapper"><?=self::getCurrentPrice("VALUE", $arPrice);?></span><?if (($arParams["SHOW_MEASURE"]=="Y") && $strMeasure):?><span class="price_measure">/<?=$strMeasure?></span><?endif;?>
@@ -115,8 +119,10 @@ if(!class_exists("CAsproItem"))
 
 				foreach(GetModuleEvents(FUNCTION_MODULE_ID, 'OnAsproItemShowItemPrices', true) as $arEvent) // event for manipulation item prices
 					ExecuteModuleEventEx($arEvent, array($arParams, $arPrices, $strMeasure, &$price_id, $bShort, &$html));
-
-				echo $html;
+                if ($bShowPrice)
+				    echo $html;
+                else
+				    return false;
 			}
 		}
 	}

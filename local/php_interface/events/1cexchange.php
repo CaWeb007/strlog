@@ -260,7 +260,7 @@ function customCatalogImportStep()
 			
 			#AddMessage2Log("Продукт XML_ID REST - " . $XML_ID . ": " . serialize($arXMLItem));
 			
-			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','ACTIVE','PROPERTY_OBEM_M3','PROPERTY_NOT_WORK']);
+			$ires = $el::GetList(array('ID' => 'ASC'), array_merge($arFilter, array('XML_ID' => $XML_ID,'ACTIVE' => ['LOGIC'=>'OR','Y','N'])), false, false, ['ID','ACTIVE','PROPERTY_QUANTITY_COEF','PROPERTY_NOT_WORK']);
 			
 			if($arItem = $ires->Fetch()){
 				/*
@@ -273,7 +273,7 @@ function customCatalogImportStep()
                 $totalQuantity = 0;
 				$itemStore = [];
 				$PRODUCT_ID = $arItem["ID"];
-				$V = (float)$arItem["PROPERTY_OBEM_M3_VALUE"];//0216
+				$V = (float)$arItem["PROPERTY_QUANTITY_COEF_VALUE"];//0216
 				$isV = false;
 				
 				#AddMessage2Log("Продукт XML_ID - " . $XML_ID . ": " . serialize($arItem));
@@ -289,7 +289,7 @@ function customCatalogImportStep()
 				$pRes = $el::GetProperty(16, $PRODUCT_ID, "sort", "asc", array("CODE" => "CML2_TRAITS"));
 				while ($ob = $pRes->GetNext())
 				{
-					if($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "м3"){
+					if(($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "м3") || ($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "пог. м")){
 						$isV = true;
 						break;
 					}
@@ -297,7 +297,7 @@ function customCatalogImportStep()
 				$log->setLogArray('PRODUCT_ID', $PRODUCT_ID);
 				$log->setLogArray('isV', $isV);
 				$log->setLogArray('V', $V);
-				if($isV && $V>0 && $V<1 && $PRODUCT_ID>0){
+				if($isV && $V>0 && $PRODUCT_ID>0){
 					
 					$query = "  SELECT item.VALUE as item,  rest.VALUE as amount, stock.VALUE as stockID
 								FROM b_xml_tree as item

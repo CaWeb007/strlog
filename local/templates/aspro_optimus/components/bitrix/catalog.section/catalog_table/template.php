@@ -202,10 +202,7 @@
                             -->
                         </div>
                         <div class="preview_text">
-                            <?if(!empty($arItem['MINI_DEуSC']) && $arItem['MINI_DESC'] != ''):?>
-							[<span><?echo $arItem['MINI_DESC'];?></span>]
-                            <?else:?>
-							<?endif;?>
+
 							<?if(0 < count($arItem["DISPLAY_PROPERTIES"])):
 								$rEcho="";?>
 								<?foreach($arItem["DISPLAY_PROPERTIES"] as $dprop):?>
@@ -250,8 +247,9 @@
 								}
 								else
 								{?>
-									<?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
-									 <?=showProductBonus($arItem)?>
+                                    <?$showPrice = null?>
+									<?$showPrice = \Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
+                                    <?if($showPrice !== false) echo showProductBonus($arItem);?>
 								<?}?>
 							<?}?>
 							<div class="counter_wrapp"></div>

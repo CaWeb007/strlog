@@ -40,6 +40,28 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 
 <?/*Костыли*start*показ меню каталога только на главной странице*/
 	//var_dump("<pre>",$TEMPLATE_OPTIONS);?>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NP3Q8H5');</script>
+<!-- End Google Tag Manager -->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(37983465, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/37983465" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <?if(COptimus::IsCatalogPage()):?>
     <?global $TEMPLATE_OPTIONS;?>
     <?if($TEMPLATE_OPTIONS['MENU_POSITION_MAIN']['VALUES'][0]['NAME'] == 'да'):?>
@@ -70,100 +92,13 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 <?endif;?>
 <?/*Костыли*end*показ меню каталога только на главной странице*/?>  
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121466226-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'UA-121466226-1');
-  gtag('config', 'AW-820014775');
-</script>
-
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NP3Q8H5');</script>
-<!-- End Google Tag Manager -->
-
+</head>
+<body id="main">
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NP3Q8H5"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<!-- Facebook Pixel Code -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '663118487943984');
-  fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=663118487943984&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
-<!-- Event snippet for 1 conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
-function gtag_report_conversion(url) {
-	var callbackg = function () {
-		if (typeof(url) != 'undefined') {
-			window.location = url;
-		}
-	};
-	gtag('event', 'conversion', {
-		'send_to': 'AW-820014775/fO8KCM6Yx4sBELfdgYcD',
-		'transaction_id': '',
-		'event_callback': callbackg
-	});
-	return false;
-}
-</script>
-
-<!-- Event snippet for обратный звонок conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
-function gtag_report_conversion2(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-820014775/xcj6CISU1YsBELfdgYcD',
-      'transaction_id': '',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '343100333482758');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=343100333482758&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Facebook Pixel Code -->
-</head>
-<body id="main">
     <div id="panel"><?$APPLICATION->ShowPanel();?></div>
     <div class="onload"></div>
 <?if(!CModule::IncludeModule("aspro.optimus")){?><center><?$APPLICATION->IncludeFile(SITE_DIR."include/error_include_module.php");?></center></body></html><?die();?><?}?>
@@ -173,41 +108,27 @@ src="https://www.facebook.com/tr?id=343100333482758&ev=PageView&noscript=1"
     <div class="header_wrap <?=strtolower($TEMPLATE_OPTIONS["HEAD_COLOR"]["CURRENT_VALUE"])?>">
         <?if($TEMPLATE_OPTIONS["BASKET"]["CURRENT_VALUE"]=="NORMAL"){?>
             <div class="top-h-row">
-                <div class="wrapper_inner our-projects-wrap">
-                    <div class="top_inner our-projects-wrapper-anchor">
-                        <div id="our-projects" class="our-projects-wrapper">
-
-                            <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
-                                array(
-                                    "COMPONENT_TEMPLATE" => ".default",
-                                    "PATH" => SITE_DIR."include/menu/menu.strlog_top_content_multilevel.php",
-                                    "AREA_FILE_SHOW" => "file",
-                                    "AREA_FILE_SUFFIX" => "",
-                                    "AREA_FILE_RECURSIVE" => "Y",
-                                    "EDIT_TEMPLATE" => "standard.php"
-                                ),
-                                false
-                            );?>
-
+                <div class="wrapper_inner">
+                    <div class="flex-line">
+                        <div class="flex-item">
+                            <div class="flex-item__menu">
+                                <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+                                    array(
+                                        "COMPONENT_TEMPLATE" => ".default",
+                                        "PATH" => SITE_DIR."include/menu/menu.strlog_top_content_multilevel.php",
+                                        "AREA_FILE_SHOW" => "file",
+                                        "AREA_FILE_SUFFIX" => "",
+                                        "AREA_FILE_RECURSIVE" => "Y",
+                                        "EDIT_TEMPLATE" => "standard.php"
+                                    ),
+                                    false
+                                );?>
+                            </div>
                         </div>
-                        <div class="h-user-block" id="personal_block">
-                            <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
-                                array(
-                                    "COMPONENT_TEMPLATE" => ".default",
-                                    "PATH" => SITE_DIR."include/topest_page/auth.top.php",
-                                    "AREA_FILE_SHOW" => "file",
-                                    "AREA_FILE_SUFFIX" => "",
-                                    "AREA_FILE_RECURSIVE" => "Y",
-                                    "EDIT_TEMPLATE" => "standard.php"
-                                ),
-                                false
-                            );?>
-                        </div>
-                        <div class="phones">
-                            <div class="phone_block">
-                                <span class="phone_wrap">
-                                    <span class="icons fa fa-phone"></span>
-                                    <span class="phone_text">
+                        <div class="flex-item">
+                            <div class="flex-item__phone">
+                                <span class="icons fa fa-phone"></span>
+                                <span class="phone_text">
                                         <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
                                             array(
                                                 "COMPONENT_TEMPLATE" => ".default",
@@ -220,18 +141,24 @@ src="https://www.facebook.com/tr?id=343100333482758&ev=PageView&noscript=1"
                                             false
                                         );?>
                                     </span>
-
                                 </span>
-
-                                <!--
-                                <span class="order_wrap_btn">
-                                    <span class="callback_btn"><?=GetMessage("CALLBACK")?></span>
-                                </span>
-                                -->
-<span class="order_wrap_btn"><a class="strlog-city-link" href="/company/contacts/">Контакты</a></span>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
+                        <div class="flex-item">
+                            <div class="flex-item__top-auth">
+                                <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+                                    array(
+                                        "COMPONENT_TEMPLATE" => ".default",
+                                        "PATH" => SITE_DIR."include/topest_page/auth.top.php",
+                                        "AREA_FILE_SHOW" => "file",
+                                        "AREA_FILE_SUFFIX" => "",
+                                        "AREA_FILE_RECURSIVE" => "Y",
+                                        "EDIT_TEMPLATE" => "standard.php"
+                                    ),
+                                    false
+                                );?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

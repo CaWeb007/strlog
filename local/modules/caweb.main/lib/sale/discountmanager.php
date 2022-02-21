@@ -1,6 +1,7 @@
 <?php
 namespace Caweb\Main\Sale;
 
+use Bitrix\Catalog\GroupTable;
 use Bitrix\Catalog\PriceTable;
 use Bitrix\Main\Diag\Debug;
 use Bitrix\Main\Event;
@@ -26,6 +27,7 @@ class DiscountManager{
     const STATUS_MAX_DISCOUNT = 'MAX_DISCOUNT';
     const SESSION_KEY = 'CAWEB_DISCOUNT';
     const DEFAULT_PRICE = 11;
+    protected static $priceIDAsNameArray = array();
     protected static $exception = null;
     public static $jsText = array();
     public static $processedCoupon = array();
@@ -268,7 +270,22 @@ class DiscountManager{
             Write::file('OrderDiscount', $res->getErrorMessages());
         }
     }
+    /**
+    *Array $_SESSION[self::SESSION_KEY]
+    (
+    [мсм] => Array
+    (
+    [KEYWORD] => мсм
+    [STATUS] => ENTER
+    [PRICE_ID] => 15
+    [USER_PRICE_ID] => 10
+    [DISCOUNT_ID] => 16
+    [COUPON_ID] => 239
+    )
 
+    )
+
+     */
     public static function OnSaleOrderBeforeSaved(Event $event){
         self::init();
         $order = $event->getParameter('ENTITY');
@@ -276,6 +293,10 @@ class DiscountManager{
         $promo = array(
             $properties->getItemByOrderPropertyId(39),
             $properties->getItemByOrderPropertyId(40)
+        );
+        $price = array(
+            $properties->getItemByOrderPropertyId(41),
+            $properties->getItemByOrderPropertyId(42)
         );
         if (!($order instanceof Order)) return;
         $coupon = array();
@@ -290,6 +311,9 @@ class DiscountManager{
             foreach ($promo as $item)
                 if ($item instanceof PropertyValue)
                     $item->setValue($coupon['KEYWORD']);
+            foreach ($price as $item)
+                if ($item instanceof PropertyValue)
+                    $item->setValue(self::getPriceXml((int)$coupon['PRICE_ID']));
         }elseif (($orderId = $order->getId()) && ($orderCoupon = DiscountUserTable::getRow(array('filter' => array('ORDER_ID' => $orderId), 'select' => array('*', 'PRICE_ID' => 'DISCOUNT.PRICE_ID', 'KEYWORD' => 'DISCOUNT.KEYWORD'))))){
             try {
                 $items = $order->getBasket()->getOrderableItems();
@@ -305,6 +329,9 @@ class DiscountManager{
                 foreach ($promo as $item)
                     if ($item instanceof PropertyValue)
                         $item->setValue($orderCoupon['KEYWORD']);
+                foreach ($price as $item)
+                    if ($item instanceof PropertyValue)
+                        $item->setValue(self::getPriceXml((int)$orderCoupon['PRICE_ID']));
             }catch(\Exception $exception){}
 
         }
@@ -313,5 +340,9 @@ class DiscountManager{
             $order
         ));
     }
-
+    protected static function getPriceXml(int $priceId = 0){
+        if (!empty(self::$priceIDAsNameArray[$priceId])) return self::$priceIDAsNameArray[$priceId];
+        self::$priceIDAsNameArray[$priceId] = GroupTable::getRowById($priceId)['XML_ID'];
+        return self::$priceIDAsNameArray[$priceId];
+    }
 }
