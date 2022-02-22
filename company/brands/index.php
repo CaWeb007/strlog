@@ -98,6 +98,7 @@ $APPLICATION->SetTitle("Партнеры");
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"SHOW_404" => "N",
 		"MESSAGE_404" => "",
+		"LIST_VIEW" => "list",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",
