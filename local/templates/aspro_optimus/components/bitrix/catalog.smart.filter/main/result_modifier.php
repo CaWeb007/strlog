@@ -10,3 +10,20 @@ foreach($arResult["ITEMS"] as $key => $arItem)
 			$arResult["ITEMS"][$key]["VALUES"][0]["VALUE"]=$arItem["NAME"];
 	}
 }
+$filterPrices = array();
+foreach ($arResult['ITEMS'] as $key => $value){
+    if ($value['PRICE']) $filterPrices[$key] = $value;
+}
+if (count($filterPrices) > 1){
+    $sort = 0;
+    $sortPrices = array();
+    foreach ($arResult['PRICES'] as $key => $value){
+        if (!$value['CAN_BUY']) continue;
+        $sortPrices[$value['SORT']] = $key;
+        if ($value['SORT'] > $sort){
+            $sort = $value['SORT'];
+        }
+    }
+    unset($filterPrices[$sortPrices[$sort]]);
+    $arResult['ITEMS'] = array_diff_key($arResult['ITEMS'], $filterPrices);
+}
