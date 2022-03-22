@@ -44,6 +44,7 @@ class Sale{
             return false;
     }
     public function priceFromPaySystemOrderEntity(Main\Event $event){
+        if ($_REQUEST['action'] === 'delete') return;
         /**@var $order \Bitrix\Sale\Order*/
         $order = $event->getParameter('ENTITY');
         Helper::checkNeedChangeProductPrice($order);
