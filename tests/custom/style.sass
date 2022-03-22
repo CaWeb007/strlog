@@ -1,0 +1,113 @@
+section.strlog-ecosystem
+  .ecosystem_row
+    display: flex
+    flex-direction: row
+    margin-left: -6px
+    margin-right: -6px
+    .ecosystem_column
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      align-content: stretch
+      margin: 0
+      &.ecosystem_column-one-third
+        flex: 0 0 40%
+      &.ecosystem_column-two-thirds
+        flex: 0 0 60%
+    .widget
+      display: block
+      position: relative
+      padding: 18px 24px 16px
+      background-color: #fff
+      flex-grow: 1
+      flex-basis: 0
+      cursor: pointer
+      border-radius: 4px
+      text-decoration: none
+      box-sizing: border-box
+      margin: 6px
+      &.widget-hover
+        transition: background-color .3s cubic-bezier(.4,0,.2,1)
+        &:after
+          content: ''
+          position: absolute
+          left: 0
+          top: 0
+          z-index: -1
+          width: 100%
+          height: 100%
+          border-radius: 4px
+          box-shadow: 0 6px 10px rgba(68, 92, 130, .14), 0 1px 18px rgba(68, 92, 130, .12), 0 3px 5px rgba(68, 92, 130, .20)
+          transition: opacity .3s cubic-bezier(.4,0,.2,1)
+          opacity: 0
+      &.widget-main
+        background-repeat: no-repeat
+        background-size: 160px
+        background-position: 100% 100%
+        height: 384px
+      &.widget-design
+        background-image: url(design.png)
+      &.widget-full
+        flex-basis: 100%
+        .widget-inner
+          p.widget-title
+            font-size: 30px
+            margin-bottom: 6px
+            line-height: 36px
+      &.widget-half
+        flex-basis: calc(50% - 12px)
+        padding-top: 16px
+        min-height: 207px
+      &.widget-horizontal
+        padding-top: 36px
+        height: 165px
+        .widget_icon
+          margin-right: 16px
+          height: 77px
+          margin-top: -8px
+        .widget-inner
+          display: grid
+          grid-template-columns: auto auto
+          grid-template-rows: auto auto
+          grid-template-areas: "icon title" "icon description"
+          width: 80%
+          p.widget-title
+            font-size: 20px
+            line-height: 24px
+      .widget_toggle-icon-wrapper
+        position: absolute
+        top: 16px
+        right: 12px
+      .widget_icon
+        height: 56px
+        display: inline-flex
+        justify-content: center
+        align-items: center
+        grid-area: icon
+        i
+          width: 100%
+          height: 100%
+          svg
+            width: auto
+            height: 100%
+            vertical-align: middle
+      &.widget-small-icon
+        .widget_icon
+          height: 48px
+      .widget-inner
+        p.widget-title
+          margin-bottom: 4px
+          color: rgba(0,0,0,.9)
+          text-align: left
+          font-weight: 700
+          line-height: 20px
+          font-size: 16px
+          letter-spacing: .15px
+          display: block
+          grid-area: title
+        p.widget-description
+          grid-area: description
+section.strlog-ecosystem
+  .ecosystem-slider
+    .widget
+      width: 200px
