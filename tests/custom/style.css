@@ -1,19 +1,19 @@
-section.strlog-ecosystem .ecosystem_row {
+section.strlog-ecosystem .ecosystem-tiles .ecosystem_row {
   display: flex;
   flex-direction: row;
   margin-left: -6px;
   margin-right: -6px; }
-  section.strlog-ecosystem .ecosystem_row .ecosystem_column {
+  section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .ecosystem_column {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: stretch;
     margin: 0; }
-    section.strlog-ecosystem .ecosystem_row .ecosystem_column.ecosystem_column-one-third {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .ecosystem_column.ecosystem_column-one-third {
       flex: 0 0 40%; }
-    section.strlog-ecosystem .ecosystem_row .ecosystem_column.ecosystem_column-two-thirds {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .ecosystem_column.ecosystem_column-two-thirds {
       flex: 0 0 60%; }
-  section.strlog-ecosystem .ecosystem_row .widget {
+  section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget {
     display: block;
     position: relative;
     padding: 18px 24px 16px;
@@ -25,9 +25,9 @@ section.strlog-ecosystem .ecosystem_row {
     text-decoration: none;
     box-sizing: border-box;
     margin: 6px; }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-hover {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-hover {
       transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-      section.strlog-ecosystem .ecosystem_row .widget.widget-hover:after {
+      section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-hover:after {
         content: "";
         position: absolute;
         left: 0;
@@ -39,59 +39,59 @@ section.strlog-ecosystem .ecosystem_row {
         box-shadow: 0 6px 10px rgba(68, 92, 130, 0.14), 0 1px 18px rgba(68, 92, 130, 0.12), 0 3px 5px rgba(68, 92, 130, 0.2);
         transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         opacity: 0; }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-main {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-main {
       background-repeat: no-repeat;
       background-size: 160px;
       background-position: 100% 100%;
       height: 384px; }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-design {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-design {
       background-image: url(design.png); }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-full {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-full {
       flex-basis: 100%; }
-      section.strlog-ecosystem .ecosystem_row .widget.widget-full .widget-inner p.widget-title {
+      section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-full .widget-inner p.widget-title {
         font-size: 30px;
         margin-bottom: 6px;
         line-height: 36px; }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-half {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-half {
       flex-basis: calc(50% - 12px);
       padding-top: 16px;
       min-height: 207px; }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-horizontal {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-horizontal {
       padding-top: 36px;
       height: 165px; }
-      section.strlog-ecosystem .ecosystem_row .widget.widget-horizontal .widget_icon {
+      section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-horizontal .widget_icon {
         margin-right: 16px;
         height: 77px;
         margin-top: -8px; }
-      section.strlog-ecosystem .ecosystem_row .widget.widget-horizontal .widget-inner {
+      section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-horizontal .widget-inner {
         display: grid;
         grid-template-columns: auto auto;
         grid-template-rows: auto auto;
         grid-template-areas: "icon title" "icon description";
         width: 80%; }
-        section.strlog-ecosystem .ecosystem_row .widget.widget-horizontal .widget-inner p.widget-title {
+        section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-horizontal .widget-inner p.widget-title {
           font-size: 20px;
           line-height: 24px; }
-    section.strlog-ecosystem .ecosystem_row .widget .widget_toggle-icon-wrapper {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget_toggle-icon-wrapper {
       position: absolute;
       top: 16px;
       right: 12px; }
-    section.strlog-ecosystem .ecosystem_row .widget .widget_icon {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget_icon {
       height: 56px;
       display: inline-flex;
       justify-content: center;
       align-items: center;
       grid-area: icon; }
-      section.strlog-ecosystem .ecosystem_row .widget .widget_icon i {
+      section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget_icon i {
         width: 100%;
         height: 100%; }
-        section.strlog-ecosystem .ecosystem_row .widget .widget_icon i svg {
+        section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget_icon i svg {
           width: auto;
           height: 100%;
           vertical-align: middle; }
-    section.strlog-ecosystem .ecosystem_row .widget.widget-small-icon .widget_icon {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-small-icon .widget_icon {
       height: 48px; }
-    section.strlog-ecosystem .ecosystem_row .widget .widget-inner p.widget-title {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget-inner p.widget-title {
       margin-bottom: 4px;
       color: rgba(0, 0, 0, 0.9);
       text-align: left;
@@ -101,8 +101,59 @@ section.strlog-ecosystem .ecosystem_row {
       letter-spacing: 0.15px;
       display: block;
       grid-area: title; }
-    section.strlog-ecosystem .ecosystem_row .widget .widget-inner p.widget-description {
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget-inner p.widget-description {
       grid-area: description; }
 
-section.strlog-ecosystem .ecosystem-slider .widget {
-  width: 200px; }
+section.strlog-ecosystem .ecosystem-slider {
+  display: none; }
+  section.strlog-ecosystem .ecosystem-slider .widget {
+    background-color: #ffffff;
+    height: 200px;
+    padding: 10px; }
+    section.strlog-ecosystem .ecosystem-slider .widget:not(:last-child) {
+      margin-right: 10px; }
+    section.strlog-ecosystem .ecosystem-slider .widget .widget_toggle-icon-wrapper {
+      position: absolute;
+      top: 16px;
+      right: 12px; }
+    section.strlog-ecosystem .ecosystem-slider .widget .widget-inner {
+      text-align: left; }
+      section.strlog-ecosystem .ecosystem-slider .widget .widget-inner p.widget-title {
+        font-size: 12px;
+        margin-bottom: 4px;
+        line-height: 14px;
+        font-weight: 600;
+        color: #000; }
+      section.strlog-ecosystem .ecosystem-slider .widget .widget-inner .widget_icon {
+        height: 45px; }
+        section.strlog-ecosystem .ecosystem-slider .widget .widget-inner .widget_icon i {
+          width: 100%;
+          height: 100%; }
+          section.strlog-ecosystem .ecosystem-slider .widget .widget-inner .widget_icon i svg {
+            width: auto;
+            height: 100%;
+            vertical-align: middle; }
+      section.strlog-ecosystem .ecosystem-slider .widget .widget-inner p.widget-description {
+        font-size: 12px;
+        line-height: 11px; }
+    section.strlog-ecosystem .ecosystem-slider .widget.widget-design {
+      background-repeat: no-repeat;
+      background-size: 78px;
+      background-position: 100% 100%;
+      background-image: url(design.png); }
+
+section.strlog-ecosystem {
+  position: relative; }
+  section.strlog-ecosystem .widget #widget-submenu, section.strlog-ecosystem .widget #widget-href {
+    display: none; }
+  section.strlog-ecosystem .ecosystem-popup {
+    position: absolute; }
+    section.strlog-ecosystem .ecosystem-popup #widget-submenu {
+      display: block; }
+
+@media (max-width: 640px) {
+  section.strlog-ecosystem .ecosystem-tiles {
+    display: none; }
+
+  section.strlog-ecosystem .ecosystem-slider {
+    display: block; } }

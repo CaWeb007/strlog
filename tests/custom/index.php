@@ -5,6 +5,9 @@ $APPLICATION->SetTitle("custom");
 $path = '/tests/custom/';
 $asset = \Bitrix\Main\Page\Asset::getInstance();
 $asset->addJs($path.'script.js');
+//$asset->addJs('/local/templates/aspro_optimus/js/jquery-ui.min.js');
+$asset->addJs('/tests/custom/position.min.js');
+
 $asset->addCss($path.'style.css');
 ?>
 <?/*$APPLICATION->IncludeComponent(

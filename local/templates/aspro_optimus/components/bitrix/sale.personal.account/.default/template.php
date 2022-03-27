@@ -17,15 +17,15 @@
 				$result = array_intersect($arGroups, $userGroups);
 				if($result){
 					if($userTotal >= 0 && $userTotal < 10000) {
-						$bonusName = "КП Бронза";
+						$bonusName = "Стройлогистика Клуб Бронза";
 						$ostalos = 10000 - $userTotal;
 					}
 					if($userTotal >= 10000 && $userTotal < 200000){
-						$bonusName = "КП Серебро";
+						$bonusName = "Стройлогистика Клуб Серебро";
 						$ostalos = 200000 - $userTotal;
 					}
 					if($userTotal >= 200000)
-						$bonusName = "КП Золото";		
+						$bonusName = "Стройлогистика Клуб  Золото";		
 				}
 				
 				/* СО */
@@ -33,15 +33,15 @@
 				$result = array_intersect($arGroups, $userGroups);
 				if($result){
 					if($userTotal >= 0 && $userTotal < 500000){
-						$bonusName = "СО Бронза";
+						$bonusName = "Стройлогистика Клуб Бронза";
 						$ostalos = 500000 - $userTotal;
 					}
 					if($userTotal >= 500000 && $userTotal < 1500000){
-						$bonusName = "СО Серебро";
+						$bonusName = "Стройлогистика Клуб Серебро";
 						$ostalos = 1500000 - $userTotal;
 					}
 					if($userTotal >= 1500000){
-						$bonusName = "СО Золото";
+						$bonusName = "Стройлогистика Клуб Золото";
 					}
 				}
 				
@@ -75,6 +75,7 @@
 		</div>
 	</div>
 	<?if($ostalos):?>
-		<div class="info-bonus-block">Текущий вид карты: "<strong>КП Бронза</strong>", оборот <strong><?=$userTotal?></strong> руб. До следующего уровня осталось <strong><?=$ostalos?></strong> руб.</div>
+	<div class="info-bonus-block">Текущий вид карты: "<strong><?=$bonusName?></strong>", оборот <strong><?=$userTotal?></strong> руб. До следующего уровня осталось <strong><?=$ostalos?></strong> руб.<br>
+		<br><a style="color:#00adee;" target="_blank" href="http://strlogclub.ru/">Подробнее о видах карт</a></div>
 	<?endif?>
 </div>

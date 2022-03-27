@@ -11,13 +11,18 @@ $itemsCount = GetIBlockElementList(16, $sectionID, Array("SORT"=>"ASC"));
 while($itemCount = $itemsCount->GetNext()){
     $elementCount++;
 }?>
+
+
+
 <?if($arResult["SECTIONS"]){?>
 <div class="catalog_section_list rows_block items section">	
 	<?foreach( $arResult["SECTIONS"] as $arItems ){
 		$this->AddEditAction($arItems['ID'], $arItems['EDIT_LINK'], CIBlock::GetArrayByID($arItems["IBLOCK_ID"], "ELEMENT_EDIT"));
 		$this->AddDeleteAction($arItems['ID'], $arItems['DELETE_LINK'], CIBlock::GetArrayByID($arItems["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 	?>
-        <?if($sectionCount != '' && $elementCount != ''):?>
+
+
+<?if($sectionCount != '' && $elementCount != ''):?>
             <div class="item_block col-auto">
                 <div class="sub_section_item item" id="<?=$this->GetEditAreaId($arItems['ID']);?>">
 					<a class="name" href="<?=$arItems["SECTION_PAGE_URL"]?>"><span><?=$arItems["NAME"]?> <i class="section_count_1"><?=$elementsQuantity?></i></span></a>
@@ -43,13 +48,14 @@ while($itemCount = $itemsCount->GetNext()){
 								<?endif;?>
 							</td>
 						<?endif;?>
+
 						<td class="section_info">
 							<ul>
 								<li class="name">
 									<a title="<?=$arItems["NAME"]?>" href="<?=$arItems["SECTION_PAGE_URL"]?>"><span><?=$arItems["NAME"]?></span></a> <i style="cursor: default;user-select: none;"><?=$elementsQuantity;?></i>
 								</li>
 							</ul>
-							<?if($arParams["SECTIONS_LIST_PREVIEW_DESCRIPTION"] != 'N'):?>
+<?if($arParams["SECTIONS_LIST_PREVIEW_DESCRIPTION"] != 'N'):?>
 								<?$arSection = $section=COptimusCache::CIBlockSection_GetList(array('CACHE' => array("MULTI" =>"N", "TAG" => COptimusCache::GetIBlockCacheTag($arParams["IBLOCK_ID"]))), array('GLOBAL_ACTIVE' => 'Y', "ID" => $arItems["ID"], "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, array("ID", "IBLOCK_ID", $arParams["SECTIONS_LIST_PREVIEW_PROPERTY"]));?>
 								<div class="desc" ><span class="desc_wrapp">
 									<?if ($arSection[$arParams["SECTIONS_LIST_PREVIEW_PROPERTY"]]):?>

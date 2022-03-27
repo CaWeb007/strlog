@@ -1,4 +1,4 @@
-section.strlog-ecosystem
+section.strlog-ecosystem .ecosystem-tiles
   .ecosystem_row
     display: flex
     flex-direction: row
@@ -107,7 +107,54 @@ section.strlog-ecosystem
           grid-area: title
         p.widget-description
           grid-area: description
+section.strlog-ecosystem .ecosystem-slider
+  display: none
+  .widget
+    background-color: #ffffff
+    height: 200px
+    padding: 10px
+    &:not(:last-child)
+      margin-right: 10px
+    .widget_toggle-icon-wrapper
+      position: absolute
+      top: 16px
+      right: 12px
+    .widget-inner
+      text-align: left
+      p.widget-title
+        font-size: 12px
+        margin-bottom: 4px
+        line-height: 14px
+        font-weight: 600
+        color: #000
+      .widget_icon
+        height: 45px
+        i
+          width: 100%
+          height: 100%
+          svg
+            width: auto
+            height: 100%
+            vertical-align: middle
+      p.widget-description
+        font-size: 12px
+        line-height: 11px
+    &.widget-design
+      background-repeat: no-repeat
+      background-size: 78px
+      background-position: 100% 100%
+      background-image: url(design.png)
 section.strlog-ecosystem
-  .ecosystem-slider
-    .widget
-      width: 200px
+  position: relative
+  .widget
+    #widget-submenu, #widget-href
+      display: none
+  .ecosystem-popup
+    position: absolute
+    #widget-submenu
+      display: block
+@media (max-width: 640px)
+  section.strlog-ecosystem .ecosystem-tiles
+    display: none
+  section.strlog-ecosystem .ecosystem-slider
+    display: block

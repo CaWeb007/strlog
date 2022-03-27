@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
-<section class="strlog-ecosystem">
-    <div class="ecosystem">
+<section class="strlog-ecosystem" id="ecosystem-wrapper">
+    <div class="ecosystem-tiles">
         <div class="ecosystem_body">
             <div class="ecosystem_row">
                 <div class="ecosystem_column ecosystem_column-one-third">
@@ -45,12 +45,13 @@
                             <p class="widget-title">Документация и дизайн-проект</p>
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
+                        <a id="widget-href" href="/"></a>
                     </div>
                 </div>
             </div>
             <div class="ecosystem_row">
                 <div class="ecosystem_column">
-                    <div class="widget widget-small-icon widget-hover">
+                    <div class="widget widget-small-icon widget-hover widget-with_submenu">
                         <div class="widget_toggle-icon-wrapper">1</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
@@ -61,6 +62,11 @@
                             <p class="widget-title">Документация и дизайн-проект</p>
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
+                        <ul id="widget-submenu">
+                            <li>loreim</li>
+                            <li>loreim</li>
+                            <li>loreim</li>
+                        </ul>
                     </div>
                     <div class="widget widget-small-icon widget-hover">
                         <div class="widget_toggle-icon-wrapper">1</div>
@@ -86,7 +92,7 @@
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
                     </div>
-                    <div class="widget widget-small-icon widget-hover">
+                    <div class="widget widget-small-icon widget-hover widget-with_submenu">
                         <div class="widget_toggle-icon-wrapper">1</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
@@ -97,14 +103,19 @@
                             <p class="widget-title">Документация и дизайн-проект</p>
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
+                        <ul id="widget-submenu">
+                            <li>loreim2</li>
+                            <li>loreim2</li>
+                            <li>loreim2</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="ecosystem-slider flexslider carousel" id="ecosystem-slider">
+    <div class="ecosystem-slider flexslider carousel">
         <ul class="ecosystem_slider_body slides">
-            <li class="widget">
+            <li class="widget widget-design">
                 <div class="widget-inner">
                     <p class="widget-title">Документация и дизайн-проект</p>
                     <p class="widget-description">по фиксированной цене - 27000</p>
@@ -194,16 +205,8 @@
             </li>
         </ul>
     </div>
+    <div class="ecosystem-popup" style="display: none"></div>
 </section>
 <script>
-    $(document).ready(function() {
-        var flexsliderItemWidth = 220;
-        var flexsliderItemMargin = 10;
-        $('#ecosystem-slider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: flexsliderItemWidth,
-            itemMargin: flexsliderItemMargin
-        });
-    });
+    JSEcosystem();
 </script>

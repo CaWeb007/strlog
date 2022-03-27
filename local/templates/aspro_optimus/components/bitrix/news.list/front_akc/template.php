@@ -33,9 +33,9 @@
 							}?>
 							<?if($img_source){?>
 								<div class="img">
-									<?$img = CFile::ResizeImageGet($img_source, array("width" => 400, "height" => 270), BX_RESIZE_IMAGE_EXACT, true, false, false, 80 );?>
+									<?//$img = CFile::ResizeImageGet($img_source, array("width" => 400, "height" => 270), BX_RESIZE_IMAGE_EXACT, true, false, false, 80 );//?>
 									<a href="<?=$arItem["DETAIL_PAGE_URL"]?>">
-										<img src="<?=$img["src"]?>" alt="<?=$arItem["NAME"];?>"  />
+										<img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" alt="<?=$name;?>" title="<?=$name;?>"/><!--<img src="<?=$img["src"]?>" alt="<?=$arItem["NAME"];?>"  />-->
 									</a>
 								</div>
 							<?}?>

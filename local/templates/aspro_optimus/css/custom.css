@@ -3110,8 +3110,10 @@ button.close {
 	#header .middle-h-row .center_block{
 		display: block;
 		position: absolute;
-		left: -30px;
+		left: 0;
 		top: 61px;
+		padding-right: 0;
+		padding-left: 0;
 	}
 
 }
