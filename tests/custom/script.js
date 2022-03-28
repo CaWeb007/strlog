@@ -3,7 +3,6 @@ function JSEcosystem(){
     this.sliderContainer = this.conteiner.find('.ecosystem-slider');
     this.allWidgets = this.conteiner.find('.widget');
     this.widgetPopup = this.conteiner.find('.ecosystem-popup');
-    this.widgetPopupOpenFlag = false;
     this.initSlider = function () {
         this.sliderContainer.flexslider({
             animation: "slide",
@@ -14,36 +13,34 @@ function JSEcosystem(){
         })
     }
     this.showWidgetPopup = function (widget) {
-        //widget.off('click');
-        if (this.widgetPopupOpenFlag === true) return;
+        var wId = widget.data('id');
+        if (widget.hasClass('widget__open')) return;
         var list = widget.find('#widget-submenu').clone();
         this.widgetPopup.append(list);
-        //var widgetOffset = widget.offset();
-        //this.widgetPopup.offset(widgetOffset);
         this.widgetPopup.css('display', 'block');
         this.widgetPopup.position({
             my: 'right',
             at: 'right',
             of: widget
         });
-        $(document).on('click', null, {'popup': this.widgetPopup, 'widget': widget}, $.proxy(this.hideWidgetPopup, this));
-        this.widgetPopupOpenFlag = true;
+        $(document).on('mouseup.closerWidget__' + wId, null, {'popup': this.widgetPopup, 'widget': widget}, $.proxy(this.hideWidgetPopup, this));
+        widget.removeClass('widget__close');
+        widget.addClass('widget__open');
     }
     this.hideWidgetPopup = function (event){
-        if (this.widgetPopupOpenFlag === false) return;
+        var wId = event.data.widget.data('id');
+        if (event.data.widget.hasClass('widget__close')) return;
         if ($(event.target).closest(event.data.popup).length) {
             return;
         }
         if ($(event.target).closest(event.data.widget).length) {
             return;
         }
-        //event.data.popup.css('top', '0px');
-        //event.data.popup.css('left', '0px');
         event.data.popup.css('display', 'none');
         event.data.popup.empty();
-        $(document).off('click', null, $.proxy(this.hideWidgetPopup, this));
-        //event.data.widget.on('click', null, event.data.widget, $.proxy(this.widgetClickEvent, this))
-        this.widgetPopupOpenFlag = false;
+        $(document).off('mouseup.closerWidget__' + wId);
+        event.data.widget.removeClass('widget__open');
+        event.data.widget.addClass('widget__close');
     }
     this.widgetClickEvent = function (event) {
         var widget = event.data;
@@ -58,6 +55,7 @@ function JSEcosystem(){
         var widget = [], i, l = this.allWidgets.length;
         for (i = 0; i < l; i++){
             widget = $(this.allWidgets[i]);
+            widget.addClass('widget__close');
             widget.on('click', null, widget, $.proxy(this.widgetClickEvent, this));
         }
     }

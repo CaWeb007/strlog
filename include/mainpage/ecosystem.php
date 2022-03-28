@@ -51,7 +51,7 @@
             </div>
             <div class="ecosystem_row">
                 <div class="ecosystem_column">
-                    <div class="widget widget-small-icon widget-hover widget-with_submenu">
+                    <div class="widget widget-small-icon widget-hover widget-with_submenu" data-id="4">
                         <div class="widget_toggle-icon-wrapper">1</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
@@ -92,7 +92,7 @@
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
                     </div>
-                    <div class="widget widget-small-icon widget-hover widget-with_submenu">
+                    <div class="widget widget-small-icon widget-hover widget-with_submenu" data-id="7">
                         <div class="widget_toggle-icon-wrapper">1</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
