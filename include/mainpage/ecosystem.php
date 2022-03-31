@@ -12,8 +12,8 @@
                     </div>
                 </div>
                 <div class="ecosystem_column ecosystem_column-two-thirds">
-                    <div class="widget widget-half widget-hover">
-                        <div class="widget_toggle-icon-wrapper">1</div>
+                    <div class="widget widget-half widget-hover widget-with_submenu" data-id="1">
+                    <div class="widget_toggle-icon-wrapper">...</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
                                 <i>
@@ -23,6 +23,11 @@
                             <p class="widget-title">Документация и дизайн-проект</p>
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
+                        <ul id="widget-submenu">
+                            <li>loreim2</li>
+                            <li>loreim2</li>
+                            <li>loreim2</li>
+                        </ul>
                     </div>
                     <div class="widget widget-half widget-hover">
                         <div class="widget-inner">
@@ -52,7 +57,7 @@
             <div class="ecosystem_row">
                 <div class="ecosystem_column">
                     <div class="widget widget-small-icon widget-hover widget-with_submenu" data-id="4">
-                        <div class="widget_toggle-icon-wrapper">1</div>
+                        <div class="widget_toggle-icon-wrapper">...</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
                                 <i>
@@ -69,7 +74,6 @@
                         </ul>
                     </div>
                     <div class="widget widget-small-icon widget-hover">
-                        <div class="widget_toggle-icon-wrapper">1</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
                                 <i>
@@ -81,7 +85,7 @@
                         </div>
                     </div>
                     <div class="widget widget-small-icon widget-hover">
-                        <div class="widget_toggle-icon-wrapper">1</div>
+                        <div class="widget_toggle-icon-wrapper">...</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
                                 <i>
@@ -93,7 +97,7 @@
                         </div>
                     </div>
                     <div class="widget widget-small-icon widget-hover widget-with_submenu" data-id="7">
-                        <div class="widget_toggle-icon-wrapper">1</div>
+                        <div class="widget_toggle-icon-wrapper">...</div>
                         <div class="widget-inner">
                             <div class="widget_icon">
                                 <i>
@@ -122,7 +126,7 @@
                 </div>
             </li>
             <li class="widget">
-                <div class="widget_toggle-icon-wrapper">1</div>
+                <div class="widget_toggle-icon-wrapper">...</div>
                 <div class="widget-inner">
                     <div class="widget_icon">
                         <i>
@@ -156,7 +160,6 @@
                 </div>
             </li>
             <li class="widget">
-                <div class="widget_toggle-icon-wrapper">1</div>
                 <div class="widget-inner">
                     <div class="widget_icon">
                         <i>
@@ -168,7 +171,6 @@
                 </div>
             </li>
             <li class="widget">
-                <div class="widget_toggle-icon-wrapper">1</div>
                 <div class="widget-inner">
                     <div class="widget_icon">
                         <i>
@@ -180,7 +182,6 @@
                 </div>
             </li>
             <li class="widget">
-                <div class="widget_toggle-icon-wrapper">1</div>
                 <div class="widget-inner">
                     <div class="widget_icon">
                         <i>
@@ -192,7 +193,6 @@
                 </div>
             </li>
             <li class="widget">
-                <div class="widget_toggle-icon-wrapper">1</div>
                 <div class="widget-inner">
                     <div class="widget_icon">
                         <i>
@@ -205,7 +205,13 @@
             </li>
         </ul>
     </div>
-    <div class="ecosystem-popup" style="display: none"></div>
+    <div class="ecosystem-popup" style="opacity: 0; display: none">
+        <dev class="ecosystem-popup__header">
+            <button class="ecosystem-popup__close"><i class="fa fa-close"></i></button>
+        </dev>
+        <div class="ecosystem-popup__arrow"></div>
+        <div class="ecosystem-popup__body"></div>
+    </div>
 </section>
 <script>
     JSEcosystem();

@@ -3072,6 +3072,7 @@ body .prices .price_matrix_block .price_wrapper_block .price:not(.discount){colo
 .container iframe, .container object, .container video { display: block; margin: 0 auto; max-width: 100%; }
 .group_description_block { font-size: 14px;color: #333; }
 .group_description_block.top { padding: 25px 0px 20px; }
+.group_description_block.top img{ width: 100% }
 .group_description_block.bottom { padding: 20px 0px 20px; }
 ul.slider_navigation.top_big .flex-direction-nav { display: none; }
 ul.slider_navigation.top_big .flex-direction-nav:first-child { display: block; }

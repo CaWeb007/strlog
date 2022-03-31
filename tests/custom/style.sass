@@ -76,8 +76,16 @@ section.strlog-ecosystem .ecosystem-tiles
             line-height: 24px
       .widget_toggle-icon-wrapper
         position: absolute
-        top: 16px
-        right: 12px
+        top: 27px
+        right: 5px
+        font-size: 23px
+        color: #000
+        transform: rotate(90deg)
+        display: inline-block
+        font-weight: bold
+        letter-spacing: 2px
+        line-height: 0px
+        opacity: .6
       .widget_icon
         height: 56px
         display: inline-flex
@@ -144,6 +152,69 @@ section.strlog-ecosystem .ecosystem-slider
       background-size: 78px
       background-position: 100% 100%
       background-image: url(design.png)
+section.strlog-ecosystem .ecosystem-popup
+  width: 320px
+  z-index: 8900
+  box-shadow: 0 16px 24px rgba(68,92,130,.14), 0 6px 30px rgba(68,92,130,.12), 0 8px 10px rgba(68,92,130,.20)
+  background: #fff
+  border-radius: 2px
+  .ecosystem-popup__header
+    min-height: 48px
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    position: absolute
+    top: 0
+    right: 0
+    padding: 0 4px 0 24px
+    z-index: 1
+    button
+      height: 40px
+      line-height: 40px
+      min-width: 40px
+      font-size: 14px
+      font-weight: 500
+  .ecosystem-popup__body
+    padding: 36px 14px 14px
+    font-style: normal
+    font-weight: 400
+    line-height: 23px
+    font-size: 14px
+    letter-spacing: .1px
+    color: rgba(0,0,0,.9)
+    background: #fff
+    border-radius: 2px
+    height: auto
+    ul
+      padding: 12px 0
+      display: block
+      cursor: default
+      list-style: none
+      li
+        font-size: 14px
+        line-height: 20px
+        &:before
+          display: none
+  .ecosystem-popup__arrow
+    position: absolute
+    width: 0
+    height: 0
+    border-color: transparent
+    border-style: solid
+  &.popup_widget_left
+    .ecosystem-popup__arrow
+      border-right-color: #fff
+      top: 50%
+      left: -8px
+      margin-top: -8px
+      border-width: 8px 8px 8px 0
+  &.popup_widget_right
+    .ecosystem-popup__arrow
+      border-left-color: #fff
+      top: 50%
+      right: -8px
+      margin-top: -8px
+      border-width: 8px 0 8px 8px
 section.strlog-ecosystem
   position: relative
   .widget
@@ -151,8 +222,10 @@ section.strlog-ecosystem
       display: none
   .ecosystem-popup
     position: absolute
+    transition: opacity .5s
     #widget-submenu
       display: block
+
 @media (max-width: 640px)
   section.strlog-ecosystem .ecosystem-tiles
     display: none

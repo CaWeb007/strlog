@@ -3,6 +3,7 @@ function JSEcosystem(){
     this.sliderContainer = this.conteiner.find('.ecosystem-slider');
     this.allWidgets = this.conteiner.find('.widget');
     this.widgetPopup = this.conteiner.find('.ecosystem-popup');
+    this.window_$ = $(window);
     this.initSlider = function () {
         this.sliderContainer.flexslider({
             animation: "slide",
@@ -16,19 +17,40 @@ function JSEcosystem(){
         var wId = widget.data('id');
         if (widget.hasClass('widget__open')) return;
         var list = widget.find('#widget-submenu').clone();
-        this.widgetPopup.append(list);
+        this.widgetPopup.find('.ecosystem-popup__body').append(list);
         this.widgetPopup.css('display', 'block');
-        this.widgetPopup.position({
-            my: 'right',
-            at: 'right',
-            of: widget
-        });
+        this.widgetPopup.position(this.getPositionSettings(widget));
+        this.window_$.on('resize.popupRepositon', null, {'widget': widget}, $.proxy(this.popupReposition, this));
+        this.widgetPopup.css('opacity', 1);
         $(document).on('mouseup.closerWidget__' + wId, null, {'popup': this.widgetPopup, 'widget': widget}, $.proxy(this.hideWidgetPopup, this));
         widget.removeClass('widget__close');
         widget.addClass('widget__open');
     }
+    this.popupReposition = function (event) {
+        this.widgetPopup.position(this.getPositionSettings(event.data.widget));
+    }
+    this.popupPosition = function (e, v) {
+        var $_this = $(this);
+        var left = 0;
+        var top = e.top + 10;
+        if (v.horizontal === 'left') left = e.left + 6;
+        else left = e.left - 42;
+        $_this.css('top', top);
+        $_this.css('left', left);
+        $_this.removeClass('popup_widget_right');
+        $_this.removeClass('popup_widget_left');
+        $_this.addClass('popup_widget_' + v.horizontal);
+    }
+    this.getPositionSettings = function (widget){
+        return {
+            my: 'right center',
+            of: widget.find('.widget_toggle-icon-wrapper'),
+            using: this.popupPosition,
+            within: this.conteiner,
+            collision: 'flip flip'
+        };
+    }
     this.hideWidgetPopup = function (event){
-        var wId = event.data.widget.data('id');
         if (event.data.widget.hasClass('widget__close')) return;
         if ($(event.target).closest(event.data.popup).length) {
             return;
@@ -36,9 +58,12 @@ function JSEcosystem(){
         if ($(event.target).closest(event.data.widget).length) {
             return;
         }
+        var wId = event.data.widget.data('id');
         event.data.popup.css('display', 'none');
-        event.data.popup.empty();
+        event.data.popup.css('opacity', 0);
+        event.data.popup.find('.ecosystem-popup__body').empty();
         $(document).off('mouseup.closerWidget__' + wId);
+        this.window_$.off('resize.popupRepositon');
         event.data.widget.removeClass('widget__open');
         event.data.widget.addClass('widget__close');
     }
@@ -60,10 +85,27 @@ function JSEcosystem(){
         }
     }
     this.initPopup = function () {
-        
+        this.widgetPopup.find('.ecosystem-popup__close').on('mouseup', $.proxy(this.closeWidgetAction, this))
+    }
+    this.closeWidgetAction = function(event){
+        var wId, popup, widget;
+        popup = this.widgetPopup;
+        wId = popup.data('widgetid');
+        widget = event.data.widget;
+
+
+
+        event.data.popup.css('display', 'none');
+        event.data.popup.css('opacity', 0);
+        event.data.popup.find('.ecosystem-popup__body').empty();
+        $(document).off('mouseup.closerWidget__' + wId);
+        this.window_$.off('resize.popupRepositon');
+        event.data.widget.removeClass('widget__open');
+        event.data.widget.addClass('widget__close');
     }
     this.init = function () {
         this.initSlider();
+        this.initPopup();
         this.initWidgetClickEvents();
     }
     $(document).ready($.proxy(this.init, this));
