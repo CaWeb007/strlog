@@ -24,9 +24,9 @@
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
                         <ul id="widget-submenu">
-                            <li>loreim2</li>
-                            <li>loreim2</li>
-                            <li>loreim2</li>
+                            <li><a href="#">loreim2</a></li>
+                            <li><a href="#">loreim2</a></li>
+                            <li><a href="#">loreim2</a></li>
                         </ul>
                     </div>
                     <div class="widget widget-half widget-hover">
@@ -68,9 +68,9 @@
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
                         <ul id="widget-submenu">
-                            <li>loreim</li>
-                            <li>loreim</li>
-                            <li>loreim</li>
+                            <li><a href="#">loreim</a></li>
+                            <li><a href="#">loreim</a></li>
+                            <li><a href="#">loreim</a></li>
                         </ul>
                     </div>
                     <div class="widget widget-small-icon widget-hover">
@@ -108,16 +108,16 @@
                             <p class="widget-description">по фиксированной цене - 27000</p>
                         </div>
                         <ul id="widget-submenu">
-                            <li>loreim2</li>
-                            <li>loreim2</li>
-                            <li>loreim2</li>
+                            <li><a href="#">loreim2</a></li>
+                            <li><a href="#">loreim2</a></li>
+                            <li><a href="#">loreim2</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="ecosystem-slider flexslider carousel">
+    <div class="ecosystem-slider">
         <ul class="ecosystem_slider_body slides">
             <li class="widget widget-design">
                 <div class="widget-inner">
@@ -125,7 +125,7 @@
                     <p class="widget-description">по фиксированной цене - 27000</p>
                 </div>
             </li>
-            <li class="widget">
+            <li class="widget widget-with_submenu" data-id="1">
                 <div class="widget_toggle-icon-wrapper">...</div>
                 <div class="widget-inner">
                     <div class="widget_icon">
@@ -136,6 +136,11 @@
                     <p class="widget-title">Документация и дизайн-проект</p>
                     <p class="widget-description">по фиксированной цене - 27000</p>
                 </div>
+                <ul id="widget-submenu">
+                    <li><a href="#">loreim2</a></li>
+                    <li><a href="#">loreim2</a></li>
+                    <li><a href="#">loreim2</a></li>
+                </ul>
             </li>
             <li class="widget">
                 <div class="widget-inner">
@@ -158,6 +163,7 @@
                     <p class="widget-title">Документация и дизайн-проект</p>
                     <p class="widget-description">по фиксированной цене - 27000</p>
                 </div>
+                <a id="widget-href" href="/"></a>
             </li>
             <li class="widget">
                 <div class="widget-inner">

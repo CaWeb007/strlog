@@ -214,5 +214,9 @@
 		COptimus::setFooterTitle();
 		COptimus::showFooterBasket();
 		?>
+
+    <?/*if(COptimus::IsMainPage()):*/?><!--
+        ecosystem
+    --><?/*endif;*/?>
 	</body>
 </html>

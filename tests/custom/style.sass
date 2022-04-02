@@ -119,14 +119,27 @@ section.strlog-ecosystem .ecosystem-slider
   display: none
   .widget
     background-color: #ffffff
-    height: 200px
+    height: 170px
     padding: 10px
+    cursor: pointer
+    border-radius: 4px
+    text-decoration: none
+    box-sizing: border-box
+    width: 120px!important
     &:not(:last-child)
       margin-right: 10px
     .widget_toggle-icon-wrapper
       position: absolute
-      top: 16px
-      right: 12px
+      top: 27px
+      right: 5px
+      font-size: 23px
+      color: #000
+      transform: rotate(90deg)
+      display: inline-block
+      font-weight: bold
+      letter-spacing: 2px
+      line-height: 0px
+      opacity: .6
     .widget-inner
       text-align: left
       p.widget-title
@@ -174,6 +187,36 @@ section.strlog-ecosystem .ecosystem-popup
       min-width: 40px
       font-size: 14px
       font-weight: 500
+      align-items: center
+      justify-content: center
+      display: inline-flex
+      display: -moz-inline-box
+      position: relative
+      cursor: pointer
+      box-sizing: border-box
+      overflow: visible
+      transition: color .3s ease-in,border-color .3s ease-in,background-color .3s ease-in
+      background-color: transparent
+      border: none
+      text-decoration: none
+      outline: none
+      -webkit-backface-visibility: hidden
+      backface-visibility: hidden
+      text-shadow: none
+      vertical-align: baseline
+      -webkit-user-select: initial
+      -moz-user-select: initial
+      -ms-user-select: initial
+      user-select: initial
+      i
+        color: rgba(0,0,0,.6)
+        vertical-align: top
+        font-size: 21px
+        transition: color .3s ease-in
+        &:before
+          text-decoration: none!important
+        &:hover
+          color: #000000
   .ecosystem-popup__body
     padding: 36px 14px 14px
     font-style: normal
@@ -193,6 +236,43 @@ section.strlog-ecosystem .ecosystem-popup
       li
         font-size: 14px
         line-height: 20px
+        margin: 0
+        padding-left: 0
+        a
+          font-weight: 400
+          letter-spacing: .15px
+          font-size: 14px
+          min-height: 40px
+          min-width: 40px
+          padding: 11px 16px
+          line-height: 18px
+          position: relative
+          cursor: pointer
+          box-sizing: border-box
+          display: flex
+          flex-direction: row
+          align-items: center
+          background-color: transparent
+          border: none
+          text-decoration: none
+          outline: none
+          -webkit-backface-visibility: hidden
+          backface-visibility: hidden
+          text-shadow: none
+          vertical-align: baseline
+          -webkit-user-select: initial
+          -moz-user-select: initial
+          -ms-user-select: initial
+          user-select: initial
+          color: #000
+          transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out
+          &:active, &:focus
+            outline: none
+            text-decoration: none
+          &:hover
+            background: #f7f8f9
+            color: #000
+            text-decoration: none
         &:before
           display: none
   .ecosystem-popup__arrow
