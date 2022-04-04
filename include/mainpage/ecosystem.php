@@ -213,6 +213,7 @@
     </div>
     <div class="ecosystem-popup" style="opacity: 0; display: none">
         <dev class="ecosystem-popup__header">
+            <div class="ecosystem-popup__title"></div>
             <button class="ecosystem-popup__close"><i class="fa fa-close"></i></button>
         </dev>
         <div class="ecosystem-popup__arrow"></div>

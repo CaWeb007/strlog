@@ -165,12 +165,14 @@ section.strlog-ecosystem .ecosystem-slider
       background-size: 78px
       background-position: 100% 100%
       background-image: url(design.png)
-section.strlog-ecosystem .ecosystem-popup
+.ecosystem-popup
   width: 320px
   z-index: 8900
   box-shadow: 0 16px 24px rgba(68,92,130,.14), 0 6px 30px rgba(68,92,130,.12), 0 8px 10px rgba(68,92,130,.20)
   background: #fff
   border-radius: 2px
+  position: absolute
+  transition: opacity .5s
   .ecosystem-popup__header
     min-height: 48px
     display: flex
@@ -181,6 +183,8 @@ section.strlog-ecosystem .ecosystem-popup
     right: 0
     padding: 0 4px 0 24px
     z-index: 1
+    .ecosystem-popup__title
+      display: none
     button
       height: 40px
       line-height: 40px
@@ -295,17 +299,26 @@ section.strlog-ecosystem .ecosystem-popup
       right: -8px
       margin-top: -8px
       border-width: 8px 0 8px 8px
+  &.mobile-view
+    position: fixed
+    width: 80%
+    height: 100%
+    .ecosystem-popup__header
+      width: 100%
+      justify-content: space-between
+      background-color: #00adee
+      padding: 0px
+      .ecosystem-popup__title
+        display: block
+        color: #000000
+        padding-left: 20px
+        font-weight: 500
+        font-size: 15px
 section.strlog-ecosystem
   position: relative
   .widget
     #widget-submenu, #widget-href
       display: none
-  .ecosystem-popup
-    position: absolute
-    transition: opacity .5s
-    #widget-submenu
-      display: block
-
 @media (max-width: 640px)
   section.strlog-ecosystem .ecosystem-tiles
     display: none

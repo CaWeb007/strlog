@@ -163,13 +163,15 @@ section.strlog-ecosystem .ecosystem-slider {
       background-position: 100% 100%;
       background-image: url(design.png); }
 
-section.strlog-ecosystem .ecosystem-popup {
+.ecosystem-popup {
   width: 320px;
   z-index: 8900;
   box-shadow: 0 16px 24px rgba(68, 92, 130, 0.14), 0 6px 30px rgba(68, 92, 130, 0.12), 0 8px 10px rgba(68, 92, 130, 0.2);
   background: #fff;
-  border-radius: 2px; }
-  section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__header {
+  border-radius: 2px;
+  position: absolute;
+  transition: opacity 0.5s; }
+  .ecosystem-popup .ecosystem-popup__header {
     min-height: 48px;
     display: flex;
     justify-content: flex-end;
@@ -179,7 +181,9 @@ section.strlog-ecosystem .ecosystem-popup {
     right: 0;
     padding: 0 4px 0 24px;
     z-index: 1; }
-    section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__header button {
+    .ecosystem-popup .ecosystem-popup__header .ecosystem-popup__title {
+      display: none; }
+    .ecosystem-popup .ecosystem-popup__header button {
       height: 40px;
       line-height: 40px;
       min-width: 40px;
@@ -206,16 +210,16 @@ section.strlog-ecosystem .ecosystem-popup {
       -moz-user-select: initial;
       -ms-user-select: initial;
       user-select: initial; }
-      section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__header button i {
+      .ecosystem-popup .ecosystem-popup__header button i {
         color: rgba(0, 0, 0, 0.6);
         vertical-align: top;
         font-size: 21px;
         transition: color 0.3s ease-in; }
-        section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__header button i:before {
+        .ecosystem-popup .ecosystem-popup__header button i:before {
           text-decoration: none !important; }
-        section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__header button i:hover {
+        .ecosystem-popup .ecosystem-popup__header button i:hover {
           color: #000000; }
-  section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body {
+  .ecosystem-popup .ecosystem-popup__body {
     padding: 36px 14px 14px;
     font-style: normal;
     font-weight: 400;
@@ -226,17 +230,17 @@ section.strlog-ecosystem .ecosystem-popup {
     background: #fff;
     border-radius: 2px;
     height: auto; }
-    section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul {
+    .ecosystem-popup .ecosystem-popup__body ul {
       padding: 12px 0;
       display: block;
       cursor: default;
       list-style: none; }
-      section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul li {
+      .ecosystem-popup .ecosystem-popup__body ul li {
         font-size: 14px;
         line-height: 20px;
         margin: 0;
         padding-left: 0; }
-        section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul li a {
+        .ecosystem-popup .ecosystem-popup__body ul li a {
           font-weight: 400;
           letter-spacing: 0.15px;
           font-size: 14px;
@@ -264,43 +268,53 @@ section.strlog-ecosystem .ecosystem-popup {
           user-select: initial;
           color: #000;
           transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out; }
-          section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul li a:active, section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul li a:focus {
+          .ecosystem-popup .ecosystem-popup__body ul li a:active, .ecosystem-popup .ecosystem-popup__body ul li a:focus {
             outline: none;
             text-decoration: none; }
-          section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul li a:hover {
+          .ecosystem-popup .ecosystem-popup__body ul li a:hover {
             background: #f7f8f9;
             color: #000;
             text-decoration: none; }
-        section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__body ul li:before {
+        .ecosystem-popup .ecosystem-popup__body ul li:before {
           display: none; }
-  section.strlog-ecosystem .ecosystem-popup .ecosystem-popup__arrow {
+  .ecosystem-popup .ecosystem-popup__arrow {
     position: absolute;
     width: 0;
     height: 0;
     border-color: transparent;
     border-style: solid; }
-  section.strlog-ecosystem .ecosystem-popup.popup_widget_left .ecosystem-popup__arrow {
+  .ecosystem-popup.popup_widget_left .ecosystem-popup__arrow {
     border-right-color: #fff;
     top: 50%;
     left: -8px;
     margin-top: -8px;
     border-width: 8px 8px 8px 0; }
-  section.strlog-ecosystem .ecosystem-popup.popup_widget_right .ecosystem-popup__arrow {
+  .ecosystem-popup.popup_widget_right .ecosystem-popup__arrow {
     border-left-color: #fff;
     top: 50%;
     right: -8px;
     margin-top: -8px;
     border-width: 8px 0 8px 8px; }
+  .ecosystem-popup.mobile-view {
+    position: fixed;
+    width: 80%;
+    height: 100%; }
+    .ecosystem-popup.mobile-view .ecosystem-popup__header {
+      width: 100%;
+      justify-content: space-between;
+      background-color: #00adee;
+      padding: 0px; }
+      .ecosystem-popup.mobile-view .ecosystem-popup__header .ecosystem-popup__title {
+        display: block;
+        color: #000000;
+        padding-left: 20px;
+        font-weight: 500;
+        font-size: 15px; }
 
 section.strlog-ecosystem {
   position: relative; }
   section.strlog-ecosystem .widget #widget-submenu, section.strlog-ecosystem .widget #widget-href {
     display: none; }
-  section.strlog-ecosystem .ecosystem-popup {
-    position: absolute;
-    transition: opacity 0.5s; }
-    section.strlog-ecosystem .ecosystem-popup #widget-submenu {
-      display: block; }
 
 @media (max-width: 640px) {
   section.strlog-ecosystem .ecosystem-tiles {
