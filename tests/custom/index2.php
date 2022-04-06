@@ -4,11 +4,11 @@ $APPLICATION->SetTitle("custom");
 //$path = \Bitrix\Main\Application::getDocumentRoot().'/tests/custom/';
 $path = '/tests/custom/';
 $asset = \Bitrix\Main\Page\Asset::getInstance();
-//$asset->addJs($path.'script.js');
+$asset->addJs($path.'script.js');
 //$asset->addJs('/local/templates/aspro_optimus/js/jquery-ui.min.js');
-//$asset->addJs('/tests/custom/position.min.js');
+$asset->addJs('/tests/custom/position.min.js');
 
-//$asset->addCss($path.'style.css');
+$asset->addCss($path.'style.css');
 ?>
 <?/*$APPLICATION->IncludeComponent(
 	"caweb:custom.elements",
@@ -16,7 +16,7 @@ $asset = \Bitrix\Main\Page\Asset::getInstance();
 	array(),
 	false
 );*/?>
-<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
 	"PATH" => SITE_DIR."include/mainpage/ecosystem.php",
 	"AREA_FILE_SHOW" => "file",
@@ -28,14 +28,14 @@ $asset = \Bitrix\Main\Page\Asset::getInstance();
 	array(
 		"ACTIVE_COMPONENT" => "Y"
 	)
-);*/?>
-<? $APPLICATION->IncludeComponent(
+);?>
+<?/* $APPLICATION->IncludeComponent(
 	"bitrix:news.list", 
 	"ecosystem", 
 	array(
 		"COMPONENT_TEMPLATE" => "ecosystem",
-		"IBLOCK_TYPE" => "aspro_optimus_content",
-		"IBLOCK_ID" => "36",
+		"IBLOCK_TYPE" => "-",
+		"IBLOCK_ID" => "",
 		"NEWS_COUNT" => "8",
 		"SORT_BY1" => "ID",
 		"SORT_ORDER1" => "ASC",
@@ -50,10 +50,8 @@ $asset = \Bitrix\Main\Page\Asset::getInstance();
 			4 => "",
 		),
 		"PROPERTY_CODE" => array(
-			0 => "SUB_MENU",
-			1 => "LINK",
-			2 => "ICON",
-			3 => "",
+			0 => "",
+			1 => "",
 		),
 		"CHECK_DATES" => "Y",
 		"DETAIL_URL" => "",
@@ -97,5 +95,5 @@ $asset = \Bitrix\Main\Page\Asset::getInstance();
 	array(
 		"HIDE_ICONS" => "N"
 	)
-);?>
+);*/?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

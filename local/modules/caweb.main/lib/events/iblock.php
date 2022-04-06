@@ -104,4 +104,19 @@ class Iblock{
         $res = IblockTable::getRow(array('filter' => array('ID' => self::CATALOG_IBLOCK), 'select' => array('ID', 'PROPERTY_INDEX')));
         var_dump($res);
     }
+    public static function ecosystemFoolChecker(&$arParams){
+        $iblockId = (int)$arParams['IBLOCK_ID'];
+        if ($iblockId !== 36) return $arParams;
+        global $APPLICATION;
+        $APPLICATION->throwException("Там вообще то некуда девятый ставить");
+        return false;
+    }
+    public static function ecosystemFoolChecker2($ID){
+        $ids = array(43644, 43645, 43646, 43647, 43648, 43649, 43650, 43651);
+        if (in_array($ID, $ids)){
+            global $APPLICATION;
+            $APPLICATION->throwException("да ну нафиг, некрасиво будет");
+            return false;
+        }
+    }
 }

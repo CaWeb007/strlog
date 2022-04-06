@@ -29,6 +29,20 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	)
 );?>
 
+<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+	"COMPONENT_TEMPLATE" => ".default",
+	"PATH" => SITE_DIR."include/mainpage/ecosystem.php",
+	"AREA_FILE_SHOW" => "file",
+	"AREA_FILE_SUFFIX" => "",
+	"AREA_FILE_RECURSIVE" => "Y",
+	"EDIT_TEMPLATE" => "standard.php"
+),
+	false,
+	array(
+		"ACTIVE_COMPONENT" => "Y"
+	)
+);?>
+
 <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
 		"COMPONENT_TEMPLATE" => ".default",

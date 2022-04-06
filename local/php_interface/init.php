@@ -27,6 +27,10 @@ EventManager::getInstance()->addEventHandler('sale', 'OnCondSaleActionsControlBu
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'setLinoMeasure'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'setLinoMeasure'));
 /**end*/
+/**start не добавлять и не удалять элемент в экосистему*/
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'ecosystemFoolChecker'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementDelete', array('Caweb\Main\Events\Iblock', 'ecosystemFoolChecker2'));
+/**end*/
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockSectionUpdate', array('Caweb\Main\Events\Iblock', 'doNotDeactivate'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockUpdate', array('\Caweb\Main\Events\Iblock', 'doNotUseFacet'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterSetUserGroup', array('Caweb\Main\Events\Main', 'OnAfterSetUserGroup'));
