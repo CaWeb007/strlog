@@ -1128,8 +1128,8 @@ body .flexslider li, body .flex-direction-nav li{padding:0px;}
 
 /*Start page teasers block*/
 .tizers_block *{line-height:18px;}
-.tizers_block{font-size:0px;margin:0px -10px 0px;text-align:center;}
-.tizers_block .item{display:inline-block;vertical-align:middle;font-size:0px;width:25%;color:#000000;box-sizing:border-box;padding:0px 10px 0px; -moz-transition:all 0.1s ease;-o-transition:all 0.1s ease;-ms-transition:all 0.1s ease;transition:all 0.1s ease;margin:0px 0px 26px;white-space:nowrap;}
+.tizers_block{font-size:0px;margin:20px -10px 5px;text-align:center;}
+.tizers_block .item{display:inline-block;vertical-align:middle;font-size:0px;width:25%;color:#000000;box-sizing:border-box;padding:0px 10px 0px; -moz-transition:all 0.1s ease;-o-transition:all 0.1s ease;-ms-transition:all 0.1s ease;transition:all 0.1s ease;margin:0;white-space:nowrap;}
 .tizers_block .item .img, .tizers_block .item .title{font-size:13px;display:inline-block;vertical-align:middle;color:#555555;}
 .tizers_block .item .img{max-width:60px;margin:0px 20px 0px 0px;}
 .tizers_block .item .title{width:60%;text-align:left;margin:-6px 0px 0px;  white-space:normal;}

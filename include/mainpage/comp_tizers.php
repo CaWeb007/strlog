@@ -1,5 +1,7 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
-<?$APPLICATION->IncludeComponent("bitrix:news.list", "optimus", array(
+<?
+if ($USER->IsAdmin())
+    $APPLICATION->IncludeComponent("bitrix:news.list", "optimus", array(
 	"IBLOCK_TYPE" => "aspro_optimus_content",
 		"IBLOCK_ID" => "4",
 		"NEWS_COUNT" => "4",
@@ -56,6 +58,6 @@
 	),
 	false,
 	array(
-	"ACTIVE_COMPONENT" => "N"
+	"ACTIVE_COMPONENT" => "Y"
 	)
 );?>
