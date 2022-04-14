@@ -25,7 +25,8 @@ section.strlog-ecosystem .ecosystem-tiles .ecosystem_row {
     border-radius: 4px;
     text-decoration: none;
     box-sizing: border-box;
-    margin: 6px; }
+    margin: 6px;
+    border: 1px solid #ddd; }
     section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-hover {
       transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
       section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-hover:hover:after {
@@ -44,7 +45,7 @@ section.strlog-ecosystem .ecosystem-tiles .ecosystem_row {
         opacity: 0; }
     section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-main {
       background-repeat: no-repeat;
-      background-size: 160px;
+      background-size: 270px;
       background-position: 100% 100%;
       height: 384px; }
     section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-full {
@@ -90,7 +91,8 @@ section.strlog-ecosystem .ecosystem-tiles .ecosystem_row {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      grid-area: icon; }
+      grid-area: icon;
+      margin-bottom: 5px; }
       section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget_icon i {
         width: 100%;
         height: 100%; }
