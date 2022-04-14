@@ -43,6 +43,12 @@ $this->setFrameMode(true);
                     $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']); // выберет потомков без учета активности
                     $arSect = \COptimusCache::CIBlockSection_GetList(array('left_margin' => 'asc'),$arFilter);
                     foreach ($arSect as $item) $sectionsNot[] = (int)$item['ID'];
+                    // product for крепеж.... unset
+                    $sectionsNot[] = 1895;
+                    $arParentSection = CIBlockSection::GetByID(1895)->Fetch();
+                    $arFilter = array('IBLOCK_ID' => $arParentSection['IBLOCK_ID'],'>LEFT_MARGIN' => $arParentSection['LEFT_MARGIN'],'<RIGHT_MARGIN' => $arParentSection['RIGHT_MARGIN'],'>DEPTH_LEVEL' => $arParentSection['DEPTH_LEVEL']); // выберет потомков без учета активности
+                    $arSect = \COptimusCache::CIBlockSection_GetList(array('left_margin' => 'asc'),$arFilter);
+                    foreach ($arSect as $item) $sectionsNot[] = (int)$item['ID'];
 
                     $GLOBALS[$arParams['FILTER_NAME']]['!SECTION_ID'] = $sectionsNot;
                     $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_FLAG_VALUE'] = 'LIKVIDATION';
