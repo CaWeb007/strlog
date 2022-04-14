@@ -384,4 +384,22 @@ class MyLittleHelper {
             \CIBlockElement::SetPropertyValuesEx($elementId, 16, array($flagPropertyId => 1));
         }
     }
+
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::clearEmptyTopics();*/
+    public static function clearEmptyTopics(){
+        \Bitrix\Main\Loader::includeModule('forum');
+        $db = \CForumTopic::GetListEx(array(), array("FORUM_ID" => 1));
+        while ($ar = $db->GetNext())
+        {
+            if ((int)$ar['POSTS'] === 0) {
+                \CForumTopic::Delete($ar['ID']);
+                continue;
+            }
+            $messageCount = \CForumMessage::GetList(array(), array("TOPIC_ID" => $ar["ID"]), true);
+            if ($messageCount === 0)
+                \CForumTopic::Delete($ar['ID']);
+        }
+        return '\Caweb\Main\User\Exchange::clearEmptyTopics();';
+    }
+
 }
