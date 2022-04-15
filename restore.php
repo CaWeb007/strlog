@@ -415,7 +415,7 @@ $bCloudDownloadStep = $_REQUEST['cloud_download'];
 $Step = IntVal($_REQUEST["Step"]);
 
 $strErrMsg = '';
-if (!DEBUG && !$Step && $_SERVER['REQUEST_METHOD'] == 'GET')
+if (false)
 {
 	$this_script_name = basename(__FILE__);
 	$bx_host = 'www.1c-bitrix.ru';
@@ -489,7 +489,7 @@ if (!DEBUG)
 	}
 }
 
-if ($_REQUEST['LoadFileList'])
+if (false)
 {
 	$strLog = '';
 	if (LoadFile("https://www.1c-bitrix.ru/buy_tmp/backup.php?license=".md5(trim($_REQUEST['license_key']))."&lang=".LANG."&action=get_info", $file = $_SERVER['DOCUMENT_ROOT'].'/file_list.xml') && ($str = file_get_contents($file)))
@@ -542,7 +542,7 @@ elseif ($Step == 2 && !$bSelectDumpStep)
 		$arHeaders = array();
 
 	$source = $_REQUEST['source'];
-	if ($source == 'bitrixcloud' && !$_REQUEST['arc_down_url'])
+	if (false)
 	{
 		$strLog = '';
 		if (LoadFile('https://www.1c-bitrix.ru/buy_tmp/backup.php?license='.md5(trim($_REQUEST['license_key'])).'&lang='.LANG.'&action=read_file&file_name='.urlencode($_REQUEST['bitrixcloud_backup']).'&check_word='.CTar::getCheckword($_REQUEST['EncryptKey']), $file = $_SERVER['DOCUMENT_ROOT'].'/file_info.xml') && ($str = file_get_contents($file)))
