@@ -332,36 +332,16 @@
 									<?}?>
 									<?if(!$arItem["OFFERS"] || $arParams['TYPE_SKU'] !== 'TYPE_1'):?>
 										<div class="counter_wrapp w-front <?=($arItem["OFFERS"] && $arParams["TYPE_SKU"] == "TYPE_1" ? 'woffers' : '')?>">
-											<?if(1>2):?>
-											<?if(($arAddToBasketData["OPTIONS"]["USE_PRODUCT_QUANTITY_LIST"] && $arAddToBasketData["ACTION"] == "ADD") && $arItem["CAN_BUY"]):?>
-												<div class="counter_block" data-offers="<?=($arItem["OFFERS"] ? "Y" : "N");?>" data-item="<?=$arItem["ID"];?>">
-													<span class="minus" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['QUANTITY_DOWN']; ?>">-</span>
-													<input type="text" class="text" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['QUANTITY']; ?>" name="<? echo $arParams["PRODUCT_QUANTITY_VARIABLE"]; ?>" value="<?=$arAddToBasketData["MIN_QUANTITY_BUY"]?>" />
-													<span class="plus" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['QUANTITY_UP']; ?>" <?=($arAddToBasketData["MAX_QUANTITY_BUY"] ? "data-max='".$arAddToBasketData["MAX_QUANTITY_BUY"]."'" : "")?>>+</span>
-												</div>
-											<?endif;?>
-											<div id="<?=$arItemIDs["ALL_ITEM_IDS"]['BASKET_ACTIONS']; ?>" class="button_block <?=(($arAddToBasketData["ACTION"] == "ORDER"/*&& !$arItem["CAN_BUY"]*/)  || !$arItem["CAN_BUY"] || !$arAddToBasketData["OPTIONS"]["USE_PRODUCT_QUANTITY_LIST"] || $arAddToBasketData["ACTION"] == "SUBSCRIBE" ? "wide" : "");?>">
+											<div id="<?=$arItemIDs["ALL_ITEM_IDS"]['BASKET_ACTIONS']; ?>" class="button_block main-page-showcase <?=(($arAddToBasketData["ACTION"] == "ORDER"/*&& !$arItem["CAN_BUY"]*/)  || !$arItem["CAN_BUY"] || !$arAddToBasketData["OPTIONS"]["USE_PRODUCT_QUANTITY_LIST"] || $arAddToBasketData["ACTION"] == "SUBSCRIBE" ? "wide" : "");?>">
 												<!--noindex-->
-													<?=$arAddToBasketData["HTML"]?>
+                                                <div class="showmore">
+                                                    <a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="button basket read_more"><?=GetMessage("CATALOG_READ_MORE");?></a>
+                                                </div>
+                                                <div class="basket">
+                                                    <?=$arAddToBasketData["HTML"]?>
+                                                </div>
 												<!--/noindex-->
 											</div>
-											<?endif;?>
-											<div class="button_block">
-												<!--noindex-->
-													<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="button basket read_more"><?=GetMessage("CATALOG_READ_MORE");?></a>
-												<!--/noindex-->
-											</div>
-											<?if($arAddToBasketData["ACTION"] !== "NOTHING"):?>
-											<?if($arAddToBasketData["ACTION"] == "ADD" && $arItem["CAN_BUY"] && $arParams["SHOW_ONE_CLICK_BUY"]!="N"):?>
-
-												<div class="wrapp_one_click">
-													<span class="transparent type_block button transition_bg one_click" data-item="<?=$arItem["ID"]?>" data-iblockID="<?=$arParams["IBLOCK_ID"]?>" data-quantity="<?=$arAddToBasketData["MIN_QUANTITY_BUY"];?>" onclick="oneClickBuy('<?=$arItem["ID"]?>', '<?=$arParams["IBLOCK_ID"]?>', this)">
-														<span><?=GetMessage('ONE_CLICK_BUY')?></span>
-													</span>
-												</div>
-											<br/>
-											<?endif;?>
-										<?endif;?>
 										</div>
 										<?
 										if(isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX']) // USE_PRICE_COUNT
