@@ -15,6 +15,9 @@ if(!empty( $_REQUEST["change_password"])){
 		<?$sLoginEqual = COption::GetOptionString('aspro.optimus', 'LOGIN_EQUAL_EMAIL', 'Y');?>
 
 					<div class="form-wr form-block">
+                        <?if($arResult['SHOW_ERRORS'] == 'Y'):?>
+                            <?ShowMessage($arResult['ERROR_MESSAGE']);?>
+                        <?endif;?>
 						<form id="avtorization-form-page" name="system_auth_form<?=$arResult["RND"]?>" method="post" target="_top" action="<?=SITE_DIR?>auth/<?=!empty( $_REQUEST["backurl"] ) ? '?backurl='.$_REQUEST["backurl"] : ''?>">
 							<?if($arResult["BACKURL"] <> ''):?><input type="hidden" name="backurl" value="<?=$arResult["BACKURL"]?>" /><?endif?>
 							<?foreach($arResult["POST"] as $key => $value):?>
@@ -63,9 +66,6 @@ if(!empty( $_REQUEST["change_password"])){
 						<div class="one_click_buy_result show" id="one_click_buy_result">
 							<div class="one_click_buy_result_fail">
 							<br>
-							<?if($arResult['SHOW_ERRORS'] == 'Y'):?>
-								<?ShowMessage($arResult['ERROR_MESSAGE']);?>
-							<?endif;?>
 							</div>
 						</div>
 					</div>
