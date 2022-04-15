@@ -1217,7 +1217,7 @@ body .flexslider li, body .flex-direction-nav li{padding:0px;}
 .best_block.tab_slider_wrapp.linked ul.tabs_content .top_wrapper{margin-top:0px;}
 
 /*special front start*/
-.best_block.tab_slider_wrapp ul.tabs_content{margin:16px -6px 0px;padding: 0px;}
+.best_block.tab_slider_wrapp ul.tabs_content{margin:16px 0px 0px;padding: 0px;}
 .best_block.tab_slider_wrapp ul.tabs_content li.tab{margin:0px;padding:0px;position:static;overflow: visible !important;}
 .best_block.tab_slider_wrapp ul.tabs_content li.tab > ul{margin:0px;}
 .best_block.tab_slider_wrapp ul.tabs_content li.tab * {box-sizing:border-box;}
