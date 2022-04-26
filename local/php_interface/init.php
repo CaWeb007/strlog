@@ -17,8 +17,8 @@ EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnBeforeUserAcco
 EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnBeforeUserAccountUpdate',array('Caweb\Main\Events\Sale', 'CheckDoExchange'));
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'priceFromPaySystemOrderEntity'));
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved',array('Caweb\Main\Events\Sale', 'OnSaleOrderBeforeSaved'));
-EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderSaved'));
-EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderBeforeSaved'));
+//EventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderSaved'));
+//ventManager::getInstance()->addEventHandler('sale', 'OnSaleOrderBeforeSaved', array('Caweb\Main\Sale\DiscountManager', 'OnSaleOrderBeforeSaved'));
 EventManager::getInstance()->addEventHandler('catalog', 'Bitrix\Catalog\Model\Product::OnBeforeUpdate',array('Caweb\Main\Events\Catalog', 'OnBeforeProductUpdate'));
 EventManager::getInstance()->addEventHandler('sale', 'OnCondSaleActionsControlBuildList', array('Caweb\Main\Sale\SaleActionGiftCtrl', 'GetControlDescr'));
 //EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'SortSku'));
@@ -45,6 +45,13 @@ EventManager::getInstance()->addEventHandlerCompatible('forum', 'onBeforeMessage
 EventManager::getInstance()->addEventHandlerCompatible('forum', 'onBeforeMessageUpdate', array('Caweb\Main\Events\Forum', 'checkSpam'));
 
 EventManager::getInstance()->addEventHandlerCompatible('forum', 'onAfterMessageAdd', array('Caweb\Main\Events\Forum', 'sendMessage'));
+
+EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnCondSaleControlBuildList', array('\Caweb\Main\Sale\Action\CSaleActionCtrlFirstOrder', 'GetControlDescr'));
+EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnCondSaleControlBuildList', array('\Caweb\Main\Sale\Action\CSaleActionCtrlOneUse', 'GetControlDescr'));
+EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnCondSaleActionsControlBuildList', array('\Caweb\Main\Sale\Action\CSaleActionDiscountFromPrice', 'GetControlDescr'));
+
+EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Discount::OnBeforeUpdate',array('\Caweb\Main\Sale\Action\Tools', 'DiscountCondController'));
+
 
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){

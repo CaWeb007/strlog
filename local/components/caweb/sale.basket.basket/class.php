@@ -15,6 +15,7 @@ use Bitrix\Main,
 	Bitrix\Iblock,
 	Bitrix\Catalog;
 use Bitrix\Catalog\PriceTable;
+use Caweb\Main\Sale\Action\Tools;
 use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\DiscountManager;
 
@@ -791,7 +792,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$this->modifyResultAfterSave($result);
 
 		if (
-		    DiscountManager::changeDiscount() ||
 			!empty($result['APPLIED_DISCOUNT_IDS'])
 			|| implode(',', $result['APPLIED_DISCOUNT_IDS']) !== $this->request->get('lastAppliedDiscounts')
 			|| $this->request->get('fullRecalculation') === 'Y'
@@ -915,7 +915,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 		if ($this->includeModules())
 		{
 			DiscountCouponsManager::init();
-			DiscountManager::init();
 			$this->setFrameMode(false);
 
 			$this->action = $this->prepareAction();
@@ -1198,7 +1197,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$this->loadCatalogInfo();
 			$this->loadIblockProperties();
-            $this->cawebDiscountProcess();
 
 			if (self::includeCatalog())
 			{
@@ -2532,13 +2530,6 @@ class CBitrixBasketComponent extends CBitrixComponent
 		if ($this->hideCoupon != 'Y')
 		{
 			$coupons = DiscountCouponsManager::get(true, array(), true, true);
-            $customDiscount = DiscountManager::getDiscountInfo();
-            if (!empty($customDiscount)){
-                foreach ($customDiscount['COUPON_LIST'] as $customCoupon){
-                    if (array_key_exists($customCoupon['COUPON'], $coupons)) unset($coupons[$customCoupon['COUPON']]);
-                }
-                $result = $customDiscount;
-            }
 			if (!empty($coupons))
 			{
 				foreach ($coupons as &$coupon)
@@ -2576,7 +2567,11 @@ class CBitrixBasketComponent extends CBitrixComponent
 							? implode('<br>', $coupon['CHECK_CODE_TEXT'])
 							: $coupon['CHECK_CODE_TEXT'];
 					}
-
+                    if (!empty($customError = Tools::getCustomDiscountCouponInfo($coupon['DISCOUNT_ID']))){
+                        $coupon['JS_STATUS'] = $customError['JS_STATUS'];
+                        $coupon['JS_CHECK_CODE'] = $customError['JS_CHECK_CODE'];
+                        $customError[$coupon['DISCOUNT_ID']] = array();
+                    }
 					$result['COUPON_LIST'][] = $coupon;
 				}
 
@@ -3229,7 +3224,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 
 			foreach ($postList['delete_coupon'] as $coupon)
 			{
-				$couponChanged = DiscountManager::delete($coupon) || DiscountCouponsManager::delete($coupon) || $couponChanged;
+				$couponChanged = DiscountCouponsManager::delete($coupon) || $couponChanged;
 			}
 		}
 		else
@@ -3240,8 +3235,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 			{
 				if (!empty($coupon))
 				{
-				    if (!$couponChanged = DiscountManager:: add($coupon))
-					    $couponChanged = DiscountCouponsManager::add($coupon);
+					$couponChanged = DiscountCouponsManager::add($coupon);
 				}
 				else
 				{
@@ -3249,8 +3243,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 				}
 			}
 		}
-		if ($couponChanged['error'])
-            $this->addErrors($couponChanged['error'], 'discount');
+
 		return $couponChanged;
 	}
 

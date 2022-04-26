@@ -16,6 +16,7 @@ use Bitrix\Main,
 	Bitrix\Sale\DiscountCouponsManager,
 	Bitrix\Sale\Services\Company,
 	Bitrix\Sale\Location\GeoIp;
+use Caweb\Main\Sale\Action\Tools;
 use Caweb\Main\Sale\Bonus;
 use Caweb\Main\Sale\Helper;
 
@@ -4650,6 +4651,11 @@ class SaleOrderAjax extends \CBitrixComponent
 						: $oneCoupon['CHECK_CODE_TEXT'];
 				}
 
+                if (!empty($customError = Tools::getCustomDiscountCouponInfo($oneCoupon['DISCOUNT_ID']))){
+                    $oneCoupon['JS_STATUS'] = $customError['JS_STATUS'];
+                    $oneCoupon['JS_CHECK_CODE'] = $customError['JS_CHECK_CODE'];
+                    $customError[$oneCoupon['DISCOUNT_ID']] = array();
+                }
 				$result['COUPON_LIST'][] = $oneCoupon;
 			}
 

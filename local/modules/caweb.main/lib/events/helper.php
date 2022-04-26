@@ -1,12 +1,16 @@
 <?
 namespace Caweb\Main\Events;
 
+use Bitrix\Catalog\GroupTable;
 use Bitrix\Catalog\SubscribeTable;
+use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\BasketItem;
+use Bitrix\Sale\Internals\DiscountTable;
 use Bitrix\Sale\Order;
 use Bitrix\Sale\Payment;
 use Bitrix\Sale\PaymentCollection;
+use Bitrix\Sale\PropertyValue;
 use Caweb\Main\Catalog\Helper as CatalogHelper;
 
 class Helper{
@@ -87,5 +91,48 @@ class Helper{
         }catch (\Exception $exception){
             return;
         }
+    }
+    public static function updateProperty(Order $order) {
+        $propertyCollection = $order->getPropertyCollection();
+        $couponProperty = null;
+        $couponPriceXMLIdProperty = null;
+        if ((int)$order->getPersonTypeId() === 1){
+            $couponProperty = $propertyCollection->getItemByOrderPropertyId(39);
+            $couponPriceXMLIdProperty = $propertyCollection->getItemByOrderPropertyId(41);
+        }
+        elseif ((int)$order->getPersonTypeId() === 2){
+            $couponProperty = $propertyCollection->getItemByOrderPropertyId(40);
+            $couponPriceXMLIdProperty = $propertyCollection->getItemByOrderPropertyId(42);
+        }
+        if ($couponProperty instanceof PropertyValue){
+            if (empty($couponProperty->getValue())){
+                $couponName = '';
+                $couponPriceXMLId = null;
+                $discountData = $order->getDiscount()->getApplyResult();
+                foreach ($discountData['COUPON_LIST'] as $coupon){
+                    if (!empty($couponName)) $couponName .= ', ';
+                    if ($coupon['APPLY'] === 'Y') {
+                        $couponName .= $coupon['COUPON'];
+                        $couponPriceXMLId = self::getDiscountPriceXml((int)$coupon['DATA']['DISCOUNT_ID']);
+                    }
+                }
+                try {
+                    if (!empty($couponName)) $couponProperty->setValue($couponName);
+                    if (!empty($couponPriceXMLId)) $couponPriceXMLIdProperty->setValue($couponPriceXMLId);
+                }catch (\Exception $e){}
+            }
+        }
+        return $order;
+    }
+    protected static function getDiscountPriceXml($discountId = null){
+        if (empty($discountId)) return false;
+        $application = DiscountTable::getRowById($discountId)['APPLICATION'];
+        $callPos = strpos($application, 'setPriceGroupDiscount');
+        if ($callPos === false) return false;
+        $match = (int)substr($application, $callPos + 33, 2);
+        if (empty($match)) return false;
+        Loader::includeModule('catalog');
+        $result = GroupTable::getRowById($match);
+        return $result['XML_ID'];
     }
 }

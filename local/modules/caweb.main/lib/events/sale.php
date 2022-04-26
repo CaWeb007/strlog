@@ -34,6 +34,7 @@ class Sale{
         /** @var \Bitrix\Sale\Order $order */
         $parameters = $event->getParameters();
         $order = $parameters['ENTITY'];
+        $order = \Caweb\Main\Events\Helper::updateProperty($order);
         $event->addResult(new Main\EventResult(
             Main\EventResult::SUCCESS,
             \Caweb\Main\Sale\Helper::updateOrderProperties($order)
