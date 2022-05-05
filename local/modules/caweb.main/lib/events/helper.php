@@ -17,7 +17,7 @@ class Helper{
     public static $REFRESH_PRICES = false;
     public static $PRICE_CHANGED = false;
     const KP_PRICE_ID = 11;
-    const PAYSYSTEMS_NEED_CHANGE_PRICE = array(13,14,15);//todo КОСТЫЛЬ КОНЕЧНО, но не забыть установить
+    const PAYSYSTEMS_NEED_CHANGE_PRICE = array(13,14,15,16);//todo КОСТЫЛЬ КОНЕЧНО, но не забыть установить
     public static function notUniqueLegalUser($inn, $kpp){
         $params['filter'] = array('UF_INN' => $inn, 'UF_KPP' => $kpp);
         return (!empty(UserTable::getRow($params)));

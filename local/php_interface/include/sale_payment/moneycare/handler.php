@@ -75,7 +75,7 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\ICh
         return $result;
     }
     private function getCreateUrl($psStatus = ''){
-        if ($psStatus === 'A') return $this->getCreateUrlFromDb();
+        //if ($psStatus === 'A') return $this->getCreateUrlFromDb();
         $data = $this->getCreateData();
         $response = $this->createPost($data);
         if (empty($response)){
@@ -102,6 +102,9 @@ class MoneyCareHandler extends PaySystem\ServiceHandler implements PaySystem\ICh
         return $obj->getUri();
     }
     private function getCreateData(){
+        $installment = $this->getBusinessValue($this->getPayment(), 'WITHOUT_OVERPAY');
+        $data['creditTypes'] = ['Classic'];
+        if ($installment === 'Y') $data['creditTypes'] = ['installment'];
         $data['order_id'] = (string)$this->getOrder()->getId();
         $data['pointId'] = $this->getBusinessValue($this->getPayment(), 'POINT_ID');
         $data['generateForm'] = true;

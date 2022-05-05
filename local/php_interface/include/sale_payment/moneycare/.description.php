@@ -19,5 +19,27 @@ $data = array(
             'NAME' => Loc::getMessage('MONEYCARE_POINT_ID'),
             'SORT' => 100
         ),
+        'WITHOUT_OVERPAY' => array(
+            'NAME' => Loc::getMessage('MONEYCARE_WITHOUT_OVERPAY'),
+            'SORT' => 100,
+            "INPUT" => array(
+                'TYPE' => 'Y/N'
+            ),
+            'DEFAULT' => array(
+                "PROVIDER_VALUE" => "N",
+                "PROVIDER_KEY" => "INPUT"
+            )
+        ),
+        'TEST_MODE' => array(
+            'NAME' => Loc::getMessage('MONEYCARE_TEST_MODE'),
+            'SORT' => 100,
+            "INPUT" => array(
+                'TYPE' => 'Y/N'
+            ),
+            'DEFAULT' => array(
+                "PROVIDER_VALUE" => "N",
+                "PROVIDER_KEY" => "INPUT"
+            )
+        )
     )
 );
