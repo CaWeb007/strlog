@@ -71,8 +71,8 @@ class Sale{
             if (!$isSlice) continue;
             $balance = (float)\Bitrix\Catalog\ProductTable::getRowById($itemId)['QUANTITY'];
             $maxBuyQuantity = $balance - $minBalance;
-            if ($item->getQuantity() > $maxBuyQuantity){
-                $errorText = Loc::getMessage('CES_MAX_QUANTITY_ERROR', array('#MAX_QUANTITY_BUY#' => $maxBuyQuantity));
+            if (($item->getQuantity() > $maxBuyQuantity) && ($item->getQuantity() != $balance)){
+                $errorText = Loc::getMessage('CES_MAX_QUANTITY_ERROR', array('#MAX_QUANTITY_BUY#' => $maxBuyQuantity, '#BALANCE#' => $balance));
                 if (!$isAddAction){
                     $item->setFieldsNoDemand(array('QUANTITY' => $maxBuyQuantity));
                     $item->save();
