@@ -14,3 +14,4 @@
 /bitrix/modules/aspro.optimus/*
 !/bitrix/modules/aspro.optimus/lib
 !/bitrix/modules/aspro.optimus/classes
+!/bitrix/modules/abricos.avitoautoload
