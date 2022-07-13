@@ -3,10 +3,10 @@
 	"products_slider", 
 	array(
 		"IBLOCK_TYPE" => "1c_catalog",
-		"IBLOCK_ID" => "16",
+		"IBLOCK_ID" => $arParams["LINK_IBLOCK_ID"],
 		"ELEMENT_SORT_FIELD" => "sort",
 		"ELEMENT_SORT_ORDER" => "asc",
-		"ELEMENT_COUNT" => "50",
+		"ELEMENT_COUNT" => "200",
 		"LINE_ELEMENT_COUNT" => "",
 		"PROPERTY_CODE" => array(
 			0 => "",
@@ -25,7 +25,12 @@
 		"CACHE_TIME" => "3600000",
 		"CACHE_GROUPS" => "N",
 		"DISPLAY_COMPARE" => "Y",
-		"PRICE_CODE" => array('КП','СО','ТО','С'),
+		"PRICE_CODE" => array(
+			0 => "ТО",
+			1 => "СО",
+			2 => "КП",
+			3 => "С",
+		),
 		"USE_PRICE_COUNT" => "N",
 		"SHOW_PRICE_COUNT" => "1",
 		"PRICE_VAT_INCLUDE" => "Y",
@@ -58,8 +63,7 @@
 		"SHOW_MEASURE" => "Y",
 		"ADD_PROPERTIES_TO_BASKET" => "Y",
 		"PARTIAL_PRODUCT_PROPERTIES" => "N",
-		"OFFERS_CART_PROPERTIES" => array(
-		),
+		"OFFERS_CART_PROPERTIES" => "",
 		"COMPARE_PATH" => "",
 		"SHOW_DISCOUNT_PERCENT" => "Y",
 		"SHOW_OLD_PRICE" => "Y",

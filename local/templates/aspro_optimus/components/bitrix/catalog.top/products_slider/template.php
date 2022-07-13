@@ -98,28 +98,28 @@ $arNotify = unserialize($notifyOption);
 								<?endif;?>
 								<?=$arQuantityData["HTML"];?>
 								<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], true);?>
-								<div class="cost prices clearfix">
-									<?if($arItem["OFFERS"]):?>
-										<?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
-									<?else:?>
-										<?										
-										if(isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX']) // USE_PRICE_COUNT
-										{?>
-											<?if($arItem['ITEM_PRICE_MODE'] == 'Q' && count($arItem['PRICE_MATRIX']['ROWS']) > 1):?>
-												<?=COptimus::showPriceRangeTop($arItem, $arParams, GetMessage("CATALOG_ECONOMY"));?>
-											<?endif;?>
-											<?=COptimus::showPriceMatrix($arItem, $arParams, $strMeasure, $arAddToBasketData);?>
-										<?	
-										}
-										elseif($arItem["PRICES"])
-										{?>
-											<?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
-										<?=showProductBonus($arItem);?>
-										<?}?>
-									<?endif;?>
-								</div>
-								
-								
+                                <?if (!$forOrder):?>
+                                    <div class="cost prices clearfix">
+                                        <?if($arItem["OFFERS"]):?>
+                                            <?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
+                                        <?else:?>
+                                            <?
+                                            if(isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX']) // USE_PRICE_COUNT
+                                            {?>
+                                                <?if($arItem['ITEM_PRICE_MODE'] == 'Q' && count($arItem['PRICE_MATRIX']['ROWS']) > 1):?>
+                                                    <?=COptimus::showPriceRangeTop($arItem, $arParams, GetMessage("CATALOG_ECONOMY"));?>
+                                                <?endif;?>
+                                                <?=COptimus::showPriceMatrix($arItem, $arParams, $strMeasure, $arAddToBasketData);?>
+                                            <?
+                                            }
+                                            elseif($arItem["PRICES"])
+                                            {?>
+                                                <?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
+                                            <?=showProductBonus($arItem);?>
+                                            <?}?>
+                                        <?endif;?>
+                                    </div>
+								<?endif;?>
 								<div class="buttons_block clearfix">
 									<?=$arAddToBasketData["HTML"]?>
 								</div>
