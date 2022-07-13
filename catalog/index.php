@@ -601,7 +601,7 @@ $APPLICATION->SetTitle("Каталог");
 		"PAGER_SHOW_ALWAYS" => "N",
 		"PAGER_TEMPLATE" => ".default",
 		"PAGER_TITLE" => "Товары",
-		"PAGE_ELEMENT_COUNT" => "20",
+		"PAGE_ELEMENT_COUNT" => "40",
 		"PARTIAL_PRODUCT_PROPERTIES" => "Y",
 		"PATH_TO_SMILE" => "/bitrix/images/forum/smile/",
 		"POST_FIRST_MESSAGE" => "N",
