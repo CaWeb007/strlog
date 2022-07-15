@@ -1,7 +1,13 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?$APPLICATION->SetTitle(GetMessage("CMP_TITLE"));?>
-
-
+<?
+if ($searchText = \Bitrix\Main\Application::getInstance()->getContext()->getRequest()->get('q')){
+    $searchText = \Caweb\Main\Tools::mb_ucfirst($searchText,  "UTF-8", true);
+    \Bitrix\Main\Localization\Loc::loadMessages(__FILE__);
+    $APPLICATION->SetPageProperty('title', $searchText);
+    $APPLICATION->SetPageProperty('description', \Bitrix\Main\Localization\Loc::getMessage('SEARCH_TITLE_DESCRIPTION_TEMPLATE', array('#DESC#' => $searchText)));
+}
+?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.search",
 	"main",
