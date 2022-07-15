@@ -140,14 +140,16 @@ if($arResult['ITEMS']){?>
 							</div>
 						<?endif;?>
 						<?=$arQuantityData["HTML"];?>
-						<div class="cost prices clearfix">
-							<?if($arItem["OFFERS"]):?>
-								<?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
-							<?elseif($arItem["PRICES"]):?>
-								<?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
-								<?=showProductBonus($arItem)?>
-							<?endif;?>
-						</div>
+                        <?if(!$forOrder):?>
+                            <div class="cost prices clearfix">
+                                <?if($arItem["OFFERS"]):?>
+                                    <?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
+                                <?elseif($arItem["PRICES"]):?>
+                                    <?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
+                                    <?=showProductBonus($arItem)?>
+                                <?endif;?>
+                            </div>
+                        <?endif;?>
 						<div class="buttons_block clearfix">
 							<?=$arAddToBasketData["HTML"]?>
 						</div>

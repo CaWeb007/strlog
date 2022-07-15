@@ -93,25 +93,27 @@ $arNotify = unserialize($notifyOption);
 			<?=$arQuantityData["HTML"];?>
 			<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], true);?>
 			<div class="cost prices clearfix">
-				<?if($arItem["OFFERS"]):?>
-					<?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
-					<?=showProductBonus($arItem)?>
-				<?else:?>
-					<?
-					if(isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX']) // USE_PRICE_COUNT
-					{?>
-						<?if($arItem['ITEM_PRICE_MODE'] == 'Q' && count($arItem['PRICE_MATRIX']['ROWS']) > 1):?>
-							<?=COptimus::showPriceRangeTop($arItem, $arParams, GetMessage("CATALOG_ECONOMY"));?>
-						<?endif;?>
-						<?=COptimus::showPriceMatrix($arItem, $arParams, $strMeasure, $arAddToBasketData);?>
-					<?	
-					}
-					elseif($arItem["PRICES"])
-					{?>
-						<?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
-					<?=showProductBonus($arItem)?>
-					<?}?>
-				<?endif;?>
+                <?if (!$forOrder):?>
+                    <?if($arItem["OFFERS"]):?>
+                        <?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>
+                        <?=showProductBonus($arItem)?>
+                    <?else:?>
+                        <?
+                        if(isset($arItem['PRICE_MATRIX']) && $arItem['PRICE_MATRIX']) // USE_PRICE_COUNT
+                        {?>
+                            <?if($arItem['ITEM_PRICE_MODE'] == 'Q' && count($arItem['PRICE_MATRIX']['ROWS']) > 1):?>
+                                <?=COptimus::showPriceRangeTop($arItem, $arParams, GetMessage("CATALOG_ECONOMY"));?>
+                            <?endif;?>
+                            <?=COptimus::showPriceMatrix($arItem, $arParams, $strMeasure, $arAddToBasketData);?>
+                        <?
+                        }
+                        elseif($arItem["PRICES"])
+                        {?>
+                            <?\Aspro\Functions\CAsproItem::showItemPrices($arParams, $arItem["PRICES"], $strMeasure, $min_price_id);?>
+                        <?=showProductBonus($arItem)?>
+                        <?}?>
+                    <?endif;?>
+                <?endif?>
 			</div>
 			
 			<div class="buttons_block clearfix">

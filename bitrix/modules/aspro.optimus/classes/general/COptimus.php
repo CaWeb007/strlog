@@ -1079,6 +1079,7 @@ class COptimus{
 
 	function GetQuantityArray($totalCount, $arItemIDs = array(), $useStoreClick="N", $for_order = false){
 		static $arQuantityOptions, $arQuantityRights;
+		if ($for_order) $totalCount = 0;
 		if($arQuantityOptions === NULL){
 			$arQuantityOptions = array(
 				"USE_WORD_EXPRESSION" => COption::GetOptionString("aspro.optimus", "USE_WORD_EXPRESSION", "Y", SITE_ID),
