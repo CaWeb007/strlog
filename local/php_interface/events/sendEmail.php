@@ -19,6 +19,10 @@ function OnOrderNewSendEmailHandler($newOrderId, &$eventName, &$arFields)
 				$arFields['BCC'] = 'to@strlog.ru';
 				break;
 			}
+            if((int)$gr === 14) {
+                $arFields['BCC'] = 'corp@strlog.ru';
+                break;
+            }
 		}
 		
 		$arOrder = CSaleOrder::GetByID($newOrderId);
