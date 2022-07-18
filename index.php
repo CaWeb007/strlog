@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 /*Если пользователь не принадлежит ни к одной группе покупателей end*/
 ?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_banners_top_slider.php",
 		"AREA_FILE_SHOW" => "file",
@@ -25,11 +25,11 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	),
 	false,
 	array(
-	"ACTIVE_COMPONENT" => "Y"
+	"ACTIVE_COMPONENT" => "N"
 	)
-);?>
+);*/?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
 	"PATH" => SITE_DIR."include/mainpage/ecosystem.php",
 	"AREA_FILE_SHOW" => "file",
@@ -39,11 +39,11 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 ),
 	false,
 	array(
-		"ACTIVE_COMPONENT" => "Y"
+		"ACTIVE_COMPONENT" => "N"
 	)
-);?>
+);*/?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
 		"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_tizers.php",
@@ -53,9 +53,9 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"EDIT_TEMPLATE" => "standard.php"
 	),
 	false
-);?>
+);*/?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
 		"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_banners_float.php",
@@ -65,7 +65,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"EDIT_TEMPLATE" => "standard.php"
 	),
 	false
-);?>
+);*/?>
 
 <?$APPLICATION->IncludeComponent(
 	"bitrix:main.include",
@@ -83,7 +83,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	false
 );?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
 		"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_news_akc.php",
@@ -93,9 +93,9 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"EDIT_TEMPLATE" => "standard.php"
 	),
 	false
-);?>
+);*/?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", "mainpage_bottom_image", Array(
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", "mainpage_bottom_image", Array(
 	"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/inc_company.php",	// Путь к файлу области
 		"AREA_FILE_SHOW" => "file",	// Показывать включаемую область
@@ -104,9 +104,9 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"EDIT_TEMPLATE" => "standard.php",	// Шаблон области по умолчанию
 	),
 	false
-);?>
+);*/?>
 
-<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
 		"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_brands.php",
@@ -116,5 +116,5 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"EDIT_TEMPLATE" => "standard.php"
 	),
 	false
-);?>
+);*/?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
