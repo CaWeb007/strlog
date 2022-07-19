@@ -96,7 +96,6 @@ foreach ($arResult["MESSAGES"] as $res):
 			<meta itemprop="name" content="<?=strip_tags($arResult['ELEMENT']['PRODUCT']['NAME'])?>" />
 		</span>
 		<meta itemprop="datePublished" content="<?=ConvertDateTime($res["POST_DATE"], 'YYYY-MM-DD')?>" />
-		<span class='message-post-date'><?=$res["POST_DATE"]?></span>
 </div>
 
 	</td></tr>
