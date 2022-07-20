@@ -17580,7 +17580,41 @@
 			jsInit = true;
 		}
 	}
+    BX.reload = function(back_url, bAddClearCache)
+    {
+      if (back_url === true)
+      {
+        bAddClearCache = true;
+        back_url = null;
+      }
 
+      var new_href = back_url || top.location.href;
+
+      var hashpos = new_href.indexOf('#'), hash = '';
+
+      if (hashpos != -1)
+      {
+        hash = new_href.substr(hashpos);
+        new_href = new_href.substr(0, hashpos);
+      }
+
+      if (bAddClearCache && new_href.indexOf('clear_cache=Y') < 0)
+        new_href += (new_href.indexOf('?') == -1 ? '?' : '&') + 'clear_cache=Y';
+
+      if (hash)
+      {
+        // hack for clearing cache in ajax mode components with history emulation
+        if (bAddClearCache && (hash.substr(0, 5) == 'view/' || hash.substr(0, 6) == '#view/') && hash.indexOf('clear_cache%3DY') < 0)
+          hash += (hash.indexOf('%3F') == -1 ? '%3F' : '%26') + 'clear_cache%3DY';
+
+        new_href = new_href.replace(/(\?|\&)_r=[\d]*/, '');
+        new_href += (new_href.indexOf('?') == -1 ? '?' : '&') + '_r='+Math.round(Math.random()*10000) + hash;
+      }
+
+      top.location.href = new_href;
+    };
+
+/*
 	function reloadInternal(back_url, bAddClearCache)
 	{
 		if (back_url === true)
@@ -17609,7 +17643,7 @@
 			if (bAddClearCache && (hash.substr(0, 5) == 'view/' || hash.substr(0, 6) == '#view/') && hash.indexOf('clear_cache%3DY') < 0)
 				hash += (hash.indexOf('%3F') == -1 ? '%3F' : '%26') + 'clear_cache%3DY';
 
-			new_href = new_href.replace(/(\?|\&)_r=[\d]*/, '');
+			new_href = new_href.replace(/(\?|\&)_r=[\d]*!/, '');
 			new_href += (new_href.indexOf('?') == -1 ? '?' : '&') + '_r='+Math.round(Math.random()*10000) + hash;
 		}
 
@@ -17631,6 +17665,7 @@
 			reloadInternal(back_url, bAddClearCache);
 		}
 	};
+*/
 
 	BX.clearCache = function()
 	{
