@@ -965,7 +965,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
             <li class="<?=(!($iTab++) ? ' current' : '')?>">
                 <span><?=GetMessage("DOCUMENTS_TITLE")?></span>
                 <?if(count($arFiles) > 1):?>
-                    <span class="count empty">&nbsp;(<?=count($arVideo)?>)</span>
+                    <span class="count empty">&nbsp;(<?=count($arFiles)?>)</span>
                 <?endif;?>
             </li>
         <?endif;?>
