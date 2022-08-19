@@ -463,7 +463,7 @@ if (false)
 
 @ini_set('pcre.backtrack_limit', 1024*1024);
 
-if (!DEBUG)
+if (false)
 {
 	if (IP_LIMIT == IP_LIMIT_DEFAULT)
 	{
