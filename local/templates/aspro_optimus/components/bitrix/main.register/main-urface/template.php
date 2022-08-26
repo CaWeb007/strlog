@@ -1,5 +1,13 @@
 <? if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die(); ?>
-<div class="module-form-block-wr registraion-page">
+<?
+/**
+ * @var $arResult array
+ * @var $arParams array
+ * @global $USER CUser
+ * @global $APPLICATION CUser
+ */
+?>
+<div class="module-form-block-wr registraion-page" id="bx_main_register_legal">
 
 	<?if( empty($arResult["ERRORS"]) && !empty($_POST["register_submit_button"]) && $arResult["USE_EMAIL_CONFIRMATION"]=="N"){
 		LocalRedirect(SITE_DIR.'personal/');
@@ -228,10 +236,17 @@
 						<?endforeach?>
 						<?if($arUFields){?>
 							<?foreach($arUFields as $k=>$arUField){?>
-								<div class="form-control bg">
+								<div class="form-control bg" id="<?=$arUField["FIELD_NAME"].'_CONTAINER'?>"
+                                    <?if(($arUField["FIELD_NAME"] === 'UF_KPP') && ($arResult['VALUES']['NOT_USE_KPP'] === 'YES')) echo 'style="display: none;"'?>>
 									<div class="wrap_md">
 										<div class="iblock label_block">
 											<?if($arUField["FIELD_NAME"] == "UF_INN" || $arUField["FIELD_NAME"] == "UF_COMPANY" || $arUField["FIELD_NAME"] == "UF_LEGAL_FORM"|| $arUField["FIELD_NAME"] == "UF_KPP" ) $arUField["MANDATORY"] = "Y";?>
+                                            <?if($arUField['FIELD_NAME'] === "UF_INN"):?>
+                                                <div class="not-use-kpp-wrapper licence_block filter label_block">
+                                                    <input <?if ($arResult['VALUES']['NOT_USE_KPP'] === 'YES') echo 'checked'?> type="checkbox" id="not_use_kpp" name="not_use_kpp" value="YES">
+                                                    <label for="not_use_kpp"><?=GetMessage('REGISTER_FIELD_TEXT_NOT_USE_KPP')?></label>
+                                                </div>
+                                            <?endif?>
 											<label for="input_<?=$FIELD;?>"><?=$arUField["EDIT_FORM_LABEL"];?>:<?if ($arUField["MANDATORY"] == "Y"):?><span class="star">*</span><?endif;?></label>
 											<?$APPLICATION->IncludeComponent(
 											"bitrix:system.field.edit",
@@ -243,6 +258,7 @@
 										</div>
 									</div>
 								</div>
+
 							<?}?>
 						<?}?>
 						<?if ($arResult["USE_CAPTCHA"] == "Y"){?>
@@ -295,3 +311,4 @@
 		</div>
 	<?}?>
 </div>
+<script>new MainRegisterLegalComponent();</script>

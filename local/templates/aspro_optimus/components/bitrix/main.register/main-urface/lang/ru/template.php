@@ -71,4 +71,5 @@
 	$MESS["REGISTER_FIELD_TEXT_EMAIL"] = "Является логином для входа на сайт. <br/>Также на него будут приходить уведомления о статусах заказа";
 	$MESS["REGISTER_FIELD_TEXT_PASSWORD"] = "Длина пароля не менее 6 символов";	
 	$MESS["REGISTER_FIELD_TEXT_UF_COMPANY"] = "Вводить без правовой формы (ООО, АО, ОАО и т.д.) и ковычек";	
+	$MESS["REGISTER_FIELD_TEXT_NOT_USE_KPP"] = "У меня нет КПП";
 ?>

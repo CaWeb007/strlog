@@ -12,15 +12,37 @@ use Bitrix\Sale\Payment;
 use Bitrix\Sale\PaymentCollection;
 use Bitrix\Sale\PropertyValue;
 use Caweb\Main\Catalog\Helper as CatalogHelper;
+use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Application;
 
+Loc::loadMessages(__FILE__);
 class Helper{
     public static $REFRESH_PRICES = false;
     public static $PRICE_CHANGED = false;
     const KP_PRICE_ID = 11;
     const PAYSYSTEMS_NEED_CHANGE_PRICE = array(13,14,15,16);//todo КОСТЫЛЬ КОНЕЧНО, но не забыть установить
-    public static function notUniqueLegalUser($inn, $kpp){
-        $params['filter'] = array('UF_INN' => $inn, 'UF_KPP' => $kpp);
-        return (!empty(UserTable::getRow($params)));
+    public static function checkLegal($fields){
+        global $APPLICATION;
+        $post = Application::getInstance()->getContext()->getRequest()->getPost('not_use_kpp');
+        $notUseKpp = ($post === 'YES');
+        if (empty($fields['UF_INN'])){
+            $APPLICATION->ThrowException(Loc::getMessage('HELPER_CHECK_LEGAL_ENTER_INN'));
+            return false;
+        }
+        if (!$notUseKpp && empty($fields['UF_KPP'])){
+            $APPLICATION->ThrowException(Loc::getMessage('HELPER_CHECK_LEGAL_ENTER_KPP'));
+            return false;
+        }
+        if ($notUseKpp)
+            $params['filter'] = array('UF_INN' => $fields['UF_INN']);
+        else
+            $params['filter'] = array('UF_INN' => $fields['UF_INN'], 'UF_KPP' => $fields['UF_KPP']);
+        if(!empty(UserTable::getRow($params))){
+            $errorCode = ($notUseKpp)? 'HELPER_CHECK_LEGAL_FIND_INN' : 'HELPER_CHECK_LEGAL_FIND_INN_KPP';
+            $APPLICATION->ThrowException(Loc::getMessage($errorCode));
+            return false;
+        }
+        return true;
     }
     /**
      * @param Order $order

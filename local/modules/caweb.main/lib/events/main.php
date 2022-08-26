@@ -13,9 +13,7 @@ class Main{
     public function OnBeforeUserRegister(&$arFields){
         if (empty($arFields["PERSONAL_PROFESSION"]))
             $arFields["PERSONAL_PROFESSION"] = 'КП(ФИЗ)';
-        if (($arFields["PERSONAL_PROFESSION"]=="КП(ЮР)") && Helper::notUniqueLegalUser($arFields['UF_INN'], $arFields['UF_KPP'])){
-            global $APPLICATION;
-            $APPLICATION -> ThrowException(Loc::getMessage('CAWEB_NOT_UNIQUE_LEGAL_USER'));
+        if (($arFields["PERSONAL_PROFESSION"]=="КП(ЮР)") && !Helper::checkLegal($arFields)){
             return false;
         }
     }
