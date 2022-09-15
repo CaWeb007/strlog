@@ -1,27 +1,67 @@
-<div class="container-content">
-	 Компания «Стройлогистика» организует доставку товаров по всей РФ.<br>
- <br>
-	 Для оформления доставки необходимо предоставить следующую информацию:<br>
- <br>
-	 &nbsp;- контактное лицо;<br>
-	 &nbsp;- контактный номер телефона;<br>
-	 &nbsp;- адрес доставки.<br>
- <br>
-	 Правила работы службы доставки:<br>
- <br>
-	 &nbsp; &nbsp;Доставка материалов осуществляется транспортом компании «Стройлогистика»&nbsp;<br>
-	&nbsp;- доставка товара с 09:00 до 18:00 по будням, в субботу с 10:00 до 15:00;<br>
-	 &nbsp;- водитель ТС, прибывающий на адрес разгрузки, доезжает ровно до того места, до которого есть возможность проезда;<br>
-	 &nbsp;- не нарушая правила ГИБДД;<br>
-	 &nbsp;- водитель не совершает разгрузку ТС;<br>
-	 - разгрузка материала до 30 минут - бесплатно, свыше 30 минут до часа– 500 рублей, свыше часа – 650 руб;
-	<p>
-		 &nbsp;- ожидание покупателя по адресу доставки 15 минут, свыше за каждые 10 минут простоя-100 рублей.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-	</p>
-	<p>
-		 Доставка линолеума только после оплаты, так как данный товар в нарезке возврату и обмену не подлежит.&nbsp;
-	</p>
- <br>
- <strong>Виды и условия доставки*</strong>:
-</div>
- <br>
+<?$APPLICATION->IncludeComponent(
+    "bitrix:news.list",
+    "strlog_faqs",
+    array(
+        "ACTIVE_DATE_FORMAT" => "d.m.Y",
+        "ADD_SECTIONS_CHAIN" => "Y",
+        "AJAX_MODE" => "N",
+        "AJAX_OPTION_ADDITIONAL" => "",
+        "AJAX_OPTION_HISTORY" => "N",
+        "AJAX_OPTION_JUMP" => "N",
+        "AJAX_OPTION_STYLE" => "Y",
+        "CACHE_FILTER" => "N",
+        "CACHE_GROUPS" => "Y",
+        "CACHE_TIME" => "0",
+        "CACHE_TYPE" => "N",
+        "CHECK_DATES" => "Y",
+        "COMPONENT_TEMPLATE" => "strlog_faqs",
+        "DETAIL_URL" => "",
+        "DISPLAY_BOTTOM_PAGER" => "Y",
+        "DISPLAY_DATE" => "N",
+        "DISPLAY_NAME" => "Y",
+        "DISPLAY_PICTURE" => "N",
+        "DISPLAY_PREVIEW_TEXT" => "Y",
+        "DISPLAY_TOP_PAGER" => "N",
+        "FIELD_CODE" => array(
+            0 => "",
+            1 => "",
+        ),
+        "FILTER_NAME" => "",
+        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+        "IBLOCK_ID" => "20",
+        "IBLOCK_TYPE" => "-",
+        "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+        "INCLUDE_SUBSECTIONS" => "Y",
+        "MESSAGE_404" => "",
+        "NEWS_COUNT" => "20",
+        "PAGER_BASE_LINK_ENABLE" => "N",
+        "PAGER_DESC_NUMBERING" => "N",
+        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+        "PAGER_SHOW_ALL" => "N",
+        "PAGER_SHOW_ALWAYS" => "N",
+        "PAGER_TEMPLATE" => "orange",
+        "PAGER_TITLE" => "Новости",
+        "PARENT_SECTION" => "",
+        "PARENT_SECTION_CODE" => "",
+        "PREVIEW_TRUNCATE_LEN" => "",
+        "PROPERTY_CODE" => array(
+            0 => "",
+            1 => "",
+        ),
+        "SET_BROWSER_TITLE" => "Y",
+        "SET_LAST_MODIFIED" => "N",
+        "SET_META_DESCRIPTION" => "Y",
+        "SET_META_KEYWORDS" => "Y",
+        "SET_STATUS_404" => "N",
+        "SET_TITLE" => "Y",
+        "SHOW_404" => "N",
+        "SORT_BY1" => "SORT",
+        "SORT_BY2" => "SORT",
+        "SORT_ORDER1" => "ASC",
+        "SORT_ORDER2" => "ASC",
+        "COMPOSITE_FRAME_MODE" => "A",
+        "COMPOSITE_FRAME_TYPE" => "AUTO",
+        "STRICT_SECTION_CHECK" => "N"
+    ),
+    false
+);?>

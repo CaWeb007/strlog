@@ -1,259 +1,47 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Условия доставки");
+$APPLICATION->SetPageProperty("keywords", "Условия доставки");
 $APPLICATION->SetTitle("Условия доставки");
 ?>
-
-<?$APPLICATION->IncludeComponent("bitrix:main.include", "", Array(
-	"COMPONENT_TEMPLATE" => ".default",
+<div class="container-content">
+	Компания «Стройлогистика» организует доставку товаров по всей РФ.<br>
+	<br>
+	Для оформления доставки необходимо предоставить следующую информацию:<br>
+	<br>
+	&nbsp;- контактное лицо;<br>
+	&nbsp;- контактный номер телефона;<br>
+	&nbsp;- адрес доставки.<br>
+	<br>
+	Правила работы службы доставки:<br>
+	<br>
+	&nbsp; &nbsp;Доставка материалов осуществляется транспортом компании «Стройлогистика»&nbsp;<br>
+	&nbsp;- доставка товара с 09:00 до 18:00 по будням, в субботу с 10:00 до 15:00;<br>
+	&nbsp;- водитель ТС, прибывающий на адрес разгрузки, доезжает ровно до того места, до которого есть возможность проезда;<br>
+	&nbsp;- не нарушая правила ГИБДД;<br>
+	&nbsp;- водитель не совершает разгрузку ТС;<br>
+	- разгрузка материала до 30 минут - бесплатно, свыше 30 минут до часа– 500 рублей, свыше часа – 650 руб;
+	<p>
+		&nbsp;- ожидание покупателя по адресу доставки 15 минут, свыше за каждые 10 минут простоя-100 рублей.&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	</p>
+	<p>
+		Доставка линолеума только после оплаты, так как данный товар в нарезке возврату и обмену не подлежит.&nbsp;
+	</p>
+	<a href="https://стройлогистика.рф/upload/medialibrary/e23/e235a649f6bfc920d96d270654ffb172.jpg"><img width="205" alt="69d8dc55-e3c6-4dd6-bafa-67f63bd60e44.jpg" src="/upload/medialibrary/e23/e235a649f6bfc920d96d270654ffb172.jpg" height="154" title="Оперативная доставка СТРОЙЛОГИСТИКА"></a>&nbsp; &nbsp;&nbsp;<a href="https://стройлогистика.рф/upload/medialibrary/6d2/6d2adadb7bfcaa7da9b0f6451f6902d3.jpg"><img width="205" alt="747bc068-effc-4f46-bab7-538405668c05.jpg" src="/upload/medialibrary/6d2/6d2adadb7bfcaa7da9b0f6451f6902d3.jpg" height="154" title="Оперативная доставка СТРОЙЛОГИСТИКА"></a>&nbsp; &nbsp;<a href="https://стройлогистика.рф/upload/medialibrary/bab/bab9b5107903d281d8dd44533a6d28fb.jpg"><img width="205" alt="561ed2d9-2173-464c-8cd3-93704357ec8a.jpg" src="/upload/medialibrary/bab/bab9b5107903d281d8dd44533a6d28fb.jpg" height="154" title="Оперативная доставка СТРОЙЛОГИСТИКА"></a>
+	<br>
+	<br>
+	<div style="position:relative;overflow:hidden; width: 100%"><a href="https://yandex.ru/maps/63/irkutsk/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Иркутск</a><a href="https://yandex.ru/maps/63/irkutsk/?ll=104.290012%2C52.298668&mode=usermaps&source=constructorLink&um=constructor%3Ab23f58b87c6f2d9ede700275566702c0117f5b1c6635d5bd42a83a8ffeff1efe&utm_medium=mapframe&utm_source=maps&z=11" style="color:#eee;font-size:12px;position:absolute;top:14px;">Яндекс Карты — транспорт, навигация, поиск мест</a><iframe src="https://yandex.ru/map-widget/v1/-/CCUB7Ltu3B" width="100%" height="500" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe></div>
+	<br>
+	<strong>Виды и условия доставки*</strong>:
+	<?$APPLICATION->IncludeComponent("bitrix:main.include", "", Array(
+		"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/inc_delivery_page.php",
 		"AREA_FILE_SHOW" => "file",
 		"AREA_FILE_SUFFIX" => "inc",
 		"AREA_FILE_RECURSIVE" => "Y",
 		"EDIT_TEMPLATE" => "standard.php",
 	),
-	false
-);?>
-
-
-<?$APPLICATION->IncludeComponent(
-	"bitrix:news.list", 
-	"strlog_faqs", 
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "0",
-		"CACHE_TYPE" => "N",
-		"CHECK_DATES" => "Y",
-		"COMPONENT_TEMPLATE" => "strlog_faqs",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "N",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "20",
-		"IBLOCK_TYPE" => "-",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
-		"INCLUDE_SUBSECTIONS" => "Y",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "20",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => "orange",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "Y",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "Y",
-		"SET_META_KEYWORDS" => "Y",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "Y",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "SORT",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "ASC",
-		"SORT_ORDER2" => "ASC",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"STRICT_SECTION_CHECK" => "N"
-	),
-	false
-);?>
-
-
-<?/*
-<p>
-	 Наш интернет-магазин предлагает несколько вариантов доставки:
-</p>
-<ul>
-	<li>курьерская;</li>
-	<li>самовывоз из магазина;</li>
-	<li>постаматы;</li>
-	<li>почта России.</li>
-</ul>
-<h3>Курьерская доставка*</h3>
-<p>
-	 Вы можете заказать доставку товара с помощью курьера, который прибудет по указанному адресу в будние дни и субботу с 9.00 до 19.00. Курьерская служба, после поступления товара на склад, свяжется с вами и предложит выбрать удобное время доставки. Уточнит адрес.
-</p>
-<p>
-	 Вы вскрываете упаковку при курьере, осматриваете на целостность и соответствие указанной комплектации. Если речь идёт об одежде, допустима примерка. Время осмотра и примерки ограничено 15 минутами. После вы можете отказаться частично или полностью от покупки.
-</p>
-<p>
-	 Доставка бесплатна при заказе от 3000 рублей.
-</p>
-<p>
-</p>
-<blockquote>
-	<p>
-		 *Действует ли в вашем городе курьерская служба, уточняйте у менеджера магазина.
-	</p>
-</blockquote>
-<h3>Самовывоз из магазина</h3>
-<p>
-	 Вы можете забрать товар в одном из магазинов, сотрудничающих с нами. Список торговых точек, которые принимают заказы от нашей компании появится у вас в корзине. Когда заказ поступит в ваш город, вам придёт уведомление. Вы просто идёте в этот магазин, обращаетесь к сотруднику в кассовой зоне и называете номер заказа. Забрать покупку может ваш друг или родственник, который знает номер и имя, на кого он оформлен.
-</p>
-<h3>Постамат</h3>
-<p>
-	 Постамат – это терминал с автоматизированной системой для хранения заказанных товаров. Удобство в том, что человек может забрать заказ в любое удобное время.
-</p>
-<h4>Как работать с постаматом:</h4>
-<ul>
-	<li>в момент оформления заказа на сайте, вы выбираете удобный для себя постамат, если такая система работает в вашем городе;</li>
-	<li>на ваш телефон или e-mail придет уникальный код, это значит, что товар доставлен в постамат;</li>
-	<li>вы приходите к постамату, вводите полученный код и следует инструкциям автомата;</li>
-	<li>оплачиваете заказ в терминале постамата;</li>
-	<li>забираете товар.</li>
-</ul>
-<p>
-	 Срок хранения в постамате 3 дня, но можно продлить ещё на аналогичный срок. Чтобы уточнить информацию и продлить время хранения зайдите на сайт нашего <a href="http://pickpoint.ru/" target="_blank">партнера</a>, введите номер заказа и телефон и следуйте подсказкам на сайте.
-</p>
-<h3>Почтовая доставка</h3>
-<p>
-	 Если в вашем городе не действует курьерская служба и постаматы, то вы можете заказать доставку через почту России. Сразу по прибытии товара, на ваш адрес придет извещение о посылке.
-</p>
-<p>
-	 Перед оплатой вы можете оценить состояние коробки (не вскрывая): вес, целостность. Если вам кажется, что заказ не соответствует параметрам или коробка повреждена, попросите сотрудника почты составить акт о вскрытии. Вскрывать коробку самостоятельно вы можете только после того, как оплатили заказ.
-</p>
-<p>
-	 Один заказ может содержать не больше 10 позиций и его стоимость не должна превышать 100 тысяч рублей.
-</p>
-<h3>Срок доставки</h3>
-<p>
-	 В зависимости от вашего региона проживания, доставка занимает разное время.
-</p>
-<p>
-</p>
-<table style="width: 100%;" border="1" class="table">
- <colgroup><col><col><col><col><col></colgroup>
-<tbody>
-<tr>
-	<td>
-		<p>
-			 Регион
-		</p>
-	</td>
-	<td>
-		<p>
-			 Курьерская доставка
-		</p>
-	</td>
-	<td>
-		<p>
-			 Самовывоз из магазина
-		</p>
-	</td>
-	<td>
-		<p>
-			 Постамат
-		</p>
-	</td>
-	<td>
-		<p>
-			 Почта России
-		</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>
-			 Московская область, Ленинградская область
-		</p>
-	</td>
-	<td colspan="3">
-		<p style="text-align: center;">
-			 2 рабочих дня
-		</p>
-	</td>
-	<td>
-		<p>
-			 5 дней
-		</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>
-			 Урал и Поволжье
-		</p>
-	</td>
-	<td>
-		<p>
-			 5-7 рабочих дней
-		</p>
-	</td>
-	<td>
-		<p>
-			 6-9 рабочих дней
-		</p>
-	</td>
-	<td>
-		<p>
-			 5 дней
-		</p>
-	</td>
-	<td>
-		<p>
-			 14 дней
-		</p>
-	</td>
-</tr>
-<tr>
-	<td>
-		<p>
-			 Сибирь
-		</p>
-	</td>
-	<td>
-		<p>
-			 8-10 рабочих дней
-		</p>
-	</td>
-	<td>
-		<p>
-			 12 рабочих дней
-		</p>
-	</td>
-	<td>
-		<p>
-			 8 дней
-		</p>
-	</td>
-	<td>
-		<p>
-			 14-21 день
-		</p>
-	</td>
-</tr>
-</tbody>
-</table>
-<p>
-	 О доставке в другие регионы России и страны СНГ уточняйте менеджеров магазина.
-</p>
-*/?>
-
-
-
+		false
+	);?>
+</div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
