@@ -1556,7 +1556,10 @@ if (empty($arRunErrors))
 				unset($pageIds);
 			}
 		}
-
+		$measureList = array();
+        $measureListIterator = Catalog\MeasureTable::getList(array('select' => array('ID', 'SYMBOL')));
+        while ($item = $measureListIterator->fetch())
+            $measureList[$item['ID']] = $item['SYMBOL'];
 		$itemsContent = '';
 		if (!empty($items))
 		{
@@ -1749,6 +1752,7 @@ if (empty($arRunErrors))
 	                              }
 	                              if($AVITO_PHONE)
 	                               $itemsContent .= "<ContactPhone>".yandex_text2xml($AVITO_PHONE)."</ContactPhone>\n";
+	                               $itemsContent .= "<ContactMethod>".yandex_text2xml(GetMessage('AVITO_CONTACT_TYPE_PHONE'))."</ContactMethod>\n";
 	                               $itemsContent .= "<Address>".yandex_text2xml($AdressArr)."</Address>\n";
 	                               $itemsContent .= "<ListingFee>".yandex_text2xml($AVITO_LISTINGFEE)."</ListingFee>\n";
 	                               $itemsContent .= "<AdType>".yandex_text2xml($AVITO_ADTYPE)."</AdType>\n";
@@ -2043,7 +2047,11 @@ if (empty($arRunErrors))
 						$minPriceCurrency = $calculatePrice['RESULT_PRICE']['CURRENCY'];
 					}
 					unset($calculatePrice);
-
+                    $row['DESCRIPTION'] = GetMessage('AVITO_DESCRIPTION_MODIFIER', array(
+                        '#PRICE#'=>$minPrice,
+                        '#MEASURE_TITLE#' => strtolower($measureList[(int)$row['CATALOG_MEASURE']]),
+                        '#DESCRIPTION#' => $row['DESCRIPTION']
+                    ));
 					if ($minPrice <= 0)
 						continue;
 
@@ -2144,8 +2152,10 @@ if (empty($arRunErrors))
 		                                $itemsContent .= "<Apparel>".yandex_text2xml($AVITO_APPAREL)."</Apparel>\n";
 		                             }
 	                            }
-	                            if($AVITO_PHONE)
-	                                $itemsContent .= "<ContactPhone>".yandex_text2xml($AVITO_PHONE)."</ContactPhone>\n";
+	                            if($AVITO_PHONE){
+                                    $itemsContent .= "<ContactPhone>".yandex_text2xml($AVITO_PHONE)."</ContactPhone>\n";
+                                    $itemsContent .= "<ContactMethod>".yandex_text2xml(GetMessage('AVITO_CONTACT_TYPE_PHONE'))."</ContactMethod>\n";
+	                            }
 	                            $itemsContent .= "<Address>".yandex_text2xml($AdressArr)."</Address>\n";
 	                            $itemsContent .= "<ListingFee>".yandex_text2xml($AVITO_LISTINGFEE)."</ListingFee>\n";
 	                            $itemsContent .= "<AdType>".yandex_text2xml($AVITO_ADTYPE)."</AdType>\n";
