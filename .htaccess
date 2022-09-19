@@ -1,6 +1,17 @@
+php_flag display_startup_errors off
+php_flag display_errors off
+php_flag html_errors off
+php_value docref_root 0
+php_value docref_ext 0
+
+php_value mbstring.internal_encoding UTF-8
+php_value mbstring.func_overload 2
+
 Options -Indexes
 ErrorDocument 404 /404.php
 #RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+#RewriteCond %{HTTP_HOST} ^xn--e1aybc.xn--80afpacjdwcqkhfi\.xn--p1ai$ [NC]xn--80afpacjdwcqkhfi.xn--p1ai
+#RewriteRule ^(.*)$ http://xn--80afpacjdwcqkhfi.xn--p1ai/$1 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !robots\.txt
 
 RewriteCond %{HTTP_USER_AGENT} SemrushBot
@@ -97,6 +108,7 @@ Deny from env=bad_bot
   Redirect 301 /uslugi/dostavka/ https://xn--80afpacjdwcqkhfi.xn--p1ai/help/delivery/
   Redirect 301 /novosti/ https://xn--80afpacjdwcqkhfi.xn--p1ai/info/news/
   Redirect 301 /gde-kupit/ https://xn--80afpacjdwcqkhfi.xn--p1ai/company/contacts/
+  #Redirect 301 /dzhut/ https://xn--80afpacjdwcqkhfi.xn--p1ai/catalog/dzhut-dzhutovyy-voylok/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteCond %{REQUEST_FILENAME} !-d
