@@ -20,9 +20,6 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
         <?$APPLICATION->ShowMeta("SKYPE_TOOLBAR");?>
 		<?$APPLICATION->ShowHead();?>
         <?$APPLICATION->AddHeadString('<script>BX.message('.CUtil::PhpToJSObject( $MESS, false ).')</script>', true);?>
-        <?/*Подключение vue.js*start*/?>
-        <!--script src="https://unpkg.com/vue"></script-->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 
         <?/*Подключение vue.js*end*/?>
 		<link rel="stylesheet" type="text/css" href="<?= SITE_TEMPLATE_PATH ?>/tooltipster/dist/css/tooltipster.bundle.min.css" />

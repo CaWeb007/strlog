@@ -72,7 +72,7 @@ $(document).ready(function(){
 /*/Сортировка и группировка в разделе товаров*/
 
 /*Our projects*start*used by vue.js*/
-    var dropCount = 0;
+    /*var dropCount = 0;
     var drop = new Vue({
         el: '#our-projects',
         data: {
@@ -101,7 +101,7 @@ $(document).ready(function(){
               //  }
             }
         }
-    });
+    });*/
 
 /*Our projects*end*/
 
