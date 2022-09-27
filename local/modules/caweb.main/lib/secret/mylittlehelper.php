@@ -24,6 +24,7 @@ use Caweb\Main\Sale\Bonus;
 
 /**usage   \Bitrix\Main\Loader::includeModule('caweb.main');*/
 class MyLittleHelper {
+    protected const CATALOG_IBLOCK = 16;
     /**usage   \Caweb\Main\Secret\MyLittleHelper::SortEnumOffer();*/
     public static function SortEnumOffer(){
         Loader::includeModule('iblock');
@@ -384,7 +385,6 @@ class MyLittleHelper {
             \CIBlockElement::SetPropertyValuesEx($elementId, 16, array($flagPropertyId => 1));
         }
     }
-
     /**usage   \Caweb\Main\Secret\MyLittleHelper::clearEmptyTopics();*/
     public static function clearEmptyTopics(){
         \Bitrix\Main\Loader::includeModule('forum');
@@ -400,6 +400,29 @@ class MyLittleHelper {
                 \CForumTopic::Delete($ar['ID']);
         }
         return '\Caweb\Main\User\Exchange::clearEmptyTopics();';
+    }
+    /**usage   \Caweb\Main\Secret\MyLittleHelper::setElementRating();*/
+    public static function setElementRating($elementUrl = false){
+        if (!$elementUrl) return 'are you idiot???';
+        Loader::includeModule('iblock');
+        $vote_count_id = 208;
+        $vote_sum_id = 209;
+        $rating_id = 210;
+        $arPath = explode('/', $elementUrl);
+        $arPath = array_diff($arPath, array(""));
+        $elementCode = array_pop($arPath);
+        if (empty($elementCode)) return 'element not fount';
+        $element = \CIBlockElement::GetList(array(), array('CODE' => $elementCode, 'IBLOCK_ID' => self::CATALOG_IBLOCK))->GetNextElement();
+        $elementId = $element->GetFields()['ID'];
+        $vote_count = (int)$element->GetProperty($vote_count_id)['VALUE'];
+        $neededVote = $vote_count * 5;
+        $updateArray = array();
+        if ($vote_count)
+            $updateArray[$vote_sum_id] = $neededVote;
+        else
+            $updateArray[$rating_id] = 5;
+        \CIBlockElement::SetPropertyValuesEx($elementId, self::CATALOG_IBLOCK, $updateArray);
+        echo '<a href="'.$elementUrl.'">check</a><br>';
     }
 
 }
