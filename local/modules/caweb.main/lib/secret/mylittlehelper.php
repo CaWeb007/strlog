@@ -24,7 +24,9 @@ use Caweb\Main\Sale\Bonus;
 
 /**usage   \Bitrix\Main\Loader::includeModule('caweb.main');*/
 class MyLittleHelper {
-    protected const CATALOG_IBLOCK = 16;
+    public const CATALOG_IBLOCK = 16;
+    public const PROPERTY_ORDER_ITEM_ID = 710;
+    public const ENUM_ORDER_ITEM_ID = 15984;
     /**usage   \Caweb\Main\Secret\MyLittleHelper::SortEnumOffer();*/
     public static function SortEnumOffer(){
         Loader::includeModule('iblock');
@@ -424,5 +426,16 @@ class MyLittleHelper {
         \CIBlockElement::SetPropertyValuesEx($elementId, self::CATALOG_IBLOCK, $updateArray);
         echo '<a href="'.$elementUrl.'">check</a><br>';
     }
-
+    /**usage
+    //title: set order item property
+    \Bitrix\Main\Loader::includeModule('caweb.main');
+    \Caweb\Main\Secret\MyLittleHelper::setOrderItemProperty();
+    */
+    public static function setOrderItemProperty(){
+        Loader::includeModule('iblock');
+        $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => self::CATALOG_IBLOCK, 'PROPERTY_90' => 'Заказная позиция'), false, false, array('ID'));
+        while ($iterator = $db->Fetch()){
+            \CIBlockElement::SetPropertyValuesEx($iterator['ID'], self::CATALOG_IBLOCK, array(self::PROPERTY_ORDER_ITEM_ID => self::ENUM_ORDER_ITEM_ID));
+        }
+    }
 }
