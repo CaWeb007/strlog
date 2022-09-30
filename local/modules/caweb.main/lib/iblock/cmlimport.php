@@ -1209,7 +1209,7 @@ class cmlImport  extends \CIBlockCMLImport {
             else
             {
                 if(!array_key_exists("CODE", $arElement) && is_array($this->translit_on_add))
-                    $arElement["CODE"] = $this->CheckElementCode($this->next_step["IBLOCK_ID"], CUtil::translit($arElement["NAME"], LANGUAGE_ID, $this->translit_on_add));
+                    $arElement["CODE"] = $this->CheckElementCode($this->next_step["IBLOCK_ID"], \CUtil::translit($arElement["NAME"], LANGUAGE_ID, $this->translit_on_add));
 
                 $arElement["IBLOCK_ID"] = $this->next_step["IBLOCK_ID"];
                 $this->fillDefaultPropertyValues($arElement, $this->arProperties);
