@@ -27,6 +27,10 @@
                 $my = array();
                 $my['Детальная катинка'] = (!empty($arItem["~DETAIL_PICTURE"]))? 'да': 'нет';
                 $my['Детальное описание'] = (!empty($arItem["DETAIL_TEXT"]))? 'да': 'нет';
+                if ((int)$arItem['IBLOCK_ID'] === 24){
+                    $arItem['DETAIL_PAGE_URL'] = str_replace('catalog', 'necondition', $arItem['DETAIL_PAGE_URL']);
+                    $my['Некондиция'] = 'Да';
+                }
                 if ($arItem["DETAIL_TEXT"] === $arItem ["NAME"]) $my['Детальное описание'] = 'Название';
             ?>
 			<?$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
