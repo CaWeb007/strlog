@@ -31,7 +31,8 @@
 
 			$totalCount = COptimus::GetTotalCount($arItem);
             $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
-            $arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], 'N', $forOrder);
+            if (empty($arItem['OFFERS']))
+                $arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], 'N', $forOrder, $arItem['STORES_COUNT'], $arItem['STORES']);
 
 			$item_id = $arItem["ID"];
 			$strMeasure = '';
@@ -62,8 +63,8 @@
 							<div class="desc_name"><a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><span><?=$elementName?></span></a></div>
 						</td>
 					</tr>
-					<tr>
-					<td class="image_block">
+					<tr style="position: relative">
+					<td style="position: relative; z-index: 1" class="image_block">
 						<div class="image_wrapper_block">
 							<div class="stickers">
 								<?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
@@ -93,12 +94,12 @@
 						</div>
 					</td>
 
-					<td class="description_wrapp">
+					<td style="position: relative; z-index: 3" class="description_wrapp">
 						<div class="description">
 							<div class="item-title">
 								<a href="<?=$arItem["DETAIL_PAGE_URL"]?>"><span><?=$elementName;?></span></a>
 							</div>
-							<div class="wrapp_stockers">
+							<div class="wrapp_stockers" id="stock_wrap_<?=$arItem['ID']?>">
 								<?if($arParams["SHOW_RATING"] == "Y"):?>
 									<div class="rating">
 										<?$APPLICATION->IncludeComponent(
@@ -118,7 +119,19 @@
 										);?>
 									</div>
 								<?endif;?>
-								<?=$arQuantityData["HTML"];?>
+                                <?if(empty($arItem['OFFERS'])):?>
+								    <?=$arQuantityData["HTML"];?>
+                                <?else:?>
+                                    <?foreach ($arItem['OFFERS'] as $key => $offer):?>
+                                        <div id="offer_block_<?=$offer['ID']?>" <?=($key === 0)? "style='display: none'": "style='display: none'"?>>
+                                            <?
+                                                $totalCount = COptimus::GetTotalCount($offer);
+                                                $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder, $offer['STORES_COUNT'], $offer['STORES'],$offer['ID']);
+                                                echo $arQuantityData['HTML'];
+                                            ?>
+                                        </div>
+                                    <?endforeach;?>
+                                <?endif;?>
 								<div class="article_block">
 									<?if(isset($arItem['ARTICLE']) && $arItem['ARTICLE']['VALUE']){?>
 										<?=$arItem['ARTICLE']['NAME'];?>: <?=$arItem['ARTICLE']['VALUE'];?>
@@ -190,7 +203,7 @@
 						<?endif;?>
 					</td>
 					<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], false, $arItemIDs["ALL_ITEM_IDS"], 'small', $arParams);?>
-					<td class="information_wrapp main_item_wrapper">
+					<td style="position: relative; z-index: 2"  class="information_wrapp main_item_wrapper">
 						<div class="information">
                             <?if(!$forOrder):?>
 							    <div class="cost prices clearfix">

@@ -29,7 +29,7 @@
 				$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
 				$totalCount = COptimus::GetTotalCount($arItem);
                 $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
-                $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
+                $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder, $arItem['STORES_COUNT'], $arItem['STORES']);
 				$strMeasure = '';
 				if(!$arItem["OFFERS"] || $arParams['TYPE_SKU'] === 'TYPE_2'){
 					if($arParams["SHOW_MEASURE"] == "Y" && $arItem["CATALOG_MEASURE"]){

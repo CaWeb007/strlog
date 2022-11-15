@@ -86,10 +86,10 @@ $forOrder = in_array('Заказная позиция', $arResult['PROPERTIES'][
 $arResult["strMainID"] = $this->GetEditAreaId($arResult['ID']);
 $arItemIDs=COptimus::GetItemsIDs($arResult, "Y");
 $totalCount = COptimus::GetTotalCount($arResult);
-$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], "Y", $forOrder);
+$arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_IDS"], "Y", $forOrder, $arResult['STORES_INFO']['NOT_EMPTY_COUNT'], $arResult['STORES_INFO']['STORES']);
 
 $arParams["BASKET_ITEMS"]=($arParams["BASKET_ITEMS"] ? $arParams["BASKET_ITEMS"] : array());
-$useStores = $arParams["USE_STORE"] == "Y" && $arResult["STORES_COUNT"] && $arQuantityData["RIGHTS"]["SHOW_QUANTITY"];
+$useStores = $arParams["USE_STORE"] == "Y" && $arResult['STORES_INFO']['STORES_COUNT'] && $arQuantityData["RIGHTS"]["SHOW_QUANTITY"];
 $showCustomOffer=(($arResult['OFFERS'] && $arParams["TYPE_SKU"] !="N") ? true : false);
 if($showCustomOffer){
 	$templateData['JS_OBJ'] = $strObName;
@@ -633,7 +633,23 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 		</span>
 	<?endif;?>
 	<div class="clearleft"></div>
-	
+    <?if($useStores):?>
+        <div class="element-stores-block  <?if (!empty($arResult['OFFERS'])) echo ' element-stores-block-sku'?>">
+            <div class="store-block-title"><?=GetMessage("STORES_TAB");?></div>
+            <div class="store-list">
+                <?foreach ($arResult['STORES_INFO']['STORES'] as $item):?>
+                    <div class="store-item">
+                        <div class="store-title">
+                            <?=$item['ADDRESS']?>
+                        </div>
+                        <div class="store-amount">
+                            <?=\COptimus::GetQuantityArray($arResult['STORES_INFO']['AMOUNT'][$item['ID']], array(), 'N', $forOrder)['HTML']?>
+                        </div>
+                    </div>
+                <?endforeach?>
+            </div>
+        </div>
+    <?endif;?>
 	<?if($arParams["SHOW_KIT_PARTS"] == "Y" && $arResult["SET_ITEMS"]):?>
 		<div class="set_wrapp set_block">
 			<div class="title"><?=GetMessage("GROUP_PARTS_TITLE")?></div>

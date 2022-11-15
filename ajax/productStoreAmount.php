@@ -3,7 +3,7 @@
 	if($_POST["OFFERS_ID"]){
 		foreach($_POST["OFFERS_ID"] as $id){?>
 			<div class="sku_stores_<?=$id?>" style="display: none;">
-				<?$APPLICATION->IncludeComponent("bitrix:catalog.store.amount", "main", array(
+				<?$APPLICATION->IncludeComponent("bitrix:catalog.store.amount", "sku", array(
 						"PER_PAGE" => "10",
 						"USE_STORE_PHONE" => $_POST["USE_STORE_PHONE"],
 						"SCHEDULE" => $_POST["SCHEDULE"],
@@ -22,6 +22,7 @@
 						"STORES" => $_POST['STORES'],
 						"CACHE_GROUPS" => "Y",
 						"CACHE_TYPE" => "N",
+						"SORT" => array('SORT' => 'ASC'),
 					),
 					false
 				);?>

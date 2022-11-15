@@ -1009,8 +1009,36 @@ if(strlen($arResult["DISPLAY_PROPERTIES"]["BRAND"]["VALUE"]) && $arResult["PROPE
 $arResult["BRAND_ITEM"]=$arBrand;
 
 /*stores product*/
-$arStores=COptimusCache::CCatalogStore_GetList(array(), array("ACTIVE" => "Y"), false, false, array());
-$arResult["STORES_COUNT"] = count($arStores);
+if ($arParams['USE_STORE'] === 'Y'){
+	$arStores=COptimusCache::CCatalogStore_GetList(array(), array("ID" => \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS), false, false, array());
+	$arResult['STORES_INFO']["STORES_COUNT"] = count($arStores);
+	$arStoreId = array();
+	$notEmptyController = array();
+	foreach ($arStores as $store){
+		$arStoreId[] = (int)$store['ID'];
+		$arResult['STORES_INFO']['AMOUNT'][(int)$store['ID']] = 0;
+		$notEmptyController[(int)$store['ID']] = false;
+	}
+	$arResult['STORES_INFO']['STORES'] = $arStores;
+	$elementIds = array();
+	if (empty($arResult['OFFERS'])){
+		$elementIds[] = (int)$arResult['ID'];
+	}else{
+		foreach ($arResult['OFFERS'] as $offer)
+			$elementIds[] = $offer['ID'];
+	}
+	$arDb = \Bitrix\Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => $arStoreId, 'PRODUCT_ID' => $elementIds), 'select' => array('AMOUNT', 'STORE_ID')));
+	while ($ar = $arDb->fetch()){
+		$arResult['STORES_INFO']['AMOUNT'][$ar['STORE_ID']] += $ar['AMOUNT'];
+		if ((int)$ar['AMOUNT'] > 0) $notEmptyController[$ar['STORE_ID']] = true;
+	}
+	$arResult['STORES_INFO']['NOT_EMPTY_COUNT'] = 0;
+	foreach ($notEmptyController as $flag)
+		if ($flag)
+			$arResult['STORES_INFO']['NOT_EMPTY_COUNT'] += 1;
+}
+
+
 
 /*get tizers section*/
 if(is_array($arParams["SECTION_TIZER"]) && $arParams["SECTION_TIZER"]){

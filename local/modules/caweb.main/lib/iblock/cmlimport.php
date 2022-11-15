@@ -151,8 +151,10 @@ class cmlImport  extends \CIBlockCMLImport {
             }
         }
 
-        if(isset($arElement["STORE_AMOUNT"]))
+        if(isset($arElement["STORE_AMOUNT"])){
+            $this->mergeShelehovStoresAmount($arElement["STORE_AMOUNT"]);
             $this->ImportStoresAmount($arElement["STORE_AMOUNT"], $arElement["ID"], $counter);
+        }
 
         if($arDBElement)
         {
@@ -1487,5 +1489,14 @@ class cmlImport  extends \CIBlockCMLImport {
             $newArray['n0']['VALUE'] = $enumId;
         $properties[$propId] = $newArray;
     }
-
+    protected function mergeShelehovStoresAmount(&$arStoresAmount){
+        $mergeStoreAmount = 0;
+        $arMergeStoreXML = array('61d1a808-394d-11ed-b9ce-2cf05d5995e6', '61d1a809-394d-11ed-b9ce-2cf05d5995e6');//xml id складов в шелехове из 1с
+        foreach ($arStoresAmount as $xml => $amount){
+            if (!in_array($xml, $arMergeStoreXML)) continue;
+            $mergeStoreAmount += $amount;
+            $arStoresAmount[$xml] = 0;
+        }
+        $arStoresAmount['shelehov_all_stores'] = $mergeStoreAmount;
+    }
 }

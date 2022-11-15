@@ -17,6 +17,7 @@ class COptimus{
 	const moduleID		= OPTIMUS_MODULE_ID;
     const wizardID		= "aspro:optimus";
 	const devMode 		= false;
+	private static $stockIndexController = 40;
 
 	private static $arMetaParams = array();
 
@@ -1077,7 +1078,7 @@ class COptimus{
 		return self::CheckTypeCount($totalCount);
 	}
 
-	function GetQuantityArray($totalCount, $arItemIDs = array(), $useStoreClick="N", $for_order = false){
+	function GetQuantityArray($totalCount, $arItemIDs = array(), $useStoreClick="N", $for_order = false, $storeCount = false, $stores = false, $offer_id = null){
 		static $arQuantityOptions, $arQuantityRights;
 		if ($for_order) $totalCount = 0;
 		if($arQuantityOptions === NULL){
@@ -1115,6 +1116,9 @@ class COptimus{
 		$totalAmount = $totalText = $totalHTML = $totalHTMLs = '';
 
 		if($arQuantityRights["SHOW_QUANTITY"]){
+
+
+
 			if($totalCount > $arQuantityOptions["MAX_AMOUNT"]){
 				$indicators = 3;
 				$totalAmount = $arQuantityOptions["EXPRESSION_FOR_MAX"];
@@ -1128,7 +1132,7 @@ class COptimus{
 				$totalAmount = $arQuantityOptions["EXPRESSION_FOR_MID"];
 			}
 
-			if($totalCount > 0){
+			/*if($totalCount > 0){
 				if($arQuantityRights["SHOW_QUANTITY_COUNT"]){
 					$totalHTML = '<span class="first'.($indicators >= 1 ? ' r' : '').'"></span><span class="'.($indicators >= 2 ? ' r' : '').'"></span><span class="last'.($indicators >= 3 ? ' r' : '').'"></span>';
 				}
@@ -1138,7 +1142,7 @@ class COptimus{
 			}
 			else{
 				$totalHTML = '<span class="null"></span>';
-			}
+			}*/
 
 			//$totalText = ($totalCount > 0 ? $arQuantityOptions["EXPRESSION_FOR_EXISTS"] : $arQuantityOptions["EXPRESSION_FOR_NOTEXISTS"]);
 			if($totalCount > 0){
@@ -1171,9 +1175,50 @@ class COptimus{
 					}
 				}
 			}
-			$totalHTMLs ='<div class="item-stock" '.($arItemIDs["STORE_QUANTITY"] ? "id=".$arItemIDs["STORE_QUANTITY"] : "").'>';
-			$totalHTMLs .= '<span class="icon '.$arClass[1].($totalCount > 0 ? 'stock' : ' order').'"></span><span class="value">'.$totalText.'</span>';
-			$totalHTMLs .='</div>';
+
+
+            if (!empty($storeCount) && ($totalCount > 0)){
+                $totalText = $totalText.' в '.$storeCount.(($storeCount === 2) ? ' магазинах': ' магазине');
+                if ($useStoreClick !== "Y"){
+                    $k = 1;
+                    $popup = '<div class="item-stock-popup">';
+                    foreach ($stores as $store){
+                        $text = $arQuantityOptions["EXPRESSION_FOR_MID"];
+                        if($store['AMOUNT'] > $arQuantityOptions["MAX_AMOUNT"]) $text = $arQuantityOptions["EXPRESSION_FOR_MAX"];
+                        if($store['AMOUNT'] < $arQuantityOptions["MIN_AMOUNT"] && $totalCount > 0) $text = $arQuantityOptions["EXPRESSION_FOR_MIN"];
+                        if ($store['AMOUNT'] === 0) $text = 'Под заказ';
+                        $popup .= '<div class="store-item"><div class="stock-address">'.$store['ADDRESS'].'</div>';
+                        $popup .= '<div class="item-stock"><span class="icon '.($store['AMOUNT'] > 0 ? 'stock' : ' order').'"></span><span class="value">'.$text.'</span></div>';
+                        $popup .='</div>';
+                        if($k < count($stores))
+                            $popup .= '<div class="stock-separator"></div>';
+                        $k++;
+                    }
+                    $popup .= '</div>';
+                }
+                self::$stockIndexController = $zIndex = self::$stockIndexController - 1;
+
+                $totalHTMLs ='<div class="item-stock" style="z-index: '.$zIndex.'">';
+                $totalHTMLs .= '<span class="icon stock"></span><span class="value">';
+                if ($useStoreClick == "Y")
+                    $totalHTMLs .= '<a href="#element_stores_block_scroll">'.$totalText.'</a>';
+                else
+                    $totalHTMLs .= '<a href="javascript:void(0)">'.$totalText.'</a>';
+
+                $totalHTMLs .= '</span>';
+
+                if (!empty($popup)) $totalHTMLs .= $popup;
+                $totalHTMLs .='</div>';
+            }else{
+                $totalHTMLs ='<div class="item-stock" '.($arItemIDs["STORE_QUANTITY"] ? "id=".$arItemIDs["STORE_QUANTITY"] : "").'>';
+                $totalHTMLs .= '<span class="icon '.$arClass[1].($totalCount > 0 ? 'stock' : ' order').'"></span><span class="value">'.$totalText.'</span>';
+                $totalHTMLs .='</div>';
+            }
+
+
+
+
+
 		}
 
 		$arOptions = array("OPTIONS" => $arQuantityOptions, "RIGHTS" => $arQuantityRights, "TEXT" => $totalText, "HTML" => $totalHTMLs);

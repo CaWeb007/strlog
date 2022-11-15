@@ -111,18 +111,18 @@ use Bitrix\Main\ModuleManager;
 					viewedCounter.params
 				);
 			<?//}?>
-			if( $('.stores_tab').length ){
+			if( $('.element-stores-block-sku').length ){
 				$.ajax({
 					type:"POST",
 					url:arOptimusOptions['SITE_DIR']+"ajax/productStoreAmount.php",
 					data:<?=CUtil::PhpToJSObject($templateData["STORES"], false, true, true)?>,
 					success: function(data){
 						var arSearch=parseUrlQuery();
-						$('.tabs_content .stores_tab').html(data);
+						$('.element-stores-block .store-list').html(data);
 						if("oid" in arSearch)
-							$('.stores_tab .sku_stores_'+arSearch.oid).show();
+							$('.element-stores-block .store-list .sku_stores_'+arSearch.oid).show();
 						else
-							$('.stores_tab > div:first').show();
+							$('.element-stores-block .store-list > div:first').show();
 
 					}
 				});

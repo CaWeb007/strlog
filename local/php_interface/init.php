@@ -39,6 +39,11 @@ EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserAutho
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnAfterUserUpdate', array('Caweb\Main\Sale\Bonus', 'updateSessionsData'));
 EventManager::getInstance()->addEventHandlerCompatible('main', 'OnBeforeEventAdd', array('Caweb\Main\Events\Main', 'OnBeforeEventAdd'));
 /**контроль остатков линолеума*/
+//region StoreActiveController
+$callback = array('Caweb\Main\Events\Catalog', 'storeActiveController');
+EventManager::getInstance()->addEventHandlerCompatible('catalog', 'OnBeforeCatalogStoreAdd', $callback);
+EventManager::getInstance()->addEventHandlerCompatible('catalog', 'OnBeforeCatalogStoreUpdate', $callback);
+//endregion
 EventManager::getInstance()->addEventHandler('sale', 'OnSaleBasketBeforeSaved', array('Caweb\Main\Events\Sale', 'linoMinBalanceController'));
 
 EventManager::getInstance()->addEventHandlerCompatible('forum', 'onBeforeMessageAdd', array('Caweb\Main\Events\Forum', 'checkSpam'));

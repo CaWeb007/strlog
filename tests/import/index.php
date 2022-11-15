@@ -5,9 +5,16 @@ $APPLICATION->SetTitle("Новая страница");
 
 $_GET['type'] = 'catalog';
 $_GET['mode'] = 'import';
-$_GET['filename'] = 'import___7bad8a38-830b-4d04-853d-97000d3631ff.xml';
+//$_GET['filename'] = 'import___7bad8a38-830b-4d04-853d-97000d3631ff.xml';
+//$_GET['filename'] = 'import___5dcd7fc9-86f2-4e59-a27e-4acfb8ad2505.xml';
+//$_GET['filename'] = 'import1___5f139ffa-5977-44bf-b950-aa3e894d11d6.xml';
+//$_GET['filename'] = 'goods/1/import___096e21d9-16f7-45a7-a7bc-a8696f9ea25b.xml';
+//$_GET['filename'] = 'goods/1/offers___dbd95f41-9a40-4d87-b8b9-fa458ac53dca.xml';
+//$_GET['filename'] = 'goods/1/prices___d6c3c0f8-a828-41a9-b7c2-e85eaa6d43fc.xml';
+$_GET['filename'] = 'goods/1/rests___9c6c9c54-29b3-4b9a-8ce9-f1c8bca1a3fd.xml';
 $_SESSION["BX_CML2_IMPORT"]["zip"] = null;
-$_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"] = '/home/bitrix/www/tests/import/1/';
+//$_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"] = '/home/bitrix/www/tests/import/1/';
+$_SESSION["BX_CML2_IMPORT"]["TEMP_DIR"] = '/home/bitrix/www/tests/import/2/';
 //if($_SESSION["BX_CML2_IMPORT"]["NS"] == 6) $_SESSION["BX_CML2_IMPORT"]["NS"] = 7;
 //$_GET['mode'] = 'init';
 

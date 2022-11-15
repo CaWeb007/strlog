@@ -3066,8 +3066,8 @@ window.JCCatalogElement.prototype.setBuyBlock = function(th, obj)
 /*set store block*/
 window.JCCatalogElement.prototype.setStoreBlock = function(id)
 {
-	$('.stores_tab > div').hide();
-	$('.stores_tab .sku_stores_'+id).show();
+	$('.element-stores-block .store-list > div').hide();
+	$('.element-stores-block .store-list .sku_stores_'+id).fadeIn(400);
 }
 
 /*set store quantity*/

@@ -471,6 +471,85 @@
 }
 
 /* pickup */
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content{
+    padding: 0;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12{
+    display: flex;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 #pickUpMap{
+    order: 2;
+    margin-bottom: 0 !important;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 #pickUpMap * {
+    box-sizing: content-box !important;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 #pickUpMap ymaps[class*="zoom__runner"]{
+    width: initial !important;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list{
+    order: 1;
+    margin-bottom: 0;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-subTitle{
+    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list .bx-soa-pickup-list-item{
+    padding: 16px 10px 16px 35px;
+    cursor: pointer;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list .bx-soa-pickup-list-item .bx-soa-pickup-l-item-adress{
+    padding-left: 0;
+    padding-right: 0;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list .bx-soa-pickup-list-item .bx-soa-pickup-l-item-schedule{
+    width: 100px;
+    font-size: 12px;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list .bx-soa-pickup-list-item .bx-soa-pickup-l-item-adress:before{
+    left: -25px;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list .bx-soa-pickup-list-item .bx-soa-pickup-l-item-detail{
+    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 .bx-soa-pickup-list .bx-soa-pickup-list-item .bx-soa-pickup-l-item-btn{
+    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+#bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx-soa-more{
+    margin: 0;
+    padding: 20px;
+}
+
+@media (max-width: 500px) {
+    #bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12{
+        display: block;
+    }
+    #bx-soa-order #bx-soa-pickup.bx-selected .bx-soa-section-content .bx_soa_pickup > .col-xs-12 #pickUpMap{
+        display: none;
+        position: absolute;
+        height: 0;
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
 #pickUpMap img {
     max-height: initial;
 }

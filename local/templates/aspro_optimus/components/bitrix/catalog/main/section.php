@@ -514,6 +514,8 @@ if($isAjaxFilter == "Y")
 						"CONVERT_CURRENCY" => $arParams["CONVERT_CURRENCY"],
 						"CURRENCY_ID" => $arParams["CURRENCY_ID"],
 						"USE_STORE" => $arParams["USE_STORE"],
+						'STORES' => $arParams['STORES'],
+						'STORE_PATH' => $arParams['STORE_PATHS'],
 						"MAX_AMOUNT" => $arParams["MAX_AMOUNT"],
 						"MIN_AMOUNT" => $arParams["MIN_AMOUNT"],
 						"USE_MIN_AMOUNT" => $arParams["USE_MIN_AMOUNT"],

@@ -5776,9 +5776,9 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					html += '<img src="' + imgSrc + '" class="bx-soa-pickup-preview-img">';
 				}
 
-				html += '<strong>' + BX.util.htmlspecialchars(selectedPickUp.TITLE) + '</strong>';
+				// html += '<strong>' + BX.util.htmlspecialchars(selectedPickUp.TITLE) + '</strong>';
 				if (selectedPickUp.ADDRESS)
-					html += '<br><strong>' + BX.message('SOA_PICKUP_ADDRESS') + ':</strong> ' + BX.util.htmlspecialchars(selectedPickUp.ADDRESS);
+					html += '<strong>' + BX.message('SOA_PICKUP_ADDRESS') + ':</strong> ' + BX.util.htmlspecialchars(selectedPickUp.ADDRESS);
 
 				if (selectedPickUp.PHONE)
 					html += '<br><strong>' + BX.message('SOA_PICKUP_PHONE') + ':</strong> ' + BX.util.htmlspecialchars(selectedPickUp.PHONE);
@@ -6163,6 +6163,10 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 							BX.util.htmlspecialchars(currentStore.ADDRESS),
 							' ( ~' + options.distance + ' ' + BX.message('SOA_DISTANCE_KM') + ' ) '
 						] : [BX.util.htmlspecialchars(currentStore.ADDRESS)]
+					}),
+					BX.create('DIV', {
+						props: {className: 'bx-soa-pickup-l-item-schedule'},
+						text: BX.util.htmlspecialchars(currentStore.SCHEDULE)
 					}),
 					BX.create('DIV', {
 						props: {className: imgClassName},

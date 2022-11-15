@@ -22,7 +22,7 @@ if(strlen($arResult["ERROR_MESSAGE"]) > 0){
 		<?$empty_count=0;
 		$count_stores=count($arResult["STORES"]);?>
 		<?foreach($arResult["STORES"] as $pid => $arProperty):
-			if($arParams['SHOW_EMPTY_STORE'] == 'N' && $arProperty['AMOUNT'] <= 0)
+			if($arParams['SHOW_EMPTY_STORE'] == 'N' && (int)$arProperty['REAL_AMOUNT'] <= 0)
 				$empty_count++;?>
 			<div class="stores_block <?=(isset($arProperty["IMAGE_ID"]) && !empty($arProperty["IMAGE_ID"]) ? 'w_image' : 'wo_image')?>" style="display: <? echo ($arParams['SHOW_EMPTY_STORE'] == 'N' && $arProperty['AMOUNT'] <= 0 ? 'none' : ''); ?>;">
 				<div class="stores_text_wrapp <?=(isset($arProperty["IMAGE_ID"]) && !empty($arProperty["IMAGE_ID"]) ? 'image_block' : '')?>">

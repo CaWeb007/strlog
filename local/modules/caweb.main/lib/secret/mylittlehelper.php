@@ -20,6 +20,7 @@ use Bitrix\Sale\Internals\OrderTable;
 use Bitrix\Sale\Internals\UserPropsTable;
 use Bitrix\Sale\Internals\UserPropsValueTable;
 use Bitrix\Sale\Order;
+use Caweb\Main\Catalog\Helper as CatalogHelper;
 use Caweb\Main\Sale\Bonus;
 
 /**usage   \Bitrix\Main\Loader::includeModule('caweb.main');*/
@@ -436,6 +437,20 @@ class MyLittleHelper {
         $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => self::CATALOG_IBLOCK, 'PROPERTY_90' => 'Заказная позиция'), false, false, array('ID'));
         while ($iterator = $db->Fetch()){
             \CIBlockElement::SetPropertyValuesEx($iterator['ID'], self::CATALOG_IBLOCK, array(self::PROPERTY_ORDER_ITEM_ID => self::ENUM_ORDER_ITEM_ID));
+        }
+    }
+    /**usage
+    //title: catalog store deactivates
+    \Bitrix\Main\Loader::includeModule('caweb.main');
+    \Caweb\Main\Secret\MyLittleHelper::catalogStoreDeactivate();
+     */
+    public static function catalogStoreDeactivate(){
+        Loader::includeModule('catalog');
+        $db = \CCatalogStore::GetList();
+        while ($ar = $db->Fetch()){
+            if (!in_array((int)$ar['ID'], CatalogHelper::ACTIVE_STORE_IDS)){
+                \CCatalogStore::Update((int)$ar['ID'], array('ACTIVE' => 'N'));
+            }
         }
     }
 }

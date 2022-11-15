@@ -125,13 +125,13 @@ $(document).ready(function() {
     });
 /*Top menu*end*/
     $(document).click(function (e){
-        var ourProjectsDropdown = $(".our-projects-dropdown-wrapper");
+/*        var ourProjectsDropdown = $(".our-projects-dropdown-wrapper");
         var ourProjects = $('.our-projects');
         if (!ourProjectsDropdown.is(e.target) && ourProjectsDropdown.has(e.target).length === 0 && !ourProjects.is(e.target) && ourProjects.has(e.target).length === 0) {
             drop.isDropped = false;
             drop.isScaled = false; //Переворот стрелочки
             dropCount = 0;
-        }
+        }*/
         var topDropdownMenu = $(".strlog-top-dropdown-menu-first-point");
         var topDropdownSubmenu = $('.strlog-top-dropdown-submenu');
         if (!topDropdownMenu.is(e.target) && topDropdownMenu.has(e.target).length === 0 && !topDropdownSubmenu.is(e.target) && topDropdownSubmenu.has(e.target).length === 0) {

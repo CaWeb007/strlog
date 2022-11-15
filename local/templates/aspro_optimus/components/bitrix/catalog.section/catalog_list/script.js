@@ -1240,10 +1240,9 @@ window.JCCatalogSection.prototype.ChangeInfo = function()
 
 		$(this.obBuyBtn).data("item", this.offers[index].ID);
 		$(this.obBasketBtn).data("item", this.offers[index].ID);
-
 		$(this.obBasketActions).closest('.counter_wrapp').css('opacity', 0);
 
-		this.setQuantityStore(this.offers[index].MAX_QUANTITY, this.offers[index].AVAILIABLE.TEXT);
+		this.setQuantityStore(this.visual.ID, this.offers[index].ID);
 		this.offerNum = index;
 		this.QuantitySet(this.offerNum);
 
@@ -1833,16 +1832,10 @@ window.JCCatalogSection.prototype.setPrice = function(change, sku, obPrices, mea
 };
 
 /*set store quantity*/
-window.JCCatalogSection.prototype.setQuantityStore = function(quantity, text)
+window.JCCatalogSection.prototype.setQuantityStore = function(elementId, offerId)
 {
-	if(parseFloat(quantity)>0){
-		$(this.storeQuanity).find('.icon').removeClass('order').addClass('stock');
-		//$(this.storeQuanity).find('.icon + span').html(BX.message('QUANTITY_AVAILIABLE')+' ('+quantity+')');
-	}else{
-		$(this.storeQuanity).find('.icon').removeClass('stock').addClass('order');
-		//$(this.storeQuanity).find('.icon + span').html(BX.message('QUANTITY_NOT_AVAILIABLE'));
-	}
-	$(this.storeQuanity).find('.icon + span').html(text);
+	$('#' + elementId).find('div[id^="offer_block_"]').hide();
+	$('#offer_block_' + offerId).fadeIn();
 }
 
 window.JCCatalogSection.prototype.Compare = function()

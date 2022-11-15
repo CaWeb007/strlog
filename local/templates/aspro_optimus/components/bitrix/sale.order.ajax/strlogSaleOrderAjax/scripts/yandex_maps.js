@@ -123,46 +123,12 @@ BX.namespace('BX.Sale.OrderAjaxComponent.Maps');
 				});
 
 				var geoObj = new ymaps.Placemark([activeStores[i].GPS_N, activeStores[i].GPS_S], {
-					hintContent: BX.util.htmlspecialchars(activeStores[i].TITLE) + '<br />' + BX.util.htmlspecialchars(activeStores[i].ADDRESS),
+					hintContent: BX.util.htmlspecialchars(activeStores[i].ADDRESS),
 					storeTitle: activeStores[i].TITLE,
 					storeBody: storeInfoHtml,
 					id: activeStores[i].ID,
 					text: this.context.params.MESS_SELECT_PICKUP
-				}, {
-					balloonContentLayout: ymaps.templateLayoutFactory.createClass(
-						'<h3>{{ properties.storeTitle }}</h3>' +
-						'{{ properties.storeBody|raw }}' +
-						'<br /><a class="btn btn-sm btn-default" data-store="{{ properties.id }}">{{ properties.text }}</a>',
-						{
-							build: function() {
-								this.constructor.superclass.build.call(this);
-
-								var button = document.querySelector('a[data-store]');
-								if (button)
-									BX.bind(button, 'click', this.selectStoreByClick);
-							},
-							clear: function() {
-								var button = document.querySelector('a[data-store]');
-								if (button)
-									BX.unbind(button, 'click', this.selectStoreByClick);
-
-								this.constructor.superclass.clear.call(this);
-							},
-							selectStoreByClick: function(e) {
-								var target = e.target || e.srcElement;
-
-								if (that.pickUpMap.container.isFullscreen())
-								{
-									that.pickUpMap.container.exitFullscreen();
-								}
-
-								that.context.selectStore(target.getAttribute('data-store'));
-								that.context.clickNextAction(e);
-								that.pickUpMap.balloon.close();
-							}
-						}
-					)
-				});
+				}, {});
 
 				if (BX('BUYER_STORE').value === activeStores[i].ID)
 				{

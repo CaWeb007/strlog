@@ -2,7 +2,9 @@
 namespace Caweb\Main\Events;
 
 use Bitrix\Catalog\GroupTable;
+use Bitrix\Catalog\StoreTable;
 use Bitrix\Catalog\SubscribeTable;
+use Bitrix\Main\DB\Exception;
 use Bitrix\Main\Loader;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\BasketItem;
@@ -11,6 +13,7 @@ use Bitrix\Sale\Order;
 use Bitrix\Sale\Payment;
 use Bitrix\Sale\PaymentCollection;
 use Bitrix\Sale\PropertyValue;
+use Bitrix\Sale\Shipment;
 use Caweb\Main\Catalog\Helper as CatalogHelper;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Application;
@@ -117,14 +120,17 @@ class Helper{
     public static function updateProperty(Order $order) {
         $propertyCollection = $order->getPropertyCollection();
         $couponProperty = null;
+        $shipmentProperty = null;
         $couponPriceXMLIdProperty = null;
         if ((int)$order->getPersonTypeId() === 1){
             $couponProperty = $propertyCollection->getItemByOrderPropertyId(39);
             $couponPriceXMLIdProperty = $propertyCollection->getItemByOrderPropertyId(41);
+            $shipmentProperty = $propertyCollection->getItemByOrderPropertyId(43);
         }
         elseif ((int)$order->getPersonTypeId() === 2){
             $couponProperty = $propertyCollection->getItemByOrderPropertyId(40);
             $couponPriceXMLIdProperty = $propertyCollection->getItemByOrderPropertyId(42);
+            $shipmentProperty = $propertyCollection->getItemByOrderPropertyId(44);
         }
         if ($couponProperty instanceof PropertyValue){
             if (empty($couponProperty->getValue())){
@@ -143,6 +149,18 @@ class Helper{
                     if (!empty($couponPriceXMLId)) $couponPriceXMLIdProperty->setValue($couponPriceXMLId);
                 }catch (\Exception $e){}
             }
+        }
+
+        if ($shipmentProperty instanceof PropertyValue){
+            try {
+                $shipmentCollection = $order->getShipmentCollection();
+                foreach ($shipmentCollection as $shipment){
+                    if (empty($shipment->getStoreId()) && !($shipment instanceof Shipment)) continue;
+                    $shipmentAddress = StoreTable::getRowById($shipment->getStoreId())['ADDRESS'];
+                    if (!empty($shipmentAddress))
+                        $shipmentProperty->setValue($shipmentAddress);
+                }
+            }catch (\Exception $e){}
         }
         return $order;
     }
