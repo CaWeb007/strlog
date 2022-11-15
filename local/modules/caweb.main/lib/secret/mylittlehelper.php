@@ -26,6 +26,7 @@ use Caweb\Main\Sale\Bonus;
 /**usage   \Bitrix\Main\Loader::includeModule('caweb.main');*/
 class MyLittleHelper {
     public const CATALOG_IBLOCK = 16;
+    public const NECONDITION_IBLOCK = 24;
     public const PROPERTY_ORDER_ITEM_ID = 710;
     public const ENUM_ORDER_ITEM_ID = 15984;
     /**usage   \Caweb\Main\Secret\MyLittleHelper::SortEnumOffer();*/
@@ -451,6 +452,22 @@ class MyLittleHelper {
             if (!in_array((int)$ar['ID'], CatalogHelper::ACTIVE_STORE_IDS)){
                 \CCatalogStore::Update((int)$ar['ID'], array('ACTIVE' => 'N'));
             }
+        }
+    }
+    /**usage
+    //title: delete necondition order items
+    \Bitrix\Main\Loader::includeModule('caweb.main');
+    \Caweb\Main\Secret\MyLittleHelper::deleteOrderItems();
+     */
+    public static function deleteOrderItems(){
+        Loader::includeModule('iblock');
+        $traitsPropertyId = 358;
+        $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => self::NECONDITION_IBLOCK));
+        while($ar = $db->GetNextElement()){
+            $traits = $ar->GetProperty($traitsPropertyId);
+            $elementId = (int)$ar->GetFields()['ID'];
+            if (!in_array('Заказная позиция', $traits['VALUE'])) continue;
+            \CIBlockElement::Delete($elementId);
         }
     }
 }
