@@ -520,7 +520,7 @@ ul.tabs li.stretch { display: none; }
 
 	/* skritie naborov i komplektov */
 	td.logo_wrapp div.logo { /*padding: 0 17px 0px 0px ;*/  }
-	.breadcrumbs { display: none; }
+	/*.breadcrumbs { display: none; }*/
 	body .personal_page .breadcrumbs {display: block;padding: 25px 0px 0px;margin: 0px;}
 	.module-cart table td.remove-cell { padding: 2px; width: 10px; }
 	body .module-cart table td.thumb-cell a { height: 40px; width: 40px; }
