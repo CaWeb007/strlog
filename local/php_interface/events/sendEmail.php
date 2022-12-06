@@ -116,7 +116,20 @@ function OnOrderNewSendEmailHandler($newOrderId, &$eventName, &$arFields)
 		$arFields["ORDER_USER"] = ($familiya?$familiya:"");
 		$arFields["ORDER_USER"] .= ($arFields["ORDER_USER"]?" ":"") . $name;
 		$arFields["ORDER_USER"] .= ($otchestvo?" ":"") . $otchestvo;*/
-		
+
+        $orderInfo = \Bitrix\Sale\Order::load($newOrderId);  // по ID заказа получаем обьект
+
+        $store_id = false;
+        foreach ($orderInfo->getShipmentCollection() as $s){
+            $store_id = $s->getStoreId();
+            if ($store_id) {
+                break;
+            }
+        }
+        if ((int)$store_id === 88){
+            $arFields['BCC'] = 'ro_sh@strlog.ru';
+        }
+
 		$arFields["ORDER_DESCRIPTION"] = $arOrder["USER_DESCRIPTION"];
 		$arFields["PHONE"] =  $phone;
 		$arFields["DELIVERY_NAME"] =  $delivery_name;
