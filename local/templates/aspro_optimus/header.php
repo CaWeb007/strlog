@@ -466,18 +466,6 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
             ),
             false
         );?>
-		<?$uGr = getGroupUser()?>
-		<?$fileXLS = getFilePrice($uGr);?>
-		<?$exp = explode("/",$fileXLS)?>
-		<?$filename = end($exp);?>
-		<?if($fileXLS):?>
-			<div class="left_price">
-				<a target="_blanc" title="Прайс лист" href="/price/?filename=<?=$filename?>">
-					<span class="left_price_title">Прайс лист </span>
-					<span class="left_price_date"> (<?=date('d.m.Y',filemtime($fileXLS))?>)<!--(07.05.2018 12:35)--></span>
-				</a>
-			</div>
-		<?endif;?>
     </div>
     <div class="right_block">
 <?}?>

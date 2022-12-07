@@ -28,12 +28,5 @@ $aMenuLinks = Array(
 		Array(), 
 		"" 
 	),
-	Array(
-		"Прайс лист", 
-		"", 
-		Array(), 
-		Array(), 
-		"" 
-	)
 );
 ?>

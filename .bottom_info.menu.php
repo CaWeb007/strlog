@@ -1,5 +1,12 @@
 <?
 $aMenuLinks = Array(
+    Array(
+        "Покупателям",
+        "/info/",
+        Array(),
+        Array(),
+        ""
+    ),
 	Array(
 		"Акции", 
 		"/sale/", 
@@ -29,8 +36,22 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
+		"Корпоративным клиентам",
+		"/info/korporativnym-klientam/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
+		"Тендерный отдел",
+		"/info/tendernyy-otdel/",
+		Array(),
+		Array(),
+		""
+	),
+	Array(
 		"Бонусная программа", 
-		"http://strlogclub.ru/about/", 
+		"http://strlogclub.ru/",
 		Array(), 
 		Array(), 
 		"" 

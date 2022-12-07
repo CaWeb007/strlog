@@ -219,6 +219,14 @@ html {
     .fast_view_frame.popup #fast_view_item .item_main_info .element-stores-block .store-block-title {
       margin-bottom: 10px; }
 
+.bottom_menu_title {
+  font-size: 20px !important;
+  text-transform: none;
+  font-weight: 600;
+  color: #666666;
+  margin-bottom: 10px !important;
+  display: inline-block; }
+
 @media (max-width: 550px) {
   .item_main_info .element-stores-block {
     padding: 20px 0 5px;

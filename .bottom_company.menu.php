@@ -1,5 +1,12 @@
 <?
 $aMenuLinks = Array(
+    Array(
+        "Стройлогистика",
+        "/company/",
+        Array(),
+        Array(),
+        ""
+    ),
 	Array(
 		"О компании", 
 		"/company/", 
@@ -12,7 +19,14 @@ $aMenuLinks = Array(
 		"/company/stores/", 
 		Array(), 
 		Array(), 
-		"" 
+		""
+	),
+	Array(
+		"Вакансии",
+		"https://irkutsk.hh.ru/employer/1457415",
+		Array(),
+		Array(),
+		""
 	),
 	Array(
 		"Партнеры", 
@@ -25,14 +39,7 @@ $aMenuLinks = Array(
 		"Поставщикам", 
 		"/company/postavshikam/", 
 		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Вакансии", 
-		"/company/jobs/", 
-		Array(), 
-		Array(), 
+		Array(),
 		"" 
 	),
 	Array(

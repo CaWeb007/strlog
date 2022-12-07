@@ -1,5 +1,12 @@
 <?
 $aMenuLinks = Array(
+    Array(
+        "Помощь",
+        "/help/",
+        Array(),
+        Array(),
+        ""
+    ),
 	Array(
 		"Как заказать", 
 		"/help/order/", 
@@ -12,7 +19,14 @@ $aMenuLinks = Array(
 		"/help/payment/", 
 		Array(), 
 		Array(), 
-		"" 
+		""
+	),
+	Array(
+		"Как проехать",
+		"/company/contacts/",
+		Array(),
+		Array(),
+		""
 	),
 	Array(
 		"Доставка", 
@@ -25,21 +39,7 @@ $aMenuLinks = Array(
 		"Обмен и возврат", 
 		"/help/warranty/", 
 		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Обзоры", 
-		"/help/articles/", 
-		Array(), 
-		Array(), 
-		"" 
-	),
-	Array(
-		"Вопрос-ответ", 
-		"/help/faq/", 
-		Array(), 
-		Array(), 
+		Array(),
 		"" 
 	)
 );
