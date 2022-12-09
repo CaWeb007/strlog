@@ -1,7 +1,9 @@
 <?
 namespace Caweb\Main\Events;
+use Bitrix\Main\GroupTable;
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\UserGroupTable;
 use Bitrix\Main\UserTable;
 use Bitrix\Sale\Internals\UserPropsTable;
 use Caweb\Main\Catalog\Helper as CatalogHelper;
@@ -14,6 +16,19 @@ class Main{
         if (empty($arFields["PERSONAL_PROFESSION"]))
             $arFields["PERSONAL_PROFESSION"] = 'КП(ФИЗ)';
         if (($arFields["PERSONAL_PROFESSION"]=="КП(ЮР)") && !Helper::checkLegal($arFields)){
+            return false;
+        }
+    }
+    public function OnBeforeUserLogin(&$arFields){
+        $user = \CUser::GetByLogin($arFields['LOGIN'])->Fetch();
+        if ($user['ACTIVE'] === 'Y') return;
+        $groupTO = !empty(UserGroupTable::getRow(array('filter' => array(
+            'USER_ID' => (int)$user['ID'],
+            'GROUP_ID' => 11
+        ))));
+        if ($groupTO){
+            global $APPLICATION;
+            $APPLICATION->throwException("Ваш аккаунт торговой организации был заблокирован. Пожалуйста обратитесь к Вашему менеджеру");
             return false;
         }
     }

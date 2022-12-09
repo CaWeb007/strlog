@@ -470,4 +470,20 @@ class MyLittleHelper {
             \CIBlockElement::Delete($elementId);
         }
     }
+    /**usage
+    //title: deactivate TO users
+    \Bitrix\Main\Loader::includeModule('caweb.main');
+    \Caweb\Main\Secret\MyLittleHelper::deactivateTOUsers();
+     */
+    public static function deactivateTOUsers(){
+        $order = array('sort' => 'asc');
+        $tmp = 'sort'; //
+        $db = \CUser::GetList($order, $tmp, array('GROUPS_ID' => array(11)));
+/*        $db->NavStart();
+        $c = $db->NavRecordCount;*/
+        $user = new \CUser;
+        while ($ar = $db->Fetch()){
+            $user->Update((int)$ar['ID'], array('ACTIVE' => 'N'));
+        }
+    }
 }

@@ -10,6 +10,7 @@ foreach(glob(__DIR__."/events/*") as $file){
     if(is_file($file) && pathinfo($file,PATHINFO_EXTENSION) == "php") include($file);
 }
 AddEventHandler("main", "OnBeforeUserRegister", array('Caweb\Main\Events\Main', 'OnBeforeUserRegister'));
+AddEventHandler("main", "OnBeforeUserLogin", array('Caweb\Main\Events\Main', 'OnBeforeUserLogin'));
 EventManager::getInstance()->addEventHandler('sale', 'OnBeforeShipmentDeleted',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDeleted'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Shipment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforeShipmentDelete'));
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Payment::OnBeforeDelete',array('Caweb\Main\Events\Sale', 'OnBeforePaymentDelete'));

@@ -115,6 +115,10 @@ class Exchange{
         $result['UF_BONUSES'] = $newFields['UF_OSTATOKBONUSOV'];
         $result['UF_BONUS_CARD'] = $newFields['UF_KODBONUSNOYKARTY'];
         $result['UF_ACCUMULATION'] = $newFields['UF_OBSHCHIYOBOROT'];
+
+        if($newFields['UF_GRUPPANASAYTE'] === 'ТО')
+            ((int)$newFields['UF_AKTIVENNASAYTE'] === 1)? $result['ACTIVE'] = 'Y': $result['ACTIVE'] = 'N';
+
         if (empty($oldFields['NAME'])) $result['NAME'] = $newFields['UF_NAME'];
         if (empty($oldFields['PERSONAL_PHONE'])) $result['PERSONAL_PHONE'] = $newFields['UF_TELEFONKONTRAGENT'];
         if (empty($oldFields['UF_INN'])) $result['UF_INN'] = $newFields['UF_INN'];
