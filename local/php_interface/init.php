@@ -58,6 +58,9 @@ EventManager::getInstance()->addEventHandlerCompatible('sale', 'OnCondSaleAction
 
 EventManager::getInstance()->addEventHandler('sale', '\Bitrix\Sale\Internals\Discount::OnBeforeUpdate',array('\Caweb\Main\Sale\Action\Tools', 'DiscountCondController'));
 
+EventManager::getInstance()->addEventHandler('', 'KontragentyOnAfterAdd',array('Caweb\Main\Events\HL', 'OnAfterAddUpdate'));
+EventManager::getInstance()->addEventHandler('', 'KontragentyOnAfterUpdate',array('Caweb\Main\Events\HL', 'OnAfterAddUpdate'));
+EventManager::getInstance()->addEventHandler('', 'KontragentyOnBeforeAdd',array('Caweb\Main\Events\HL', 'OnBeforeAdd'));
 
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){

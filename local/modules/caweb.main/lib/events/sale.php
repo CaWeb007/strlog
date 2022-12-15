@@ -4,9 +4,6 @@ namespace Caweb\Main\Events;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\Entity;
 use Bitrix\Main;
-use Bitrix\Sale\PropertyValue;
-use Caweb\Main\Log\Write;
-use Caweb\Main\User\Exchange;
 Loc::loadLanguageFile(__FILE__);
 class Sale{
     public function OnBeforeShipmentDelete(Entity\Event $event){
@@ -41,7 +38,7 @@ class Sale{
         ));
     }
     public function CheckDoExchange($arFields){
-        if (!Exchange::$doExchange)
+        if (!HL::$doExchange)
             return false;
     }
     public function priceFromPaySystemOrderEntity(Main\Event $event){
