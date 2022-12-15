@@ -41,7 +41,7 @@ if(!class_exists("CAsproOptimusCustom"))
 		function OnAsproGetBuyBlockElementHandler($arItem, $totalCount, $arParams, &$arOptions){
 			//... some code
 			if(isset($arItem['PROPERTIES']['NOT_WORK']) && $arItem['PROPERTIES']['NOT_WORK']["VALUE_ENUM"]=="ДА"){
-				$html = '<div class="alert alert-warning">Снят с производства</div>';
+				$html = '<div class="alert alert-warning">СНЯТ С ПРОДАЖИ</div>';
 				$arOptions['HTML'] = $html;
 			}
 		}

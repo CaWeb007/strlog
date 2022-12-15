@@ -83,6 +83,8 @@ $arQuantityData = COptimus::GetQuantityArray($totalCount, $arItemIDs["ALL_ITEM_I
 
 $arParams["BASKET_ITEMS"]=($arParams["BASKET_ITEMS"] ? $arParams["BASKET_ITEMS"] : array());
 $useStores = $arParams["USE_STORE"] == "Y" && $arResult['STORES_INFO']['STORES_COUNT'] && $arQuantityData["RIGHTS"]["SHOW_QUANTITY"];
+if(isset($arResult['PROPERTIES']['NOT_WORK']) && $arResult['PROPERTIES']['NOT_WORK']["VALUE_ENUM"]=="ДА")
+    $useStores = false;
 $showCustomOffer=(($arResult['OFFERS'] && $arParams["TYPE_SKU"] !="N") ? true : false);
 if($showCustomOffer){
 	$templateData['JS_OBJ'] = $strObName;
