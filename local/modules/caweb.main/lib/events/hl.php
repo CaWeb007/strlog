@@ -56,13 +56,13 @@ class HL{
             if (empty($userFields)){
                 $ID = $user->Add($resultFields);
             }else{
-                if ($user->Update($userFields['ID'], $resultFields)) $ID = $userFields['ID'];
+                if ($user->Update((int)$userFields['ID'], $resultFields)) $ID = $userFields['ID'];
             }
             if (!$ID)
-                throw new \Exception($user->LAST_ERROR);
+                throw new \Exception('Ошибка создания/обновления пользователя: '.$user->LAST_ERROR);
 
             if (empty($userFields)) $instance->sendEmail($ID, $resultFields);
-            $instance->writeSaleAccount($userFields['ID'], $resultFields);
+            $instance->writeSaleAccount($ID, $resultFields);
             if (!empty($fields['UF_ERROR'])){
                 self::$bHandlerStop = true;
                 $entityDataClass::update($id, array('UF_ERROR' => ''));
@@ -141,10 +141,14 @@ class HL{
         if (empty($accountFields)){
             $resAdd = $account->Add($array);
         }else{
-            $resUpdate = $account->Update($accountFields['ID'], $array);
+            $resUpdate = $account->Update((int)$accountFields['ID'], $array);
         }
-        if (!$resAdd)
-            throw new \Exception('Не добавился аккаунт покупателя');
+        if (!$resAdd){
+            $strError = 'хз';
+            if($ex = $GLOBALS["APPLICATION"]->GetException())
+                $strError = $ex->GetString();
+            throw new \Exception('Не добавился аккаунт покупателя: '.$strError);
+        }
         if (!$resUpdate)
             throw new \Exception('Не обновился аккаунт покупателя - '.$accountFields['ID']);
     }
