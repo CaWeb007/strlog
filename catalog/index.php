@@ -716,7 +716,7 @@ $APPLICATION->SetTitle("Каталог");
 		"SHOW_MEASURE" => "Y",
 		"SHOW_MEASURE_WITH_RATIO" => "N",
 		"SHOW_OLD_PRICE" => "Y",
-		"SHOW_ONE_CLICK_BUY" => "Y",
+		"SHOW_ONE_CLICK_BUY" => "N",
 		"SHOW_PRICE_COUNT" => "1",
 		"SHOW_QUANTITY" => "Y",
 		"SHOW_QUANTITY_COUNT" => "Y",
