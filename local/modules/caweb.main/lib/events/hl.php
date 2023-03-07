@@ -15,7 +15,7 @@ class HL{
     public static $doExchange = false;
     protected static $bHandlerStop = false;
     //KontragentyOnAfterAdd
-    //удалим если нет ошибок, либо сохраним
+    //запускает обновление вместо добавления
     public function OnBeforeAdd(\Bitrix\Main\Entity\Event $event){
         $result = new EventResult();
         $entity = $event->getEntity();
@@ -33,6 +33,8 @@ class HL{
             return $result;
         }
     }
+    //обновление и добавление записи, если обновлено без ошибок, очищает поле UF_ERROR, таблица чистится агентом
+    //userExchangeLogs
     public function OnAfterAddUpdate(\Bitrix\Main\Entity\Event $event){
         if (self::$bHandlerStop) return;
         self::$doExchange = true;

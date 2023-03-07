@@ -21,7 +21,6 @@ if(strlen($arResult["ERROR_MESSAGE"]) > 0){
 		<?$empty_count=0;
 		$count_stores=count($arResult["STORES"]);?>
 		<?foreach($arResult["STORES"] as $pid => $arProperty):?>
-
             <?$totalCount = COptimus::CheckTypeCount($arProperty["NUM_AMOUNT"]);?>
             <div class="store-item">
                 <div class="store-title">

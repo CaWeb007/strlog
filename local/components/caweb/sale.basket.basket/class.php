@@ -3183,11 +3183,21 @@ class CBitrixBasketComponent extends CBitrixComponent
 				'select' => array('ID', 'QUANTITY', 'QUANTITY_TRACE', 'CAN_BUY_ZERO'),
 				'filter' => array('@ID' => $elementIds)
 			));
+
+			if(\Caweb\Main\Tools::getInstance()->isTO()){
+                $productStoreIterator = Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS[0], 'PRODUCT_ID' => $elementIds), 'select' => array('PRODUCT_ID','AMOUNT', 'STORE_ID')));
+                $productStoreQuantity = array();
+                while ($ar = $productStoreIterator->fetch()){
+                    $productStoreQuantity[(int)$ar['PRODUCT_ID']] = $ar['AMOUNT'];
+                }
+            }
+
 			while ($product = $productIterator->fetch())
 			{
 				if (!isset($productMap[$product['ID']]))
 					continue;
-
+                if (!empty($productStoreQuantity[(int)$product['ID']]))
+                    $product['QUANTITY'] = $productStoreQuantity[(int)$product['ID']];
 				$check = ($product['QUANTITY_TRACE'] == 'Y' && $product['CAN_BUY_ZERO'] == 'N' ? 'Y' : 'N');
 				foreach ($productMap[$product['ID']] as $key)
 				{

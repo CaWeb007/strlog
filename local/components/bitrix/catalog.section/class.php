@@ -82,7 +82,9 @@ class CatalogSectionComponent extends ElementList
 		{
 			CJSCore::Init(array('popup'));
 		}
-
+        if (\Caweb\Main\Tools::getInstance()->isTO()){
+            $params['STORES'] = array(array_shift($params['STORES']));
+        }
 		return $params;
 	}
     protected function getSort()
@@ -645,6 +647,8 @@ class CatalogSectionComponent extends ElementList
                 $this->elementLinks[$elementId]['CATALOG_STORE_AMOUNT_'.$id] += $offer['CATALOG_STORE_AMOUNT_'.$id];
                 $offer['STORES'][$id]['AMOUNT'] = $offer['CATALOG_STORE_AMOUNT_'.$id];
                 $notEmptyStoreCountController[$id] = true;
+                if (\Caweb\Main\Tools::getInstance()->isTO())
+                    $offer['CATALOG_QUANTITY'] = $offer['~CATALOG_QUANTITY'] = $offer['STORES'][$id]['AMOUNT'];
             }
             $offer['STORES_COUNT'] = count($notEmptyStoreCountController);
             $this->elementLinks[$elementId]['OFFERS'][] = $offer;
@@ -893,6 +897,9 @@ class CatalogSectionComponent extends ElementList
 			        $element['STORES'][$storeId] = $store;
 			        $element['STORES'][$storeId]['AMOUNT'] = (int)$element['CATALOG_STORE_AMOUNT_'.$storeId];
 			        if ($element['STORES'][$storeId]['AMOUNT'] > 0) $storeCount++;
+                    if (\Caweb\Main\Tools::getInstance()->isTO()){
+                        $element['~CATALOG_QUANTITY'] = $element['CATALOG_QUANTITY'] = $element['STORES'][$storeId]['AMOUNT'];
+                    }
                 }
 			    $element['STORES_COUNT'] = $storeCount;
             }

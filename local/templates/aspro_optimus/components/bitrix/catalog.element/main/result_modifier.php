@@ -290,6 +290,66 @@ else
 	$arResult['OFFERS'] = array();
 }
 
+
+
+$arDouble = array();
+
+foreach ($arResult['OFFERS'] as $keyOffer => $arOffer)
+{
+	$arOffer['ID'] = (int)$arOffer['ID'];
+	if (isset($arDouble[$arOffer['ID']]))
+		continue;
+	$arOfferIDS[] = (int)$arOffer['ID'];
+	$arDouble[$arOffer['ID']] = true;
+}
+
+
+/*stores product*/
+if ($arParams['USE_STORE'] === 'Y'){
+	$cacheTag = "";
+	$storesId = \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS;
+	$isTO = \Caweb\Main\Tools::getInstance()->isTO();
+	if ($isTO){
+		$cacheTag = "group_to";
+		$storesId = array_shift($storesId);
+	}
+	$arStores=COptimusCache::CCatalogStore_GetList(array(), array("ID" => $storesId), false, false, array(), $cacheTag);
+	$arResult['STORES_INFO']["STORES_COUNT"] = count($arStores);
+	$arStoreId = array();
+	foreach ($arStores as $store){
+		$arStoreId[] = (int)$store['ID'];
+	}
+	$arResult['STORES_INFO']['STORES'] = $arStores;
+
+	if (empty($arResult['OFFERS'])){
+		$arDb = \Bitrix\Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => $arStoreId, 'PRODUCT_ID' => (int)$arResult['ID']), 'select' => array('AMOUNT', 'STORE_ID')));
+		$k = 0;
+		while ($ar = $arDb->fetch()){
+			$arResult['STORES_INFO']['AMOUNT'][$ar['STORE_ID']] = $ar['AMOUNT'];
+			if ((int)$ar['AMOUNT'] > 0) $k++;
+		}
+		$arResult['STORES_INFO']['NOT_EMPTY_COUNT'] = $k;
+		if ($isTO){
+			$arResult['CATALOG_QUANTITY'] = $arResult['~CATALOG_QUANTITY'] = $arResult['STORES_INFO']['AMOUNT'][$storesId];
+			$arParams['STORES'] = $arStoreId;
+		}
+	}elseif($isTO){
+		$arDb = \Bitrix\Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => $arStoreId, 'PRODUCT_ID' => $arOfferIDS), 'select' => array('PRODUCT_ID', 'AMOUNT', 'STORE_ID')));
+		$tmpAmount = array();
+		while ($ar = $arDb->fetch()){
+			$tmpAmount[(int)$ar['PRODUCT_ID']] = (int)$ar['AMOUNT'];
+		}
+		foreach ($arResult['OFFERS'] as $key => $arOffer){
+			$arResult['OFFERS'][$key]['CATALOG_QUANTITY'] = $arResult['OFFERS'][$key]['~CATALOG_QUANTITY'] = $tmpAmount[(int)$arOffer['ID']];
+		}
+		$arParams['STORES'] = $arStoreId;
+	}
+}
+
+
+
+
+
 if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 {
 	$boolSKUDisplayProps = false;
@@ -345,6 +405,13 @@ if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFE
 	foreach ($arResult['OFFERS'] as $keyOffer => $arOffer)
 	{
 		$arOffer['ID'] = (int)$arOffer['ID'];
+
+		if ((int)$arOffer['CATALOG_QUANTITY'] < $arOffer['CATALOG_MEASURE_RATIO']){
+			$arIDS = array_diff($arIDS, array($arOffer['ID']));
+			unset($arResult['OFFERS'][$keyOffer]);
+			continue;
+		}
+
 		if (isset($arDouble[$arOffer['ID']]))
 			continue;
 		$arIDS[] = $arOffer['ID'];
@@ -426,8 +493,7 @@ if ($arResult['CATALOG'] && isset($arResult['OFFERS']) && !empty($arResult['OFFE
 	}
 	$arResult['OFFERS'] = $arNewOffers;
 	$arResult['SHOW_OFFERS_PROPS'] = $boolSKUDisplayProps;
-	
-	
+
 	/* PRICE 'TO'=>'С' */
 	$isPriceC = false;
 	if(isset($arResult["PROPERTIES"]["CML2_TRAITS"])){
@@ -1091,23 +1157,6 @@ if(strlen($arResult["DISPLAY_PROPERTIES"]["BRAND"]["VALUE"]) && $arResult["PROPE
 
 $arResult["BRAND_ITEM"]=$arBrand;
 
-/*stores product*/
-if ($arParams['USE_STORE'] === 'Y'){
-	$arStores=COptimusCache::CCatalogStore_GetList(array(), array("ID" => \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS), false, false, array());
-	$arResult['STORES_INFO']["STORES_COUNT"] = count($arStores);
-	$arStoreId = array();
-	foreach ($arStores as $store){
-		$arStoreId[] = (int)$store['ID'];
-	}
-	$arResult['STORES_INFO']['STORES'] = $arStores;
-	$arDb = \Bitrix\Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => $arStoreId, 'PRODUCT_ID' => (int)$arResult['ID']), 'select' => array('AMOUNT', 'STORE_ID')));
-	$k = 0;
-	while ($ar = $arDb->fetch()){
-		$arResult['STORES_INFO']['AMOUNT'][$ar['STORE_ID']] = $ar['AMOUNT'];
-		if ((int)$ar['AMOUNT'] > 0) $k++;
-	}
-	$arResult['STORES_INFO']['NOT_EMPTY_COUNT'] = $k;
-}
 
 
 
