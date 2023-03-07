@@ -215,7 +215,8 @@ $APPLICATION->SetTitle("Каталог");
 			2 => "VOLUME",
 			3 => "SIZES",
 			4 => "COLOR_REF",
-            5 => "M_P"
+            5 => "M_P",
+            6 => 'SHTUK_V_UPAKOVKE'
 		),
 		"DETAIL_PRODUCT_INFO_BLOCK_ORDER" => "sku,props",
 		"DETAIL_PRODUCT_PAY_BLOCK_ORDER" => "rating,price,priceRanges,quantityLimit,quantity,buttons",
@@ -444,7 +445,8 @@ $APPLICATION->SetTitle("Каталог");
 			2 => "VOLUME",
 			3 => "SIZES",
 			4 => "COLOR_REF",
-            5 => "M_P"
+            5 => "M_P",
+            6 => 'SHTUK_V_UPAKOVKE'
 		),
 		"LIST_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons,compare",
 		"LIST_PRODUCT_ROW_VARIANTS" => "[{'VARIANT':'3','BIG_DATA':false},{'VARIANT':'3','BIG_DATA':false},{'VARIANT':'3','BIG_DATA':false}]",
@@ -592,7 +594,8 @@ $APPLICATION->SetTitle("Каталог");
 		"OFFER_HIDE_NAME_PROPS" => "N",
 		"OFFER_TREE_PROPS" => array(
 			0 => "M2",
-            1 => "M_P"
+            1 => "M_P",
+            2 => 'SHTUK_V_UPAKOVKE'
 		),
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"PAGER_DESC_NUMBERING" => "N",
