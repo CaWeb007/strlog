@@ -54,7 +54,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
    ym(37983465, "init", {
         clickmap:true,
         trackLinks:true,
-        accurateTrackBounce:true
+        accurateTrackBounce:true,
+        webvisor:true
    });
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/37983465" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
