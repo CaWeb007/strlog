@@ -442,6 +442,13 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 						<?}?>
 							<?=showProductBonus($arResult,true);?>
 					</div>
+                        <?if($arResult['KOSTYLISHE'] === true):?>
+                            <div class="kostilishe">
+                                <span style="color: red">
+                                    цена доступна при условии покупки без монтажа
+                                </span>
+                            </div>
+                        <?endif;?>
                     <?endif;?>
 					<?if($arParams["SHOW_DISCOUNT_TIME"]=="Y"){?>
 						<?$arUserGroups = $USER->GetUserGroupArray();?>

@@ -1209,7 +1209,15 @@ if(is_array($arParams["SECTION_TIZER"]) && $arParams["SECTION_TIZER"]){
 	}
 	$arResult["TIZERS_ITEMS"]=$arTizersData;
 }
-
+if (\Caweb\Main\Tools::getInstance()->isKPSO()){
+	$array = CIBlockSection::GetNavChain($arResult['IBLOCK_ID'], $arResult['SECTION']['ID'], false, true);
+	$sectionsTree = array((int)$arResult['IBLOCK_SECTION_ID']);
+	foreach ($array as $item){
+		$sectionsTree[] = (int)$item['ID'];
+	}
+	if (!empty(array_intersect($sectionsTree, array(2124,1734,2609))))
+		$arResult['KOSTYLISHE'] = true;
+}
 ?>
 
 <?COptimus::AddMeta(

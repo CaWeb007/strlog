@@ -7,6 +7,7 @@ class Tools {
     private $userGroupID = null;
     private const STRLOG_GROUPS = array(9,10,11,12,13,14,15);
     private const GROUP_TO = 11;
+    private const GROUP_KPSO = 15;
     public static function getInstance(){
         if (self::$instance === null){
             self::$instance = new self;
@@ -23,6 +24,9 @@ class Tools {
     }
     public function isTO(){
         return ($this->getUserGroupId() === self::GROUP_TO);
+    }
+    public function isKPSO(){
+        return ($this->getUserGroupId() === self::GROUP_KPSO);
     }
     static public function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false) {
         $first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
