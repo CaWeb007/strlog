@@ -53,7 +53,7 @@ $this->setFrameMode(true);
                     $GLOBALS[$arParams['FILTER_NAME']]['!SECTION_ID'] = $sectionsNot;
                     $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_FLAG_VALUE'] = 'LIKVIDATION';
                     $GLOBALS[$arParams['FILTER_NAME']]['!DETAIL_PICTURE'] = false;
-                    $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_CML2_TRAITS'] = 'Заказная позиция';
+                    $GLOBALS[$arParams['FILTER_NAME']]['!PROPERTY_ORDER_ITEM_VALUE'] = 'Да';
                     /*endregion*/
                 ?>
                 <?$GLOBALS[$arParams["FILTER_NAME"]][0]=['LOGIC'=>'OR'];?>
