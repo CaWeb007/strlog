@@ -14,6 +14,7 @@ Loc::loadLanguageFile(__FILE__);
 class Ratio{
     const BRICKS_SECTION = 2193;
     const LINO_SECTION = 2147;
+    const STEEL_SECTION = 2691;
     const STRLOG_IBLOCK_ID = 16;
     const OFFER_NAREZKA_ENUM_ID = 6389;
     protected $log = array(
@@ -27,9 +28,16 @@ class Ratio{
     public function measureRatioConfig($sectionId){
         if ((int)$sectionId === static::BRICKS_SECTION) $this->setBricksRatio();
         if ((int)$sectionId === static::LINO_SECTION) $this->setLinoRatio();
+        if ((int)$sectionId === static::STEEL_SECTION) $this->setSteelRatio();
     }
     protected function setBricksRatio(){
         $arElements = $this->getBricks();
+        foreach ($arElements as $fields){
+            $this->setRatio($fields['ID'], $fields['COUNT'], $fields['NAME']);
+        }
+    }
+    protected function setSteelRatio(){
+        $arElements = $this->getSteel();
         foreach ($arElements as $fields){
             $this->setRatio($fields['ID'], $fields['COUNT'], $fields['NAME']);
         }
@@ -42,6 +50,23 @@ class Ratio{
         while ($ar = $db->Fetch()){
             $this->log['COUNT'] = $this->log['COUNT'] + 1;
             $k = (float)$ar["PROPERTY_KOLICHESTVO_V_UPAKOVKE_SHT_VALUE"];
+            if ($k <= 0){
+                $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
+                $this->log['ERRORS'] .= Loc::getMessage('ERRORS_EMPTY_RATIO', array('#NAME#' => $ar['NAME']));
+                continue;
+            }
+            $result[] = array('ID' => (int)$ar['ID'], 'COUNT' => $k, 'NAME' => $ar['NAME']);
+        }
+        return $result;
+    }
+    protected function getSteel(){
+        $result = array();
+        $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'SECTION_ID' => static::STEEL_SECTION);
+        $select = array('ID', 'NAME', 'IBLOCK_ID', 'PROPERTY_DLINA_M');
+        $db = \CIBlockElement::GetList(array(), $filter, false, false, $select);
+        while ($ar = $db->Fetch()){
+            $this->log['COUNT'] = $this->log['COUNT'] + 1;
+            $k = (float)$ar["PROPERTY_DLINA_M_VALUE"];
             if ($k <= 0){
                 $this->log['ERRORS_COUNT'] = $this->log['ERRORS_COUNT'] + 1;
                 $this->log['ERRORS'] .= Loc::getMessage('ERRORS_EMPTY_RATIO', array('#NAME#' => $ar['NAME']));
