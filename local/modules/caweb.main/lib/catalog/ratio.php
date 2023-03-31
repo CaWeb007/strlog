@@ -14,7 +14,7 @@ Loc::loadLanguageFile(__FILE__);
 class Ratio{
     const BRICKS_SECTION = 2193;
     const LINO_SECTION = 2147;
-    const STEEL_SECTION = 2691;
+    const STEEL_SECTION = 2688;
     const STRLOG_IBLOCK_ID = 16;
     const OFFER_NAREZKA_ENUM_ID = 6389;
     protected $log = array(
@@ -61,7 +61,7 @@ class Ratio{
     }
     protected function getSteel(){
         $result = array();
-        $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'SECTION_ID' => static::STEEL_SECTION);
+        $filter = array('IBLOCK_ID' => static::STRLOG_IBLOCK_ID, 'SECTION_ID' => static::STEEL_SECTION, 'INCLUDE_SUBSECTIONS' => 'Y');
         $select = array('ID', 'NAME', 'IBLOCK_ID', 'PROPERTY_DLINA_M');
         $db = \CIBlockElement::GetList(array(), $filter, false, false, $select);
         while ($ar = $db->Fetch()){
