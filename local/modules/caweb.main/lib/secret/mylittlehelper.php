@@ -29,6 +29,10 @@ class MyLittleHelper {
     public const NECONDITION_IBLOCK = 24;
     public const PROPERTY_ORDER_ITEM_ID = 710;
     public const ENUM_ORDER_ITEM_ID = 15984;
+    public const NECOND_PROPERTY_ORDER_ITEM_ID = 793;
+    //public const NECOND_PROPERTY_ORDER_ITEM_ID = 789;
+    public const NECOND_ENUM_ORDER_ITEM_ID = 16721;
+    //public const NECOND_ENUM_ORDER_ITEM_ID = 16701;
     /**usage   \Caweb\Main\Secret\MyLittleHelper::SortEnumOffer();*/
     public static function SortEnumOffer(){
         Loader::includeModule('iblock');
@@ -484,6 +488,18 @@ class MyLittleHelper {
         $user = new \CUser;
         while ($ar = $db->Fetch()){
             $user->Update((int)$ar['ID'], array('ACTIVE' => 'N'));
+        }
+    }
+    /**usage
+    //title: set order item property
+    \Bitrix\Main\Loader::includeModule('caweb.main');
+    \Caweb\Main\Secret\MyLittleHelper::setNecondOrderItemProperty();
+     */
+    public static function setNecondOrderItemProperty(){
+        Loader::includeModule('iblock');
+        $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => self::NECONDITION_IBLOCK, 'PROPERTY_358' => 'Заказная позиция'), false, false, array('ID'));
+        while ($iterator = $db->Fetch()){
+            \CIBlockElement::SetPropertyValuesEx($iterator['ID'], self::NECONDITION_IBLOCK, array(self::NECOND_PROPERTY_ORDER_ITEM_ID => self::NECOND_ENUM_ORDER_ITEM_ID));
         }
     }
 }

@@ -414,6 +414,11 @@ if($isAjaxFilter == "Y")
 			<?if($isAjax=="Y"){
 				$APPLICATION->RestartBuffer();
 			}?>
+            <?
+            if((int)$arParams["IBLOCK_ID"] === \Caweb\Main\Secret\MyLittleHelper::NECONDITION_IBLOCK){
+                $GLOBALS[$arParams["FILTER_NAME"]]['!PROPERTY_ORDER_ITEM_VALUE'] = 'Да';
+            }
+            ?>
 			<?$show = $arParams["PAGE_ELEMENT_COUNT"];?>
 			<?if($isAjax=="N"){?>
 				<div class="ajax_load <?=$display;?>">

@@ -9,6 +9,12 @@ class cmlImport  extends \CIBlockCMLImport {
     protected const PROPERTY_ORDER_ITEM_ID = MyLittleHelper::PROPERTY_ORDER_ITEM_ID;
     protected const ENUM_ORDER_ITEM_ID = MyLittleHelper::ENUM_ORDER_ITEM_ID;
 
+    protected const NECOND_PROPERTY_ORDER_ITEM_ID = MyLittleHelper::NECOND_PROPERTY_ORDER_ITEM_ID;
+    protected const NECOND_ENUM_ORDER_ITEM_ID = MyLittleHelper::NECOND_ENUM_ORDER_ITEM_ID;
+
+    protected const CATALOG_IBLOCK = MyLittleHelper::CATALOG_IBLOCK;
+    protected const NECONDITION_IBLOCK = MyLittleHelper::NECONDITION_IBLOCK;
+
     function ImportElementPrices($arXMLElement, &$counter, $arParent = false)
     {
         /** @global \CMain $APPLICATION */
@@ -424,7 +430,7 @@ class cmlImport  extends \CIBlockCMLImport {
             Array("ID"=>"asc"),
             Array("=XML_ID" => $arElement["XML_ID"], "IBLOCK_ID" => $this->next_step["IBLOCK_ID"]),
             false, false,
-            Array("ID", "TMP_ID", "ACTIVE", "CODE", "PREVIEW_PICTURE", "DETAIL_PICTURE")
+            Array("ID", "TMP_ID", "ACTIVE", "CODE", "PREVIEW_PICTURE", "DETAIL_PICTURE", 'IBLOCK_ID')
         );
 
         $bMatch = false;
@@ -858,7 +864,7 @@ class cmlImport  extends \CIBlockCMLImport {
                         }
                         //region Set Property заказная позиция
                         if ($value[$this->mess["IBLOCK_XML2_NAME"]] === 'Ценовая группа'){
-                            $this->setPriceGroupProperty($arElement['PROPERTY_VALUES'], $value[$this->mess["IBLOCK_XML2_VALUE"]]);
+                            $this->setPriceGroupProperty($arElement['PROPERTY_VALUES'], $value[$this->mess["IBLOCK_XML2_VALUE"]], (int)$arDBElement['IBLOCK_ID']);
                         }
                         //endregion
                         $arElement["PROPERTY_VALUES"][$this->PROPERTY_MAP["CML2_TRAITS"]]["n".$i] = array(
@@ -1469,9 +1475,14 @@ class cmlImport  extends \CIBlockCMLImport {
 
         return $arElement["ID"];
     }
-    protected function setPriceGroupProperty(&$properties, $groupValue) {
-        $enumId = self::ENUM_ORDER_ITEM_ID;
-        $propId = self::PROPERTY_ORDER_ITEM_ID;
+    protected function setPriceGroupProperty(&$properties, $groupValue, $iblockId = null) {
+        if ($iblockId === self::NECONDITION_IBLOCK){
+            $enumId = self::NECOND_ENUM_ORDER_ITEM_ID;
+            $propId = self::NECOND_PROPERTY_ORDER_ITEM_ID;
+        }else{
+            $enumId = self::ENUM_ORDER_ITEM_ID;
+            $propId = self::PROPERTY_ORDER_ITEM_ID;
+        }
         $property = $properties[$propId];
         $oldValue = false;
         $newValue = ($groupValue === 'Заказная позиция');
