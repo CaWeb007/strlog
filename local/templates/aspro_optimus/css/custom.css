@@ -2038,10 +2038,12 @@ body .ajax_load.table .main_item_wrapper div.counter_wrapp{
 	padding: 0;
 }
 
-.sticker_hit,
-.sticker_sale{
-	background: #2992d9;
-}
+ .sticker_hit{
+	 background: #2992d9;
+ }
+ .sticker_sale{
+	 background: #d50000;
+ }
 
 .sticker_stock{
 	background: #ffc438;
