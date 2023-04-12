@@ -63,7 +63,7 @@ class HL{
             if (!$ID)
                 throw new \Exception('Ошибка создания/обновления пользователя: '.$user->LAST_ERROR);
 
-            if (empty($userFields)) $instance->sendEmail($ID, $resultFields);
+            if (empty($userFields)) $instance->sendEmail($resultFields);
             $instance->writeSaleAccount($ID, $resultFields);
             if (!empty($fields['UF_ERROR'])){
                 self::$bHandlerStop = true;
@@ -123,13 +123,13 @@ class HL{
             $result = 15;
         return array_merge(array(2,3,4,5,6), array($result));
     }
-    protected function sendEmail($ID, $arFields){
+    protected function sendEmail($arFields){
         $arEventFields= array(
             "LOGIN" => $arFields['EMAIL'],
             "PASSWORD" => $arFields['PASSWORD'],
             "EMAIL" => $arFields['EMAIL']
         );
-        $CV = \CEvent::Send("USER_INFO_STRLOG", SITE_ID, $arEventFields, "N", 95, array(),LANGUAGE_ID);
+        $CV = \CEvent::Send("USER_INFO_STRLOG", "s1", $arEventFields, "N", 95, array(),LANGUAGE_ID);
         if (empty($CV))
             throw new \Exception('Ошибка добавления события отправки письма');
     }

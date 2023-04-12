@@ -1178,7 +1178,7 @@ class COptimus{
 
 
             if (!empty($storeCount) && ($totalCount > 0)){
-                $totalText = $totalText.' в '.$storeCount.(($storeCount === 2) ? ' магазинах': ' магазине');
+                $totalText = $totalText.' в '.$storeCount.(($storeCount === 1) ? ' магазине': ' магазинах');
                 if ($useStoreClick !== "Y"){
                     $k = 1;
                     $popup = '<div class="item-stock-popup">';

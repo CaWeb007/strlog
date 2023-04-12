@@ -159,6 +159,7 @@ class cmlImport  extends \CIBlockCMLImport {
 
         if(isset($arElement["STORE_AMOUNT"])){
             $this->mergeShelehovStoresAmount($arElement["STORE_AMOUNT"]);
+            $this->mergeHomutovoStoresAmount($arElement["STORE_AMOUNT"]);
             $this->ImportStoresAmount($arElement["STORE_AMOUNT"], $arElement["ID"], $counter);
         }
 
@@ -1508,6 +1509,16 @@ class cmlImport  extends \CIBlockCMLImport {
             $mergeStoreAmount += $amount;
             $arStoresAmount[$xml] = 0;
         }
-        $arStoresAmount['shelehov_all_stores'] = $mergeStoreAmount;
+        $arStoresAmount['shelehov_all_stores'] = $mergeStoreAmount;//shelehov_all_stores - внешний код нужного склада
+    }
+    protected function mergeHomutovoStoresAmount(&$arStoresAmount){
+        $mergeStoreAmount = 0;
+        $arMergeStoreXML = array('ad59a474-b7e5-11ed-b9cf-2cf05d5995e6', 'ad59a475-b7e5-11ed-b9cf-2cf05d5995e6');//xml id складов в хомутово из 1с
+        foreach ($arStoresAmount as $xml => $amount){
+            if (!in_array($xml, $arMergeStoreXML)) continue;
+            $mergeStoreAmount += $amount;
+            $arStoresAmount[$xml] = 0;
+        }
+        $arStoresAmount['homutovo_all_stores'] = $mergeStoreAmount;//homutovo_all_stores - внешний код нужного склада
     }
 }
