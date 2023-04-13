@@ -129,7 +129,9 @@ function OnOrderNewSendEmailHandler($newOrderId, &$eventName, &$arFields)
         if ((int)$store_id === 88){
             $arFields['BCC'] = 'ro_sh@strlog.ru';
         }
-
+        if ((int)$store_id === 91){
+            $arFields['BCC'] = 'ro_khom@strlog.ru';
+        }
 		$arFields["ORDER_DESCRIPTION"] = $arOrder["USER_DESCRIPTION"];
 		$arFields["PHONE"] =  $phone;
 		$arFields["DELIVERY_NAME"] =  $delivery_name;
