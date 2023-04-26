@@ -42,6 +42,13 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 }
 ?>
 <script id="basket-item-template" type="text/html">
+    {{#DELIVERY_TIME}}
+    <tr id="basket-items-delivery-{{ID}}" class="basket-items-delivery {{DELIVERY_TIME_CLASS}}">
+        <td colspan="5">
+            {{DELIVERY_TIME}}
+        </td>
+    </tr>
+    {{/DELIVERY_TIME}}
 	<tr class="basket-items-list-item-container{{#SHOW_RESTORE}} basket-items-list-item-container-expend{{/SHOW_RESTORE}}"
 		id="basket-item-{{ID}}" data-entity="basket-item" data-id="{{ID}}">
 		{{#SHOW_RESTORE}}
@@ -157,7 +164,8 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							</div>
 						{{/WARNINGS.length}}
 						<div class="basket-item-block-properties">
-							<?
+                            <div class="delivery-time-info {{DELIVERY_TIME_CLASS}}">{{DELIVERY_TIME}}</div>
+                            <?
 							if (!empty($arParams['PRODUCT_BLOCKS_ORDER']))
 							{
 								foreach ($arParams['PRODUCT_BLOCKS_ORDER'] as $blockName)

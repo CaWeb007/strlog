@@ -62,6 +62,8 @@ foreach ($this->basketItems as $row)
 		'BRAND' => isset($row[$this->arParams['BRAND_PROPERTY'].'_VALUE'])
 			? $row[$this->arParams['BRAND_PROPERTY'].'_VALUE']
 			: '',
+        'DELIVERY_TIME' => $row['DELIVERY_TIME'],
+        'DELIVERY_TIME_CLASS' => $row['DELIVERY_TIME_CLASS'],
 	);
 
 	// show price including ratio

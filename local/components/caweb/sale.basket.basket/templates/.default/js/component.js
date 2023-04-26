@@ -61,7 +61,8 @@
 			itemListTable: 'basket-item-table',
 			itemListEmptyResult: 'basket-item-list-empty-result',
 			itemListOverlay: 'basket-items-list-overlay',
-			warning: 'basket-warning'
+			warning: 'basket-warning',
+			itemsDeliveryInfo: 'basket-items-delivery-'
 		},
 
 		init: function(parameters)
@@ -77,6 +78,7 @@
 			this.useItemsFilter = this.params.SHOW_FILTER === 'Y' && !this.isMobile;
 
 			this.initializeFilter();
+			this.initializeStore();
 			this.applyBasketResult(parameters.result);
 			this.initializeActionPool();
 
@@ -588,9 +590,7 @@
 			{
 				BX.bind(couponNodes[i], 'click', BX.proxy(this.removeCouponAction, this));
 			}
-
 		},
-
 		checkOutAction: function()
 		{
 			document.location.href = this.params.PATH_TO_ORDER;
@@ -598,7 +598,6 @@
 
 		addCouponAction: function(event)
 		{
-			var target = BX.getEventTarget(event);
 			if (target && target.value)
 			{
 				this.actionPool.addCoupon(target.value);
@@ -630,6 +629,10 @@
 		initializeFilter: function()
 		{
 			this.filter = new BX.Sale.BasketFilter(this);
+		},
+		initializeStore: function()
+		{
+			this.store = new BX.Sale.BasketStore(this);
 		},
 
 		/**
@@ -679,13 +682,14 @@
 					}
 
 					this.applyBasketResult(result.BASKET_DATA);
-					this.editBasketItems(this.getItemsToEdit());
+					if (result.RESORT)
+						this.sortSortedItems();
+					this.editBasketItems(this.getItemsToEdit(), result.RESORT);
 					this.editTotal();
 
 					this.adjustBasketWrapperHeight();
 					this.applyPriceAnimation();
 					this.editWarnings();
-
 					this.actionPool.switchTimer();
 
 					if (this.isBasketIntegrated() && this.isBasketChanged())
@@ -962,7 +966,7 @@
 			data.sessid = BX.bitrix_sessid();
 			data.template = this.template;
 			data.signedParamsString = this.signedParamsString;
-
+			data.oldStoreId = this.store.getCurrentStore();
 			return data;
 		},
 
@@ -1266,7 +1270,7 @@
 					}
 				}
 			}
-
+			itemIds = this.sortedItems;
 			return itemIds;
 		},
 
@@ -1293,7 +1297,7 @@
 			return itemIdsAfter;
 		},
 
-		editBasketItems: function(itemIds)
+		editBasketItems: function(itemIds, resort = false)
 		{
 			if (!itemIds || itemIds.length === 0)
 			{
@@ -1320,10 +1324,13 @@
 
 					continue;
 				}
-
 				if (BX.type.isDomNode(BX(this.ids.item + item.ID)))
 				{
-					this.redrawBasketItemNode(item.ID);
+					if (resort){
+						this.redrawAndResortBasketItemNode(item.ID);
+					}else {
+						this.redrawBasketItemNode(item.ID);
+					}
 					this.applyQuantityAnimation(item.ID);
 				}
 				else
@@ -1608,7 +1615,9 @@
 
 		redrawBasketItemNode: function(itemId)
 		{
+			debugger;
 			var basketItemNode = BX(this.ids.item + itemId);
+			var basketDeliveryInfoRow = BX(this.ids.itemsDeliveryInfo + itemId)
 
 			if (!this.items[itemId] || !BX.type.isDomNode(basketItemNode))
 				return;
@@ -1627,6 +1636,53 @@
 				var basketItemHtml = this.renderBasketItem(basketItemTemplate, this.items[itemId]);
 				basketItemNode.insertAdjacentHTML('beforebegin', basketItemHtml);
 				BX.remove(basketItemNode);
+				BX.remove(basketDeliveryInfoRow);
+
+				if (oldHeight)
+				{
+					nodeAligner = BX(this.ids.itemHeightAligner + itemId);
+
+					if (BX.type.isDomNode(nodeAligner) && nodeAligner.clientHeight < oldHeight)
+					{
+						nodeAligner.style.minHeight = oldHeight + 'px';
+						setTimeout(function(){nodeAligner.style.minHeight = '0px';}, 1);
+					}
+				}
+
+				this.bindBasketItemEvents(this.items[itemId]);
+
+				if (this.filter.isActive())
+				{
+					this.filter.highlightSearchMatch(this.items[itemId]);
+				}
+			}
+		},
+		redrawAndResortBasketItemNode: function(itemId)
+		{
+			debugger;
+			var basketItemNode = BX(this.ids.item + itemId);
+			var basketNode = document.getElementById(this.ids.itemListTable).children[0];
+			var basketDeliveryInfoRow = BX(this.ids.itemsDeliveryInfo + itemId)
+
+			if (!this.items[itemId] || !BX.type.isDomNode(basketItemNode))
+				return;
+
+			var basketItemTemplate = this.getTemplate('basket-item-template');
+			if (basketItemTemplate)
+			{
+				var nodeAligner = BX(this.ids.itemHeightAligner + itemId),
+					oldHeight;
+
+				if (BX.type.isDomNode(nodeAligner))
+				{
+					oldHeight = nodeAligner.clientHeight;
+				}
+
+				var basketItemHtml = this.renderBasketItem(basketItemTemplate, this.items[itemId]);
+				basketNode.insertAdjacentHTML('beforeEnd', basketItemHtml);
+				BX.remove(basketItemNode);
+				BX.remove(basketDeliveryInfoRow);
+
 
 				if (oldHeight)
 				{

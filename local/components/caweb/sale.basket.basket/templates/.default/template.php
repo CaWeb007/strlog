@@ -115,14 +115,16 @@ $this->addExternalCss($templateFolder.'/themes/'.$arParams['TEMPLATE_THEME'].'/s
 $this->addExternalJs($templateFolder.'/js/mustache.js');
 $this->addExternalJs($templateFolder.'/js/action-pool.js');
 $this->addExternalJs($templateFolder.'/js/filter.js');
+$this->addExternalJs($templateFolder.'/js/store.js');
 $this->addExternalJs($templateFolder.'/js/component.js');
-
 $mobileColumns = isset($arParams['COLUMNS_LIST_MOBILE'])
 	? $arParams['COLUMNS_LIST_MOBILE']
 	: $arParams['COLUMNS_LIST'];
 $mobileColumns = array_fill_keys($mobileColumns, true);
 
 $jsTemplates = new Main\IO\Directory($documentRoot.$templateFolder.'/js-templates');
+$storeIterator = 1;
+$storeCount = count($arResult['STORE_INFO']['DATA']);
 /** @var Main\IO\File $jsTemplate */
 foreach ($jsTemplates->getChildren() as $jsTemplate)
 {
@@ -184,13 +186,24 @@ if (empty($arResult['ERROR_MESSAGE']))
 				<div class="basket-items-list-wrapper basket-items-list-wrapper-height-fixed basket-items-list-wrapper-light<?=$displayModeClass?>"
 					id="basket-items-list-wrapper">
 					<div class="basket-items-list-header" data-entity="basket-items-list-header">
-						<div class="basket-items-search-field" data-entity="basket-filter">
-							<div class="form has-feedback">
-								<input type="text" class="form-control"
-									placeholder="<?=Loc::getMessage('SBB_BASKET_FILTER')?>"
-									data-entity="basket-filter-input">
-								<span class="form-control-feedback basket-clear" data-entity="basket-filter-clear-btn"></span>
-							</div>
+						<div class="basket-items-search-field">
+                            <div class="basket-items-list-header-delivery" id="bx_delivery_filter" data-store-id="<?=$arResult['STORE_INFO']['SELECTED']['ID']?>">
+                                <div class="basket-items-list-header-delivery-city-name"><?=$arResult['STORE_INFO']['SELECTED']['NAME']?></div>
+                                <div class="basket-items-list-header-delivery-city-change">
+                                    <div class="basket-items-list-header-delivery-city-change-toggle"><?=Loc::getMessage('SBB_CITY_TOGGLE')?></div>
+                                    <div class="basket-items-list-header-delivery-city-list">
+                                        <div class="basket-items-list-header-delivery-city-wrapper">
+                                            <?foreach ($arResult['STORE_INFO']['DATA'] as $id => $name):?>
+                                                <div class="basket-items-list-header-delivery-city-item" id="bx_delivery_filter_item" data-store-id="<?=$id?>"><?=$name?></div>
+                                                <?if($storeIterator < $storeCount):?>
+                                                    <div class="basket-items-list-header-delivery-city-item-separator"></div>
+                                                <?endif;?>
+                                                <?$storeIterator++?>
+                                            <?endforeach?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 						<div class="basket-items-list-header-filter">
 							<a href="javascript:void(0)" class="basket-items-list-header-filter-item active"
@@ -207,7 +220,7 @@ if (empty($arResult['ERROR_MESSAGE']))
 					</div>
 					<div class="basket-items-list-container" id="basket-items-list-container">
 						<div class="basket-items-list-overlay" id="basket-items-list-overlay" style="display: none;"></div>
-						<div class="basket-items-list" id="basket-item-list">
+						<div class="basket-items-list" id="basket-item-list" style="position:relative;">
 							<div class="basket-search-not-found" id="basket-item-list-empty-result" style="display: none;">
 								<div class="basket-search-not-found-icon"></div>
 								<div class="basket-search-not-found-text">
@@ -215,7 +228,8 @@ if (empty($arResult['ERROR_MESSAGE']))
 								</div>
 							</div>
 							<table class="basket-items-list-table" id="basket-item-table"></table>
-						</div>
+                            <div style="position: absolute; width: 100%; height: 100%; background: #FFF; display: none; top:0; left: 0" id="load_overlay"></div>
+                        </div>
 					</div>
 				</div>
 			</div>

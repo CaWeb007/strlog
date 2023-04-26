@@ -225,6 +225,13 @@
 			this.needFullRecalculation = false;
 		}
 	};
+	BX.Sale.BasketActionPool.prototype.setStoreId = function(storeId)
+	{
+		this.component.sendRequest('refreshAjax', {
+			fullRecalculation: 'Y',
+			newStoreId: storeId
+		});
+	};
 
 	BX.Sale.BasketActionPool.prototype.getPoolData = function()
 	{
