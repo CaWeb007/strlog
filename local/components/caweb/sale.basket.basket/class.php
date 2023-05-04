@@ -55,6 +55,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 	protected static $iblockIncluded = null;
 	protected static $catalogIncluded = null;
 	protected static $highLoadInclude = null;
+	protected $resortBasket = false;
 
 	public function __construct($component = null)
 	{
@@ -811,10 +812,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		{
 			$result['GIFTS_RELOAD'] = true;
 		}
-        if ($this->storage['RESORT']){
 
-            $result['RESORT'] = $this->storage['RESORT'];
-        }
 		self::sendJsonAnswer($result);
 	}
 
@@ -1340,11 +1338,12 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$result['ORDERABLE_BASKET_ITEMS_COUNT'] = $this->storage['ORDERABLE_BASKET_ITEMS_COUNT'];
 		$result['NOT_AVAILABLE_BASKET_ITEMS_COUNT'] = $this->storage['NOT_AVAILABLE_BASKET_ITEMS_COUNT'];
 		$result['DELAYED_BASKET_ITEMS_COUNT'] = $this->storage['DELAYED_BASKET_ITEMS_COUNT'];
-		$result['STORE_INFO'] = $this->storage['STORE_INFO'];
+
 		$result['BASKET_ITEM_MAX_COUNT_EXCEEDED'] = $this->basketItemsMaxCountExceeded();
 		$result['EVENT_ONCHANGE_ON_START'] = $this->isNeedBasketUpdateEvent();
 		$result['CURRENCIES'] = $this->getFormatCurrencies();
-
+        $result['STORE_INFO'] = $this->storage['STORE_INFO'];
+        $result['RESORT'] = $this->resortBasket;
 		$this->applyTemplateMutator($result);
 
 		return $result;
@@ -1636,6 +1635,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$this->basketItems = getMeasures($this->basketItems);
 		$this->basketItems = getRatio($this->basketItems);
 		$this->basketItems = $this->getAvailableQuantity($this->basketItems);
+        $this->basketItems = $this->storeAction($this->basketItems);
 	}
 
 	protected function loadOfferToProductRelations()
@@ -3186,10 +3186,45 @@ class CBitrixBasketComponent extends CBitrixComponent
 				'select' => array('ID', 'QUANTITY', 'QUANTITY_TRACE', 'CAN_BUY_ZERO'),
 				'filter' => array('@ID' => $elementIds)
 			));
-            $this->storage['RESORT'] = false;
+			while ($product = $productIterator->fetch())
+			{
+				if (!isset($productMap[$product['ID']]))
+					continue;
+
+				$check = ($product['QUANTITY_TRACE'] == 'Y' && $product['CAN_BUY_ZERO'] == 'N' ? 'Y' : 'N');
+				foreach ($productMap[$product['ID']] as $key)
+				{
+					$basketItems[$key]['AVAILABLE_QUANTITY'] = $product['QUANTITY'];
+					$basketItems[$key]['CHECK_MAX_QUANTITY'] = $check;
+				}
+
+				unset($key, $check);
+			}
+
+			unset($product, $productIterator);
+		}
+
+		unset($productMap, $elementIds);
+
+		return $basketItems;
+	}
+
+    // legacy method
+    public function storeAction($basketItems){
+        if (empty($basketItems) || !is_array($basketItems))
+            return array();
+
+        $elementIds = array();
+        foreach ($basketItems as $key => $item)
+            $elementIds[$item['PRODUCT_ID']] = $item['PRODUCT_ID'];
+
+        if (!empty($elementIds)){
+            $storeId = null;
+            if($this->action == self::INITIAL_LOAD_ACTION)
+                $this->resortBasket = true;
             if (!empty($storeId = (int)$this->request->get('newStoreId'))){
                 \Caweb\Main\User\Store::getInstance()->setStoreId($storeId);
-                $this->storage['RESORT'] = true;
+                $this->resortBasket = true;
             }elseif (empty($storeId = (int)$this->request->get('oldStoreId'))){
                 $storeId = \Caweb\Main\User\Store::getInstance()->getUserStoreId();
             }
@@ -3199,71 +3234,62 @@ class CBitrixBasketComponent extends CBitrixComponent
                 'ID' => $storeId,
                 'NAME' => $this->storage['STORE_INFO']['DATA'][$storeId]
             );
-            $productStoreIterator = Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS, 'PRODUCT_ID' => $elementIds), 'select' => array('PRODUCT_ID','AMOUNT', 'STORE_ID')));
+            $productStoreIterator = Catalog\StoreProductTable::getList(array(
+                'filter' => array('STORE_ID' => \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS, 'PRODUCT_ID' => $elementIds),
+                'select' => array('PRODUCT_ID','AMOUNT', 'STORE_ID'))
+            );
             $productStoreQuantity = array();
             while ($ar = $productStoreIterator->fetch()){
                 $productStoreQuantity[(int)$ar['PRODUCT_ID']][(int)$ar['STORE_ID']] = (int)$ar['AMOUNT'];
             }
             $sortIterator = array(100 => array(), 200 => array());
-			while ($product = $productIterator->fetch())
-			{
-				if (!isset($productMap[$product['ID']]))
-					continue;
+            foreach ($basketItems as $key => $item){
+                if (\Caweb\Main\Tools::getInstance()->isTO() && !empty($productStoreQuantity[(int)$item['PRODUCT_ID']]))
+                    $basketItems[$key]['AVAILABLE_QUANTITY'] = $productStoreQuantity[(int)$item['PRODUCT_ID']][$storeId];
 
-                if (\Caweb\Main\Tools::getInstance()->isTO() && !empty($productStoreQuantity[(int)$product['ID']]))
-                    $product['QUANTITY'] = $productStoreQuantity[(int)$product['ID']][$storeId];
+                if ($productStoreQuantity[(int)$item['PRODUCT_ID']][$storeId] < $item['QUANTITY']){
+                    $datePlusWeek = new Main\Type\Date();
+                    $datePlusWeek->add("1 week");
+                    $sort = 200;
+                    $sortPlus = count($sortIterator[$sort]);
+                    $sortIterator[$sort][] = $key;
+                    $sort = $sort + $sortPlus;
+                    if ($sortPlus === 0)
+                        $basketItems[$key]['DELIVERY_TIME'] = Loc::getMessage('SBB_AVAILABLE_LATER', array('#DATE#' => $datePlusWeek->toString()));
 
-				$check = ($product['QUANTITY_TRACE'] == 'Y' && $product['CAN_BUY_ZERO'] == 'N' ? 'Y' : 'N');
-				foreach ($productMap[$product['ID']] as $key)
-				{
-					$basketItems[$key]['AVAILABLE_QUANTITY'] = $product['QUANTITY'];
-					$basketItems[$key]['CHECK_MAX_QUANTITY'] = $check;
-					if ($productStoreQuantity[$product['ID']][$storeId] < $basketItems[$key]['QUANTITY']){
-                        $datePlusWeek = new Main\Type\Date();
-                        $datePlusWeek->add("1 week");
-                        $sort = 200;
-                        $sortPlus = count($sortIterator[$sort]);
-                        $sortIterator[$sort][] = $key;
-                        $sort = $sort + $sortPlus;
-                        if ($sortPlus === 0)
-                            $basketItems[$key]['DELIVERY_TIME'] = Loc::getMessage('SBB_AVAILABLE_LATER', array('#DATE#' => $datePlusWeek->toString()));
-                        $basketItems[$key]['SORT'] = $sort;
-                        $basketItems[$key]['DELIVERY_TIME_CLASS'] = 'later';
+                    $basketItems[$key]['DELIVERY_TIME_CLASS'] = 'later';
 
-                    }else{
-                        $sort = 100;
-                        $sortPlus = count($sortIterator[$sort]);
-                        $sortIterator[$sort][] = $key;
-                        $sort = $sort + $sortPlus;
-                        if ($sortPlus === 0)
-                            $basketItems[$key]['DELIVERY_TIME'] = Loc::getMessage("SBB_AVAILABLE_NOW");
-                        $basketItems[$key]['DELIVERY_TIME_CLASS'] = 'now';
-                        $basketItems[$key]['SORT'] = $sort;
-                    }
-					$basketItems[$key]['STORE_AMOUNT'] = $productStoreQuantity[$product['ID']];
+                }else{
+                    $sort = 100;
+                    $sortPlus = count($sortIterator[$sort]);
+                    $sortIterator[$sort][] = $key;
+                    $sort = $sort + $sortPlus;
+                    if ($sortPlus === 0)
+                        $basketItems[$key]['DELIVERY_TIME'] = Loc::getMessage("SBB_AVAILABLE_NOW");
+                    $basketItems[$key]['DELIVERY_TIME_CLASS'] = 'now';
+                }
 
-					if ($this->storage['RESORT']){
-                        $basket = $this->getBasketStorage()->getBasket();
-                        $basketItem = $basket->getItemByBasketCode($key);
-                        $res = $basketItem->setField('SORT', $sort);
-                        if (!$res->isSuccess())
-                        {
-                            $errorMessages = $res->getErrorMessages();
-                            $result['ERROR'] = reset($errorMessages);
-                            $result['ERRORS'] = $res->getErrors();
-                        }
-                    }
+                $basketItems[$key]['STORE_AMOUNT'] = $productStoreQuantity[(int)$item['PRODUCT_ID']];
 
-				}
-				unset($key, $check);
-			}
+                if ((int)$item['SORT'] !== $sort){
+                    $this->resortBasket = true;
+                    $basketItems[$key]['SORT'] = $sort;
+                }
 
-			unset($product, $productIterator);
-		}
 
-		unset($productMap, $elementIds);
-		return $basketItems;
-	}
+                if ($this->resortBasket){
+                    $basket = $this->getBasketStorage()->getBasket();
+                    $basketItem = $basket->getItemByBasketCode($key);
+                    $res = $basketItem->setField('SORT', $sort);
+                }
+            }
+        }
+        if ($this->resortBasket)
+            $this->saveBasket();
+        unset($productMap, $elementIds);
+        return $basketItems;
+
+    }
 
 	protected function checkCoupon($postList)
 	{
