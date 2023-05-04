@@ -164,7 +164,7 @@ if (!empty($arParams['LABEL_PROP_POSITION']))
 							</div>
 						{{/WARNINGS.length}}
 						<div class="basket-item-block-properties">
-                            <div class="delivery-time-info {{DELIVERY_TIME_CLASS}}">{{DELIVERY_TIME}}</div>
+                            <div>{{TEST}}</div>
                             <?
 							if (!empty($arParams['PRODUCT_BLOCKS_ORDER']))
 							{

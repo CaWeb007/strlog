@@ -792,19 +792,19 @@ class CBitrixBasketComponent extends CBitrixComponent
 		$this->saveBasket();
 		$this->modifyResultAfterSave($result);
 
-		if (
+		/*if (
 			!empty($result['APPLIED_DISCOUNT_IDS'])
 			|| implode(',', $result['APPLIED_DISCOUNT_IDS']) !== $this->request->get('lastAppliedDiscounts')
 			|| $this->request->get('fullRecalculation') === 'Y'
 		)
-		{
+		{*/
 			// reload all items
 			$this->loadBasketItems();
-		}
-		else
+		//}
+		/*else
 		{
 			$this->loadBasketItems($result['CHANGED_BASKET_ITEMS']);
-		}
+		}*/
 
 		$result['BASKET_DATA'] = $this->getBasketResult();
 
@@ -3270,6 +3270,12 @@ class CBitrixBasketComponent extends CBitrixComponent
                 }
 
                 $basketItems[$key]['STORE_AMOUNT'] = $productStoreQuantity[(int)$item['PRODUCT_ID']];
+                $basketItems[$key]['TEST'] = '';
+
+                foreach ($basketItems[$key]['STORE_AMOUNT'] as $id => $amount){
+                    $basketItems[$key]['TEST'] .= $this->storage['STORE_INFO']['DATA'][$id].' : '.$amount.'   ||||   ';
+                }
+
 
                 if ((int)$item['SORT'] !== $sort){
                     $this->resortBasket = true;

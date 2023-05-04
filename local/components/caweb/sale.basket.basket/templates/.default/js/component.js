@@ -1326,11 +1326,11 @@
 				}
 				if (BX.type.isDomNode(BX(this.ids.item + item.ID)))
 				{
-					if (resort){
+					//if (resort){
 						this.redrawAndResortBasketItemNode(item.ID);
-					}else {
+					/*}else {
 						this.redrawBasketItemNode(item.ID);
-					}
+					}*/
 					this.applyQuantityAnimation(item.ID);
 				}
 				else

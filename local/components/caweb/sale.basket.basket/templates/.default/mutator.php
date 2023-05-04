@@ -63,6 +63,7 @@ foreach ($this->basketItems as $row)
 			? $row[$this->arParams['BRAND_PROPERTY'].'_VALUE']
 			: '',
         'DELIVERY_TIME' => $row['DELIVERY_TIME'],
+        'TEST' => $row['TEST'],
         'DELIVERY_TIME_CLASS' => $row['DELIVERY_TIME_CLASS'],
 	);
 
