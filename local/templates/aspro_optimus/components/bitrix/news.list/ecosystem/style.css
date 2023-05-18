@@ -27,6 +27,15 @@ section.strlog-ecosystem .ecosystem-tiles .ecosystem_row {
     box-sizing: border-box;
     margin: 6px;
     border: 1px solid #ddd; }
+    section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget .widget_perimetr-logo {
+      background-image: url("./image/logo.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 85px;
+      height: 20px;
+      position: absolute;
+      top: 15px;
+      right: 15px; }
     section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-hover {
       transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
       section.strlog-ecosystem .ecosystem-tiles .ecosystem_row .widget.widget-hover:hover:after {

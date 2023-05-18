@@ -1,5 +1,5 @@
 <?
-if ($USER->IsAdmin())
+//if ($USER->IsAdmin())
 $APPLICATION->IncludeComponent(
 	"bitrix:news.list",
 	"ecosystem",
