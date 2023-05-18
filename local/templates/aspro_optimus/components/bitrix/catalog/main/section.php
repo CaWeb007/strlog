@@ -442,7 +442,10 @@ if($isAjaxFilter == "Y")
 						"ELEMENT_SORT_ORDER" => $arParams["ELEMENT_SORT_ORDER"],
 						"ELEMENT_SORT_FIELD2" => $arParams["ELEMENT_SORT_FIELD2"],
 						"ELEMENT_SORT_ORDER2" => $arParams["ELEMENT_SORT_ORDER2"],
-						"CUSTOM_ELEMENT_SORT" => array('PROPERTY_ORDER_ITEM' => 'nulls,asc'),
+						"CUSTOM_ELEMENT_SORT" => array(
+                            'PROPERTY_ORDER_ITEM' => 'nulls,asc',
+                            'PROPERTY_NOT_AVAILABLE_SKU' => 'nulls,asc'
+                        ),
 						"FILTER_NAME" => $arParams["FILTER_NAME"],
 						"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
 						"PAGE_ELEMENT_COUNT" => $show,
