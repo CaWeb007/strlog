@@ -68,7 +68,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		isMobile: BX.browser.IsMobile(),
 		isHttps: window.location.protocol === "https:",
 		orderSaveAllowed: false,
-
+		refreshAfterError: false,
 		/**
 		 * Initialization of sale.order.ajax component js
 		 */
@@ -184,9 +184,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 		 */
 		sendRequest: function(action, actionData)
 		{
+
 			var loaderTimer, form;
-			if (!(loaderTimer = this.startLoader()))
-				return;
+			if (!this.refreshAfterError)
+				if (!(loaderTimer = this.startLoader()))
+					return;
 
 			this.firstLoad = false;
 			action = BX.type.isString(action) ? action : 'refreshOrderAjax';
@@ -268,6 +270,8 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			if (action === 'enterCoupon' || action === 'removeCoupon')
 				data.coupon = actionData;
 
+			if (action === 'refreshOrderAjax' && actionData.hasOwnProperty('errors'))
+				data.errors = actionData.errors;
 			return data;
 		},
 
@@ -324,7 +328,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				this.mapsReady && this.initMaps();
 				BX.saleOrderAjax && BX.saleOrderAjax.initDeferredControl();
 			}
-
+			this.refreshAfterError = false;
 			return true;
 		},
 
@@ -355,14 +359,19 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 						redirected = true;
 						document.location.href = result.REDIRECT_URL;
 					}
-
-					this.showErrors(result.ERROR, true, true);
+					if (result.ERROR.hasOwnProperty('BASKET_QUANTITY')){
+						this.refreshAfterError = true;
+						this.sendRequest('refreshOrderAjax', {'errors': result.ERROR})
+					}else{
+						this.showErrors(result.ERROR, true, true);
+					}
 				}
 			}
 
 			if (!redirected)
 			{
-				this.endLoader();
+				if(!this.refreshAfterError)
+					this.endLoader();
 				this.disallowOrderSave();
 			}
 		},
@@ -640,6 +649,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 				switch (k.toUpperCase())
 				{
 					case 'MAIN':
+						this.showError(this.mainErrorsNode, blockErrors);
+						this.animateScrollTo(this.mainErrorsNode, 800, 100);
+						scroll = false;
+						break;
+					case 'BASKET_QUANTITY':
 						this.showError(this.mainErrorsNode, blockErrors);
 						this.animateScrollTo(this.mainErrorsNode, 800, 100);
 						scroll = false;

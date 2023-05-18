@@ -6,6 +6,7 @@ use Bitrix\Main,
 	Bitrix\Main\Localization\Loc,
 	Bitrix\Sale,
 	Bitrix\Sale\Order,
+    Bitrix\Sale\Basket,
 	Bitrix\Sale\PersonType,
 	Bitrix\Sale\Shipment,
 	Bitrix\Sale\PaySystem,
@@ -953,8 +954,12 @@ class SaleOrderAjax extends \CBitrixComponent
 		$this->arUserResult['QUANTITY_LIST'] = $this->getActualQuantityList($basket);
 
 		$result = $basket->refresh();
+		$changedBasketItem = $result->get('CHANGED_BASKET_ITEMS');
 		if ($result->isSuccess())
 		{
+		    if (!empty($changedBasketItem) && $this->checkQuantityCoef($basket, $changedBasketItem))
+                $this->addError(Loc::getMessage('SBB_ORDER_ITEM_WRONG_AVAILABLE_QUANTITY'), 'BASKET_QUANTITY');
+
 			$basket->save();
 		}
 
@@ -968,7 +973,20 @@ class SaleOrderAjax extends \CBitrixComponent
 
 		$order->appendBasket($availableBasket);
 	}
-
+    protected function checkQuantityCoef($basket, $changedBasketItem){
+	    $check = false;
+        foreach ($changedBasketItem as $itemId){
+            $basketItem = $basket->getItemById($itemId);
+            $newQuantity = $basketItem->getFields()->getChangedValues()['QUANTITY'];
+            if (!empty($newQuantity)){
+                $check = true;
+                break;
+            }
+        }
+        if ($check === false) return false;
+        $ratioResult = Sale\BasketComponentHelper::correctQuantityRatio($basket);
+        return $ratioResult->isSuccess();
+    }
 	protected function showEmptyBasket()
 	{
 		global $APPLICATION;
@@ -4242,7 +4260,11 @@ class SaleOrderAjax extends \CBitrixComponent
 	protected function refreshOrderAjaxAction()
 	{
 		global $USER;
-
+        if ($getErrors = $this->request->get('errors')){
+            foreach ($getErrors as $key => $items)
+                foreach ($items as $text)
+                    $this->addError($text, $key);
+        }
 		$error = false;
 		$this->request->set($this->request->get('order'));
 		if ($this->checkSession)

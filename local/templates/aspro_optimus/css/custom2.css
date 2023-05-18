@@ -77,7 +77,7 @@
 .catalog .item {
   position: relative; }
   .catalog .item .item-title {
-    z-index: 30; }
+    z-index: 40; }
   .catalog .item.list_item_wrapp .description_wrapp {
     z-index: 25; }
   .catalog .item.list_item_wrapp .item-stock .item-stock-popup {
