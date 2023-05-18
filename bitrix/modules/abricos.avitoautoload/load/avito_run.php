@@ -1199,16 +1199,16 @@ if (empty($arRunErrors))
 
 	if ($AVITO_PRICE)
     {   if($XML_DATA['PRICE']>0)
-			$filter['>PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE;
+			$filter['>CATALOG_PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE;
 		else
-			$filter['>PRICE_1']  = $AVITO_PRICE;
+			$filter['>CATALOG_PRICE_11']  = $AVITO_PRICE;
 	}
 	 if ($AVITO_PRICE_MAX)
     {
 	    if($XML_DATA['PRICE']>0)
-			$filter['<PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE_MAX;
+			$filter['<CATALOG_PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE_MAX;
 		else
-			$filter['<PRICE_1']  = $AVITO_PRICE_MAX;
+			$filter['<CATALOG_PRICE_11']  = $AVITO_PRICE_MAX;
     }
 	if($AVITO_FILTER)
 	$filter["!PROPERTY_".$AVITO_FILTER] = false;
@@ -1230,16 +1230,16 @@ if (empty($arRunErrors))
 	if ($AVITO_PRICE)
     {
 	    if($XML_DATA['PRICE']>0)
-			$offersFilter['>PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE;
+			$offersFilter['>CATALOG_PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE;
 		else
-			$offersFilter['>PRICE_1']  = $AVITO_PRICE;
+			$offersFilter['>CATALOG_PRICE_11']  = $AVITO_PRICE;
 	}
     if ($AVITO_PRICE_MAX)
     {
 	    if($XML_DATA['PRICE']>0)
-			$offersFilter['<PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE_MAX;
+			$offersFilter['<CATALOG_PRICE_'.$XML_DATA['PRICE']]  = $AVITO_PRICE_MAX;
 		else
-			$offersFilter['<PRICE_1']  = $AVITO_PRICE_MAX;
+			$offersFilter['<CATALOG_PRICE_11']  = $AVITO_PRICE_MAX;
     }
 	if ($filterAvailable)
 		$offersFilter['CATALOG_AVAILABLE'] = 'Y';
