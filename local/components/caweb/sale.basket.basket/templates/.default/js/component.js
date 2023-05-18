@@ -1615,7 +1615,7 @@
 
 		redrawBasketItemNode: function(itemId)
 		{
-			debugger;
+			//debugger;
 			var basketItemNode = BX(this.ids.item + itemId);
 			var basketDeliveryInfoRow = BX(this.ids.itemsDeliveryInfo + itemId)
 
@@ -1659,7 +1659,7 @@
 		},
 		redrawAndResortBasketItemNode: function(itemId)
 		{
-			debugger;
+			//debugger;
 			var basketItemNode = BX(this.ids.item + itemId);
 			var basketNode = document.getElementById(this.ids.itemListTable).children[0];
 			var basketDeliveryInfoRow = BX(this.ids.itemsDeliveryInfo + itemId)

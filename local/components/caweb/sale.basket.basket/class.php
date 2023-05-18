@@ -3286,7 +3286,8 @@ class CBitrixBasketComponent extends CBitrixComponent
                 if ($this->resortBasket){
                     $basket = $this->getBasketStorage()->getBasket();
                     $basketItem = $basket->getItemByBasketCode($key);
-                    $res = $basketItem->setField('SORT', $sort);
+                    if ($basketItem)
+                        $res = $basketItem->setField('SORT', $sort);
                 }
             }
         }
