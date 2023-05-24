@@ -66,7 +66,8 @@
 					<tr style="position: relative">
 					<td style="position: relative; z-index: 1" class="image_block">
 						<div class="image_wrapper_block">
-							<div class="stickers">
+                            <?if(($totalCount !== 0) && !$forOrder):?>
+							    <div class="stickers">
 								<?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
 									<?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
 										<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
@@ -76,6 +77,7 @@
 									<div><div class="sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
 								<?}?>
 							</div>
+                            <?endif?>
 							<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="thumb" id="<? echo $arItemIDs["ALL_ITEM_IDS"]['PICT']; ?>">
 								<?
 								$a_alt=($arItem["PREVIEW_PICTURE"]["DESCRIPTION"] ? $arItem["PREVIEW_PICTURE"]["DESCRIPTION"] : ($arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_ALT"] ? $arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_ALT"] : $arItem["NAME"] ));

@@ -2481,7 +2481,7 @@ body .ajax_load.table .main_item_wrapper .counter_wrapp div.total_summ{margin: -
 .fast_view_frame.popup .form.init .item_main_info:before{content:"";position:absolute;top:0px;bottom:0px;height:100%;width:1px;background:#f2f2f2;display:block;right: 269px;z-index:1}
 .fast_view_frame.popup .form .form_head{border-bottom:1px solid #f2f2f2;padding-top:23px;padding-bottom:24px;z-index: 2;background: #fff;position:relative;}
 .fast_view_frame.popup .form .form_head h2{font-weight:normal;font-size:22px;}
-.fast_view_frame.popup #fast_view_item{height:600px;overflow:hidden;}
+.fast_view_frame.popup #fast_view_item{height:640px;overflow:hidden;}
 .fast_view_frame.popup #fast_view_item .loading_block{height:100%;}
 .fast_view_frame.popup .catalog_detail .item_main_info{border:none;margin: 0px;position:static;}
 .fast_view_frame.popup .catalog_detail .item_main_info .img_wrapper{width:310px;float:left;padding:30px 30px;position:relative;}

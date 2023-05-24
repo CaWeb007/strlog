@@ -1097,6 +1097,10 @@ foreach ($arResult['OFFERS'] as $key => $value){
 		$arResult['MIN_PRICE'] = $value['MIN_PRICE'];
 	$firstStep = false;
 }
+if (\Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()->isSO()){
+	$arResult['NAME'] = $arResult['PREVIEW_TEXT'];
+	$arResult['~NAME'] = $arResult['~PREVIEW_TEXT'];
+}
 ?>
 
 <?COptimus::AddMeta(

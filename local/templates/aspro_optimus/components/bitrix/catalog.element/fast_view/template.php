@@ -147,16 +147,18 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 <div class="item_main_info <?=(!$showCustomOffer ? "noffer" : "");?> <?=($arParams["SHOW_UNABLE_SKU_PROPS"] != "N" ? "show_un_props" : "unshow_un_props");?>" id="<?=$arItemIDs["strMainID"];?>">
 	<div class="img_wrapper">
 		<div class="item_slider">
-			<div class="stickers">
-				<?if (is_array($arResult["PROPERTIES"]["FLAG"]["VALUE"])):?>
-					<?foreach($arResult["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
-						<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
-					<?}?>
-				<?endif;?>
-				<?if($arParams["SALE_STIKER"] && $arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
-					<div><div class="sticker_sale_text"><?=$arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
-				<?}?>
-			</div>
+            <?if(($totalCount !== 0) && !$forOrder):?>
+                <div class="stickers">
+                    <?if (is_array($arResult["PROPERTIES"]["FLAG"]["VALUE"])):?>
+                        <?foreach($arResult["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+                            <div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
+                        <?}?>
+                    <?endif;?>
+                    <?if($arParams["SALE_STIKER"] && $arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
+                        <div><div class="sticker_sale_text"><?=$arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
+                    <?}?>
+                </div>
+            <?endif?>
 			
 
 			<?reset($arResult['MORE_PHOTO']);
