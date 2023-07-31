@@ -10,6 +10,7 @@
 				</div> <?// .wrapper_inner?>				
 			</div> <?// #content?>
 		</div><?// .wrapper?>
+<?/*?>
 		<footer id="footer">
 			<div class="footer_inner <?=strtolower($TEMPLATE_OPTIONS["BGCOLOR_THEME_FOOTER_SIDE"]["CURRENT_VALUE"]);?>">
 
@@ -32,7 +33,7 @@
 					<div class="footer_bottom_inner">
 
 						<!--<div class="left_block">
-							<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+							<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 								array(
 									"COMPONENT_TEMPLATE" => ".default",
 									"PATH" => SITE_DIR."include/footer/copyright.php",
@@ -42,7 +43,7 @@
 									"EDIT_TEMPLATE" => "standard.php"
 								),
 								false
-							);*/?>
+							);?>
 							<div id="bx-composite-banner"></div>
 						</div>-->
 
@@ -171,11 +172,12 @@
 				</div>
 			</div>
 		</footer>
+<?*/?>
 		<?
 		COptimus::setFooterTitle();
 		COptimus::showFooterBasket();
 		?>
-        <?if($USER->IsAdmin()):?>
+        <?/*if($USER->IsAdmin()):?>
             <script>
                 (function(w,d,u){
                     var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
@@ -189,6 +191,6 @@
                     var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
                 })(window,document,'https://crm.strlog.ru/upload/crm/site_button/loader_3_lrizq0.js');
             </script>
-        <?endif?>
+        <?endif*/?>
 	</body>
 </html>

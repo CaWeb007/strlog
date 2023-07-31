@@ -3284,11 +3284,11 @@ $(document).ready(function(){
 			$('.basket_block .basket_popup_wrapp').slideUp();
 		}
 		if(!$(event.target).closest('.catalog_item').length){
-			var tabsContentUnhoverHover = $('.tab:visible').attr('data-unhover') * 1;
+			var tabsContentUnhoverHover = $('.tab:not(".custom-tab"):visible').attr('data-unhover') * 1;
 			if(tabsContentUnhoverHover)
-				$('.tab:visible').stop().animate({'height': tabsContentUnhoverHover}, 100);
-			$('.tab:visible').find('.catalog_item').removeClass('hover');
-			$('.tab:visible').find('.catalog_item .buttons_block').stop().fadeOut(233);
+				$('.tab:not(".custom-tab"):visible').stop().animate({'height': tabsContentUnhoverHover}, 100);
+			$('.tab:not(".custom-tab"):visible').find('.catalog_item').removeClass('hover');
+			$('.tab:not(".custom-tab"):visible').find('.catalog_item .buttons_block').stop().fadeOut(233);
 			if($('.catalog_block').length){
 				$('.catalog_block').find('.catalog_item').removeClass('hover');
 				//$('.catalog_block').find('.catalog_item').blur();
@@ -4005,12 +4005,31 @@ if(!funcDefined('setHeightBlockSlider')){
 		$(document).find('.specials.tab_slider_wrapp .tabs_content > li.cur').equalize({children: '.catalog_item'});
 		var itemsButtonsHeight = $(document).find('.specials.tab_slider_wrapp .tabs_content .tab.cur .tabs_slider li .buttons_block').height();
 		var tabsContentUnhover = $(document).find('.specials.tab_slider_wrapp .tabs_content .tab.cur').height() * 1;
-		var tabsContentHover = tabsContentUnhover + itemsButtonsHeight+50;
+		var tabsContentHover = tabsContentUnhover + itemsButtonsHeight + 50;
 		$(document).find('.specials.tab_slider_wrapp .tabs_content .tab.cur').attr('data-unhover', tabsContentUnhover);
 		$(document).find('.specials.tab_slider_wrapp .tabs_content .tab.cur').attr('data-hover', tabsContentHover);
 		$(document).find('.specials.tab_slider_wrapp .tabs_content').height(tabsContentUnhover);
 	}
 }
+
+if(!funcDefined('setHeightBlockSlider2')){
+	setHeightBlockSlider2 = function(id){
+		var itemsButtonsHeight = $(document).find(id + ' .tabs_content .tab.cur .tabs_slider li .buttons_block').height();
+		$(document).find(id + ' .tabs_content .tab.cur .tabs_slider .buttons_block').hide();
+		$(document).find(id + ' .tabs_content > li.cur').css('height', '');
+		$(document).find(id + ' .tabs_content > li.cur').equalize({children: '.item-title'});
+		$(document).find(id + ' .tabs_content > li.cur').equalize({children: '.item_info .price_group'});
+		$(document).find(id + ' .tabs_content > li.cur').equalize({children: '.item_info'});
+		//$(document).find('.specials.tab_slider_wrapp .tabs_content > li.cur').equalize({children: '.catalog_item'});
+		var tabsContentUnhover = $(document).find(id + ' .tabs_content .tab.cur').height() * 1;
+		var tabsContentHover = tabsContentUnhover + itemsButtonsHeight + 50;
+		$(document).find(id + ' .tabs_content .tab.cur').attr('data-unhover', tabsContentUnhover);
+		$(document).find(id + ' .tabs_content .tab.cur').attr('data-hover', tabsContentHover);
+		$(document).find(id + ' .tabs_content').height(tabsContentUnhover);
+		$(document).find(id + ' .tabs_content').css('min-height', '');
+	}
+}
+
 
 if(!funcDefined('checkStickyFooter')){
 	checkStickyFooter = function() {

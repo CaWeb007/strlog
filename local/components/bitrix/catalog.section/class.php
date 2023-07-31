@@ -891,19 +891,20 @@ class CatalogSectionComponent extends ElementList
 		if ($this->arResult['ID'])
 		{
 			$element['IBLOCK_SECTION_ID'] = $this->arResult['ID'];
-			if ($this->arParams['USE_STORE'] && !empty($stores = $this->arResult['STORES'])){
-			    $storeCount = 0;
-			    foreach ($stores as $storeId => $store){
-			        $element['STORES'][$storeId] = $store;
-			        $element['STORES'][$storeId]['AMOUNT'] = (int)$element['CATALOG_STORE_AMOUNT_'.$storeId];
-			        if ($element['STORES'][$storeId]['AMOUNT'] > 0) $storeCount++;
-                    if (\Caweb\Main\Tools::getInstance()->isTO()){
-                        $element['~CATALOG_QUANTITY'] = $element['CATALOG_QUANTITY'] = $element['STORES'][$storeId]['AMOUNT'];
-                    }
-                }
-			    $element['STORES_COUNT'] = $storeCount;
-            }
 		}
+
+        if ($this->arParams['USE_STORE'] && !empty($stores = $this->arResult['STORES'])){
+            $storeCount = 0;
+            foreach ($stores as $storeId => $store){
+                $element['STORES'][$storeId] = $store;
+                $element['STORES'][$storeId]['AMOUNT'] = (int)$element['CATALOG_STORE_AMOUNT_'.$storeId];
+                if ($element['STORES'][$storeId]['AMOUNT'] > 0) $storeCount++;
+                if (\Caweb\Main\Tools::getInstance()->isTO()){
+                    $element['~CATALOG_QUANTITY'] = $element['CATALOG_QUANTITY'] = $element['STORES'][$storeId]['AMOUNT'];
+                }
+            }
+            $element['STORES_COUNT'] = $storeCount;
+        }
 
 		parent::processElement($element);
 		$this->checkLastModified($element);

@@ -34,6 +34,8 @@ if ($searchText = \Bitrix\Main\Application::getInstance()->getContext()->getRequ
 			"OFFERS_SORT_ORDER2" => $arParams["OFFERS_SORT_ORDER2"],
 			'OFFER_TREE_PROPS' => $arParams['OFFER_TREE_PROPS'],
 			"SHOW_COUNTER_LIST" => $arParams["SHOW_COUNTER_LIST"],
+            "USE_STORE" => $arParams["USE_STORE"],
+            'STORES' => $arParams['STORES'],
 
 			"SECTION_URL" => $arParams["SECTION_URL"],
 			"DETAIL_URL" => $arParams["DETAIL_URL"],
