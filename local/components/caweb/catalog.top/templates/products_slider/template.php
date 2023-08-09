@@ -11,7 +11,7 @@ $arNotify = unserialize($notifyOption);
 		<ul class="slider_navigation top_big custom_flex border"></ul>
 		<div class="all_wrapp">
 			<div class="content_inner tab">
-				<ul class="specials_slider slides wr">
+				<ul class="specials_slider tabs_slider slides wr">
 					<?foreach($arResult["ITEMS"] as $key => $arItem):?>
 						<?
 						$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
@@ -20,8 +20,8 @@ $arNotify = unserialize($notifyOption);
                         $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
                         $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
 						$arItem["FRONT_CATALOG"]="Y";
-						
-						$strMeasure='';
+
+                        $strMeasure='';
 						if($arItem["OFFERS"]){
 							$strMeasure=$arItem["MIN_PRICE"]["CATALOG_MEASURE_NAME"];
 						}else{
@@ -34,18 +34,16 @@ $arNotify = unserialize($notifyOption);
 						<li id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="catalog_item">
 							<div class="image_wrapper_block">
 								<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="thumb">
-									<?if($arItem["DISPLAY_PROPERTIES"]["HIT"]){?>
-										<div class="stickers">
-											<?if (is_array($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"])):?>
-												<?foreach($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"] as $key=>$class){?>
-													<div><div class="sticker_<?=strtolower($class);?>"><?=$arItem["PROPERTIES"]["HIT"]["VALUE"][$key]?></div></div>
-												<?}?>
-											<?endif;?>
-											<?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
-												<div><div class="sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
-											<?}?>
-										</div>
-									<?}?>
+                                    <div class="stickers">
+                                        <?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
+                                            <?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+                                                <div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage('ICON_TEXT_'.$class)?></div></div>
+                                            <?}?>
+                                        <?endif;?>
+                                        <?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
+                                            <div><div class="sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
+                                        <?}?>
+                                    </div>
 									<?if( ($arParams["DISPLAY_WISH_BUTTONS"] != "N" || $arParams["DISPLAY_COMPARE"] == "Y")):?>
 										<div class="like_icons">
 											<?if($arItem["CAN_BUY"] && empty($arItem["OFFERS"]) && $arParams["DISPLAY_WISH_BUTTONS"] != "N"):?>
@@ -96,8 +94,8 @@ $arNotify = unserialize($notifyOption);
 										);?>
 									</div>
 								<?endif;?>
-								<?=$arQuantityData["HTML"];?>
-								<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], true);?>
+								<?//=$arQuantityData["HTML"];?>
+								<?$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], false);?>
 								<div class="cost prices clearfix">
 									<?if($arItem["OFFERS"]):?>
 										<?\Aspro\Functions\CAsproSku::showItemPrices($arParams, $arItem, $item_id, $min_price_id);?>

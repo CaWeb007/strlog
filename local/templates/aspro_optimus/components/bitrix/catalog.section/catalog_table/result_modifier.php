@@ -114,8 +114,13 @@ if (!empty($arResult['ITEMS'])){
 
 	$arNewItemsList = array();
 	Search::getInstance()->initSort();
+	$changeNames = \Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()->isSO();
 	foreach ($arResult['ITEMS'] as $key => $arItem)
 	{
+		if ($changeNames){
+			$arItem['NAME'] = $arItem['PREVIEW_TEXT'];
+			$arItem['~NAME'] = $arItem['~PREVIEW_TEXT'];
+		}
 		Search::getInstance()->setElementArray($key, $arItem);
 		$arItem['CHECK_QUANTITY'] = false;
 		if (!isset($arItem['CATALOG_MEASURE_RATIO']))

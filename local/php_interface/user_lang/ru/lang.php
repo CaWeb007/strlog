@@ -47,5 +47,9 @@ $MESS["/bitrix/components/bitrix/catalog.bigdata.products/lang/ru/template.php"]
 $MESS["/bitrix/components/bitrix/catalog.bigdata.products/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
 $MESS["/bitrix/components/bitrix/catalog.bigdata.products/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
 
-
+$MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_HIT"] = "Хит продаж";
+$MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_RECOMMEND"] = "Лучшая цена";
+$MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
+$MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
+$MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
 ?>

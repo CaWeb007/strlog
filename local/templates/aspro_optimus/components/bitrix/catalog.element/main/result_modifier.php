@@ -1218,6 +1218,10 @@ if (\Caweb\Main\Tools::getInstance()->isKPSO()){
 	if (!empty(array_intersect($sectionsTree, array(2124,1734,2609))))
 		$arResult['KOSTYLISHE'] = true;
 }
+if (\Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()->isSO()){
+	$arResult['NAME'] = $arResult['PREVIEW_TEXT'];
+	$arResult['~NAME'] = $arResult['~PREVIEW_TEXT'];
+}
 ?>
 
 <?COptimus::AddMeta(

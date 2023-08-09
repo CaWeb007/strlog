@@ -1,0 +1,149 @@
+.custom-tabs-container
+  margin-top: 20px
+  .custom-tabs-top-line
+    margin-bottom: 20px
+    .custom-tabs-top-line-title
+      display: block
+      font-size: 22px
+      color: #000
+    .custom-tabs-top-line-description
+      display: inline-block
+      font-size: 14px
+      margin-top: 10px
+  .top_blocks
+    margin-bottom: 25px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    div:first-child
+      overflow-x: scroll
+      scrollbar-width: none
+      -ms-overflow-style: none
+      &::-webkit-scrollbar
+        display: none
+    .tabs
+      display: flex
+      justify-content: start
+      align-items: center
+      > li
+        margin: 0
+        padding: 0px 15px!important
+        line-height: 32px
+        background-color: rgba(28,154,214,.1)!important
+        transition: all .5s
+        border-radius: 10px
+        text-align: center
+        color: #7d9ead
+        font-weight: 500
+        text-wrap: nowrap
+        user-select: none
+        &.cur
+          background-color: #00adee!important
+          color: #fff
+        &:hover
+          background-color: #00adee!important
+          color: #fff
+        &:not(:last-child)
+          margin-right: 20px
+    .slider_navigation
+      margin: 0
+      position: static
+      .tabs_slider_navigation
+        margin: 0
+        padding: 0
+        ul.customflex-direction-nav
+          display: flex
+          li
+            padding: 0
+            margin-bottom: 0
+            &:first-child
+              margin-right: 10px
+              margin-left: 10px
+            a
+              display: flex
+              justify-content: center
+              align-items: center
+              line-height: 1
+              width: 33px
+              height: 33px
+              font-size: 24px
+              border: 1px solid #ddd
+              color: #8a8a8a
+              transition: all 0.5s
+              &:hover
+                border-color: #00adee
+                color: #00adee
+              i
+                line-height: 1
+                padding-bottom: 2px
+            &.customflex-nav-prev
+              a
+                i
+                  padding-right: 2px
+            &.customflex-nav-next
+              a
+                i
+                  padding-left: 2px
+            &.customflex-disabled
+              display: none
+  .custom-tabs-content
+    margin: 0!important
+    .loader
+      position: absolute
+      height: 100%
+      width: 100%
+      background-color: #f6f6f6
+      z-index: 2
+      &:after
+        content: ''
+        display: block
+        position: absolute
+        width: 30px
+        height: 30px
+        border-radius: 50%
+        background: conic-gradient(#0000 10%,#00adee)
+        -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 4px),#000 0)
+        animation: s3 1s infinite linear
+    .tab
+      padding: 0!important
+      margin: 0!important
+      .common_product
+        display: none
+      .tabs_slider
+        margin-bottom: 0
+        .catalog_item
+          width: 220px!important
+          margin: 0
+          &:not(:last-child)
+            margin-right: 12px
+          &:hover
+            .item_info
+              height: auto!important
+          .image_wrapper_block
+            padding: 0
+          .item_info
+            .item-title
+              text-align: center
+            .rating
+              text-align: center
+            .price_matrix_wrapper
+              text-align: center
+            .buttons_block
+              display: none
+
+@keyframes s3
+  to
+    transform: rotate(1turn)
+
+@media (max-width: 860px)
+  .custom-tabs-container
+    .top_blocks
+      div:last-child
+        display: none
+    .custom-tabs-content
+      .tab
+        .tabs_slider
+          .catalog_item
+            .item_info
+              .buttons_block
+                display: block!important

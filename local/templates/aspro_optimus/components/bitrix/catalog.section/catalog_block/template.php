@@ -122,16 +122,18 @@
 					<div class="catalog_item item_wrap <?=(($_GET['q'])) ? 's' : ''?>" id="<?=$arItemIDs["strMainID"];?> ааа">
 						<div>
 							<div class="image_wrapper_block">
-								<div class="stickers">
-										<?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
-									<?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
-										<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
-										<?}?>
-									<?endif;?>
-									<?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
-										<div><div class="sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
-									<?}?>
-								</div>
+                                <?if(($totalCount !== 0) && !$forOrder):?>
+                                    <div class="stickers">
+                                            <?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
+                                        <?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+                                            <div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
+                                            <?}?>
+                                        <?endif;?>
+                                        <?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
+                                            <div><div class="sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
+                                        <?}?>
+                                    </div>
+                                <?endif?>
 								<?if($arParams["DISPLAY_WISH_BUTTONS"] != "N" || $arParams["DISPLAY_COMPARE"] == "Y"):?>
 									<div class="like_icons">
 										<?if($arParams["DISPLAY_WISH_BUTTONS"] != "N"):?>

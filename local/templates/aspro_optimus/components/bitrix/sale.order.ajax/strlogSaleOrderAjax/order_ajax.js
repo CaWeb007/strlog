@@ -269,8 +269,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 
 			if (action === 'enterCoupon' || action === 'removeCoupon')
 				data.coupon = actionData;
-
-			if (action === 'refreshOrderAjax' && actionData.hasOwnProperty('errors'))
+			if (action === 'refreshOrderAjax' && actionData && actionData.hasOwnProperty('errors'))
 				data.errors = actionData.errors;
 			return data;
 		},

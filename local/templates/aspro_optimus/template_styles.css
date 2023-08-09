@@ -1218,7 +1218,7 @@ body .flexslider li, body .flex-direction-nav li{padding:0px;}
 
 /*special front start*/
 .best_block.tab_slider_wrapp ul.tabs_content{margin:16px 0px 0px;padding: 0px;}
-.best_block.tab_slider_wrapp ul.tabs_content li.tab{margin:0px;padding:0px;position:static;overflow: visible !important;}
+.best_block.tab_slider_wrapp ul.tabs_content:not(.custom-tabs-content) li.tab{margin:0px;padding:0px;position:static;overflow: visible !important;}
 .best_block.tab_slider_wrapp ul.tabs_content li.tab > ul{margin:0px;}
 .best_block.tab_slider_wrapp ul.tabs_content li.tab * {box-sizing:border-box;}
 .best_block.tab_slider_wrapp ul.tabs_content li.tab .catalog_block{font-size:0px;}
@@ -1279,7 +1279,7 @@ body .stickers .sticker_recommend:before{background-position:-3px -135px;}
 .detail_footer .top_block{border-top:1px solid #E5E5E5;position:relative;/*z-index:-1;*/}
 .wrapper_block .all_wrapp{position:relative;}
 .wrapper_block .all_wrapp .content_inner.absolute{position:absolute;z-index:111;zoom:1;overflow:hidden;}
-.tabs_content .flex-viewport, .wrapper_block .flex-viewport{overflow:visible !important;margin-top:26px;}
+.tabs_content:not(.custom-tabs-content) .flex-viewport, .wrapper_block .flex-viewport{overflow:visible !important;margin-top:26px;}
 .specials_slider > li, .tabs_slider > li, .wrapper_block .wr > li{width:178px !important;padding:20px 20px 12px;opacity:0;min-height:305px;}
 .specials_slider > li:hover, .tabs_slider > li:hover, .wrapper_block .wr > li:hover, .specials_slider > li.hover, .tabs_slider li.hover, .wrapper_block .wr li.hover{padding:20px 20px 20px;}
 
@@ -2481,7 +2481,7 @@ body .ajax_load.table .main_item_wrapper .counter_wrapp div.total_summ{margin: -
 .fast_view_frame.popup .form.init .item_main_info:before{content:"";position:absolute;top:0px;bottom:0px;height:100%;width:1px;background:#f2f2f2;display:block;right: 269px;z-index:1}
 .fast_view_frame.popup .form .form_head{border-bottom:1px solid #f2f2f2;padding-top:23px;padding-bottom:24px;z-index: 2;background: #fff;position:relative;}
 .fast_view_frame.popup .form .form_head h2{font-weight:normal;font-size:22px;}
-.fast_view_frame.popup #fast_view_item{height:600px;overflow:hidden;}
+.fast_view_frame.popup #fast_view_item{height:650px;overflow:hidden;}
 .fast_view_frame.popup #fast_view_item .loading_block{height:100%;}
 .fast_view_frame.popup .catalog_detail .item_main_info{border:none;margin: 0px;position:static;}
 .fast_view_frame.popup .catalog_detail .item_main_info .img_wrapper{width:310px;float:left;padding:30px 30px;position:relative;}
