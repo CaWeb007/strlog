@@ -1,7 +1,14 @@
 .popup-delivery-wrapper
-  .popup-delivery-tab-delivery-map, popup-delivery-tab-pickup-map
+  .popup-delivery-tab-delivery-map, .popup-delivery-tab-pickup-map
     height: 500px
     > ymaps
       width: 100%
       > ymaps
         width: 100%
+  .popup-delivery-tab-pickup-item
+    margin-bottom: 20px
+    padding: 10px
+    background-color: #777777
+    cursor: pointer
+    &.selectedStore
+      background-color: #0a5ca3

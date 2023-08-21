@@ -1,6 +1,13 @@
-.popup-delivery-wrapper .popup-delivery-tab-delivery-map, .popup-delivery-wrapper popup-delivery-tab-pickup-map {
+.popup-delivery-wrapper .popup-delivery-tab-delivery-map, .popup-delivery-wrapper .popup-delivery-tab-pickup-map {
   height: 500px; }
-  .popup-delivery-wrapper .popup-delivery-tab-delivery-map > ymaps, .popup-delivery-wrapper popup-delivery-tab-pickup-map > ymaps {
+  .popup-delivery-wrapper .popup-delivery-tab-delivery-map > ymaps, .popup-delivery-wrapper .popup-delivery-tab-pickup-map > ymaps {
     width: 100%; }
-    .popup-delivery-wrapper .popup-delivery-tab-delivery-map > ymaps > ymaps, .popup-delivery-wrapper popup-delivery-tab-pickup-map > ymaps > ymaps {
+    .popup-delivery-wrapper .popup-delivery-tab-delivery-map > ymaps > ymaps, .popup-delivery-wrapper .popup-delivery-tab-pickup-map > ymaps > ymaps {
       width: 100%; }
+.popup-delivery-wrapper .popup-delivery-tab-pickup-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #777777;
+  cursor: pointer; }
+  .popup-delivery-wrapper .popup-delivery-tab-pickup-item.selectedStore {
+    background-color: #0a5ca3; }

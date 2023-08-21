@@ -1,14 +1,20 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Новый раздел");
-\Bitrix\Main\Page\Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1?lang=ru_RU');
+$api = 'ad511be7-b59e-446b-87cf-e10964a25c8a';
+\Bitrix\Main\Page\Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey='.$api.'&lang=ru_RU');
 \Bitrix\Main\Page\Asset::getInstance()->addJs('/tests/popupmaps/script.js');
 \Bitrix\Main\Page\Asset::getInstance()->addCss('/tests/popupmaps/style.css');
 \Bitrix\Main\Page\Asset::getInstance()->addJs('/tests/popupmaps/ui/jquery-ui.js');
 \Bitrix\Main\Page\Asset::getInstance()->addCss('/tests/popupmaps/ui/jquery-ui.css');
 $options = array(
-    'currentDeliveryMethod' => 'DELIVERY'
-)
+    'currentDeliveryMethod' => 'PICKUP',
+    'currentStoreId' => 88
+);
+$db = \Bitrix\Catalog\StoreTable::getList(array('filter' => array('ACTIVE' => 'Y')));
+while ($ar = $db->fetch()){
+    $options['storeData'][(int)$ar['ID']] = $ar;
+}
 ?>
 
 <div class="popup-delivery-wrapper" id="caweb_delivery_maps">
@@ -23,39 +29,19 @@ $options = array(
                 <div class="popup-delivery-tab-pickup">
                     <div class="popup-delivery-tab-pickup-list-wrapper">
                         <div class="popup-delivery-tab-pickup-item-wrapper" id="caweb_delivery_pickup_list">
-                            <div class="popup-delivery-tab-pickup-item" id="caweb_delivery_pickup_list_item" data-id="1">
-                                <div class="popup-delivery-tab-pickup-item-address">
-                                    г.Иркутск, ул. Трактовая 18 Б/А
+                            <?foreach ($options['storeData'] as $id => $array):?>
+                                <div class="popup-delivery-tab-pickup-item" id="caweb_delivery_pickup_list_item" data-id="<?=$id?>">
+                                    <div class="popup-delivery-tab-pickup-item-address">
+                                        <?=$array['ADDRESS']?>
+                                    </div>
+                                    <div class="popup-delivery-tab-pickup-item-schedule">
+                                        <?=$array['SCHEDULE']?>
+                                    </div>
+                                    <div class="popup-delivery-tab-pickup-item-phone">
+                                        <?=$array['PHONE']?>
+                                    </div>
                                 </div>
-                                <div class="popup-delivery-tab-pickup-item-schedule">
-                                    Пн-Вс, 10:00-20:00
-                                </div>
-                                <div class="popup-delivery-tab-pickup-item-phone">
-                                    280-900
-                                </div>
-                            </div>
-                            <div class="popup-delivery-tab-pickup-item" id="caweb_delivery_pickup_list_item" data-id="2">
-                                <div class="popup-delivery-tab-pickup-item-address">
-                                    г.Иркутск, ул. Трактовая 18 Б/А
-                                </div>
-                                <div class="popup-delivery-tab-pickup-item-schedule">
-                                    Пн-Вс, 10:00-20:00
-                                </div>
-                                <div class="popup-delivery-tab-pickup-item-phone">
-                                    280-900
-                                </div>
-                            </div>
-                            <div class="popup-delivery-tab-pickup-item" id="caweb_delivery_pickup_list_item" data-id="3">
-                                <div class="popup-delivery-tab-pickup-item-address">
-                                    г.Иркутск, ул. Трактовая 18 Б/А
-                                </div>
-                                <div class="popup-delivery-tab-pickup-item-schedule">
-                                    Пн-Вс, 10:00-20:00
-                                </div>
-                                <div class="popup-delivery-tab-pickup-item-phone">
-                                    280-900
-                                </div>
-                            </div>
+                            <?endforeach;?>
                         </div>
                     </div>
                     <div class="popup-delivery-tab-pickup-map-wrapper">
@@ -65,7 +51,7 @@ $options = array(
             </div>
             <div class="popup-delivery-tab-delivery-wrapper" id="caweb_delivery_tab_delivery">
                 <div class="popup-delivery-tab-delivery-map-wrapper">
-                    <div class="popup-delivery-tab-delivery-map" id="caweb_delivery_tab_pickup_map"></div>
+                    <div class="popup-delivery-tab-delivery-map" id="caweb_delivery_tab_delivery_map"></div>
                 </div>
             </div>
         </div>
