@@ -1,0 +1,6 @@
+.popup-delivery-wrapper .popup-delivery-tab-delivery-map, .popup-delivery-wrapper popup-delivery-tab-pickup-map {
+  height: 500px; }
+  .popup-delivery-wrapper .popup-delivery-tab-delivery-map > ymaps, .popup-delivery-wrapper popup-delivery-tab-pickup-map > ymaps {
+    width: 100%; }
+    .popup-delivery-wrapper .popup-delivery-tab-delivery-map > ymaps > ymaps, .popup-delivery-wrapper popup-delivery-tab-pickup-map > ymaps > ymaps {
+      width: 100%; }

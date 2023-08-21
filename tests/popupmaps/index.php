@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Новый раздел");
-\Bitrix\Main\Page\Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;coordorder=longlat&amp;');
+\Bitrix\Main\Page\Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1?lang=ru_RU');
 \Bitrix\Main\Page\Asset::getInstance()->addJs('/tests/popupmaps/script.js');
 \Bitrix\Main\Page\Asset::getInstance()->addCss('/tests/popupmaps/style.css');
 \Bitrix\Main\Page\Asset::getInstance()->addJs('/tests/popupmaps/ui/jquery-ui.js');

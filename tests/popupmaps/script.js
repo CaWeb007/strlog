@@ -44,12 +44,18 @@ const CawebDeliveryMap = {
     },
     mapPickupInit: function () {
         if (this.mapPickupInited) return
-        //code
+        this.ymaps.pickup.map = new ymaps.Map(this.tabPickupMap.prop('id'), {
+            center: [55.76, 37.64],
+            zoom: 10
+        })
         this.mapPickupInited = true
     },
     mapDeliveryInit: function () {
         if (this.mapPickupInited) return
-        //code
+        this.ymaps.delivery.map = new ymaps.Map(this.tabDeliveryMap.prop('id'), {
+            center: [55.76, 36.64],
+            zoom: 10
+        })
         this.mapDeliveryInited = true
     }
 }
