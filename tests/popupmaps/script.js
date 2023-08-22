@@ -13,6 +13,67 @@ const CawebDeliveryMap = {
             pickup: {},
             delivery: {}
         }
+        this.options.deliveryZones =  {
+            "type":"FeatureCollection",
+            "metadata":{
+                "name":"Без названия",
+                "creator":"Yandex Map Constructor"
+            },
+            "features":[
+                {
+                    "type":"Feature",
+                    "id":0,
+                    "geometry":{
+                        "type":"Polygon",
+                        "coordinates":[
+                            [
+                                [104.1239331628415,52.36232835134156],
+                                [104.134125557098,52.35026748018316],
+                                [104.18837055221523,52.32313814587976],
+                                [104.20871242538415,52.33160471402492],
+                                [104.2008160020443,52.33717808728186],
+                                [104.18090328231776,52.349952118916185],
+                                [104.15845855728111,52.356416572946046],
+                                [104.1387174989315,52.361934257510676],
+                                [104.1239331628415,52.36232835134156]]
+                        ]
+                    },
+                    "properties":{
+                        "description":"400 рублей",
+                        "fill":"#ed4543",
+                        "fill-opacity":0.6,
+                        "stroke":"#ed4543",
+                        "stroke-width":"5",
+                        "stroke-opacity":0.9
+                    }
+                },
+                {
+                    "type":"Feature",
+                    "id":1,
+                    "geometry":{
+                        "type":"Polygon",
+                        "coordinates":[
+                            [
+                                [104.22506317153889,52.3251892031507],
+                                [104.23085674301106,52.311803016756784],
+                                [104.23686489120445,52.3115925923455],
+                                [104.23480495468098,52.3252680880605],
+                                [104.22506317153889,52.3251892031507]
+                            ]
+                        ]
+                    },
+                    "properties":{
+                        "description":"600 рублей",
+                        "fill":"#1e98ff",
+                        "fill-opacity":0.6,
+                        "stroke":"#1e98ff",
+                        "stroke-width":"5",
+                        "stroke-opacity":0
+                    }
+                }
+            ]
+        }
+
         this.tabsInit()
         this.storeItemInit()
     },
@@ -45,29 +106,71 @@ const CawebDeliveryMap = {
     },
     mapPickupInit: function () {
         if (this.mapPickupInited) return
-        debugger
         const initStoreData = this.options.storeData[this.options.currentStoreId]
         this.ymaps.pickup.map = new ymaps.Map(this.tabPickupMap.prop('id'), {
-            center: [initStoreData['GPS_N'], initStoreData['GPS_S']],
+            center: [initStoreData['GPS_S'], initStoreData['GPS_N']],
             zoom: 10
         })
+
+
+        this.ymaps.pickup.placemark = {}
+        for (let id in this.options.storeData){
+            let store = this.options.storeData[id]
+            let placemark = new ymaps.Placemark([store['GPS_S'], store['GPS_N']], {storeId: id})
+            placemark.events.add('click', this.placemarkClickHandler, this)
+            this.ymaps.pickup.placemark[id] = placemark
+            this.ymaps.pickup.map.geoObjects.add(placemark)
+        }
+
         this.mapPickupInited = true
     },
+    placemarkClickHandler: function(element) {
+        const id = element.get('target').properties.get('storeId') * 1
+        this.storeSelectAction(id)
+    },
     mapDeliveryInit: function () {
-        if (this.mapPickupInited) return
+        if (this.mapDeliveryInited) return
+        const initStoreData = this.options.storeData[49]
         this.ymaps.delivery.map = new ymaps.Map(this.tabDeliveryMap.prop('id'), {
-            center: [55.76, 36.64],
-            zoom: 10
+            center: [initStoreData['GPS_S'], initStoreData['GPS_N']],
+            zoom: 9,
+            controls: ['geolocationControl', 'searchControl']
         })
+
+
+
+        this.ymaps.delivery.placemark = {}
+        for (let id in this.options.storeData){
+            let store = this.options.storeData[id]
+            let placemark = new ymaps.Placemark([store['GPS_S'], store['GPS_N']], {storeId: id})
+            placemark.events.add('click', this.placemarkClickHandler, this)
+            this.ymaps.delivery.placemark[id] = placemark
+            this.ymaps.delivery.map.geoObjects.add(placemark)
+        }
+
+
+
+        ymaps.geoQuery(this.options.deliveryZones).addToMap(this.ymaps.delivery.map)
+
+
+
         this.mapDeliveryInited = true
     },
     storeItemInit: function () {
         this.tabPickupItems[this.options.currentStoreId].addClass('selectedStore')
-        this.tabPickupList.on('click', $.proxy(this.storeListClick, this))
+        this.tabPickupList.on('click', $.proxy(this.storeListClickHandler, this))
     },
-    storeListClick: function (el) {
-        let target = $(el.currentTarget)
+    storeListClickHandler: function (el) {
+        const storeId = $(el.currentTarget).attr('data-id') * 1
+        this.storeSelectAction(storeId)
+    },
+    storeSelectAction: function (storeId) {
+        const storeData = this.options.storeData[storeId]
+        const center = [storeData['GPS_N'], storeData['GPS_S']]
+        this.ymaps.pickup.map.setCenter(center, 10, {
+            duration: 500
+        })
         this.tabPickupList.removeClass('selectedStore')
-        target.addClass('selectedStore')
+        this.tabPickupItems[storeId].addClass('selectedStore')
     }
 }
