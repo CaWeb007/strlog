@@ -192,5 +192,29 @@
                 })(window,document,'https://crm.strlog.ru/upload/crm/site_button/loader_3_lrizq0.js');
             </script>
         <?endif*/?>
+        <div id="bx_ord_popup" class="ord-popup">
+            <div class="ord-head">
+                <div class="ord-info-logo">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21.5c-7.14 0-9.5-2.353-9.5-9.47C2.5 4.912 4.86 2.5 12 2.5c7.141 0 9.5 2.412 9.5 9.53 0 7.117-2.359 9.47-9.5 9.47" stroke="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M13 6h-2v2h2V6zm0 4h-2v8h2v-8z" fill="currentColor"></path></svg>
+                </div>
+                <div class="ord-text">
+                    <div class="ord-text-head">
+                        Рекламодатель
+                    </div>
+                    <div class="ord-text-footer">
+                        ООО "Альянс"
+                    </div>
+                </div>
+            </div>
+            <div class="ord-separator"></div>
+            <div class="copy-ord-link">
+                <div class="copy-ord-link-icon">
+                    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 18.5h-3V6L7 3.5h9.5v2m.5 15H7.5V8L10 5.5h9.5V18L17 20.5z" stroke="currentColor"></path></svg>
+                </div>
+                <div class="copy-ord-link-text">
+                    Скопировать ссылку
+                </div>
+            </div>
+        </div>
 	</body>
 </html>

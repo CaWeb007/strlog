@@ -18,7 +18,7 @@ elseif(strlen(trim($arResult["VARIABLES"]["SECTION_CODE"])) > 0){
 
 $banner = COptimusCache::CIBlockElement_GetList(
         array('CACHE' => array("MULTI" =>"Y", "TAG" => COptimusCache::GetIBlockCacheTag(2))),
-        array("IBLOCK_ID" => 2, "ACTIVE" => "Y", "ACTIVE_DATE" => 'Y', "PROPERTY_SHOW_IN_CATALOG_SECTION" => $section['ID']), false, false, array('NAME', 'DETAIL_PICTURE', 'PROPERTY_URL_STRING')
+        array("IBLOCK_ID" => 2, "ACTIVE" => "Y", "ACTIVE_DATE" => 'Y', "PROPERTY_SHOW_IN_CATALOG_SECTION" => $section['ID']), false, false, array('NAME', 'DETAIL_PICTURE', 'PROPERTY_URL_STRING', 'PROPERTY_MARKER_ORD')
 );
 
 Caweb\Main\Catalog\Helper::setCanonicalLink($section['UF_CAN']);
@@ -333,9 +333,20 @@ if($isAjaxFilter == "Y")
 		<div class="inner_wrapper">
 <?endif;?>
         <?if (!empty($banner[0]['DETAIL_PICTURE'])):?>
+            <?
+            $link = $banner[0]['PROPERTY_URL_STRING_VALUE'];
+            if ($link && $banner[0]['PROPERTY_MARKER_ORD_VALUE'])
+                $link = \Caweb\Main\Tools::getInstance()->getMarkerOrdUri($banner[0]['PROPERTY_MARKER_ORD_VALUE'] , $link);?>
             <div class="group_description_block top">
-                <div>
-                    <a href="<?= $banner[0]['PROPERTY_URL_STRING_VALUE'] ?>"><img src="<?=\CFile::GetPath($banner[0]['DETAIL_PICTURE']) ?>" alt="<?=$banner['NAME']?> title="<?=$banner['NAME']?>"></a>
+                <div class="group_description_block-top-image">
+                    <a href="<?= $link ?>"><img src="<?=\CFile::GetPath($banner[0]['DETAIL_PICTURE']) ?>" alt="<?=$banner['NAME']?> title="<?=$banner['NAME']?>"></a>
+                    <?if ($link && $banner[0]['PROPERTY_MARKER_ORD_VALUE']):?>
+                        <div class="ord-link">
+                            Реклама
+                            <i class="fa fa-angle-right"></i>
+                            <input type="text" class="ord-link-href" value="<?=$link?>">
+                        </div>
+                    <?endif?>
                 </div>
             </div>
         <?endif?>

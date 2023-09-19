@@ -22,7 +22,7 @@
 			5 => "BUTTON1LINK",
 			6 => "BUTTON2TEXT",
 			7 => "BUTTON2LINK",
-			8 => "",
+			8 => "MARKER_ORD",
 		),
 		"CHECK_DATES" => "Y",
 		"CACHE_GROUPS" => "N",

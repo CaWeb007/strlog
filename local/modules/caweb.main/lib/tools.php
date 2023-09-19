@@ -2,6 +2,9 @@
 namespace Caweb\Main;
 
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Web\Uri;
+
 class Tools {
     private static $instance = null;
     private $userGroupID = null;
@@ -10,6 +13,7 @@ class Tools {
     private const GROUP_KPSO = 15;
     private const GROUP_SO1 = 10;
     private const GROUP_SO2 = 12;
+    private $host = null;
     public static function getInstance(){
         if (self::$instance === null){
             self::$instance = new self;
@@ -44,5 +48,17 @@ class Tools {
         }
         $str = $first_letter . $str_end;
         return $str;
+    }
+    private function getHost(){
+        if ($this->host) return $this->host;
+        $this->host = Application::getInstance()->getContext()->getRequest()->getHttpHost();
+        return $this->host;
+    }
+    public function getMarkerOrdUri(string $markerORD, string $link = null){
+        if (empty($link)) return false;
+        $uri = new Uri($link);
+        if (empty($uri->getHost()))
+            $uri->setHost($this->getHost());
+        return $uri->addParams(array('erid' => $markerORD))->getUri();
     }
 }
