@@ -958,11 +958,8 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 
     <?
     $arFiles = array();
-    if($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]){
-        $arFiles = $arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"];
-    }
-    else{
-        $arFiles = $arResult["SECTION_FULL"]["UF_FILES"];
+    if($arResult["FILES"]){
+        $arFiles = $arResult["FILES"];
     }
     if(is_array($arFiles)){
         foreach($arFiles as $key => $value){
@@ -980,8 +977,9 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				<span><?=GetMessage("OFFER_PRICES")?></span>
 			</li>
 		<?endif;?>
-		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || ((count($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]) && is_array($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"])) || count($arResult["SECTION_FULL"]["UF_FILES"])) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
+		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || is_array($arResult["FILES"]) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
+				<span><?=GetMessage("DESCRIPTION_TAB")?></span>
 				<span><?=GetMessage("DESCRIPTION_TAB")?></span>
 			</li>
 		<?endif;?>
@@ -1301,7 +1299,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				</table>
 			</li>
 		<?endif;?>
-		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || ((count($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]) && is_array($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"])) || count($arResult["SECTION_FULL"]["UF_FILES"])) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
+		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || is_array($arResult["FILES"]["VALUE"]) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
 				<?if(strlen($arResult["DETAIL_TEXT"])):?>
 					<div class="detail_text"><?=$arResult["DETAIL_TEXT"]?></div>
