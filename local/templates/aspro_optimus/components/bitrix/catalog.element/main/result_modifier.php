@@ -1230,4 +1230,18 @@ if (\Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()
 		//	'og:image' => (($arElement['PREVIEW_PICTURE'] || $arElement['DETAIL_PICTURE']) ? CFile::GetPath(($arElement['PREVIEW_PICTURE'] ? $arElement['PREVIEW_PICTURE'] : $arElement['DETAIL_PICTURE'])) : false),
 	)
 );?>
-
+<?
+if (!empty($arResult['PROPERTIES']['FILES_EXCHANGE']['VALUE'])){
+	$arFilesId = explode(',', $arResult['PROPERTIES']['FILES_EXCHANGE']['VALUE']);
+	if (!empty($arFilesId)){
+		$db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => \Caweb\Main\Events\Iblock::FILES_IBLOCK_ID, 'XML_ID' => $arFilesId), false, false, array());
+		$arFilesId = array();
+		while ($ar = $db->GetNextElement()){
+			$props = $ar->GetProperty('FILES');
+			if (!empty($props['VALUE']))
+				$arFilesId = array_merge($arFilesId, $props['VALUE']);
+		}
+		$arResult['FILES'] = $arFilesId;
+	}
+}
+?>

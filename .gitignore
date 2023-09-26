@@ -27,7 +27,7 @@
 /bitrix/modules/askaron.agents/
 /bitrix/modules/currency/
 /bitrix/modules/socialservices/
-/bitrix/modules/yandex.market/
+#/bitrix/modules/yandex.market/
 /bitrix/modules/catalog/
 /bitrix/modules/sale_migrator.log
 /bitrix/modules/forum/
@@ -81,3 +81,7 @@
 /bitrix/modules/report/
 /bitrix/modules/bendersay.exportimport/
 /bitrix/modules/advertising/
+20220728_162649_sql_19d2072c.tar.gz
+20220725_144603_sql_26eff931.tar.gz
+node.tar
+bfg.jar

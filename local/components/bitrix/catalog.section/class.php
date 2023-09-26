@@ -91,6 +91,9 @@ class CatalogSectionComponent extends ElementList
     {
         $sortFields = array();
 
+        if (!empty($this->arParams['CUSTOM_ELEMENT_SORT']))
+            $sortFields += $this->arParams['CUSTOM_ELEMENT_SORT'];
+
         if (
             (
                 $this->isIblockCatalog
@@ -105,8 +108,7 @@ class CatalogSectionComponent extends ElementList
             $sortFields['CATALOG_AVAILABLE'] = 'desc,nulls';
         }
 
-        if (!empty($this->arParams['CUSTOM_ELEMENT_SORT']))
-            $sortFields += $this->arParams['CUSTOM_ELEMENT_SORT'];
+
 
         if (!isset($sortFields[$this->arParams['ELEMENT_SORT_FIELD']]))
         {
@@ -413,6 +415,7 @@ class CatalogSectionComponent extends ElementList
                 'CATALOG_TYPE' => 1,
                 'CATALOG_STORE_AMOUNT_88' => 1,
                 'CATALOG_STORE_AMOUNT_49' => 1,
+                'CATALOG_STORE_AMOUNT_91' => 1,
             );
             if (!empty($iblockParams['OFFERS_FIELD_CODE']))
             {
