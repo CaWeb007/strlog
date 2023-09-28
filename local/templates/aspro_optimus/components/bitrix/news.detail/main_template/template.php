@@ -5,7 +5,9 @@
 $templateData = array(
 	'PRICE' => $arResult['PROPERTIES'][$arParams["PRICE_PROPERTY"]]['VALUE'],
 );
-
+$link = $arResult["DETAIL_PAGE_URL"];
+if ($link && $arResult['PROPERTIES']['MARKER_ORD']['VALUE'])
+    $link = \Caweb\Main\Tools::getInstance()->getMarkerOrdUri($arResult['PROPERTIES']['MARKER_ORD']['VALUE'] , $link);
 /**/
 ?>
 <div class="news_detail_wrapp big">
@@ -15,6 +17,13 @@ $templateData = array(
 			<a href="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" class="fancy">
 				<img src="<?=$img["src"]?>" alt="<?=($arResult["DETAIL_PICTURE"]["ALT"] ? $arResult["DETAIL_PICTURE"]["ALT"] : $arResult["NAME"])?>" title="<?=($arResult["DETAIL_PICTURE"]["TITLE"] ? $arResult["DETAIL_PICTURE"]["TITLE"] : $arResult["NAME"])?>"/>
 			</a>
+            <?if ($link && $arResult['PROPERTIES']['MARKER_ORD']['VALUE']):?>
+                <div class="ord-link">
+                    Реклама
+                    <i class="fa fa-angle-right"></i>
+                    <input type="text" class="ord-link-href" value="<?=$link?>">
+                </div>
+            <?endif?>
 		</div>
 	<?endif;?>
 	<div class="detail-box">

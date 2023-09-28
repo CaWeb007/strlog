@@ -14,6 +14,7 @@ class Tools {
     private const GROUP_SO1 = 10;
     private const GROUP_SO2 = 12;
     private $host = null;
+    private $uriInstance = null;
     public static function getInstance(){
         if (self::$instance === null){
             self::$instance = new self;
@@ -60,5 +61,16 @@ class Tools {
         if (empty($uri->getHost()))
             $uri->setHost($this->getHost());
         return $uri->addParams(array('erid' => $markerORD))->getUri();
+    }
+    public function getUriInstance(){
+        if ($this->uriInstance) return $this->uriInstance;
+        $uri = new Uri(Application::getInstance()->getContext()->getRequest()->getRequestUri());
+        if (empty($uri->getHost()))
+            $uri->setHost($this->getHost());
+        $this->uriInstance = $uri;
+        return $this->uriInstance;
+    }
+    public function getPropertyIdByCode(string $propertyCode, $iblockID = false){
+        return (int)\CIBlockProperty::GetByID($propertyCode, $iblockID, false)->GetNext()['ID'];
     }
 }

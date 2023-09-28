@@ -26,7 +26,8 @@ class ORD {
         $this->setHeaders();
     }
     private function setSiteUrl(){
-        $this->siteUrl = 'https://стройлогистика.рф';
+        $uri = Tools::getInstance()->getUriInstance();
+        $this->siteUrl = $uri->getScheme().'://'.$uri->getHost();
     }
     private function setHeaders(){
         if ($this->testMode){

@@ -22,9 +22,10 @@ class Iblock{
     const DO_NOT_DEACTIVATE_SECTION = array(2155);
     const FILES_IBLOCK_ID = 38;
     const MAIN_BANNERS_IBLOCK_ID = 2;
+    const SALES_IBLOCK_ID = 12;
     const CONTENT_IBLOCK_TYPE = 'aspro_optimus_content';
     const ADV_IBLOCK_TYPE= 'aspro_optimus_adv';
-    const PROPERTY_MARKER_ORD_ID = 803;
+    const PROPERTY_MARKER_ORD_CODE = 'MARKER_ORD';
     public function SortSku(&$arParams){
         $iblockId = (int)$arParams['IBLOCK_ID'];
         if ($iblockId !== 23) return $arParams;

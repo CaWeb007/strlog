@@ -16,25 +16,32 @@
 				}
 				if(isset($arParams["BIG_IMG"]) && $arParams["BIG_IMG"] == "Y")
 					$arSize=array("WIDTH"=>400, "HEIGHT" => 290);
+                $link = $arItem["DETAIL_PAGE_URL"];
+                if ($link && $arItem['PROPERTIES']['MARKER_ORD']['VALUE'])
+                    $link = \Caweb\Main\Tools::getInstance()->getMarkerOrdUri($arItem['PROPERTIES']['MARKER_ORD']['VALUE'] , $link);
 		?>
 			<div class="item clearfix item_block" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 				<div class="wrapper_inner_block">
-					<?if($arItem["PREVIEW_PICTURE"]):?>
-						<?$img = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], array( "width" => $arSize["WIDTH"], "height" => $arSize["HEIGHT"] ), BX_RESIZE_IMAGE_EXACT, true );?>
-						<div class="left-data">
-							<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="thumb"><img src="<?=$img["src"]?>" alt="<?=($arItem["PREVIEW_PICTURE"]["ALT"] ? $arItem["PREVIEW_PICTURE"]["ALT"] : $arItem["NAME"])?>" title="<?=($arItem["PREVIEW_PICTURE"]["TITLE"] ? $arItem["PREVIEW_PICTURE"]["TITLE"] : $arItem["NAME"])?>" /></a>
-						</div>
-					<?elseif($arItem["DETAIL_PICTURE"]):?>
-						<?$img = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], array( "width" => $arSize["WIDTH"], "height" => $arSize["HEIGHT"] ), BX_RESIZE_IMAGE_EXACT, true );?>
-						<div class="left-data">
-							<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="thumb"><img src="<?=$img["src"]?>" alt="<?=($arItem["DETAIL_PICTURE"]["ALT"] ? $arItem["DETAIL_PICTURE"]["ALT"] : $arItem["NAME"])?>" title="<?=($arItem["DETAIL_PICTURE"]["TITLE"] ? $arItem["DETAIL_PICTURE"]["TITLE"] : $arItem["NAME"])?>" /></a>
-						</div>
-					<?else:?>
-						<div class="left-data">
-							<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="thumb"><img src="<?=SITE_TEMPLATE_PATH?>/images/no_photo_medium.png" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" height="90" /></a>
-						</div>
-					<?endif;?>
-					<div class="right-data">
+                    <div class="left-data">
+                        <?if($arItem["PREVIEW_PICTURE"]):?>
+                            <?$img = CFile::ResizeImageGet($arItem["PREVIEW_PICTURE"], array( "width" => $arSize["WIDTH"], "height" => $arSize["HEIGHT"] ), BX_RESIZE_IMAGE_EXACT, true );?>
+                                <a href="<?=$link?>" class="thumb"><img src="<?=$img["src"]?>" alt="<?=($arItem["PREVIEW_PICTURE"]["ALT"] ? $arItem["PREVIEW_PICTURE"]["ALT"] : $arItem["NAME"])?>" title="<?=($arItem["PREVIEW_PICTURE"]["TITLE"] ? $arItem["PREVIEW_PICTURE"]["TITLE"] : $arItem["NAME"])?>" /></a>
+                        <?elseif($arItem["DETAIL_PICTURE"]):?>
+                            <?$img = CFile::ResizeImageGet($arItem["DETAIL_PICTURE"], array( "width" => $arSize["WIDTH"], "height" => $arSize["HEIGHT"] ), BX_RESIZE_IMAGE_EXACT, true );?>
+                                <a href="<?=$link?>" class="thumb"><img src="<?=$img["src"]?>" alt="<?=($arItem["DETAIL_PICTURE"]["ALT"] ? $arItem["DETAIL_PICTURE"]["ALT"] : $arItem["NAME"])?>" title="<?=($arItem["DETAIL_PICTURE"]["TITLE"] ? $arItem["DETAIL_PICTURE"]["TITLE"] : $arItem["NAME"])?>" /></a>
+                        <?else:?>
+                                <a href="<?=$link?>" class="thumb"><img src="<?=SITE_TEMPLATE_PATH?>/images/no_photo_medium.png" alt="<?=$arItem["NAME"]?>" title="<?=$arItem["NAME"]?>" height="90" /></a>
+                        <?endif;?>
+                        <?if ($link && $arItem['PROPERTIES']['MARKER_ORD']['VALUE']):?>
+                            <div class="ord-link">
+                                Реклама
+                                <i class="fa fa-angle-right"></i>
+                                <input type="text" class="ord-link-href" value="<?=$link?>">
+                            </div>
+                        <?endif?>
+                    </div>
+
+                    <div class="right-data">
 						<?if($arParams["DISPLAY_DATE"]=="Y"){?>
 							<?if( $arItem["PROPERTIES"]["PERIOD"]["VALUE"] ){?>
 								<div class="date_small"><?=$arItem["PROPERTIES"]["PERIOD"]["VALUE"]?></div>
@@ -42,7 +49,7 @@
 								<div class="date_small"><?=$arItem["DISPLAY_ACTIVE_FROM"]?></div>
 							<?}?>
 						<?}?>
-						<div class="item-title"><a title="<?=$arItem["NAME"]?>" href="<?=$arItem["DETAIL_PAGE_URL"]?>"><span><?=$arItem["NAME"]?></span></a></div>
+						<div class="item-title"><a title="<?=$arItem["NAME"]?>" href="<?=$link?>"><span><?=$arItem["NAME"]?></span></a></div>
 
 						<?if($arParams["SHOW_PREVIEW_TEXT"] != 'N'):?>
 							<div class="preview-text"><?=$arItem["PREVIEW_TEXT"]?></div>
@@ -58,6 +65,7 @@
 					</div>
 					<div class="clear"></div>
 				</div>
+
 			</div>
 		<?}?>
 	</div>
