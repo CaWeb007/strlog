@@ -150,6 +150,12 @@ class Main{
             $tableId = md5($type.".".$iblock);
             $checkIblock = $oAdminList->table_id == "tbl_iblock_list_".$tableId;
         }
+        if (!$checkIblock){
+            $type = Iblock::CONTENT_IBLOCK_TYPE;
+            $iblock = Iblock::NEWS_IBLOCK_ID;
+            $tableId = md5($type.".".$iblock);
+            $checkIblock = $oAdminList->table_id == "tbl_iblock_list_".$tableId;
+        }
         if (!$checkIblock) return;
         if(isset($_REQUEST["del_filter"]) && $_REQUEST["del_filter"] != "")
             $find_section_section = -1;
@@ -207,6 +213,10 @@ class Main{
             $iblockId = Iblock::SALES_IBLOCK_ID;
             $checkIblock = (int)$oRequest->get('IBLOCK_ID') == $iblockId;
         }
+        if (!$checkIblock){
+            $iblockId = Iblock::NEWS_IBLOCK_ID;
+            $checkIblock = (int)$oRequest->get('IBLOCK_ID') == $iblockId;
+        }
         if (!$checkIblock) return;
         if (!$oRequest->isAdminSection()) return;
         if ($type !== 'E') return;
@@ -225,7 +235,7 @@ class Main{
         }
         try {
             Loader::includeModule('caweb.main');
-            $ord = new ORD();
+            $ord = new ORD(true);
             $body = array(
                 "name"=> $fields['NAME'],
                 "brand"=> $fields['NAME'],

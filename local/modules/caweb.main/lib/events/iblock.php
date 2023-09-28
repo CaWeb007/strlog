@@ -23,6 +23,7 @@ class Iblock{
     const FILES_IBLOCK_ID = 38;
     const MAIN_BANNERS_IBLOCK_ID = 2;
     const SALES_IBLOCK_ID = 12;
+    const NEWS_IBLOCK_ID = 11;
     const CONTENT_IBLOCK_TYPE = 'aspro_optimus_content';
     const ADV_IBLOCK_TYPE= 'aspro_optimus_adv';
     const PROPERTY_MARKER_ORD_CODE = 'MARKER_ORD';

@@ -55,7 +55,7 @@
 			2 => "",
 		),
 		"LIST_PROPERTY_CODE" => array(
-			0 => "",
+			0 => "MARKER_ORD",
 			1 => "",
 		),
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
@@ -73,7 +73,7 @@
 			0 => "LINK",
 			1 => "NK",
 			2 => "MORE_PHOTO",
-			3 => "",
+			3 => "MARKER_ORD",
 		),
 		"IBLOCK_CATALOG_TYPE" => "aspro_optimus_catalog",
 		"CATALOG_IBLOCK_ID1" => "14",
