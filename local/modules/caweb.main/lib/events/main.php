@@ -249,10 +249,10 @@ class Main{
             $marker = $ord->getMarker();
             if ($create){
                 $elementEntity = new \CIBlockElement();
-                $elementEntity->Update($ID, array('XML_ID' => $externalID));
                 $elementEntity::SetPropertyValuesEx($ID, $iblockId, array(
                     $propertyCode => $marker
                 ));
+                $elementEntity->Update($ID, array('XML_ID' => $externalID));
             }
         }catch (\Exception $exception){
             echo '<script>alert("'.$exception->getMessage().'")</script>';

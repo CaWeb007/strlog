@@ -29,6 +29,7 @@ class Iblock{
     const CONTENT_IBLOCK_TYPE = 'aspro_optimus_content';
     const ADV_IBLOCK_TYPE= 'aspro_optimus_adv';
     const PROPERTY_MARKER_ORD_CODE = 'MARKER_ORD';
+    const PROPERTY_BANNER_LINK_CODE = 'URL_STRING';
     const PROPERTY_RELATED_BANNER_ELEMENT_CODE = 'RELATED_ELEMENT';
     public function SortSku(&$arParams){
         $iblockId = (int)$arParams['IBLOCK_ID'];
@@ -166,15 +167,16 @@ class Iblock{
     }
     public static function ordRelatedElements($fields){
         if (self::$disableEvents) return;
-        self::$disableEvents = true;
         $iblockId = (int)$fields['IBLOCK_ID'];
         switch ($iblockId){
             case self::MAIN_BANNERS_IBLOCK_ID:
-                ORD::bannerAction($fields);
-                break;
             case self::NEWS_IBLOCK_ID:
             case self::SALES_IBLOCK_ID:
-                ORD::relatedElementAction($fields);
+                self::$disableEvents = true;
+                ORD::elementUpdateAction($fields);
+                break;
+            default:
+                return;
         }
         self::$disableEvents = false;
     }
