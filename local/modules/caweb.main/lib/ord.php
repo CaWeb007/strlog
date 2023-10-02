@@ -149,27 +149,4 @@ class ORD {
             \CIBlockElement::SetPropertyValuesEx($relatedElement['id'], $relatedElement['iblock_id'], $arRelatedUpdate['props']);
         }
     }
-    public static function relatedElementAction($fields){
-        $relatedBanner = array('link', 'marker', 'xml');// get  banner
-        if (!$relatedBanner) return;
-
-        if ($fields['link'] !== $relatedBanner['link']) // || empty???
-            $arUpdateProps['link'] = $fields['link'];
-
-        if ($fields['marker'] !== $relatedBanner['marker'])
-            $arUpdateProps['marker'] = $fields['marker'];
-
-        if ($fields['xml'] !== $relatedBanner['xml'])
-            $arUpdateFields['xml'] = $fields['xml'];
-
-        if ($arUpdateFields){
-            $entity = new \CIBlockElement();
-            $entity->Update($relatedBanner['ID'], $arUpdateFields);
-        }
-
-        if ($arUpdateProps){
-            \CIBlockElement::SetPropertyValuesEx($relatedBanner['ID'], $relatedBanner['IBLOCK_ID'], $arUpdateProps);
-        }
-
-    }
 }

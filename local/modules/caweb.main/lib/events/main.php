@@ -174,7 +174,7 @@ class Main{
             $prop = $row->aFields['PROPERTY_'.$propertyId];
             if (empty($fields['PROPERTY_'.$propertyId])) continue;
             if ($row->arRes['ACTIVE'] !== 'Y') continue;
-            $markerExist = !empty($prop['view']['value']);// + related marker exist
+            $markerExist = !empty($prop['view']['value']);
             $arActions = $row->aActions;
             $arActions[] = array(
                 'SEPARATOR' => true
