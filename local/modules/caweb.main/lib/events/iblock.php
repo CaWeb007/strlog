@@ -14,9 +14,11 @@ use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
 use Caweb\Main\Log\Write;
 use \Bitrix\Main\Entity;
+use Caweb\Main\ORD;
 
 class Iblock{
     public static $instance = null;
+    public static $disableEvents = false;
     const SCU_IBLOCK = 23;
     const CATALOG_IBLOCK = 16;
     const DO_NOT_DEACTIVATE_SECTION = array(2155);
@@ -27,6 +29,7 @@ class Iblock{
     const CONTENT_IBLOCK_TYPE = 'aspro_optimus_content';
     const ADV_IBLOCK_TYPE= 'aspro_optimus_adv';
     const PROPERTY_MARKER_ORD_CODE = 'MARKER_ORD';
+    const PROPERTY_RELATED_BANNER_ELEMENT_CODE = 'RELATED_ELEMENT';
     public function SortSku(&$arParams){
         $iblockId = (int)$arParams['IBLOCK_ID'];
         if ($iblockId !== 23) return $arParams;
@@ -160,5 +163,19 @@ class Iblock{
                 $arFields['XML_ID'] = 1;
             }
         }
+    }
+    public static function ordRelatedElements($fields){
+        if (self::$disableEvents) return;
+        self::$disableEvents = true;
+        $iblockId = (int)$fields['IBLOCK_ID'];
+        switch ($iblockId){
+            case self::MAIN_BANNERS_IBLOCK_ID:
+                ORD::bannerAction($fields);
+                break;
+            case self::NEWS_IBLOCK_ID:
+            case self::SALES_IBLOCK_ID:
+                ORD::relatedElementAction($fields);
+        }
+        self::$disableEvents = false;
     }
 }

@@ -4,6 +4,7 @@ use Bitrix\Main\Application;
 use Bitrix\Main\Web\HttpClient;
 use Bitrix\Main\Web\Json;
 use Bitrix\Main\Web\Uri;
+use Caweb\Main\Events\Iblock;
 
 class ORD {
     private const MEDIA_TYPE = 'application/json';
@@ -77,5 +78,75 @@ class ORD {
         $error = $result['error'];
         if ($error) throw new \Exception($error);
         return $marker;
+    }
+    public static function bannerAction($fields){
+        $bannerElementDB = \CIBlockElement::GetList(
+            array(),
+            array('ID' => $fields['ID']),
+            false,
+            false,
+            array(
+                'ID',
+                'IBLOCK_ID',
+            )
+        )->GetNextElement();
+
+        $relatedElementId =
+            (int)$fields['PROPERTY_VALUES'][Tools::getInstance()->getPropertyIdByCode(Iblock::PROPERTY_RELATED_BANNER_ELEMENT_CODE)]['n0']['VALUE'];
+        if (!$relatedElementId) return;
+        $relatedElementDB = \CIBlockElement::GetList(
+            array(),
+            array('ID' => $relatedElementId),
+            false,
+            false,
+            array(
+                'ID',
+                'IBLOCK_ID',
+                'DETAIL_PAGE_URL'
+            )
+        )->GetNextElement();
+        $arUpdateProps = array();
+        $arUpdateFields = array();
+
+        if ($fields['link'] !== $relatedElement['link']) // || empty???
+            $arUpdateProps['link'] = $relatedElement['link'];
+
+        if ($fields['marker'] !== $relatedElement['marker'])
+            $arUpdateProps['marker'] = $relatedElement['marker'];
+
+        if ($fields['xml'] !== $relatedElement['xml'])
+            $arUpdateFields['xml'] = $relatedElement['xml'];
+
+        if ($arUpdateFields){
+            $entity = new \CIBlockElement();
+            $entity->Update($fields['ID'], $arUpdateFields);
+        }
+
+        if ($arUpdateProps){
+            \CIBlockElement::SetPropertyValuesEx($fields['ID'], $fields['IBLOCK_ID'], $arUpdateProps);
+        }
+    }
+    public static function relatedElementAction($fields){
+        $relatedBanner = array('link', 'marker', 'xml');// get  banner
+        if (!$relatedBanner) return;
+
+        if ($fields['link'] !== $relatedBanner['link']) // || empty???
+            $arUpdateProps['link'] = $fields['link'];
+
+        if ($fields['marker'] !== $relatedBanner['marker'])
+            $arUpdateProps['marker'] = $fields['marker'];
+
+        if ($fields['xml'] !== $relatedBanner['xml'])
+            $arUpdateFields['xml'] = $fields['xml'];
+
+        if ($arUpdateFields){
+            $entity = new \CIBlockElement();
+            $entity->Update($relatedBanner['ID'], $arUpdateFields);
+        }
+
+        if ($arUpdateProps){
+            \CIBlockElement::SetPropertyValuesEx($relatedBanner['ID'], $relatedBanner['IBLOCK_ID'], $arUpdateProps);
+        }
+
     }
 }
