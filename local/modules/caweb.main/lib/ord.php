@@ -1,6 +1,7 @@
 <?
 namespace Caweb\Main;
 use Bitrix\Main\Application;
+use Bitrix\Main\Type\Date;
 use Bitrix\Main\Web\HttpClient;
 use Bitrix\Main\Web\Json;
 use Bitrix\Main\Web\Uri;
@@ -112,9 +113,14 @@ class ORD {
             'link' => $relatedElementDB->GetFields()['DETAIL_PAGE_URL'],
             'xml_id' => $relatedElementDB->GetFields()['XML_ID'],
             'marker' => $relatedElementDB->GetProperty(Iblock::PROPERTY_MARKER_ORD_CODE)['VALUE'],
-            'id' => $relatedElementDB->GetFields()['ID'],
-            'iblock_id' => $relatedElementDB->GetFields()['IBLOCK_ID']
+            'id' => (int)$relatedElementDB->GetFields()['ID'],
+            'iblock_id' => (int)$relatedElementDB->GetFields()['IBLOCK_ID']
         );
+
+        if ($relatedElement['iblock_id'] === Iblock::NEWS_IBLOCK_ID){
+            $arDate = ParseDateTime($relatedElementDB->GetFields()['ACTIVE_FROM'], 'DD.MM.YYYY');
+            $relatedElement['link'] = preg_replace('|#YEAR#|', $arDate["YYYY"], $relatedElement['link'], 1);
+        }
 
         $arBannerUpdate = array('fields'=>array(), 'props' => array());
         $arRelatedUpdate = array('fields'=>array(), 'props' => array());
