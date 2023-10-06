@@ -1,9 +1,11 @@
 <?
 namespace Caweb\Main;
 use Bitrix\Main\Application;
+use Bitrix\Main\Type\Date;
 use Bitrix\Main\Web\HttpClient;
 use Bitrix\Main\Web\Json;
 use Bitrix\Main\Web\Uri;
+use Caweb\Main\Events\Iblock;
 
 class ORD {
     private const MEDIA_TYPE = 'application/json';
@@ -26,7 +28,8 @@ class ORD {
         $this->setHeaders();
     }
     private function setSiteUrl(){
-        $this->siteUrl = 'https://стройлогистика.рф';
+        $uri = Tools::getInstance()->getUriInstance();
+        $this->siteUrl = $uri->getScheme().'://'.$uri->getHost();
     }
     private function setHeaders(){
         if ($this->testMode){
@@ -76,5 +79,80 @@ class ORD {
         $error = $result['error'];
         if ($error) throw new \Exception($error);
         return $marker;
+    }
+    public static function elementUpdateAction($fields){
+        $bannerFilter = array();
+        if ((int)$fields['IBLOCK_ID'] === Iblock::MAIN_BANNERS_IBLOCK_ID){
+            $bannerFilter['ID'] = (int)$fields['ID'];
+        }elseif(((int)$fields['IBLOCK_ID'] === Iblock::NEWS_IBLOCK_ID)
+            || ((int)$fields['IBLOCK_ID'] === Iblock::SALES_IBLOCK_ID)){
+            $bannerFilter['PROPERTY_'.Iblock::PROPERTY_RELATED_BANNER_ELEMENT_CODE] = (int)$fields['ID'];
+        }
+
+        $bannerElementDB = \CIBlockElement::GetList(
+            array(),
+            $bannerFilter,
+        )->GetNextElement();
+        if (!$bannerElementDB) return;
+        $banner = array(
+            'link' => $bannerElementDB->GetProperty(Iblock::PROPERTY_BANNER_LINK_CODE)['VALUE'],
+            'xml_id' => $bannerElementDB->GetFields()['XML_ID'],
+            'marker' => $bannerElementDB->GetProperty(Iblock::PROPERTY_MARKER_ORD_CODE)['VALUE'],
+            'relatedId' => $bannerElementDB->GetProperty(Iblock::PROPERTY_RELATED_BANNER_ELEMENT_CODE)['VALUE'],
+            'id' => $bannerElementDB->GetFields()['ID'],
+            'iblock_id' => $bannerElementDB->GetFields()['IBLOCK_ID']
+        );
+
+        if (!$banner['relatedId']) return;
+        $relatedElementDB = \CIBlockElement::GetList(
+            array(),
+            array('ID' => $banner['relatedId'])
+        )->GetNextElement();
+        if (!$relatedElementDB) return;
+        $relatedElement = array(
+            'link' => $relatedElementDB->GetFields()['DETAIL_PAGE_URL'],
+            'xml_id' => $relatedElementDB->GetFields()['XML_ID'],
+            'marker' => $relatedElementDB->GetProperty(Iblock::PROPERTY_MARKER_ORD_CODE)['VALUE'],
+            'id' => (int)$relatedElementDB->GetFields()['ID'],
+            'iblock_id' => (int)$relatedElementDB->GetFields()['IBLOCK_ID']
+        );
+
+        if ($relatedElement['iblock_id'] === Iblock::NEWS_IBLOCK_ID){
+            $arDate = ParseDateTime($relatedElementDB->GetFields()['ACTIVE_FROM'], 'DD.MM.YYYY');
+            $relatedElement['link'] = preg_replace('|#YEAR#|', $arDate["YYYY"], $relatedElement['link'], 1);
+        }
+
+        $arBannerUpdate = array('fields'=>array(), 'props' => array());
+        $arRelatedUpdate = array('fields'=>array(), 'props' => array());
+
+        if (empty($relatedElement['marker']) && !empty($banner['marker'])){
+            $arRelatedUpdate['props'][Iblock::PROPERTY_MARKER_ORD_CODE] = $banner['marker'];
+            $arRelatedUpdate['fields']['XML_ID'] = $banner['xml_id'];
+        }elseif (!empty($relatedElement['marker']) && ($relatedElement['marker'] !== $banner['marker'])){
+            $arBannerUpdate['props'][Iblock::PROPERTY_MARKER_ORD_CODE] = $relatedElement['marker'];
+            $arBannerUpdate['fields']['XML_ID'] = $relatedElement['xml_id'];
+        }
+
+        if (!empty($relatedElement['link']) && ($banner['link'] !== $relatedElement['link'])){
+            $arBannerUpdate['props'][Iblock::PROPERTY_BANNER_LINK_CODE] = $relatedElement['link'];
+        }
+
+        if ($arBannerUpdate['fields']){
+            $entity = new \CIBlockElement();
+            $entity->Update($banner['id'], $arBannerUpdate['fields']);
+        }
+
+        if ($arBannerUpdate['props']){
+            \CIBlockElement::SetPropertyValuesEx($banner['id'], $banner['iblock_id'], $arBannerUpdate['props']);
+        }
+
+        if ($arRelatedUpdate['fields']){
+            $entity = new \CIBlockElement();
+            $entity->Update($relatedElement['id'], $arRelatedUpdate['fields']);
+        }
+
+        if ($arRelatedUpdate['props']){
+            \CIBlockElement::SetPropertyValuesEx($relatedElement['id'], $relatedElement['iblock_id'], $arRelatedUpdate['props']);
+        }
     }
 }

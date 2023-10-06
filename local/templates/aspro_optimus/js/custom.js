@@ -383,8 +383,10 @@ $(document).ready(function () {
 			this.setEvents()
 		},
 		setEvents: function () {
-			this.ord.on('click', $.proxy(this.ordClickHandler, this))
-			this.popupLink.on('click.copyOrdLink', $.proxy(this.copyLinkHandler, this))
+			if (this.ord){
+				this.ord.on('click', $.proxy(this.ordClickHandler, this))
+				this.popupLink.on('click.copyOrdLink', $.proxy(this.copyLinkHandler, this))
+			}
 		},
 		setEntities: function () {
 			this.ord = $('.ord-link')

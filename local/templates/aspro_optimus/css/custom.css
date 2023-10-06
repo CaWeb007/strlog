@@ -2042,7 +2042,10 @@ body .ajax_load.table .main_item_wrapper div.counter_wrapp{
 	 background: #2992d9;
  }
  .sticker_sale{
-	 background: #d50000;
+	 background-color: #d50000!important;
+ }
+ .sticker_sale:before{
+	 display: none!important;
  }
 
 .sticker_stock{
@@ -2631,6 +2634,7 @@ figure.texts
 
 .news_detail_wrapp.big .detail_picture_block {
 	height:auto;
+	position: relative;
 }
 .news_detail_wrapp .detail_picture_block img {
 	max-width:100%;

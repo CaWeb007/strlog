@@ -47,7 +47,7 @@ $APPLICATION->SetTitle("Акции");
 		),
 		"LIST_PROPERTY_CODE" => array(
 			0 => "PERIOD",
-			1 => "",
+			1 => "MARKER_ORD",
 		),
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"DISPLAY_NAME" => "Y",
@@ -61,7 +61,7 @@ $APPLICATION->SetTitle("Акции");
 		),
 		"DETAIL_PROPERTY_CODE" => array(
 			0 => "LINK",
-			1 => "",
+			1 => "MARKER_ORD",
 		),
 		"IBLOCK_CATALOG_TYPE" => "aspro_optimus_catalog",
 		"CATALOG_IBLOCK_ID1" => "14",

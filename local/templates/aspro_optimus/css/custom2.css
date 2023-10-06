@@ -240,7 +240,8 @@ html {
   border-radius: 3px;
   transition: opacity 0.5s;
   z-index: 10;
-  user-select: none; }
+  user-select: none;
+  line-height: 20px; }
   .ord-link:hover {
     opacity: 0.8; }
   .ord-link input {
