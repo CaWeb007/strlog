@@ -1,5 +1,6 @@
 /.idea/
 /gulpfile.js
+!/upload/historyButtons.js
 /upload/
 /images/
 /logs/
