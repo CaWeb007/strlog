@@ -111,8 +111,6 @@ const CawebDeliveryMap = {
             center: [initStoreData['GPS_S'], initStoreData['GPS_N']],
             zoom: 10
         })
-
-
         this.ymaps.pickup.placemark = {}
         for (let id in this.options.storeData){
             let store = this.options.storeData[id]
@@ -136,7 +134,8 @@ const CawebDeliveryMap = {
             zoom: 9,
             controls: ['geolocationControl', 'searchControl']
         })
-
+        this.ymaps.delivery.searchControl = this.ymaps.delivery.map.controls.get('searchControl')
+        this.ymaps.delivery.searchControl.options.set({noPlacemark: true, placeholderContent: 'Введите адрес доставки'})
 
 
         this.ymaps.delivery.placemark = {}
@@ -166,7 +165,7 @@ const CawebDeliveryMap = {
     },
     storeSelectAction: function (storeId) {
         const storeData = this.options.storeData[storeId]
-        const center = [storeData['GPS_N'], storeData['GPS_S']]
+        const center = [storeData['GPS_S'], storeData['GPS_N']]
         this.ymaps.pickup.map.setCenter(center, 10, {
             duration: 500
         })
