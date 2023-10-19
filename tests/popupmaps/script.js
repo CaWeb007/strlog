@@ -131,11 +131,11 @@ const CawebDeliveryMap = {
         const initStoreData = this.options.storeData[49]
         this.ymaps.delivery.map = new ymaps.Map(this.tabDeliveryMap.prop('id'), {
             center: [initStoreData['GPS_S'], initStoreData['GPS_N']],
-            zoom: 9,
+            zoom: 10,
             controls: ['geolocationControl', 'searchControl']
         })
         this.ymaps.delivery.searchControl = this.ymaps.delivery.map.controls.get('searchControl')
-        this.ymaps.delivery.searchControl.options.set({noPlacemark: true, placeholderContent: 'Введите адрес доставки'})
+        this.ymaps.delivery.searchControl.options.set({noPlacemark: true, placeholderContent: 'Введите адрес доставки', useMapBounds: true})
 
 
         this.ymaps.delivery.placemark = {}
@@ -147,14 +147,31 @@ const CawebDeliveryMap = {
             this.ymaps.delivery.map.geoObjects.add(placemark)
         }
 
+        this.ymaps.delivery.zones = ymaps.geoQuery(this.options.geodata).addToMap(this.ymaps.delivery.map)
+        this.ymaps.delivery.zones.each(function (obj) {
+            obj.options.set({
+                fillColor: obj.properties.get('fill'),
+                fillOpacity: obj.properties.get('fill-opacity'),
+                strokeColor: obj.properties.get('stroke'),
+                strokeWidth: obj.properties.get('stroke-width'),
+                strokeOpacity: obj.properties.get('stroke-opacity')
+            });
+            obj.properties.set('balloonContent', obj.properties.get('description'));
+        });
 
-
-        ymaps.geoQuery(this.options.deliveryZones).addToMap(this.ymaps.delivery.map)
-
-
+        this.ymaps.delivery.searchControl.events.add('resultshow', $.proxy(this.searchResultHandler, this))
+        this.ymaps.delivery.map.controls.get('geolocationControl').add('locationchange', $.proxy(this.locationChangeHandler, this))
 
         this.mapDeliveryInited = true
     },
+
+    searchResultHandler: function (e) {
+        debugger;
+    },
+    locationChangeHandler: function (e) {
+        debugger;
+    },
+
     storeItemInit: function () {
         this.tabPickupItems[this.options.currentStoreId].addClass('selectedStore')
         this.tabPickupList.on('click', $.proxy(this.storeListClickHandler, this))

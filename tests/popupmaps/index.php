@@ -2,15 +2,17 @@
 require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Новый раздел");
 $api = 'ad511be7-b59e-446b-87cf-e10964a25c8a';
-\Bitrix\Main\Page\Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey='.$api.'&lang=ru_RU&coordorder=longlat');
+$suggest = 'a7decd84-133b-4c26-8664-b0dd4a5572e5';
+\Bitrix\Main\Page\Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey='.$api.'&suggest_apikey='.$suggest.'&lang=ru_RU&coordorder=longlat');
 \Bitrix\Main\Page\Asset::getInstance()->addJs('/tests/popupmaps/script.js');
 \Bitrix\Main\Page\Asset::getInstance()->addCss('/tests/popupmaps/style.css');
 \Bitrix\Main\Page\Asset::getInstance()->addJs('/tests/popupmaps/ui/jquery-ui.js');
 \Bitrix\Main\Page\Asset::getInstance()->addCss('/tests/popupmaps/ui/jquery-ui.css');
 $options = array(
-    'currentDeliveryMethod' => 'PICKUP',
+    'currentDeliveryMethod' => 'DELIVERY',
     'currentStoreId' => 88
 );
+$options['geodata'] = file_get_contents('data.geojson');
 $db = \Bitrix\Catalog\StoreTable::getList(array('filter' => array('ACTIVE' => 'Y')));
 while ($ar = $db->fetch()){
     $options['storeData'][(int)$ar['ID']] = $ar;
