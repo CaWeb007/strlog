@@ -301,6 +301,42 @@ html {
 .group_description_block-top-image {
   position: relative; }
 
+#fullscreenButtonsControl {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2; }
+  #fullscreenButtonsControl .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    #fullscreenButtonsControl .buttons > button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 1;
+      padding: 15px 24px;
+      background-color: #000;
+      opacity: 0.5;
+      transition: opacity 0.5s;
+      cursor: pointer;
+      border: none; }
+      #fullscreenButtonsControl .buttons > button:hover {
+        opacity: 0.7; }
+      #fullscreenButtonsControl .buttons > button:active {
+        opacity: 0.9; }
+  #fullscreenButtonsControl .left-button {
+    border-radius: 20px 0 0 20px; }
+  #fullscreenButtonsControl .right-button {
+    border-radius: 0 20px 20px 0; }
+  #fullscreenButtonsControl .button-text {
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #fff;
+    user-select: none; }
+
 @media (max-width: 550px) {
   .item_main_info .element-stores-block {
     padding: 20px 0 5px;
@@ -363,3 +399,6 @@ html {
       text-align: center; }
       .header_wrap .flex-line .flex-item:nth-child(3) .flex-item__top-auth .module-enter {
         display: inline; } }
+@media all and (display-mode: fullscreen) {
+  #fullscreenButtonsControl {
+    display: block; } }

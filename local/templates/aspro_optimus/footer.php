@@ -216,5 +216,15 @@
                 </div>
             </div>
         </div>
+        <div id="fullscreenButtonsControl">
+            <div class="buttons">
+                <button onclick="history.back();" class="left-button">
+                    <div class="button-text">Назад</div>
+                </button>
+                <button onclick="history.forward();" class="right-button">
+                    <div class="button-text">Вперед</div>
+                </button>
+            </div>
+        </div>
 	</body>
 </html>
