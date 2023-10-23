@@ -1166,6 +1166,9 @@ class Source extends Market\Export\Entity\Reference\Source
 						}
 
 						$fieldValue = $this->makeDetailUrl($fieldValue, $element, $context, $useOriginValues);
+
+						$fieldValue = preg_replace('#/fanera_1/#', '/fanera/', $fieldValue, 1);
+
 					break;
 				}
 			}
