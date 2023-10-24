@@ -3,24 +3,30 @@
 addEventHandler('sale', 'OnOrderNewSendEmail', "OnOrderNewSendEmailHandler");
 function OnOrderNewSendEmailHandler($newOrderId, &$eventName, &$arFields)
 {
-	if($eventName == "SALE_NEW_ORDER" || $eventName == "NEW_ONE_CLICK_BUY") {
+	if($eventName == "SALE_NEW_ORDER"
+        || $eventName == "NEW_ONE_CLICK_BUY"
+        || $eventName == "SALE_ORDER_PAID"
+        || $eventName == "SALE_ORDER_CANCEL") {
 		global $USER;
 		$userID = $USER->GetID();
 		$userGroups = \CUser::GetUserGroup($userID);
 	
 		$arFields['BCC'] = 'zakaz@strlog.ru';
-		
+        $arFields['THEME_PREFIX'] = '';
 		foreach($userGroups as $gr){
 			if((int)$gr === 10 || (int)$gr === 12) {
 				$arFields['BCC'] = 'co@strlog.ru';
+                $arFields['THEME_PREFIX'] = ', отдел СО';
 				break;
 			}
 			if((int)$gr === 11) {
 				$arFields['BCC'] = 'to@strlog.ru';
+                $arFields['THEME_PREFIX'] = ', отдел ТО';
 				break;
 			}
             if((int)$gr === 14) {
                 $arFields['BCC'] = 'corp@strlog.ru';
+                $arFields['THEME_PREFIX'] = ', корпоративный отдел';
                 break;
             }
 		}
@@ -128,9 +134,11 @@ function OnOrderNewSendEmailHandler($newOrderId, &$eventName, &$arFields)
         }
         if ((int)$store_id === 88){
             $arFields['BCC'] = 'ro_sh@strlog.ru';
+            $arFields['THEME_PREFIX'] = ', Шелехов';
         }
         if ((int)$store_id === 91){
             $arFields['BCC'] = 'ro_khom@strlog.ru';
+            $arFields['THEME_PREFIX'] = ', Хомутово';
         }
 		$arFields["ORDER_DESCRIPTION"] = $arOrder["USER_DESCRIPTION"];
 		$arFields["PHONE"] =  $phone;

@@ -50,7 +50,7 @@ $APPLICATION->SetTitle("Корзина");
 		"COMPONENT_TEMPLATE" => ".default",
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
-		"CORRECT_RATIO" => "N",
+		"CORRECT_RATIO" => "Y",
 		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
 		"DEFERRED_REFRESH" => "N",
 		"DISCOUNT_PERCENT_POSITION" => "bottom-right",

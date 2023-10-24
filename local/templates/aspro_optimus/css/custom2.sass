@@ -82,10 +82,11 @@
             .user-bonus-wrapper
               display: block
 
+
 .catalog .item
   position: relative
   .item-title
-    z-index: 30
+    z-index: 40
   &.list_item_wrapp
     .description_wrapp
       z-index: 25
@@ -249,6 +250,117 @@ html
   margin-bottom: 10px!important
   display: inline-block
 
+.ord-link
+  font-size: 12px
+  background-color: #000
+  opacity: .5
+  color: #fff
+  cursor: pointer
+  padding: 3px 7px
+  position: absolute
+  top: 5px
+  right: 5px
+  border-radius: 3px
+  transition: opacity .5s
+  z-index: 10
+  user-select: none
+  line-height: 20px
+  &:hover
+    opacity: .8
+  input
+    position: absolute
+    opacity: 0
+.ord-popup
+  position: absolute
+  padding: 20px
+  z-index: 2
+  background-color: #fff
+  display: none
+  -webkit-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2)
+  -moz-box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2)
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2)
+  .ord-head
+    display: flex
+    justify-content: start
+    align-items: center
+    .ord-info-logo
+      padding-right: 10px
+      line-height: 1
+    .ord-text
+      .ord-text-head
+        white-space: nowrap
+        color: #888
+        font-size: 14px
+        line-height: 1
+        margin-bottom: 10px
+      .ord-text-footer
+        white-space: nowrap
+        font-size: 16px
+        line-height: 1
+        color: black
+  .ord-separator
+    margin: 15px 0
+    height: 1px
+    background-color: #ddd
+  .copy-ord-link
+    display: flex
+    justify-content: start
+    align-items: center
+    cursor: pointer
+    .copy-ord-link-icon
+      padding-right: 10px
+      line-height: 1
+    .copy-ord-link-text
+      font-size: 14px
+      color: #888
+      white-space: nowrap
+      line-height: 1
+    &.link-copied
+      .copy-ord-link-icon, .copy-ord-link-text
+        color: green
+
+.small_banners_block
+  .advt_banner
+    position: relative
+.group_description_block-top-image
+  position: relative
+
+#fullscreenButtonsControl
+  display: none
+  position: fixed
+  bottom: 40px
+  left: 50%
+  transform: translateX(-50%)
+  z-index: 2
+  .buttons
+    display: flex
+    justify-content: center
+    align-items: center
+    & > button
+      display: flex
+      justify-content: center
+      align-items: center
+      line-height: 1
+      padding: 15px 24px
+      background-color: #000
+      opacity: .5
+      transition: opacity .5s
+      cursor: pointer
+      border: none
+      &:hover
+        opacity: .7
+      &:active
+        opacity: .9
+  .left-button
+    border-radius: 20px 0 0 20px
+  .right-button
+    border-radius: 0 20px 20px 0
+  .button-text
+    font-size: 16px
+    letter-spacing: 1px
+    color: #fff
+    user-select: none
+
 @media (max-width: 550px)
   .item_main_info
     .element-stores-block
@@ -346,3 +458,7 @@ html
           text-align: center
           .module-enter
             display: inline
+
+@media all and (display-mode: fullscreen)
+  #fullscreenButtonsControl
+    display: block

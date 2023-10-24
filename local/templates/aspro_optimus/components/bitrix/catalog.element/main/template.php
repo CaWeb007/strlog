@@ -151,16 +151,18 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 <?/*Костыль для показа цены для разных групп пользователей end*/?>
 <div class="item_main_info <?=(!$showCustomOffer ? "noffer" : "");?> <?=($arParams["SHOW_UNABLE_SKU_PROPS"] != "N" ? "show_un_props" : "unshow_un_props");?>" id="<?=$arItemIDs["strMainID"];?>">
 	<div class="img_wrapper">
-		<div class="stickers">
-			<?if (is_array($arResult["PROPERTIES"]["FLAG"]["VALUE"])):?>
-				<?foreach($arResult["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
-					<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
-				<?}?>
-			<?endif;?>
-			<?if($arParams["SALE_STIKER"] && $arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
-				<div><div class="sticker_sale_text"><?=$arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
-			<?}?>
-		</div>
+        <?if(($totalCount !== 0) && !$forOrder):?>
+            <div class="stickers">
+                <?if (is_array($arResult["PROPERTIES"]["FLAG"]["VALUE"])):?>
+                    <?foreach($arResult["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+                        <div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage("ICON_TEXT_".$class)?></div></div>
+                    <?}?>
+                <?endif;?>
+                <?if($arParams["SALE_STIKER"] && $arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
+                    <div><div class="sticker_sale_text"><?=$arResult["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
+                <?}?>
+            </div>
+        <?endif?>
 		<div class="item_slider">
 			<?if(($arParams["DISPLAY_WISH_BUTTONS"] != "N" || $arParams["DISPLAY_COMPARE"] == "Y") || (strlen($arResult["DISPLAY_PROPERTIES"]["CML2_ARTICLE"]["VALUE"]) || ($arResult['SHOW_OFFERS_PROPS'] && $showCustomOffer))):?>
 				<div class="like_wrapper">
@@ -956,11 +958,8 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 
     <?
     $arFiles = array();
-    if($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]){
-        $arFiles = $arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"];
-    }
-    else{
-        $arFiles = $arResult["SECTION_FULL"]["UF_FILES"];
+    if($arResult["FILES"]){
+        $arFiles = $arResult["FILES"];
     }
     if(is_array($arFiles)){
         foreach($arFiles as $key => $value){
@@ -978,8 +977,9 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				<span><?=GetMessage("OFFER_PRICES")?></span>
 			</li>
 		<?endif;?>
-		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || ((count($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]) && is_array($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"])) || count($arResult["SECTION_FULL"]["UF_FILES"])) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
+		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || is_array($arResult["FILES"]) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
+				<span><?=GetMessage("DESCRIPTION_TAB")?></span>
 				<span><?=GetMessage("DESCRIPTION_TAB")?></span>
 			</li>
 		<?endif;?>
@@ -1299,7 +1299,7 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 				</table>
 			</li>
 		<?endif;?>
-		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || ((count($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"]) && is_array($arResult["PROPERTIES"]["INSTRUCTIONS"]["VALUE"])) || count($arResult["SECTION_FULL"]["UF_FILES"])) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
+		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || is_array($arResult["FILES"]["VALUE"]) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
 				<?if(strlen($arResult["DETAIL_TEXT"])):?>
 					<div class="detail_text"><?=$arResult["DETAIL_TEXT"]?></div>

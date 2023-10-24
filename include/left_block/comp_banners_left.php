@@ -1,6 +1,6 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();?>
 <?global $SITE_THEME, $TEMPLATE_OPTIONS;?>
-<?/*$APPLICATION->IncludeComponent(
+<?$APPLICATION->IncludeComponent(
 	"aspro:com.banners.optimus", 
 	"left_banner", 
 	array(
@@ -26,7 +26,7 @@
 			9 => "BUTTON1LINK",
 			10 => "BUTTON2TEXT",
 			11 => "BUTTON2LINK",
-			12 => "",
+			12 => "MARKER_ORD",
 		),
 		"CHECK_DATES" => "Y",
 		"CACHE_TYPE" => "N",
@@ -39,4 +39,4 @@
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);*/?>
+);?>

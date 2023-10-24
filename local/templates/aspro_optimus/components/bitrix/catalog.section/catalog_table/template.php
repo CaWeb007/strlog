@@ -53,18 +53,6 @@
 		    <?endif?>
 				<tr class="item main_item_wrapper" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
 					<td class="foto-cell" style="position: relative;">
-                        <!--
-                        <div class="stickers" style="position: absolute;top: 16px;left: 0;width: 96px;">
-                            <?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE_XML_ID"])):?>
-                                <?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE_XML_ID"] as $key=>$class){?>
-                                    <div><div class="sticker_<?=strtolower($key);?>"><?=GetMessage('ICON_TEXT_'.$key)?></div></div>
-                                <?}?>
-                            <?endif;?>
-                            <?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
-                                <div><div class="sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div></div>
-                            <?}?>
-                        </div>
-                        -->
                         <style>
                             .sticker_hit::before,
                             .sticker_main::before,
@@ -153,56 +141,19 @@
                     </td>
 					<td class="item-name-cell">
 						<div class="title"><a title="<?=$elementName?>" href="<?=$arItem["DETAIL_PAGE_URL"]?>"><?=$elementName?></a></div>
-                        <div class="stickers-wrapper">
-                            <?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
-                                <?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
-                                    <div class="table-stickers sticker_<?=strtolower($class);?>"><?=GetMessage('ICON_TEXT_'.$class)?></div>
+                        <?if(($totalCount !== 0) && !$forOrder):?>
+                            <div class="stickers-wrapper">
+                                <?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
+                                    <?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+                                        <div class="table-stickers sticker_<?=strtolower($class);?>"><?=GetMessage('ICON_TEXT_'.$class)?></div>
+                                    <?}?>
+                                <?endif;?>
+                                <?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
+                                    <div class="table-stickers sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div>
                                 <?}?>
-                            <?endif;?>
-                            <?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>
-                                <div class="table-stickers sticker_sale_text"><?=$arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"];?></div>
-                            <?}?>
-                            <!--
-                            <div class="wrapp_stockers">
-                                <div class="like_icons">
-                                    <?if($arParams["DISPLAY_WISH_BUTTONS"] != "N"):?>
-                                        <?if(!$arItem["OFFERS"]):?>
-                                            <div class="wish_item_button">
-                                                <span title="<?=GetMessage('CATALOG_WISH')?>" class="wish_item to" data-item="<?=$arItem["ID"]?>" data-iblock="<?=$arItem["IBLOCK_ID"]?>"><i></i></span>
-                                                <span title="<?=GetMessage('CATALOG_WISH_OUT')?>" class="wish_item in added" style="display: none;" data-item="<?=$arItem["ID"]?>" data-iblock="<?=$arItem["IBLOCK_ID"]?>"><i></i></span>
-                                            </div>
-                                        <?elseif($arItem["OFFERS"]):?>
-                                            <?foreach($arItem["OFFERS"] as $arOffer):?>
-                                                <?if($arOffer['CAN_BUY']):?>
-                                                    <div class="wish_item_button o_<?=$arOffer["ID"];?>" style="display: none;">
-                                                        <span title="<?=GetMessage('CATALOG_WISH')?>" class="wish_item to <?=$arParams["TYPE_SKU"];?>" data-item="<?=$arOffer["ID"]?>" data-iblock="<?=$arItem["IBLOCK_ID"]?>" data-offers="Y" data-props="<?=$arOfferProps?>"><i></i></span>
-                                                        <span title="<?=GetMessage('CATALOG_WISH_OUT')?>" class="wish_item in added <?=$arParams["TYPE_SKU"];?>" style="display: none;" data-item="<?=$arOffer["ID"]?>" data-iblock="<?=$arOffer["IBLOCK_ID"]?>"><i></i></span>
-                                                    </div>
-                                                <?endif;?>
-                                            <?endforeach;?>
-                                        <?endif;?>
-                                    <?endif;?>
-                                    <?if($arParams["DISPLAY_COMPARE"] == "Y"):?>
-                                        <?if(!$arItem["OFFERS"] || $arParams["TYPE_SKU"] !== 'TYPE_1'):?>
-                                            <div class="compare_item_button">
-                                                <span title="<?=GetMessage('CATALOG_COMPARE')?>" class="compare_item to" data-iblock="<?=$arParams["IBLOCK_ID"]?>" data-item="<?=$arItem["ID"]?>" ><i></i></span>
-                                                <span title="<?=GetMessage('CATALOG_COMPARE_OUT')?>" class="compare_item in added" style="display: none;" data-iblock="<?=$arParams["IBLOCK_ID"]?>" data-item="<?=$arItem["ID"]?>"><i></i></span>
-                                            </div>
-                                        <?elseif($arItem["OFFERS"]):?>
-                                            <?foreach($arItem["OFFERS"] as $arOffer):?>
-                                                <div class="compare_item_button o_<?=$arOffer["ID"];?>" style="display: none;">
-                                                    <span title="<?=GetMessage('CATALOG_COMPARE')?>" class="compare_item to <?=$arParams["TYPE_SKU"];?>" data-iblock="<?=$arParams["IBLOCK_ID"]?>" data-item="<?=$arOffer["ID"]?>" ><i></i></span>
-                                                    <span title="<?=GetMessage('CATALOG_COMPARE_OUT')?>" class="compare_item in added <?=$arParams["TYPE_SKU"];?>" style="display: none;" data-iblock="<?=$arParams["IBLOCK_ID"]?>" data-item="<?=$arOffer["ID"]?>"><i></i></span>
-                                                </div>
-                                            <?endforeach;?>
-                                        <?endif;?>
-                                    <?endif;?>
-                                </div>
                             </div>
-                            -->
-                        </div>
+                        <?endif?>
                         <div class="preview_text">
-
 							<?if(0 < count($arItem["DISPLAY_PROPERTIES"])):
 								$rEcho="";?>
 								<?foreach($arItem["DISPLAY_PROPERTIES"] as $dprop):?>

@@ -19,7 +19,7 @@ $this->addExternalJS($templateFolder.'/js/position.min.js');
             <?$i = 0?>
             <?foreach($arResult["ITEMS"] as $arItem):?>
                 <?$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));?>
-
+                <?$logo = $arItem['ID'] == 43647?>
                 <?if($i === 0):?>
                     <div class="ecosystem_row">
                         <div class="ecosystem_column ecosystem_column-one-third">
@@ -42,6 +42,9 @@ $this->addExternalJS($templateFolder.'/js/position.min.js');
                     ?>" data-id="<?echo $arItem['ID']?>" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
                     <?if (!empty($arItem['DISPLAY_PROPERTIES']['SUB_MENU'])):?>
                         <div class="widget_toggle-icon-wrapper">...</div>
+                    <?endif?>
+                    <?if($logo):?>
+                        <div class="widget_perimetr-logo"></div>
                     <?endif?>
                     <div class="widget-inner">
                         <?if (($i !== 0) && !empty($arItem['DISPLAY_PROPERTIES']['ICON'])):?>

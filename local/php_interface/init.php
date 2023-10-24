@@ -62,6 +62,22 @@ EventManager::getInstance()->addEventHandler('', 'KontragentyOnAfterAdd',array('
 EventManager::getInstance()->addEventHandler('', 'KontragentyOnAfterUpdate',array('Caweb\Main\Events\HL', 'OnAfterAddUpdate'));
 EventManager::getInstance()->addEventHandler('', 'KontragentyOnBeforeAdd',array('Caweb\Main\Events\HL', 'OnBeforeAdd'));
 
+/**добавим действие группового копирования ID в инфоблоке файлов start*/
+EventManager::getInstance()->addEventHandlerCompatible("main", "OnAdminListDisplay", array('Caweb\Main\Events\Main',"addContextButtonInFiles"));
+EventManager::getInstance()->addEventHandlerCompatible("main", "OnAfterEpilog", array('Caweb\Main\Events\Main',"contextButtonInFilesHandler"));
+/**добавим действие в контекстное меню end*/
+/**start работа с инфоблоком файлов*/
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'filesIblockAction'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'filesIblockAction'));
+/**end*/
+/**start работа инфоблоков с ord*/
+EventManager::getInstance()->addEventHandlerCompatible("main", "OnAdminListDisplay", array('Caweb\Main\Events\Main',"addContextButtonForOrd"));
+EventManager::getInstance()->addEventHandlerCompatible("main", "OnBeforeProlog", array('Caweb\Main\Events\Main',"adminOrdActionHandler"));
+
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'ordRelatedElements'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'ordRelatedElements'));
+/**end*/
+
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){
         $dbBasketItems = CSaleBasket::GetList(

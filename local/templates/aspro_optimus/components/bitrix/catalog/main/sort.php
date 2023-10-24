@@ -97,7 +97,7 @@ $template = "catalog_".$display;
 				<?
 				$current_url = '';
 				$current_url = $APPLICATION->GetCurPageParam('display='.$displayType, 	array('display'));
-				$url = str_replace('+', '%2B', $current_url);
+				$url = $current_url;
 				?>
 				<a rel="nofollow" href="<?=$url;?>" class="sort_btn <?=$displayType?> <?=($display == $displayType ? 'current' : '')?>"><i title="<?=GetMessage("SECT_DISPLAY_".strtoupper($displayType))?>"></i></a>
 			<?endforeach;?>

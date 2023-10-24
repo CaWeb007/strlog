@@ -393,7 +393,7 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
 <?if(!COptimus::IsOrderPage() && !COptimus::IsBasketPage() && !$iSDetailPage){?>
     <div class="left_block">
         <?/*Статичное меню*start*JS скрипт выпадающего меню находится bitrix/menu/left_front_catalog/template.php*/?>
-        <?$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
+        <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
             array(
                 "COMPONENT_TEMPLATE" => ".default",
                 "PATH" => SITE_DIR."include/left_block/menu.left_menu.php",
@@ -403,7 +403,7 @@ $iSDetailPage = (COptimus::IsCatalogPage() && count($exp) > 2 && !in_array("filt
                 "EDIT_TEMPLATE" => "standard.php"
             ),
             false
-        );?>
+        );*/?>
         <?/*Статичное меню*end*/?>
 
         <?$APPLICATION->ShowViewContent('left_menu');?>

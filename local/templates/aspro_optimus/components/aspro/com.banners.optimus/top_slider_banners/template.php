@@ -1,7 +1,9 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?$this->setFrameMode(true);?>
+<?$this->setFrameMode(true);
+\Caweb\Main\Tools::getInstance()->getMarkerOrdUri('difgbdfjk');
+?>
 <?if($arResult["ITEMS"]):?>
-	<div class="top_slider_wrapp">
+	<div class="top_slider_wrapp" id="bx_top_slider_wrap">
 		<?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.flexslider-min.js',true)?> 
 		<div class="flexslider">
 			<ul class="slides">
@@ -11,10 +13,13 @@
 					$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 					$background = is_array($arItem["DETAIL_PICTURE"]) ? $arItem["DETAIL_PICTURE"]["SRC"] : $this->GetFolder()."/images/background.jpg";
 					$target = $arItem["PROPERTIES"]["TARGETS"]["VALUE_XML_ID"];
+					$link = $arItem["PROPERTIES"]["URL_STRING"]["VALUE"];
+					if ($link && $arItem['DISPLAY_PROPERTIES']['MARKER_ORD']['VALUE'])
+					    $link = \Caweb\Main\Tools::getInstance()->getMarkerOrdUri($arItem['DISPLAY_PROPERTIES']['MARKER_ORD']['VALUE'] , $link);
 					?>
 				<li style="<!--background-image: url('<?=$background?>') !important;-->background: url(<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>) !important;" class="box<?=($arItem["PROPERTIES"]["TEXTCOLOR"]["VALUE_XML_ID"] ? " ".$arItem["PROPERTIES"]["TEXTCOLOR"]["VALUE_XML_ID"] : "");?><?=($arItem["PROPERTIES"]["TEXT_POSITION"]["VALUE_XML_ID"] ? " ".$arItem["PROPERTIES"]["TEXT_POSITION"]["VALUE_XML_ID"] : " left");?>" data-nav_color="<?=($arItem["PROPERTIES"]["NAV_COLOR"]["VALUE_XML_ID"] ? $arItem["PROPERTIES"]["NAV_COLOR"]["VALUE_XML_ID"] : "");?>" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-						<?if(!$arItem["PREVIEW_PICTURE"] && !$arItem["PREVIEW_TEXT"] && $arItem["PROPERTIES"]["URL_STRING"]["VALUE"]):?>
-							<a class="target" href="<?=$arItem["PROPERTIES"]["URL_STRING"]["VALUE"]?>" <?=(strlen($target) ? 'target="'.$target.'"' : '')?>>
+						<?if(!$arItem["PREVIEW_PICTURE"] && !$arItem["PREVIEW_TEXT"] && $link):?>
+							<a class="target" href="<?=$link?>" <?=(strlen($target) ? 'target="'.$target.'"' : '')?>>
 								<img class="main-slider-img" src="<?=$background?>" />
 							</a>
 						<?endif;?>
@@ -108,6 +113,13 @@
 						<?/*if(!$arItem["PREVIEW_PICTURE"] && !$arItem["PREVIEW_TEXT"] && $arItem["PROPERTIES"]["URL_STRING"]["VALUE"]):?>
 							</a>
 						<?endif;*/?>
+                        <?if ($link && $arItem['DISPLAY_PROPERTIES']['MARKER_ORD']['VALUE']):?>
+                            <div class="ord-link">
+                                Реклама
+                                <i class="fa fa-angle-right"></i>
+                                <input type="text" class="ord-link-href" value="<?=$link?>">
+                            </div>
+                        <?endif?>
 					</li>
 				<?endforeach;?>
 			</ul>

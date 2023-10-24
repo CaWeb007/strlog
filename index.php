@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 /*Если пользователь не принадлежит ни к одной группе покупателей end*/
 ?>
 
-<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
 		"PATH" => SITE_DIR."include/mainpage/comp_banners_top_slider.php",
 		"AREA_FILE_SHOW" => "file",
@@ -25,9 +25,9 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	),
 	false,
 	array(
-	"ACTIVE_COMPONENT" => "N"
+	"ACTIVE_COMPONENT" => "Y"
 	)
-);*/?>
+);?>
 
 <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
@@ -39,7 +39,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 ),
 	false,
 	array(
-		"ACTIVE_COMPONENT" => "N"
+		"ACTIVE_COMPONENT" => "Y"
 	)
 );*/?>
 
@@ -66,13 +66,17 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	),
 	false
 );*/?>
-
-<?$APPLICATION->IncludeComponent(
+<?
+$comp_catalog_hit = SITE_DIR."include/mainpage/comp_catalog_hit.php";
+if($USER->IsAdmin())
+	$comp_catalog_hit = SITE_DIR."include/mainpage/comp_catalog_hit_2.php"
+?>
+<?/*$APPLICATION->IncludeComponent(
 	"bitrix:main.include",
 	"front",
 	array(
 		"COMPONENT_TEMPLATE" => "front",
-		"PATH" => SITE_DIR."include/mainpage/comp_catalog_hit.php",
+		"PATH" => $comp_catalog_hit,
 		"AREA_FILE_SHOW" => "file",
 		"AREA_FILE_SUFFIX" => "",
 		"AREA_FILE_RECURSIVE" => "Y",
@@ -81,7 +85,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);?>
+);*/?>
 
 <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(

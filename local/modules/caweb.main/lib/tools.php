@@ -2,12 +2,19 @@
 namespace Caweb\Main;
 
 
+use Bitrix\Main\Application;
+use Bitrix\Main\Web\Uri;
+
 class Tools {
     private static $instance = null;
     private $userGroupID = null;
     private const STRLOG_GROUPS = array(9,10,11,12,13,14,15);
     private const GROUP_TO = 11;
     private const GROUP_KPSO = 15;
+    private const GROUP_SO1 = 10;
+    private const GROUP_SO2 = 12;
+    private $host = null;
+    private $uriInstance = null;
     public static function getInstance(){
         if (self::$instance === null){
             self::$instance = new self;
@@ -28,6 +35,9 @@ class Tools {
     public function isKPSO(){
         return ($this->getUserGroupId() === self::GROUP_KPSO);
     }
+    public function isSO(){
+        return (($this->getUserGroupId() === self::GROUP_SO1) || ($this->getUserGroupId() === self::GROUP_SO2));
+    }
     static public function mb_ucfirst($str, $encoding = "UTF-8", $lower_str_end = false) {
         $first_letter = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding);
         $str_end = "";
@@ -39,5 +49,28 @@ class Tools {
         }
         $str = $first_letter . $str_end;
         return $str;
+    }
+    private function getHost(){
+        if ($this->host) return $this->host;
+        $this->host = Application::getInstance()->getContext()->getRequest()->getHttpHost();
+        return $this->host;
+    }
+    public function getMarkerOrdUri(string $markerORD, string $link = null){
+        if (empty($link)) return false;
+        $uri = new Uri($link);
+        if (empty($uri->getHost()))
+            $uri->setHost($this->getHost());
+        return $uri->addParams(array('erid' => $markerORD))->getUri();
+    }
+    public function getUriInstance(){
+        if ($this->uriInstance) return $this->uriInstance;
+        $uri = new Uri(Application::getInstance()->getContext()->getRequest()->getRequestUri());
+        if (empty($uri->getHost()))
+            $uri->setHost($this->getHost());
+        $this->uriInstance = $uri;
+        return $this->uriInstance;
+    }
+    public function getPropertyIdByCode(string $propertyCode, $iblockID = false){
+        return (int)\CIBlockProperty::GetByID($propertyCode, $iblockID, false)->GetNext()['ID'];
     }
 }

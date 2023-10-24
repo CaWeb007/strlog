@@ -233,6 +233,8 @@ if (is_array($arElements) && !empty($arElements))
 					"USE_MAIN_ELEMENT_SECTION" => $arParams["USE_MAIN_ELEMENT_SECTION"],
 					"OFFER_HIDE_NAME_PROPS" => $arParams["OFFER_HIDE_NAME_PROPS"],
 					"SHOW_MEASURE" => $arParams["SHOW_MEASURE"],
+                    "USE_STORE" => $arParams["USE_STORE"],
+                    'STORES' => $arParams['STORES'],
 				),
 				$arResult["THEME_COMPONENT"]
 			);?>

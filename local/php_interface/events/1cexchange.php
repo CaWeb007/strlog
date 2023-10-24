@@ -289,14 +289,16 @@ function customCatalogImportStep()
 				$pRes = $el::GetProperty(16, $PRODUCT_ID, "sort", "asc", array("CODE" => "CML2_TRAITS"));
 				while ($ob = $pRes->GetNext())
 				{
-					if(($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "м3") || ($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "пог. м")){
+					if(
+					    ($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "м3")
+                        || ($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "пог. м")
+                        || ($ob["DESCRIPTION"] === "Единица хранения" && $ob['VALUE'] === "т")
+                    ){
 						$isV = true;
 						break;
 					}
 				}
-				$log->setLogArray('PRODUCT_ID', $PRODUCT_ID);
-				$log->setLogArray('isV', $isV);
-				$log->setLogArray('V', $V);
+
 				if($isV && $V>0 && $PRODUCT_ID>0){
 					
 					$query = "  SELECT item.VALUE as item,  rest.VALUE as amount, stock.VALUE as stockID
@@ -308,7 +310,6 @@ function customCatalogImportStep()
 								
 					$results = $DB->Query($query);
                     while($stock = $results->Fetch()) {
-                        $log->setLogArray('stock', $stock);
 
                         if(isset($stock['amount']) && (float)$stock['amount'] > 0){
 						
@@ -316,7 +317,6 @@ function customCatalogImportStep()
 							//$rsStore = \CCatalogStoreProduct::GetList(array(), array('PRODUCT_ID' =>$arItem['ID']), false, false, array('ID','STORE_ID','AMOUNT')); 
 							$result = $DB->Query($q="SELECT ID FROM `b_catalog_store` WHERE `XML_ID` = '".$stock['stockID']."'");
 							$store = $result->Fetch();
-                            $log->setLogArray('store', $store);
 
                             #AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " склад ID из БД = " . serialize($store) . ", QUERY = " . $q);
 							
@@ -339,7 +339,6 @@ function customCatalogImportStep()
 							}
 						}
 					}
-					$log->setLogArray('itemStore', $itemStore);
 					if(count($itemStore)>0){
 						$ratio = false;
 						
@@ -353,8 +352,6 @@ function customCatalogImportStep()
 						}
 						
 						//AddMessage2Log("Продукт ID-" . $PRODUCT_ID . " Общий остаток новый = " . $totalQuantity);
-                        $log->setLogArray('totalQuantity', $totalQuantity);
-                        $log->setLogArray('$ratio', $ratio);
 
 						if($totalQuantity>0){
 							$DB->query("UPDATE b_catalog_product SET `QUANTITY` = '".$totalQuantity."' WHERE `ID` = '".$PRODUCT_ID."'");
@@ -366,7 +363,6 @@ function customCatalogImportStep()
 					}
 					
 				}
-                $log->dumpLog('amount', false);
             }
 			/** начало костыля под линолеум
              * берется $XML_ID и эксплодится на решетку

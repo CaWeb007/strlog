@@ -1,9 +1,10 @@
-<?$APPLICATION->IncludeComponent("caweb:custom.elements", "", array(
-	"CUSTOM_FILTER" => "{\"CLASS_ID\":\"CondGroup\",\"DATA\":{\"All\":\"OR\",\"True\":\"True\"},\"CHILDREN\":[{\"CLASS_ID\":\"CondIBElement\",\"DATA\":{\"logic\":\"Equal\",\"value\":[25375,35474]}},{\"CLASS_ID\":\"CondIBSection\",\"DATA\":{\"logic\":\"Equal\",\"value\":2276}}]}",
-		"TITLE" => "Не забудь купить"
-	),
-	false,
+<?$APPLICATION->IncludeComponent(
+	"caweb:custom.elements",
+	"",
 	array(
-	"ACTIVE_COMPONENT" => "N"
+	"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"CUSTOM_FILTER" => "{\"CLASS_ID\":\"CondGroup\",\"DATA\":{\"All\":\"AND\",\"True\":\"True\"},\"CHILDREN\":[{\"CLASS_ID\":\"CondIBElement\",\"DATA\":{\"logic\":\"Equal\",\"value\":[40027,40028,40414,40415,40421]}}]}",	// Фильтр
+		"TITLE" => "Готовимся к сезону пикников!",	// Заголовок
 	)
 );?>
