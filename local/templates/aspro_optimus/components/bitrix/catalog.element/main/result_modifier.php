@@ -1231,8 +1231,8 @@ if (\Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()
 	)
 );?>
 <?
-if (!empty($arResult['PROPERTIES']['FILES_EXCHANGE']['VALUE'])){
-	$arFilesId = explode(',', $arResult['PROPERTIES']['FILES_EXCHANGE']['VALUE']);
+if (!empty($arResult['PROPERTIES']['FAYLY']['VALUE'])){
+	$arFilesId = explode(',', $arResult['PROPERTIES']['FAYLY']['VALUE']);
 	if (!empty($arFilesId)){
 		$db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => \Caweb\Main\Events\Iblock::FILES_IBLOCK_ID, 'XML_ID' => $arFilesId), false, false, array());
 		$arFilesId = array();

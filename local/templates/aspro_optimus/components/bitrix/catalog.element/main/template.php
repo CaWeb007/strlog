@@ -980,7 +980,6 @@ setViewedProduct(<?=$arResult['ID']?>, <?=CUtil::PhpToJSObject($arViewedData, fa
 		<?if($arResult["DETAIL_TEXT"] || count($arResult["STOCK"]) || count($arResult["SERVICES"]) || is_array($arResult["FILES"]) || ($showProps && $arParams["PROPERTIES_DISPLAY_LOCATION"] != "TAB")):?>
 			<li class="<?=(!($iTab++) ? ' current' : '')?>">
 				<span><?=GetMessage("DESCRIPTION_TAB")?></span>
-				<span><?=GetMessage("DESCRIPTION_TAB")?></span>
 			</li>
 		<?endif;?>
 		<?if($arParams["PROPERTIES_DISPLAY_LOCATION"] == "TAB" && $showProps):?>
