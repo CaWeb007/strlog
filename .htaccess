@@ -87,6 +87,8 @@ Deny from env=bad_bot
   RewriteCond %{REQUEST_URI} !^/bitrix/admin/1c_exchange.php
   RewriteCond %{REQUEST_URI} ^(.*/[^/\.]+)$
   RewriteRule ^(.*)$ $1/ [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www.xn--80afpacjdwcqkhfi.xn--p1ai$ [NC]
+  RewriteRule ^(.*)$ https://xn--80afpacjdwcqkhfi.xn--p1ai/$1 [R=301,L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -342,3 +344,4 @@ Deny from 2a0f:d001::/32
 Deny from 46.8.56.0/24
 Deny from 45.139.177.0/24
 Deny from 2.59.50.0/24
+Deny from 212.176.94.232
