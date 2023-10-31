@@ -136,8 +136,15 @@ const CawebDeliveryMap = {
         })
         this.ymaps.delivery.searchControl = this.ymaps.delivery.map.controls.get('searchControl')
         this.ymaps.delivery.searchControl.options.set({noPlacemark: true, placeholderContent: 'Введите адрес доставки', useMapBounds: true})
-
-
+        this.ymaps.delivery.point = new ymaps.GeoObject({
+            geometry: {type: 'Point'},
+            properties: {iconCaption: 'Адрес'}
+        }, {
+            preset: 'islands#blackDotIconWithCaption',
+            draggable: true,
+            iconCaptionMaxWidth: '215'
+        })
+        this.ymaps.delivery.map.geoObjects.add(this.ymaps.delivery.point)
         this.ymaps.delivery.placemark = {}
         for (let id in this.options.storeData){
             let store = this.options.storeData[id]
@@ -160,13 +167,52 @@ const CawebDeliveryMap = {
         });
 
         this.ymaps.delivery.searchControl.events.add('resultshow', $.proxy(this.searchResultHandler, this))
-        this.ymaps.delivery.map.controls.get('geolocationControl').add('locationchange', $.proxy(this.locationChangeHandler, this))
+        //this.ymaps.delivery.map.controls.get('geolocationControl').add('locationchange', $.proxy(this.locationChangeHandler, this))
 
         this.mapDeliveryInited = true
     },
 
     searchResultHandler: function (e) {
-        debugger;
+        let objectSearch = this.ymaps.delivery.searchControl.getResultsArray()[e.get('index')]
+        const resultCoords = objectSearch.geometry.getCoordinates();
+        let polygon = this.ymaps.delivery.zones.searchContaining(resultCoords).get(0)
+        debugger
+        if (polygon){
+            this.ymaps.delivery.zones.setOptions('fillOpacity', 0.4)
+            polygon.options.set('fillOpacity', 0.8)
+            this.ymaps.delivery.point.geometry.setCoordinates(resultCoords)
+            this.ymaps.delivery.point.options.set('iconColor', polygon.properties.get('fill'))
+            if (typeof(objectSearch.getThoroughfare) === 'function') {
+                this.setData(objectSearch, polygon)
+            } else {
+                // Если вы не хотите, чтобы при каждом перемещении метки отправлялся запрос к геокодеру,
+                // закомментируйте код ниже.
+                //this.ymaps.delivery.map.geocode(coords, {results: 1}).then($.proxy(this.setData, this));
+            }
+
+        }else{
+            this.ymaps.delivery.zones.setOptions('fillOpacity', 0.4)
+            this.ymaps.delivery.point.geometry.setCoordinates(resultCoords)
+            this.ymaps.delivery.point.properties.set({
+                iconCaption: 'Доставка транспортной компанией',
+                balloonContent: 'Cвяжитесь с оператором',
+                balloonContentHeader: ''
+            })
+        }
+
+    },
+    setData: function(object, polygon) {
+        var address = [object.getThoroughfare(), object.getPremiseNumber(), object.getPremise()].join(' ');
+        if (address.trim() === '') {
+            address = object.getAddressLine();
+        }
+        var price = polygon.properties.get('description');
+        //price = price.match(/<strong>(.+)<\/strong>/)[1];
+        deliveryPoint.properties.set({
+            iconCaption: address,
+            balloonContent: address,
+            balloonContentHeader: 'test'
+        });
     },
     locationChangeHandler: function (e) {
         debugger;
