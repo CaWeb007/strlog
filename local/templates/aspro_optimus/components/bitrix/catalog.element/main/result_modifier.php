@@ -309,7 +309,8 @@ if ($arParams['USE_STORE'] === 'Y'){
 	$cacheTag = "";
 	$storesId = \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS;
 	$isTO = \Caweb\Main\Tools::getInstance()->isTO();
-	if ($isTO){
+	$isSO = \Caweb\Main\Tools::getInstance()->isSO();
+	if ($isTO || $isSO){
 		$cacheTag = "group_to";
 		$storesId = array_shift($storesId);
 	}
@@ -329,11 +330,11 @@ if ($arParams['USE_STORE'] === 'Y'){
 			if ((int)$ar['AMOUNT'] > 0) $k++;
 		}
 		$arResult['STORES_INFO']['NOT_EMPTY_COUNT'] = $k;
-		if ($isTO){
+		if ($isTO || $isSO){
 			$arResult['CATALOG_QUANTITY'] = $arResult['~CATALOG_QUANTITY'] = $arResult['STORES_INFO']['AMOUNT'][$storesId];
 			$arParams['STORES'] = $arStoreId;
 		}
-	}elseif($isTO){
+	}elseif($isTO || $isSO){
 		$arDb = \Bitrix\Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => $arStoreId, 'PRODUCT_ID' => $arOfferIDS), 'select' => array('PRODUCT_ID', 'AMOUNT', 'STORE_ID')));
 		$tmpAmount = array();
 		while ($ar = $arDb->fetch()){

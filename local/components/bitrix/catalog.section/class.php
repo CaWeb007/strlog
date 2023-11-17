@@ -82,8 +82,9 @@ class CatalogSectionComponent extends ElementList
 		{
 			CJSCore::Init(array('popup'));
 		}
-        if (\Caweb\Main\Tools::getInstance()->isTO()){
+        if (\Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()->isSO()){
             $params['STORES'] = array(array_shift($params['STORES']));
+            $params['ELEMENT_SORT_FIELD'] = 'CATALOG_STORE_AMOUNT_49';
         }
 		return $params;
 	}
@@ -103,6 +104,8 @@ class CatalogSectionComponent extends ElementList
                 )
             )
             && $this->arParams['HIDE_NOT_AVAILABLE'] === 'L'
+            && !\Caweb\Main\Tools::getInstance()->isTO()
+            && !\Caweb\Main\Tools::getInstance()->isSO()
         )
         {
             $sortFields['CATALOG_AVAILABLE'] = 'desc,nulls';

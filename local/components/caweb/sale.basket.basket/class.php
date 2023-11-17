@@ -3184,7 +3184,7 @@ class CBitrixBasketComponent extends CBitrixComponent
 				'filter' => array('@ID' => $elementIds)
 			));
 
-			if(\Caweb\Main\Tools::getInstance()->isTO()){
+			if(\Caweb\Main\Tools::getInstance()->isTO() || \Caweb\Main\Tools::getInstance()->isSO()){
                 $productStoreIterator = Catalog\StoreProductTable::getList(array('filter' => array('STORE_ID' => \Caweb\Main\Catalog\Helper::ACTIVE_STORE_IDS[0], 'PRODUCT_ID' => $elementIds), 'select' => array('PRODUCT_ID','AMOUNT', 'STORE_ID')));
                 $productStoreQuantity = array();
                 while ($ar = $productStoreIterator->fetch()){
