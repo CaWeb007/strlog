@@ -443,6 +443,7 @@ if($isAjaxFilter == "Y")
 						"SEF_URL_TEMPLATES" => $arParams["SEF_URL_TEMPLATES"],
 						"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 						"IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                        "IBLOCK_STOCK_ID" => $arParams["IBLOCK_STOCK_ID"],
 						"SECTION_ID" => $lkv?"":$arResult["VARIABLES"]["SECTION_ID"],
 						"SECTION_CODE" => $lkv?"":$arResult["VARIABLES"]["SECTION_CODE"],
 						"SHOW_ALL_WO_SECTION" => $lkv?"Y":"N",

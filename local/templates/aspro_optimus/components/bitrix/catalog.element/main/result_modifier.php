@@ -1137,6 +1137,7 @@ if ($arResult['MODULES']['currency']){
 if (intVal($arParams["IBLOCK_STOCK_ID"])){
 	$arSelect = array("ID", "IBLOCK_ID", "IBLOCK_SECTION_ID", "NAME", "PREVIEW_PICTURE", "PREVIEW_TEXT", "DETAIL_PAGE_URL");
 	$arResult["STOCK"]=COptimusCache::CIBLockElement_GetList(array('CACHE' => array("TAG" => COptimusCache::GetIBlockCacheTag($arParams["IBLOCK_STOCK_ID"]))), array("IBLOCK_ID" => $arParams["IBLOCK_STOCK_ID"], "ACTIVE"=>"Y", "ACTIVE_DATE" => "Y", "PROPERTY_LINK" => $arResult["ID"]), false, false, $arSelect);
+	if(!empty($arResult['STOCK'])) $arResult["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
 }
 
 /*services*/
