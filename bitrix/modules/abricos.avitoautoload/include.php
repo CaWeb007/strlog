@@ -227,7 +227,7 @@ Class CAbricosAvitoautoload
 function Agent_FileMerge()
 	{
 		$fp = fopen($_SERVER['DOCUMENT_ROOT']."/bitrix/catalog_export/avito_fid.php", "w");
-		$arrFile=explode("\n", COption::GetOptionString("abricos.avitoautoload", "ABRICOS_AVITOAUTOLOAD_FILE"));
+
 		$allFid='<? header("Content-Type: text/xml; charset=UTF-8");
 echo "<"."?xml version=\"1.0\" encoding=\"UTF-8\"?".">"?><Ads formatVersion="3" target="Avito.ru">';
 		$replTopString='<? $disableReferers = false;
@@ -242,10 +242,13 @@ echo "<"."?xml version=\"1.0\" encoding=\"UTF-8\"?".">"?>
 <Ads formatVersion="3" target="Avito.ru">';
 		$fidText='';
 		$replBotString='</Ads>';
-		foreach($arrFile as $fid)
-		{
-			$fidText .=file_get_contents($_SERVER['DOCUMENT_ROOT'].trim($fid));
-		}
+        $optStr = COption::GetOptionString("abricos.avitoautoload", "ABRICOS_AVITOAUTOLOAD_FILE");
+        $arrProfileId = explode(",", $optStr);
+        foreach ($arrProfileId as $id){
+            $fileName = ExportProfile($id);
+            if ($fileName === false) continue;
+            $fidText .=file_get_contents($_SERVER['DOCUMENT_ROOT'].trim($fileName));
+        }
 		$fidText=str_replace($replTopString,'',$fidText);
 		$fidText=str_replace($replTopString2,'',$fidText);
 		$fidText=str_replace($replBotString,'',$fidText);
@@ -254,5 +257,52 @@ echo "<"."?xml version=\"1.0\" encoding=\"UTF-8\"?".">"?>
 	    $test = fwrite($fp, $allFid);
 		fclose($fp);
 		return "Agent_FileMerge();";
-	}
+	};
+    function ExportProfile($profile_id)
+	{
+		global $DB;
+
+		$profile_id = (int)$profile_id;
+		if ($profile_id <= 0)
+			return false;
+        \Bitrix\Main\Loader::includeModule('catalog');
+		$ar_profile = CCatalogExport::GetByID($profile_id);
+		if ((!$ar_profile) || ('Y' == $ar_profile['NEED_EDIT']))
+			return false;
+
+		$strFile = CATALOG_PATH2EXPORTS.$ar_profile["FILE_NAME"]."_run.php";
+		if (!file_exists($_SERVER["DOCUMENT_ROOT"].$strFile))
+		{
+			$strFile = CATALOG_PATH2EXPORTS_DEF.$ar_profile["FILE_NAME"]."_run.php";
+			if (!file_exists($_SERVER["DOCUMENT_ROOT"].$strFile))
+				return false;
+		}
+
+		$arSetupVars = array();
+		$intSetupVarsCount = 0;
+		if ('Y' != $ar_profile["DEFAULT_PROFILE"])
+		{
+			parse_str($ar_profile["SETUP_VARS"], $arSetupVars);
+			if (!empty($arSetupVars) && is_array($arSetupVars))
+				$intSetupVarsCount = extract($arSetupVars, EXTR_SKIP);
+		}
+
+		if (!defined('CATALOG_EXPORT_NO_STEP'))
+			define('CATALOG_EXPORT_NO_STEP', true);
+		$firstStep = true;
+		$finalExport = true;
+		$CUR_ELEMENT_ID = 0;
+
+		CCatalogDiscountSave::Disable();
+		include($_SERVER["DOCUMENT_ROOT"].$strFile);
+		CCatalogDiscountSave::Enable();
+
+		CCatalogExport::Update($profile_id, array(
+			"=LAST_USE" => $DB->GetNowFunction()
+			)
+		);
+
+		return $arSetupVars['SETUP_FILE_NAME'];
+}
+
 ?>

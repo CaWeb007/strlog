@@ -1588,13 +1588,46 @@ if (empty($arRunErrors))
 					continue;
 
                 /**start Доработка для GoodsSubType*/
+
+
+                if (($AVITO_CATEGORY_TYPE !== 'Стройматериалы') && ($AVITO_CATEGORY_TYPE !== 'Инструменты'))
+                    continue;
                 $allSectionList = \CIBlockSection::GetNavChain(false, $row['CATEGORY_ID'], ['ID'], true);
                 $sectionsId = array();
                 foreach ($allSectionList as $ar) $sectionsId[] = $ar['ID'];
-                $res = \CIBlockSection::GetList(Array("DEPTH_LEVEL" => "DESC"), Array("IBLOCK_ID"=>$IBLOCK_ID, "ID"=>$sectionsId, '!UF_AV_GOODSSUBTYPE' => false),false, Array("UF_AV_GOODSSUBTYPE"))->GetNext();
+
+                $arSectionsFilter = array(
+                    "IBLOCK_ID"=>$IBLOCK_ID,
+                    "ID"=>$sectionsId
+                );
+                if ($AVITO_CATEGORY_TYPE === 'Стройматериалы')
+                    $arSectionsFilter['!UF_AV_GOODSSUBTYPE'] = false;
+
+                if ($AVITO_CATEGORY_TYPE === 'Инструменты') {
+                    $arSectionsFilter['!UF_AV_TOOLSTYPE'] = false;
+                    $arSectionsFilter['!UF_AV_TOOLSSUBTYPE'] = false;
+                }
+
+                $res = \CIBlockSection::GetList(Array("DEPTH_LEVEL" => "DESC"), $arSectionsFilter,false, Array('UF_AV_TOOLSTYPE', 'UF_AV_GOODSSUBTYPE', 'UF_AV_TOOLSSUBTYPE'))->GetNext();
                 if($res){
-                    $goodsSubType['KEY'] = 'GoodsSubType';
-                    $goodsSubType['VALUE'] = \CUserFieldEnum::GetList(array(), array('ID' => $res['UF_AV_GOODSSUBTYPE']))->Fetch()['VALUE'];
+                    $goodsSubType = array();
+                    if ($AVITO_CATEGORY_TYPE === 'Стройматериалы'){
+                        $goodsSubType[] = array(
+                            'KEY' => 'GoodsSubType',
+                            'VALUE' => \CUserFieldEnum::GetList(array(), array('ID' => $res['UF_AV_GOODSSUBTYPE']))->Fetch()['VALUE']
+                        );
+                    }
+                    elseif ($AVITO_CATEGORY_TYPE === 'Инструменты'){
+                        $goodsSubType[] = array(
+                            'KEY' => 'ToolType',
+                            'VALUE' => \CUserFieldEnum::GetList(array(), array('ID' => $res['UF_AV_TOOLSTYPE']))->Fetch()['VALUE']
+                        );
+                        $goodsSubType[] = array(
+                            'KEY' => 'ToolSubType',
+                            'VALUE' => \CUserFieldEnum::GetList(array(), array('ID' => $res['UF_AV_TOOLSSUBTYPE']))->Fetch()['VALUE']
+                        );
+
+                    }
                 }else{
                     continue;
                 }
@@ -1743,9 +1776,13 @@ if (empty($arRunErrors))
 		                               	$itemsContent .= "<TypeId>".yandex_text2xml($AVITO_CATEGORY_TYPE)."</TypeId>\n";
 		                            else
 		                               	$itemsContent .= "<GoodsType>".yandex_text2xml($AVITO_CATEGORY_TYPE)."</GoodsType>\n";
+
                                     /**start Доработка для GoodsSubType*/
-                                    $itemsContent .= "<".$goodsSubType['KEY'].">".yandex_text2xml($goodsSubType['VALUE'])."</".$goodsSubType['KEY'].">\n";
+                                    if (!empty($goodsSubType))
+                                        foreach ($goodsSubType as $type)
+                                            $itemsContent .= "<".$type['KEY'].">".yandex_text2xml($type['VALUE'])."</".$type['KEY'].">\n";
                                     /**end Доработка для GoodsSubSection*/
+
 		                            if($AVITO_APPAREL) {
 			                           	$itemsContent .= "<Apparel>".yandex_text2xml($AVITO_APPAREL)."</Apparel>\n";
 		                           	}
@@ -2144,7 +2181,9 @@ if (empty($arRunErrors))
 		                              }
 
 		                             /**start Доработка для GoodsSubType*/
-                                    $itemsContent .= "<".$goodsSubType['KEY'].">".yandex_text2xml($goodsSubType['VALUE'])."</".$goodsSubType['KEY'].">\n";
+                                    if (!empty($goodsSubType))
+                                        foreach ($goodsSubType as $type)
+                                            $itemsContent .= "<".$type['KEY'].">".yandex_text2xml($type['VALUE'])."</".$type['KEY'].">\n";
                                     /**end Доработка для GoodsSubSection*/
 
 		                             if($AVITO_APPAREL)

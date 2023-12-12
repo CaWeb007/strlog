@@ -7,5 +7,5 @@ $MESS ['ABRICOS_AVITOAUTOLOAD_NOTE_SETTINGS'] = "
 <span style='color:red'>*</span>&nbsp;&nbsp;&nbsp;Любой текст, который нужно добавить к объявлениям, например информацию о доставке.   <br />
 <span style='color:red'>**</span>&nbsp;&nbsp;Свойство типа файл. Если используете Детальную картинку - оставьте это поле пустым. <br />
 ";
-$MESS ['ABRICOS_AVITOAUTOLOAD_FILE'] = "Ссылки на файлы, которые нужно объединить в один фид. Каждая ссылка с новой строки.<br> Cсылка на общий фид <a href='/bitrix/catalog_export/avito_fid.php'>/bitrix/catalog_export/avito_fid.php</a>";
+$MESS ['ABRICOS_AVITOAUTOLOAD_FILE'] = "ID профилей обмена, которые нужно объединить в один фид. Каждый ID через запятую без пробелов.<br> Cсылка на общий фид <a href='/bitrix/catalog_export/avito_fid.php'>/bitrix/catalog_export/avito_fid.php</a>";
 $MESS ['ABRICOS_AVITOAUTOLOAD_TIME'] = "Периодичность запуска агента в минутах. ";

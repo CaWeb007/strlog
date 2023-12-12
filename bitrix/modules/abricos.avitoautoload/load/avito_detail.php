@@ -157,7 +157,7 @@ $defaultVatExport = array(
 );
 
 $dbRes = CIBlockProperty::GetList(
-	array('SORT' => 'ASC'),
+	array('ID' => 'ASC'),
 	array('IBLOCK_ID' => $intIBlockID, 'ACTIVE' => 'Y')
 );
 $arIBlock['PROPERTY'] = array();
@@ -168,7 +168,7 @@ while ($arRes = $dbRes->Fetch())
 }
 if ($boolOffers)
 {
-	$rsProps = CIBlockProperty::GetList(array('SORT' => 'ASC'),array('IBLOCK_ID' => $intOfferIBlockID,'ACTIVE' => 'Y'));
+	$rsProps = CIBlockProperty::GetList(array('ID' => 'ASC'),array('IBLOCK_ID' => $intOfferIBlockID,'ACTIVE' => 'Y'));
 	while ($arProp = $rsProps->Fetch())
 	{
 		if ($arOffers['SKU_PROPERTY_ID'] != $arProp['ID'])
@@ -176,7 +176,7 @@ if ($boolOffers)
 			if ($arProp['PROPERTY_TYPE'] == 'L')
 			{
 				$arProp['VALUES'] = array();
-				$rsPropEnums = CIBlockProperty::GetPropertyEnum($arProp['ID'],array('sort' => 'asc'),array('IBLOCK_ID' => $intOfferIBlockID));
+				$rsPropEnums = CIBlockProperty::GetPropertyEnum($arProp['ID'],array('id' => 'asc'),array('IBLOCK_ID' => $intOfferIBlockID));
 				while ($arPropEnum = $rsPropEnums->Fetch())
 				{
 					$arProp['VALUES'][$arPropEnum['ID']] = $arPropEnum['VALUE'];
