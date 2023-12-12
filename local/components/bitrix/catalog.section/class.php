@@ -134,7 +134,6 @@ class CatalogSectionComponent extends ElementList
 		{
 			$this->initSectionProperties();
 			parent::processResultData();
-			$this->setSaleStickerProperty();
 		}
 
 	}
@@ -147,32 +146,6 @@ class CatalogSectionComponent extends ElementList
                 $res[$ar['ID']] = $ar;
             if(!empty($res))
                 $this->arResult['STORES'] = $res;
-        }
-    }
-
-    protected function setSaleStickerProperty(){
-        if (intVal($this->arParams["IBLOCK_STOCK_ID"])){
-            $arSelect = array("PROPERTY_LINK");
-            $arStocks = COptimusCache::CIBLockElement_GetList(
-                array(
-                    'CACHE' => array(
-                        "TAG" => COptimusCache::GetIBlockCacheTag($this->arParams["IBLOCK_STOCK_ID"])
-                    )
-                ),
-                array(
-                    "IBLOCK_ID" => $this->arParams["IBLOCK_STOCK_ID"],
-                    "ACTIVE"=>"Y",
-                    "ACTIVE_DATE" => "Y",
-                    "PROPERTY_LINK" => $this->arResult['ELEMENTS']),
-                false, false, $arSelect);
-            if (empty($arStocks)) return;
-            $arStockItems = array();
-            foreach ($arStocks as $stock)
-                foreach ($stock['PROPERTY_LINK_VALUE'] as $elementId)
-                    $arStockItems[(int)$elementId] = true;
-            foreach ($this->arResult['ITEMS'] as $key => $item)
-                if ($arStockItems[(int)$item['ID']])
-                    $this->arResult['ITEMS'][$key]["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
         }
     }
 

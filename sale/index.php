@@ -1,5 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetPageProperty("description", "Акции в компании Стройлогистика");
 $APPLICATION->SetTitle("Акции");
 ?>
 
@@ -43,11 +44,13 @@ $APPLICATION->SetTitle("Акции");
 			0 => "PREVIEW_PICTURE",
 			1 => "DETAIL_PICTURE",
 			2 => "DATE_ACTIVE_FROM",
-			3 => "",
+			3 => "DATE_ACTIVE_TO",
+			4 => "",
 		),
 		"LIST_PROPERTY_CODE" => array(
-			0 => "PERIOD",
-			1 => "MARKER_ORD",
+			0 => "MARKER_ORD",
+			1 => "PERIOD",
+			2 => "",
 		),
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"DISPLAY_NAME" => "Y",
@@ -57,11 +60,16 @@ $APPLICATION->SetTitle("Акции");
 		"DETAIL_ACTIVE_DATE_FORMAT" => "j F Y",
 		"DETAIL_FIELD_CODE" => array(
 			0 => "PREVIEW_PICTURE",
-			1 => "",
+			1 => "DETAIL_TEXT",
+			2 => "DETAIL_PICTURE",
+			3 => "DATE_ACTIVE_FROM",
+			4 => "DATE_ACTIVE_TO",
+			5 => "",
 		),
 		"DETAIL_PROPERTY_CODE" => array(
-			0 => "LINK",
-			1 => "MARKER_ORD",
+			0 => "MARKER_ORD",
+			1 => "LINK",
+			2 => "",
 		),
 		"IBLOCK_CATALOG_TYPE" => "aspro_optimus_catalog",
 		"CATALOG_IBLOCK_ID1" => "14",

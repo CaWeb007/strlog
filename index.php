@@ -67,11 +67,9 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	false
 );*/?>
 <?
-$comp_catalog_hit = SITE_DIR."include/mainpage/comp_catalog_hit.php";
-if($USER->IsAdmin())
 	$comp_catalog_hit = SITE_DIR."include/mainpage/comp_catalog_hit_2.php"
 ?>
-<?/*$APPLICATION->IncludeComponent(
+<?$APPLICATION->IncludeComponent(
 	"bitrix:main.include",
 	"front",
 	array(
@@ -85,7 +83,7 @@ if($USER->IsAdmin())
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
-);*/?>
+);?>
 
 <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(

@@ -21,6 +21,8 @@ $arNotify = unserialize($notifyOption);
                         $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
 						$arItem["FRONT_CATALOG"]="Y";
 
+                        if(!empty($arItem['PROPERTIES']['PRODUCT_WITH_STOCK']['VALUE'])) $arItem["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
+
                         $strMeasure='';
 						if($arItem["OFFERS"]){
 							$strMeasure=$arItem["MIN_PRICE"]["CATALOG_MEASURE_NAME"];

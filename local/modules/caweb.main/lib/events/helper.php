@@ -175,4 +175,41 @@ class Helper{
         $result = GroupTable::getRowById($match);
         return $result['XML_ID'];
     }
+    public static function activeController(&$arElementFields){
+        $activeChanged = false;
+        $format = \CSite::GetDateFormat("SHORT");
+        $active = 'N';
+        if (!empty($arElementFields['ACTIVE_FROM']) && !empty($arElementFields['ACTIVE_TO'])){
+            $dateFrom = MakeTimeStamp($arElementFields['ACTIVE_FROM'], $format);
+            $dateTo = MakeTimeStamp($arElementFields['ACTIVE_TO'], $format) + 86400;
+            $time = time();
+            if (($time >= $dateFrom) && ($time <= $dateTo))
+                $active = 'Y';
+        }
+        if ($arElementFields['ACTIVE'] !== $active){
+            $activeChanged = true;
+            $arElementFields['ACTIVE'] = $active;
+        }
+        return $activeChanged;
+    }
+    public static function setElementsStock($elements = array(), $flag = false){
+        if (empty($elements)) return;
+        if ($flag) {
+            $flag = \CIBlockProperty::GetPropertyEnum('PRODUCT_WITH_STOCK', array(), array('EXTERNAL_ID' => 'Y'))->Fetch()['ID'];
+        }
+        foreach ($elements as $elementId){
+            \CIBlockElement::SetPropertyValuesEx($elementId, 0, array('PRODUCT_WITH_STOCK' => $flag));
+        }
+    }
+    public static function normalizeElementsArray($elementsArray = array()){
+        if (empty($elementsArray)) return false;
+        $result = array();
+        foreach ($elementsArray as $key => $value){
+            if (!is_array($value))
+                $result[] = $value;
+            else
+                $result[] = $value['VALUE'];
+        }
+        return $result;
+    }
 }

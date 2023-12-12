@@ -89,6 +89,8 @@
 					<?$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
 					$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
 
+                    if(!empty($arItem['PROPERTIES']['PRODUCT_WITH_STOCK']['VALUE'])) $arItem["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
+
 					$arItem["strMainID"] = $this->GetEditAreaId($arItem['ID']);
 					$arItemIDs=COptimus::GetItemsIDs($arItem);
 

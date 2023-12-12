@@ -5,6 +5,8 @@ use Bitrix\Main\Application;
 use Bitrix\Main\IO\Directory;
 use Bitrix\Main\IO\File;
 use Bitrix\Main\Loader;
+use Caweb\Main\Events\Helper;
+use Caweb\Main\Events\Iblock;
 
 //\Caweb\Main\Agent\Skeleton::
 class Skeleton {
@@ -39,5 +41,20 @@ class Skeleton {
                 \CCatalogProduct::Update((int)$ar['ID'], array('QUANTITY' => $quant));
         }
         return '\Caweb\Main\Agent\Skeleton::setLinoSKUAvailable();';
+    }
+    public static function checkStocksActive(){
+        Loader::includeModule('iblock');
+        $db = \CIBlockElement::GetList(array(), array('IBLOCK_ID' => Iblock::SALES_IBLOCK_ID));
+        $entity = new \CIBlockElement;
+        while ($ar = $db->GetNextElement()){
+            $arFields = $ar->GetFields();
+            $elementId = $arFields['ID'];
+            unset($arFields['ID']);
+            $activeChanged = Helper::activeController($arFields);
+            $update['ACTIVE'] = $arFields['ACTIVE'];
+            if (!$activeChanged) continue;
+            $entity->Update($elementId, $update);
+        }
+        return '\Caweb\Main\Agent\Skeleton::checkStocksActive();';
     }
 }

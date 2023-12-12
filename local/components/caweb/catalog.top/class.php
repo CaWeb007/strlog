@@ -137,4 +137,17 @@ class CustomCatalogTopComponent extends CustomElementList
 			$theme = 'blue';
 		}
 	}
+
+    protected function getSort()
+    {
+        $sortFields = parent::getSort();
+
+        if (!isset($sortFields[$this->arParams['ELEMENT_SORT_FIELD3']]))
+        {
+            $sortFields[$this->arParams['ELEMENT_SORT_FIELD3']] = $this->arParams['ELEMENT_SORT_ORDER3'];
+        }
+
+        return $sortFields;
+    }
+
 }

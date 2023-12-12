@@ -407,7 +407,7 @@ class MyLittleHelper {
             if ($messageCount === 0)
                 \CForumTopic::Delete($ar['ID']);
         }
-        return '\Caweb\Main\User\Exchange::clearEmptyTopics();';
+        return '\Caweb\Main\Secret\MyLittleHelper::clearEmptyTopics();';
     }
     /**usage   \Caweb\Main\Secret\MyLittleHelper::setElementRating();*/
     public static function setElementRating($elementUrl = false){

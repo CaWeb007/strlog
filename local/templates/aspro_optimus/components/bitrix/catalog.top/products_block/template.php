@@ -10,6 +10,8 @@
 						<?$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
 						$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
 
+                        if(!empty($arItem['PROPERTIES']['PRODUCT_WITH_STOCK']['VALUE'])) $arItem["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
+
 						$totalCount = COptimus::GetTotalCount($arItem);
                         $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
                         $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
@@ -39,9 +41,9 @@
 								<div class="inner_wrap">
 									<div class="image_wrapper_block">
 										<div class="stickers">
-											<?if (is_array($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"])):?>
-												<?foreach($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"] as $key=>$class){?>
-													<div><div class="sticker_<?=strtolower($class);?>"><?=$arItem["PROPERTIES"]["HIT"]["VALUE"][$key]?></div></div>
+											<?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
+												<?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+													<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage('ICON_TEXT_'.$class)?></div></div>
 												<?}?>
 											<?endif;?>
 											<?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>

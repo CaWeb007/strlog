@@ -55,6 +55,9 @@ if($arResult['ITEMS']){?>
 						? $arItem["IPROPERTY_VALUES"]["ELEMENT_PREVIEW_PICTURE_FILE_TITLE"]
 						: $arItem['NAME']
 					);
+
+                    if(!empty($arItem['PROPERTIES']['PRODUCT_WITH_STOCK']['VALUE'])) $arItem["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
+
 					$totalCount = COptimus::GetTotalCount($arItem);
                     $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
                     $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
@@ -76,11 +79,11 @@ if($arResult['ITEMS']){?>
 				
 					<div class="image_wrapper_block">
 						<a href="<?=$arItem["DETAIL_PAGE_URL"]?>?RID=<?=$arResult["RID"]?>" class="thumb">
-							<?if($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"]){?>
+							<?if($arItem["PROPERTIES"]["FLAG"]["VALUE"]){?>
 								<div class="stickers">
-									<?if (is_array($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"])):?>
-										<?foreach($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"] as $key=>$class){?>
-											<div><div class="sticker_<?=strtolower($class);?>"><?=$arItem["PROPERTIES"]["HIT"]["VALUE"][$key]?></div></div>
+									<?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
+										<?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+											<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage('ICON_TEXT_'.$class)?></div></div>
 										<?}?>
 									<?endif;?>
 									<?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>

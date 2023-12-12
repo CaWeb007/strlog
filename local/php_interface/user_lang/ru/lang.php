@@ -52,4 +52,33 @@ $MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"
 $MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
 $MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
 $MESS["/local/components/caweb/catalog.tabs/templates/main/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
-?>
+
+$MESS["/local/components/caweb/catalog.top/templates/products_slider/lang/ru/template.php"]["ICON_TEXT_HIT"] = "Хит продаж";
+$MESS["/local/components/caweb/catalog.top/templates/products_slider/lang/ru/template.php"]["ICON_TEXT_RECOMMEND"] = "Лучшая цена";
+$MESS["/local/components/caweb/catalog.top/templates/products_slider/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
+$MESS["/local/components/caweb/catalog.top/templates/products_slider/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
+$MESS["/local/components/caweb/catalog.top/templates/products_slider/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
+
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_slider/lang/ru/template.php"]["ICON_TEXT_HIT"] = "Хит продаж";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_slider/lang/ru/template.php"]["ICON_TEXT_RECOMMEND"] = "Лучшая цена";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_slider/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_slider/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_slider/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
+
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_block/lang/ru/template.php"]["ICON_TEXT_HIT"] = "Хит продаж";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_block/lang/ru/template.php"]["ICON_TEXT_RECOMMEND"] = "Лучшая цена";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_block/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_block/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/products_block/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
+
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/main/lang/ru/template.php"]["ICON_TEXT_HIT"] = "Хит продаж";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/main/lang/ru/template.php"]["ICON_TEXT_RECOMMEND"] = "Лучшая цена";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/main/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/main/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.top/main/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";
+
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.section/catalog_viewed/lang/ru/template.php"]["ICON_TEXT_HIT"] = "Хит продаж";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.section/catalog_viewed/lang/ru/template.php"]["ICON_TEXT_RECOMMEND"] = "Лучшая цена";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.section/catalog_viewed/lang/ru/template.php"]["ICON_TEXT_NEW"] = "Новинка";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.section/catalog_viewed/lang/ru/template.php"]["ICON_TEXT_STOCK"] = "Акция";
+$MESS["/local/templates/aspro_optimus/components/bitrix/catalog.section/catalog_viewed/lang/ru/template.php"]["ICON_TEXT_SALE"] = "Распродажа";

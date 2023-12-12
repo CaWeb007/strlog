@@ -20,7 +20,9 @@ $arNotify = unserialize($notifyOption);
                         $forOrder = in_array('Заказная позиция', $arItem['PROPERTIES']['CML2_TRAITS']['VALUE']);
                         $arQuantityData = COptimus::GetQuantityArray($totalCount, array(), 'N', $forOrder);
 						$arItem["FRONT_CATALOG"]="Y";
-						
+
+                        if(!empty($arItem['PROPERTIES']['PRODUCT_WITH_STOCK']['VALUE'])) $arItem["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
+
 						$strMeasure='';
 						if($arItem["OFFERS"]){
 							$strMeasure=$arItem["MIN_PRICE"]["CATALOG_MEASURE_NAME"];
@@ -34,11 +36,11 @@ $arNotify = unserialize($notifyOption);
 						<li id="<?=$this->GetEditAreaId($arItem['ID']);?>" class="catalog_item">
 							<div class="image_wrapper_block">
 								<a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="thumb">
-									<?if($arItem["DISPLAY_PROPERTIES"]["HIT"]){?>
+									<?if($arItem["PROPERTIES"]["FLAG"]){?>
 										<div class="stickers">
-											<?if (is_array($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"])):?>
-												<?foreach($arItem["PROPERTIES"]["HIT"]["VALUE_XML_ID"] as $key=>$class){?>
-													<div><div class="sticker_<?=strtolower($class);?>"><?=$arItem["PROPERTIES"]["HIT"]["VALUE"][$key]?></div></div>
+											<?if (is_array($arItem["PROPERTIES"]["FLAG"]["VALUE"])):?>
+												<?foreach($arItem["PROPERTIES"]["FLAG"]["VALUE"] as $key=>$class){?>
+													<div><div class="sticker_<?=strtolower($class);?>"><?=GetMessage('ICON_TEXT_'.$class)?></div></div>
 												<?}?>
 											<?endif;?>
 											<?if($arParams["SALE_STIKER"] && $arItem["PROPERTIES"][$arParams["SALE_STIKER"]]["VALUE"]){?>

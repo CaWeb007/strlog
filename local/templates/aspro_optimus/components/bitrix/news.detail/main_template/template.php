@@ -27,12 +27,8 @@ if ($link && $arResult['PROPERTIES']['MARKER_ORD']['VALUE'])
 		</div>
 	<?endif;?>
 	<div class="detail-box">
-	<?if($arParams["DISPLAY_DATE"]!="N"):?>
-			<?if($arResult["PROPERTIES"][$arParams["PERIOD_PROPERTY"]]["VALUE"]):?>
-				<div class="news_date_time_detail date_small"><?=$arResult["PROPERTIES"][$arParams["PERIOD_PROPERTY"]]["VALUE"];?></div>	
-			<?elseif($arResult["DISPLAY_ACTIVE_FROM"]):?>
-				<div class="news_date_time_detail date_small"><?=$arResult["DISPLAY_ACTIVE_FROM"]?></div>	
-			<?endif;?>
+	<?if($arParams["DISPLAY_DATE"]!="N" && !empty($arResult["DATE_ACTIVE_TO"])):?>
+            <div class="news_date_time_detail date_small">до <?=$arResult["DATE_ACTIVE_TO"]?></div>
 	<?endif;?>
 
 	<?if ($arResult["PREVIEW_TEXT"]):?>

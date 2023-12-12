@@ -62,8 +62,9 @@ if($arResult['ITEMS']){?>
 					$arItem["FRONT_CATALOG"]="Y";
 					$arItem["RID"]=$arResult["RID"];
 					$arAddToBasketData = COptimus::GetAddToBasketArray($arItem, $totalCount, $arParams["DEFAULT_COUNT"], $arParams["BASKET_URL"], true);
-					
-					
+
+                    if(!empty($arItem['PROPERTIES']['PRODUCT_WITH_STOCK']['VALUE'])) $arItem["PROPERTIES"]["FLAG"]["VALUE"][] = 'STOCK';
+
 					$strMeasure='';
 					if($arItem["OFFERS"]){
 						$strMeasure=$arItem["MIN_PRICE"]["CATALOG_MEASURE_NAME"];

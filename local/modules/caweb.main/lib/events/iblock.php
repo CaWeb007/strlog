@@ -180,4 +180,66 @@ class Iblock{
         }
         self::$disableEvents = false;
     }
+    public static function productStockControllerAdd(&$arFields){
+        $iblockId = (int)$arFields['IBLOCK_ID'];
+        if ($iblockId !== self::SALES_IBLOCK_ID) return;
+        Helper::activeController($arFields);
+        if ($arFields['ACTIVE'] === 'N') return;
+        if ($arFields['ACTIVE'] === 'Y'){
+            // пометить все товары
+            Helper::setElementsStock($arFields['PROPERTY_VALUES'][41], true);
+        }
+    }
+    public static function productStockControllerUpdate(&$arFields){
+        $iblockId = (int)$arFields['IBLOCK_ID'];
+        if ($iblockId !== self::SALES_IBLOCK_ID) return;
+        $activeChanged = false;
+        $elementId = (int)$arFields['ID'];
+        $element = \CIBlockElement::GetByID($elementId)->GetNextElement();
+        $arOldFields = $element->GetFields();
+        $arFields['ACTIVE'] = $arOldFields['ACTIVE']; //отменим активацию пользователем
+        if (empty($arFields['ACTIVE_FROM']))
+            $arFields['ACTIVE_FROM'] = $arOldFields['ACTIVE_FROM'];
+        if (empty($arFields['ACTIVE_TO']))
+            $arFields['ACTIVE_TO'] = $arOldFields['ACTIVE_TO'];
+        $activeChanged = Helper::activeController($arFields);
+
+        //изменение неактивной акции
+        if ($arFields['ACTIVE'] === 'N' && !$activeChanged) return;
+
+        $oldElements = Helper::normalizeElementsArray($element->GetProperty(41)['VALUE']);
+        $newElements = Helper::normalizeElementsArray($arFields['PROPERTY_VALUES'][41]);
+        $diff = array_diff($oldElements, $newElements);
+        if (!$newElements) $newElements = $oldElements;
+        //изменение активной акции
+        if ($arFields['ACTIVE'] === 'Y' && !$activeChanged){
+            //снять пометки со всех старых товаров
+            if (!empty($diff))
+                Helper::setElementsStock($oldElements, false);
+            //пометить все товары
+            Helper::setElementsStock($newElements, true);
+        }
+        //изменение активной акции, деактивация
+        if ($arFields['ACTIVE'] === 'N' && $activeChanged){
+            // снять пометки со всех товаров
+            Helper::setElementsStock($oldElements, false);
+        }
+
+        //изменение неактивной акции, активация
+        if ($arFields['ACTIVE'] === 'Y' && $activeChanged){
+            // пометить все товары
+            Helper::setElementsStock($newElements, true);
+        }
+    }
+    public static function productStockControllerDelete($elementId){
+        $element = \CIBlockElement::GetByID($elementId)->GetNextElement();
+        $arOldFields = $element->GetFields();
+        $iblockId = (int)$arOldFields['IBLOCK_ID'];
+        if ($iblockId !== self::SALES_IBLOCK_ID) return;
+        if ($arOldFields['ACTIVE'] === 'N') return;
+        if ($arOldFields['ACTIVE'] === 'Y'){
+            // снять пометки со всех товаров
+            Helper::setElementsStock($element->GetProperty(41), false);
+        }
+    }
 }

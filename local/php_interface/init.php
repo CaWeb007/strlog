@@ -77,7 +77,11 @@ EventManager::getInstance()->addEventHandlerCompatible("main", "OnBeforeProlog",
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'ordRelatedElements'));
 EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnAfterIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'ordRelatedElements'));
 /**end*/
-
+/**start функционал акционного товара*/
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementAdd', array('Caweb\Main\Events\Iblock', 'productStockControllerAdd'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementUpdate', array('Caweb\Main\Events\Iblock', 'productStockControllerUpdate'));
+EventManager::getInstance()->addEventHandlerCompatible('iblock', 'OnBeforeIBlockElementDelete', array('Caweb\Main\Events\Iblock', 'productStockControllerDelete'));
+/**end*/
 function CheckBasket(){
     if(CModule::IncludeModule("sale")){
         $dbBasketItems = CSaleBasket::GetList(
