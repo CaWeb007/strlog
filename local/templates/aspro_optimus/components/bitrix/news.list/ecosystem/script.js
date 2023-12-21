@@ -134,5 +134,5 @@ function JSEcosystem(){
         this.sliderEvent();
         this.initWidgetClickEvents();
     }
-    $(document).ready($.proxy(this.init, this));
+    $(this.conteiner).ready($.proxy(this.init, this));
 }

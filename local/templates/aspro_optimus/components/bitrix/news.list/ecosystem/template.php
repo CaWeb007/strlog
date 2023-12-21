@@ -110,7 +110,7 @@ $this->addExternalJS($templateFolder.'/js/position.min.js');
                     <?if (!empty($arItem['DISPLAY_PROPERTIES']['SUB_MENU']['VALUE'])):?>
                         <ul id="widget-submenu">
                             <?foreach ($arItem['DISPLAY_PROPERTIES']['SUB_MENU']['VALUE'] as $key => $subLink):?>
-                                <li><a href="<?=$subLink['LINK']?>"><?=$arItem['DISPLAY_PROPERTIES']['SUB_MENU']['DESCRIPTION'][$key]?></a></li>
+                                <li><a href="<?=$subLink?>"><?=$arItem['DISPLAY_PROPERTIES']['SUB_MENU']['DESCRIPTION'][$key]?></a></li>
                             <?endforeach;?>
                         </ul>
                     <?elseif (!empty($arItem['DISPLAY_PROPERTIES']['LINK']['VALUE'])):?>
