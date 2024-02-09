@@ -29,7 +29,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	)
 );?>
 
-<?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
+<?$APPLICATION->IncludeComponent("bitrix:main.include", ".default", array(
 	"COMPONENT_TEMPLATE" => ".default",
 	"PATH" => SITE_DIR."include/mainpage/ecosystem.php",
 	"AREA_FILE_SHOW" => "file",
@@ -41,7 +41,7 @@ $APPLICATION->SetTitle("Стройлогистика Иркутск, Интер�
 	array(
 		"ACTIVE_COMPONENT" => "Y"
 	)
-);*/?>
+);?>
 
 <?/*$APPLICATION->IncludeComponent("bitrix:main.include", ".default",
 	array(
