@@ -48,7 +48,7 @@ if($section){
 		$catalog_available = 'N';
 	if($arParams['HIDE_NOT_AVAILABLE'] == 'Y')
 		$catalog_available = 'Y';
-	$arElementFilter = array("SECTION_ID" => $arSection["ID"], "ACTIVE" => "Y", "GLOBAL_ACTIVE" => "Y", "SECTION_GLOBAL_ACTIVE" => "Y", "INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"]);
+	$arElementFilter = array("IBLOCK_ID" => $arParams['IBLOCK_ID'],"SECTION_ID" => $arSection["ID"], "ACTIVE" => "Y", "GLOBAL_ACTIVE" => "Y", "SECTION_GLOBAL_ACTIVE" => "Y", "INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"]);
 	if($arParams['HIDE_NOT_AVAILABLE'] == 'Y')
 		$arElementFilter["CATALOG_AVAILABLE"] = $catalog_available;
 	
