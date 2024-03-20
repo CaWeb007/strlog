@@ -198,6 +198,8 @@ class Helper{
             $flag = \CIBlockProperty::GetPropertyEnum('PRODUCT_WITH_STOCK', array(), array('EXTERNAL_ID' => 'Y'))->Fetch()['ID'];
         }
         foreach ($elements as $elementId){
+            if (is_array($elementId) && !empty($elementId['VALUE']))
+                $elementId = $elementId['VALUE'];
             \CIBlockElement::SetPropertyValuesEx($elementId, 0, array('PRODUCT_WITH_STOCK' => $flag));
         }
     }

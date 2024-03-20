@@ -239,7 +239,7 @@ class Iblock{
         if ($arOldFields['ACTIVE'] === 'N') return;
         if ($arOldFields['ACTIVE'] === 'Y'){
             // снять пометки со всех товаров
-            Helper::setElementsStock($element->GetProperty(41), false);
+            Helper::setElementsStock($element->GetProperty(41)['VALUE'], false);
         }
     }
 }
