@@ -8,6 +8,9 @@ IncludeTemplateLangFile(__FILE__);
 global $APPLICATION, $TEMPLATE_OPTIONS, $arSite;
 $arSite = CSite::GetByID(SITE_ID)->Fetch();
 $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
+$ip = \Bitrix\Main\Application::getInstance()->getContext()->getRequest()->getRemoteAddress();
+$tvzIp = 'false';
+if ( ( $ip === '195.46.109.165' ) || ( $ip === '91.240.103.0' ) || ( $ip === '185.234.229.123' ) || ( $ip === '195.206.52.200' ) ) $tvzIp = 'true';
 ?>
 <!DOCTYPE html>
 <html xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/xhtml" <?=($htmlClass ? 'class="'.$htmlClass.'"' : '')?>>
@@ -49,33 +52,45 @@ $htmlClass = ($_REQUEST && isset($_REQUEST['print']) ? 'print' : false);
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter37983465 = new Ya.Metrika({
-                    id:37983465,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true
-                });
-            } catch(e) { }
-        });
+    var tvzIp = ('<?=$tvzIp?>' === 'true'),
+        fullscreen = (window.innerHeight === screen.height),
+        tvz = ( fullscreen && tvzIp);
+    if (!tvz) {
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function () {
+                try {
+                    w.yaCounter37983465 = new Ya.Metrika({
+                        id: 37983465,
+                        clickmap: true,
+                        trackLinks: true,
+                        accurateTrackBounce: true
+                    });
+                } catch (e) {
+                }
+            });
 
-        var n = d.getElementsByTagName("script")[0],
-            x = "https://mc.yandex.ru/metrika/watch.js",
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        for (var i = 0; i < document.scripts.length; i++) {
-            if (document.scripts[i].src === x) { return; }
-        }
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = x;
+            var n = d.getElementsByTagName("script")[0],
+                x = "https://mc.yandex.ru/metrika/watch.js",
+                s = d.createElement("script"),
+                f = function () {
+                    n.parentNode.insertBefore(s, n);
+                };
+            for (var i = 0; i < document.scripts.length; i++) {
+                if (document.scripts[i].src === x) {
+                    return;
+                }
+            }
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = x;
 
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else {
+                f();
+            }
+        })(document, window, "yandex_metrika_callbacks");
+    }
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/37983465" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
