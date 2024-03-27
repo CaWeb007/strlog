@@ -140,9 +140,9 @@ if (is_array($arElements) && !empty($arElements))
 					if($sort == "PRICE"){
 						$sort = $arAvailableSort["PRICE"][0];
 					}
-					if($sort == "CATALOG_AVAILABLE"){
+					/*if($sort == "CATALOG_AVAILABLE"){
 						$sort = "CATALOG_QUANTITY";
-					}
+					}*/
 					?>
 				</div>
 				<div class="sort_display">	
@@ -177,7 +177,10 @@ if (is_array($arElements) && !empty($arElements))
 					"OFFERS_SORT_ORDER" => $arParams["OFFERS_SORT_ORDER"],
 					"OFFERS_LIMIT" => $arParams["OFFERS_LIMIT"],
 					"SHOW_COUNTER_LIST" => $arParams["SHOW_COUNTER_LIST"],
-
+                    "CUSTOM_ELEMENT_SORT" => array(
+                        'PROPERTY_ORDER_ITEM' => 'nulls,asc',
+                        'PROPERTY_NOT_AVAILABLE_SKU' => 'nulls,asc'
+                    ),
 					"SECTION_URL" => $arParams["SECTION_URL"],
 					"DETAIL_URL" => $arParams["DETAIL_URL"],
 					"BASKET_URL" => $arParams["BASKET_URL"],

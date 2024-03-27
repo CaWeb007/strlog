@@ -123,6 +123,10 @@ class CatalogSectionComponent extends ElementList
             $sortFields[$this->arParams['ELEMENT_SORT_FIELD2']] = $this->arParams['ELEMENT_SORT_ORDER2'];
         }
 
+        if (empty($sortFields['CATALOG_PRICE_11']))
+            $sortFields['CATALOG_PRICE_11'] = 'asc';
+
+
         return $sortFields;
     }
 
